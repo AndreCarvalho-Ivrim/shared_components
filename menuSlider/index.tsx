@@ -3,7 +3,7 @@
 export const menuSlider = () => {
  return(
   <div>
-   <h1>Menu Slider</h1>
+   <h1>Teste de alteração</h1>
   </div>
  )
 }
