@@ -2,48 +2,18 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 
-import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
-import { PossiblePermissions, StatusType } from '../../types';
+import { PossiblePermissions } from '../../types';
 import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from './v3/Wrapper';
 import { AsideItems } from './v3/Aside';
 import { useAuth } from '../../contexts/AuthContext';
 import { ProjectIcon, UsersIcon } from '../utils/icons';
 import { planetsRedirectTo } from '../../pages/carrosell';
 
-export interface FilterProps{
-  status: {
-    statusList: StatusType[] | undefined,
-    filterStatus: string[] | undefined,
-    setFilterStatus: (param: any) => void
-  },
-  requester: {
-    filterRequester: string,
-    setFilterRequester: (param: string) => void
-  },
-  date: {
-    filterDate: DateValueType,
-    setFilterDate: (date: DateValueType) => void
-  },
-  po: {
-    filterNumberPO: string,
-    setFilterNumberPO: (param: string) => void
-  },
-  onPageStart?: () => void
-}
-export type DisabledType = Array<'menu' | 'office' | 'help' | 'profile' | 'menu-aside'>;
-
 interface WrapperProps{
   v?: 3,
   children?: ReactNode,
-
-  // PROPS V2 =============================
   module_name?: string,
-  options?: { disabled?: DisabledType },
-  onDeleteMultiple?: () => Promise<void>,
-  filter?: FilterProps,
-  setOrders?: (order: any[] | any) => void,
   isAdmin?: boolean,
-  // PROPS V3 =============================
   asideActive?: string | string[],
   breadcrumbs?: HeaderBreadcrumbs[] 
 }
