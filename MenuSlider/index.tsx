@@ -46,22 +46,22 @@ export const MenuSlider = ({ urls }: MenuSliderProps) => {
  const itensSlider = [
   {
    title: "Portal de Soluções Ivrim",
-   url: urls.portal,
+   url: `${urls.portal}`,
    img: "https://source.unsplash.com/random/?city,night"
   },
   {
    title: "Ivrim System Architect",
-   url: urls.wf,
+   url: `${urls.wf}`,
    img: "https://source.unsplash.com/random/?business-work"
   },
   {
    title: " Ivrim Office Intelligence",
-   url: urls.office,
+   url: `${urls.office}`,
    img: "https://source.unsplash.com/random/?3d-renders"
   },
   {
    title: "Ivrim Learning Center",
-   url: urls.learning,
+   url: `${urls.learning}`,
    img: "https://source.unsplash.com/random/?technology"
   },
  ]
