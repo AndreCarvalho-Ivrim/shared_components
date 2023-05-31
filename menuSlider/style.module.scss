@@ -1,0 +1,105 @@
+.slider {
+ width: 100%;
+ margin: 0 auto;
+}
+
+.slider__item {
+ position: relative;
+ height: auto;
+
+ &::after {
+  content: '';
+  display: block;
+  padding-bottom: 115%;
+ }
+
+ &__card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 1rem 0.5rem;
+  cursor: pointer;
+  transition: all ease 0.2s;
+  &:hover {
+   transform: scale(1.05);
+  }
+
+  &__content {
+   flex: 1;
+   border-radius: 0.5rem;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   overflow: hidden;
+
+   &__img {
+    width: 40%;
+    background-color: #e0e0e0;
+    border-radius: 0.4rem;
+    object-fit: cover;
+   }
+  }
+ }
+}
+
+.gradient {
+ width: 100%;
+ height: 100%;
+ background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%);
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ padding: 1em 1rem;
+ & span {
+  color: #fff;
+  font-size: 2.5vw;
+  text-align: center;
+ }
+
+ & button {
+  color: #fff;
+  font-size: 1.5vw;
+  text-align: center;
+  border: 1px solid #fff;
+  padding: 0.2em 0.5em;
+  border-radius: 0.4rem;
+  margin-top: 1rem;
+  // glassmorphism
+  background: rgba(255, 255, 255, 0.144);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  &:hover {
+   animation: pulse 1s infinite;
+   
+  }
+ }
+}
+
+.header {
+ width: 95%;
+ height: 150px;
+ margin: 0 auto;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 0.8rem;
+ &__logo {
+  width: 25%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  & img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+
+  }
+ }
+}
