@@ -1,13 +1,11 @@
-
 import { ReactNode, useEffect, useState } from 'react';
-
 
 import { PossiblePermissions } from '../../types';
 import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from './v3/Wrapper';
 import { AsideItems } from './v3/Aside';
 import { useAuth } from '../../contexts/AuthContext';
 import { ProjectIcon, UsersIcon } from '../utils/icons';
-import { planetsRedirectTo } from '../../pages/carrosell';
+import { applicationRedirection } from '../MenuSlider';
 
 interface WrapperProps{
   v?: 3,
@@ -70,9 +68,7 @@ export function Wrapper({
       { id: 'aside-item-finance', name: 'Comercial',   href: '/co-pilot-dashboard/comercial'   },
       { id: 'aside-item-finance', name: 'Operacional', href: '/co-pilot-dashboard/operacional' }
     ];
-    else if(module_name === 'Configurações') asideItems = planetsRedirectTo(user).map(u => ({
-      ...u, name: u.name.replaceAll('_',' ')
-    }));
+    else if(module_name === 'Configurações') asideItems = applicationRedirection(user);
     else asideItems = [
       { id: 'aside-item-compras-e-contas-a-pagar',              name: 'Contas a Pagar',
         items: [

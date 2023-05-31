@@ -21,7 +21,6 @@
   height: 100%;
   display: flex;
   padding: 1rem 0.5rem;
-  cursor: pointer;
   transition: all ease 0.2s;
   &:hover {
    transform: scale(1.05);
@@ -62,12 +61,13 @@
 
  & button {
   color: #fff;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   text-align: center;
   border: 1px solid #fff;
   padding: 0.2em 0.5em;
   border-radius: 0.4rem;
   margin-top: 1rem;
+  cursor: pointer;
   // glassmorphism
   background: rgba(255, 255, 255, 0.144);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
