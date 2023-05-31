@@ -94,7 +94,7 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
             "/>
           </button>
           <ul className="
-            hidden group-[.expanded]/item:block pl-4 py-1
+            hidden group-[.expanded]/item:block md:pl-4 py-1 max-sm:group-[.expanded-aside]:pl-4
             group-[.collapsed]:p-0 group-[.collapsed-desktop-aside]:p-0
             text-white
           ">
