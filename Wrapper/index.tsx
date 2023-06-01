@@ -1,11 +1,11 @@
 import { ReactNode, useEffect, useState } from 'react';
 
-import { PossiblePermissions } from '../../types';
 import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from './v3/Wrapper';
 import { AsideItems } from './v3/Aside';
 import { useAuth } from '../../contexts/AuthContext';
 import { ProjectIcon, UsersIcon } from '../utils/icons';
 import { applicationRedirection } from '../MenuSlider';
+import { PossiblePermissions } from '../types';
 
 interface WrapperProps{
   v?: 3,

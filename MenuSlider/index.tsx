@@ -3,10 +3,11 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import style from "./style.module.scss";
 import logo from "../assets/Logo_Negativo_semFundo.png";
-import { PossiblePermissions, User } from "../../types";
+import { User } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
+import { PossiblePermissions } from "../types";
 
 export const applicationRedirection = (user: User | undefined) => {
   let urls = { portal: '', wf: '' }
