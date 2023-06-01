@@ -15,12 +15,13 @@ export interface AsideItems{
 }
 interface AsideProps{
   active?: string | string[],
-  items: AsideItems[]
+  items: AsideItems[],
+  dynamicItems: AsideItems[],
   isCollapsed?: boolean,
   dotColor?: string,
   module_name?: string
 }
-export const Aside = ({ active, items, isCollapsed, dotColor, module_name } : AsideProps) => (
+export const Aside = ({ active, items, dynamicItems, isCollapsed, dotColor, module_name } : AsideProps) => (
   <div className="
     w-full h-full max-sm:hidden
     group-[.expanded-aside]:max-sm:bg-gray-700/75
@@ -46,6 +47,10 @@ export const Aside = ({ active, items, isCollapsed, dotColor, module_name } : As
           text-white
         ">
           {items.map((item) => <AsideLiItem item={item} key={item.id} active={active}/>)}
+          {dynamicItems.length > 0 && (
+            <div className="w-full h-[1px] my-3 bg-gray-50/50"/>
+          )}
+          {dynamicItems.map((item) => <AsideLiItem item={item} key={item.id} active={active}/>)}
         </ul>
         <FooterAside />
       </div>

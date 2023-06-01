@@ -1,3 +1,13 @@
+import { Permition, PossiblePermissions } from './permission';
+
+export * from './permission';
+export * from './workflow';
+export * from './workflow.config';
+
+export interface ResultAndResponse{
+  result: boolean,
+  response: string
+}
 export interface User{
   id: string;
   email: string,
@@ -46,29 +56,6 @@ export interface UserCategory{
   clientId: string,
   permitions: Permition[] 
 }
-//#region PERIMTIONS
-export enum PossiblePermissions {
-  APPROVAL = 'aprovacao',
-  ADMIN =  'admin',
-  FINANCIAL_APPROVAL = 'aprovacao-financeiro',
-  EXCLUSION = 'exclusao',
-  EDITION = 'edicao',
-  CONTAS_A_PAGAR = 'cap',
-  GESTAO = 'gestao',
-  PLANILHA = 'sheet',
-  DASH= 'dash'
-}
-export interface PermissionType{
-  name: string,
-  actions: string[]
-}
-export interface Permition{
-  id: string,
-  name: string,
-  slug?: string,
-  description?: string,
-}
-//#endregion PERIMTIONS
 export interface Sheet{
   clientId?: string
   src?: string
