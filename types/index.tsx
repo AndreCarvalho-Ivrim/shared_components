@@ -33,6 +33,7 @@ export interface Client{
   telefone: string,
   email: string,
 
+  sheet?: Sheet
   users?: User[],
 
   active?: boolean
@@ -68,3 +69,10 @@ export interface Permition{
   description?: string,
 }
 //#endregion PERIMTIONS
+export interface Sheet{
+  clientId?: string
+  src?: string
+  name: string
+  comments: string
+  formatedRows?: any[]
+}
