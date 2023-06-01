@@ -1,8 +1,8 @@
 import { PermissionType } from "."
-import { IntegrationExcelColumnTypeType } from "../../types";
 
 export type AvailableServicesType = 'email'|'whatsapp'|'sms'|'chatbot';
 export type AvailableViewModeType = 'table' | 'dashboard';
+export type IntegrationExcelColumnTypeType = 'text' | 'date' | 'email' | 'phone' | 'percent' | 'money' | 'number' | 'cpf-cnpj';
 export interface WorkflowConfigType{
   asideButtons?: ConfigAsideButtonType[],
   table?: {
