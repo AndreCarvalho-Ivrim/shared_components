@@ -34,12 +34,12 @@ export const applicationRedirection = (user: User | undefined) => {
       disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
     },
     { id: 'ivrim-automator',    name: 'Ivrim System Architect',    url: `${urls.wf}?token=${user?.token}`, img: 'https://source.unsplash.com/random/?business-work' },
-    { id: 'co-pilot-dashboard', name: 'Ivrim Office Intelligence', url: `${urls.portal}/co-pilot-dashboard/financeiro`, img: "https://source.unsplash.com/random/?3d-renders" },
     { id: 'ivrim-learn-center', name: 'Ivrim Learning Center',     url: undefined, img: "https://source.unsplash.com/random/?technology" },
     {
-      id: 'admin-panel',        name: 'Admin Panel', url: `${urls.portal}/painel-adm`, img: "https://source.unsplash.com/random/?business-work",
+      id: 'admin-panel',        name: 'Admin Panel', url: `${urls.portal}/painel-adm`, img: "https://source.unsplash.com/random/?textures-patterns",
       disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN)
-    }
+    },
+    { id: 'co-pilot-dashboard', name: 'Ivrim Office Intelligence', url: `${urls.portal}/co-pilot-dashboard/financeiro`, img: "https://source.unsplash.com/random/?3d-renders" },
   ];
 }
 export const redirectToApp = ({ url, disabled }: { url: string | undefined, disabled?: boolean }, toast: any, navigate: any) => {
