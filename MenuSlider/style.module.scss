@@ -81,14 +81,14 @@
 
 .header {
  width: 95%;
- height: 150px;
- margin: 0 auto;
+ height: 100px;
+ margin: 0 auto 4rem;
  display: flex;
  align-items: center;
  justify-content: space-between;
  padding: 0.8rem;
  &__logo {
-  width: 25%;
+  width: 12rem;
   height: auto;
   display: flex;
   align-items: center;

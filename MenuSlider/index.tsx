@@ -8,6 +8,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
 import { PossiblePermissions } from "../types";
+import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise";
+import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 
 export const applicationRedirection = (user: User | undefined) => {
   let urls = { portal: '', wf: '' }
@@ -96,6 +98,7 @@ export const MenuSlider = () => {
         <div className={style.header__logo}>
           <img src={logo} alt="Ivrim Consulting"/>
         </div>
+        <DropdownChooseEnterprise/>
       </div>
       <div className="w-full flex justify-center items-center pad py-15">
         <div className="w-full">
@@ -124,6 +127,9 @@ export const MenuSlider = () => {
               )
             })}
           </Slider>
+        </div>
+        <div className="absolute bottom-4 z-50 w-[95%] flex justify-end pr-1">
+          <ButtonHelp/>
         </div>
       </div>
     </div>
