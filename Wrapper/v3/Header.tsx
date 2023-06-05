@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { MenuCollapsedIcon, MenuIcon, NotificationIcon } from "../../utils/icons";
 import { useNotify } from "../../../contexts/NotifyContext";
 import { DropdownChooseEnterprise } from "./DropdownChooseEnterprise";
+import { getUrls } from "../../services/conn/api";
 
 interface HeaderProps{
   breadcrumbs: { name: string, href: string }[],
 }
 export const Header = ({ breadcrumbs } : HeaderProps) => {
   const { toast } = useNotify();  
+  const navigate = useNavigate();
+  const urls = getUrls('front')!;
 
   return (
     <header className="flex items-start max-sm:items-center justify-between gap-2 mb-10">
@@ -19,7 +22,14 @@ export const Header = ({ breadcrumbs } : HeaderProps) => {
               <li
                 key={item.name}
                 className="group last:font-semibold last:text-gray-100 truncate overflow-clip max-sm:max-w-[6rem]"
-              ><span className="group-first:hidden mr-1.5">/</span><Link to={item.href}>{item.name}</Link></li>
+              >
+                <span className="group-first:hidden mr-1.5">/</span>
+                {item.href === '/' && !urls.wf ? (
+                  <a href={urls.portal}>{item.name}</a>
+                ) : (
+                  <Link to={item.href}>{item.name}</Link>
+                )}
+              </li>
             ))}
           </ul>
 

@@ -5,7 +5,8 @@ interface ModalType{
   options: ModalOptionsType,
   isOpen: boolean,
   setIsOpen: (isOpen: boolean) => void,
-  children: ReactNode
+  children: ReactNode,
+  zIndex?: 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50'
 }
 export interface ModalOptionsType{
   title: string,
@@ -45,13 +46,14 @@ export function Modal({
   children,
   isOpen,
   setIsOpen,
-  options
+  options,
+  zIndex = 'z-10'
 }: ModalType) {
   const cancelButtonRef = useRef(null);
 
   return (
     <Transition.Root  show={isOpen} as={Fragment}>
-      <Dialog  as="div" className="relative z-10" initialFocus={undefined} onClose={setIsOpen}>
+      <Dialog  as="div" className={`relative ${zIndex}`} initialFocus={undefined} onClose={setIsOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -122,6 +124,29 @@ export function Modal({
                       ref={cancelButtonRef}
                     >{options.cancelButtonText ?? 'Cancelar'}</button>
                   )}
+                </div>
+                <div className="hidden h-0 w-0"  id="load-classes-backgrounds-by-theme">
+                  <span className="
+                    bg-primary-600
+                    hover:bg-primary-700
+                    focus:ring-primary-500
+                  "/><span className="
+                    bg-danger-600
+                    hover:bg-danger-700
+                    focus:ring-danger-500
+                  "/><span className="
+                    bg-warning-600
+                    hover:bg-warning-700
+                    focus:ring-warning-500
+                  "/><span className="
+                    bg-success-600
+                    hover:bg-success-700
+                    focus:ring-success-500
+                  "/><span className="
+                    bg-info-600
+                    hover:bg-info-700
+                    focus:ring-info-500
+                  "/>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
