@@ -59,7 +59,7 @@ export const SlideOver = ({ title, children, isOpen, onClose }: SlideOverProps) 
                 <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                   {title && (
                     <div className="px-4 sm:px-6">
-                      <Dialog.Title className="text-lg font-medium text-gray-900">{ title }</Dialog.Title>
+                      <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
                     </div>
                   )}
                   <div className="relative mt-6 flex-1 px-4 sm:px-6">
