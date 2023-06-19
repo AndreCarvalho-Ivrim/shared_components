@@ -19,7 +19,7 @@ export const getPublishedFlows = async (token: string, client_id: string) : Prom
     };
   }
   try{
-    const { data } = await wf.get(`published-flows/${client_id}`, headerBearer(token));
+    const { data } = await wf.get(`/flows/published/${client_id}`, headerBearer(token));
     console.log('[requested-published-flows]')
 
     if(data.result) cachePublishedFlows = { token, data: data.data };
