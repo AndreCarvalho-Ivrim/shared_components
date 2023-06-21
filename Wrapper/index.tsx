@@ -133,7 +133,8 @@ export const getAsideItems = ({
 }
 export const iconByTheme = (theme: AvailableWorkflowThemeType) => {
   switch(theme){
-    case 'Cobrança':  return <MoneyIcon w={22} h={22}/>;
-    case 'Comercial': return <WorkflowIcon w={22} h={22}/>;
+    case 'Cobrança':   return <MoneyIcon w={22} h={22}/>;
+    case 'Comercial':  return <WorkflowIcon w={22} h={22}/>;
+    case 'Financeiro': return <MoneyIcon w={22} h={22}/>;
   }
 }
