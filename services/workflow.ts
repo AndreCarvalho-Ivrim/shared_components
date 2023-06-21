@@ -1,4 +1,4 @@
-import { ResultAndResponse, WorkflowType } from "../types";
+import { ResultAndResponse, WorkflowType } from "../../shared-types";
 import { handleErrorResultAndResponse, headerBearer, wf } from "./conn/api";
 
 export let cachePublishedFlows : {

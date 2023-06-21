@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ResultAndResponse } from "../../types";
+import { ResultAndResponse } from "../../../types";
 import { authStorageKeys } from "../cache";
 
 export const getUrls = (environment: 'front' | 'back' ) => {

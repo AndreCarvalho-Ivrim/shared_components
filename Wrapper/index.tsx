@@ -5,7 +5,7 @@ import { AsideItems } from './v3/Aside';
 import { useAuth } from '../../contexts/AuthContext';
 import { DetalistIcon, MoneyIcon, ProjectIcon, UsersIcon, WorkflowIcon } from '../utils/icons';
 import { applicationRedirection } from '../MenuSlider';
-import { AvailableWorkflowThemeType, PossiblePermissions, User, WorkflowType } from '../types';
+import { AvailableWorkflowThemeType, PossiblePermissions, User, WorkflowType } from '../../types';
 import { getPublishedFlows } from '../services/workflow';
 
 interface WrapperProps{
