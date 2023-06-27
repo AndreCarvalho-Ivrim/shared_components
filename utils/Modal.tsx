@@ -146,6 +146,10 @@ export function Modal({
                     bg-info-600
                     hover:bg-info-700
                     focus:ring-info-500
+                  "/><span className="
+                    bg-red-600
+                    hover:bg-red-700
+                    focus:ring-red-500
                   "/>
                 </div>
               </Dialog.Panel>
