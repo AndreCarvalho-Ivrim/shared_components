@@ -1,17 +1,15 @@
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 import { StateFilterItem } from "./StateFilterItem";
+import { WorkflowConfigFilterType } from "../../shared-types";
+import { Fragment } from "react";
 
 interface StateFilterProps{
   availableSteps?: { name: string, _id: string }[],
   isApplied: boolean,
   selectedStep: string[],
   setSelectedStep: React.Dispatch<React.SetStateAction<string[]>>,
-  // requester: string,
-  // setRequester: React.Dispatch<React.SetStateAction<string>>,
-  // poId: string,
-  // setPoId: React.Dispatch<React.SetStateAction<string>>,
-  // date: DateValueType,
-  // setDate: React.Dispatch<React.SetStateAction<DateValueType>>,
+  setDynamicFilter: React.Dispatch<React.SetStateAction<Record<string,{ value: any, ref: (string | string[]), type: WorkflowConfigFilterType['type'] }>>>,
+  dynamicFilter: Record<string,{ value: any, ref: (string | string[]), type: WorkflowConfigFilterType['type'] }>,
   handleApplyFilter: () => void
 }
 const formatDate = (date: string) => {
@@ -28,10 +26,10 @@ export const StateFilter = ({
   availableSteps,
   isApplied,
   selectedStep,
-  // requester, poId, date,
   setSelectedStep,
-  // setRequester, setPoId, setDate,
-  handleApplyFilter
+  handleApplyFilter,
+  setDynamicFilter,
+  dynamicFilter,
 }: StateFilterProps) => {
   return (
     <div className="flex justify-between items-center gap-2">
@@ -43,38 +41,35 @@ export const StateFilter = ({
             onClear={() => setSelectedStep([])}
           >{availableSteps.filter(s => selectedStep.includes(s._id)).map((s) => s.name).join(', ')}</StateFilterItem>
         )}
-        {/* {date && (
-          <>
-            {date.startDate && (
-              <StateFilterItem
-                title="Data Incial"
-                isApplied={isApplied}
-                onClear={() => setDate(null)}
-              >{formatDate(date.startDate as string)}</StateFilterItem>
-            )}
-            {date.endDate && (
-              <StateFilterItem
-                title="Data Final"
-                isApplied={isApplied}
-                onClear={() => setDate(null)}
-              >{formatDate(date.endDate as string)}</StateFilterItem>
-            )}
-          </>
-        )}
-        {requester && (
+        {Object.entries(dynamicFilter).map(([key, data]) => data.type === 'text' ? (
           <StateFilterItem
-            title="Solicitante"
+            title={key}
             isApplied={isApplied}
-            onClear={() => setRequester('')}
-          >{requester}</StateFilterItem>
-        )}
-        {poId && (
-          <StateFilterItem
-            title="Número da PO"
-            isApplied={isApplied}
-            onClear={() => setPoId('')}
-          >{poId}</StateFilterItem>
-        )} */}
+            onClear={() => setDynamicFilter(prevState => ({
+              ...prevState,
+              [key]: {
+                ...prevState[key],
+                value: undefined
+              }
+            }))}
+            key={key}
+          >{data.value}</StateFilterItem>
+        ) : data.type === 'date' ? (
+          <Fragment key={key}>
+            {data.value.startDate && data.value.endDate && (
+              <StateFilterItem
+                title={key}
+                isApplied={isApplied}
+                onClear={() => setDynamicFilter(prevState => ({
+                  ...prevState, [key]: {
+                    ...prevState[key],
+                    value: { startDate: null, endDate: null }
+                  }
+                }))}
+              >{formatDate(data.value.startDate as string)} ~ {formatDate(data.value.endDate as string)}</StateFilterItem>
+            )}
+          </Fragment>
+        ):'')}
       </div>
 
       {!isApplied && (
