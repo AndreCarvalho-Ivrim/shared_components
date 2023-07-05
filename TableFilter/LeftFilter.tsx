@@ -17,7 +17,7 @@ export const LeftFilter = ({
 }: LeftFilterProps) => {
   const divStatusRef = useRef<HTMLDivElement>(null);
   return (
-    <div className="relative max-sm:hidden group" ref={divStatusRef}>
+    <div className="relative group" ref={divStatusRef}>
       <div className="flex items-center gap-3">
         <button
           type="button"
