@@ -60,9 +60,8 @@ export const TableFilter = ({
     <div className="
       relative bg-gradient-glass backdrop-blur-[25px] rounded-lg
       flex flex-col gap-2 mt-4 px-4 py-3 text-gray-100 mb-4 z-10
-      overflow-x-auto
     ">
-      <div className="flex justify-between gap-2 min-h-[2rem]">
+      <div className="flex flex-wrap justify-between gap-2 min-h-[2rem]">
         <LeftFilter {...{
           selectedStep,
           setSelectedStep,
