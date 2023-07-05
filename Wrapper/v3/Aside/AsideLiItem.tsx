@@ -98,8 +98,8 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
             group-[.collapsed]:p-0 group-[.collapsed-desktop-aside]:p-0
             text-white
           ">
-            {items.map(subitem => (
-              <AsideLiItem item={subitem} key={subitem.id} active={active} depth={depth + 1}/>
+            {items.map((subitem, i) => (
+              <AsideLiItem item={subitem} key={`${subitem.id}-${i}`} active={active} depth={depth + 1}/>
             ))}
           </ul>  
         </>

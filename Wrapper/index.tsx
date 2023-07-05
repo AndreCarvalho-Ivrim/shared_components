@@ -14,12 +14,14 @@ interface WrapperProps{
   module_name?: string,
   isAdmin?: boolean,
   asideActive?: string | string[],
+  asideItems?: AsideItems[],
   breadcrumbs?: HeaderBreadcrumbs[] 
 }
 export function Wrapper({
   module_name,
   children,
   asideActive,
+  asideItems,
   breadcrumbs,
   isAdmin = false,
   v = 3,
@@ -41,7 +43,10 @@ export function Wrapper({
 
   if(v === 3) return (
     <WrapperV3 breadcrumbs={[...[{ name: 'Home', href: '/' }], ...(breadcrumbs ?? [])]} {...{
-      asideItems: getAsideItems({ user, isAdmin, module_name }),
+      asideItems: [
+        ...getAsideItems({ user, isAdmin, module_name }),
+        ...(asideItems ? asideItems : [])
+      ],
       dynamicAsideItems: module_name === 'System Archictect' ? publishedFlows.map(flow => ({
         id: flow._id,
         href: `/modulo/${flow._id}`,
@@ -75,8 +80,8 @@ export const getAsideItems = ({
     )
   );
 
-  let asideItems : AsideItems[] = [];
-  if(isAdmin) asideItems = [
+  let defaultAsideItems : AsideItems[] = [];
+  if(isAdmin) defaultAsideItems = [
     { 
       id: 'aside-item-admin-users', name: 'Admin Usuários',
       href: '/painel-adm',         disabled: !canAccessAdminPanel,
@@ -98,17 +103,17 @@ export const getAsideItems = ({
 
     },
   ];
-  else if(module_name === 'Co-Pilot Dashboard') asideItems = [
+  else if(module_name === 'Co-Pilot Dashboard') defaultAsideItems = [
     { id: 'aside-item-finance', name: 'Financeiro',  href: '/co-pilot-dashboard/financeiro'  },
     { id: 'aside-item-finance', name: 'Comercial',   href: '/co-pilot-dashboard/comercial'   },
     { id: 'aside-item-finance', name: 'Operacional', href: '/co-pilot-dashboard/operacional' }
   ];
-  else if(module_name === 'Configurações') asideItems = applicationRedirection(user);
-  else if(module_name === 'System Archictect') asideItems = [
+  else if(module_name === 'Configurações') defaultAsideItems = applicationRedirection(user);
+  else if(module_name === 'System Archictect') defaultAsideItems = [
     { id: 'aside-item-workflows', href: '/', icon: <WorkflowIcon w={22} h={22}/>, name: 'Workflows' },
     { id: 'aside-item-template',  href: '/modelos', icon: <DetalistIcon w={22} h={22}/>, name: 'Modelos'}
   ];
-  else asideItems = [
+  else if(module_name === 'Ivrim Flows') defaultAsideItems = [
     { id: 'aside-item-compras-e-contas-a-pagar',              name: 'Contas a Pagar',
       items: [
         {
@@ -129,7 +134,7 @@ export const getAsideItems = ({
     },
   ];
 
-  return asideItems
+  return defaultAsideItems
 }
 export const iconByTheme = (theme: AvailableWorkflowThemeType) => {
   switch(theme){

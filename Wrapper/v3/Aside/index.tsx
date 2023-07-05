@@ -46,7 +46,7 @@ export const Aside = ({ active, items, dynamicItems, isCollapsed, dotColor, modu
           group-[.collapsed]:p-4 group-[.collapsed-desktop-aside]:p-4
           text-white
         ">
-          {items.map((item) => <AsideLiItem item={item} key={item.id} active={active}/>)}
+          {items.map((item,i) => <AsideLiItem item={item} key={`${item.id}-${i}`} active={active}/>)}
           {dynamicItems.length > 0 && (
             <div className="w-full h-[1px] my-3 bg-gray-50/50"/>
           )}

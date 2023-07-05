@@ -4,11 +4,15 @@ import { CloseIcon } from './icons'
 
 interface SlideOverProps{
   title?: string,
+  header?: {
+    content: ReactNode,
+    mode: 'append' | 'prepend' | 'overwrite'
+  },
   children: ReactNode,
   isOpen: boolean,
   onClose: () => void
 }
-export const SlideOver = ({ title, children, isOpen, onClose }: SlideOverProps) => (
+export const SlideOver = ({ title, children, header, isOpen, onClose }: SlideOverProps) => (
   <Transition.Root show={isOpen} as={Fragment}>
     <Dialog as="div" className="relative z-10" onClose={onClose}>
       <Transition.Child
@@ -57,12 +61,30 @@ export const SlideOver = ({ title, children, isOpen, onClose }: SlideOverProps) 
                   </div>
                 </Transition.Child>
                 <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                  {title && (
-                    <div className="px-4 sm:px-6">
-                      <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
-                    </div>
+                  {header ? (
+                    <>
+                      {header.mode === 'overwrite' ? header.content : (
+                        <>
+                          {header.mode === 'prepend' && header.content}
+                          {title && (
+                            <div className="px-4 sm:px-6">
+                              <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
+                            </div>
+                          )}
+                          {header.mode === 'append' && header.content}
+                        </>
+                      )}
+                    </>
+                  ):(
+                    <>
+                      {title && (
+                        <div className="px-4 sm:px-6">
+                          <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
+                        </div>
+                      )}
+                    </>
                   )}
-                  <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                  <div className="relative mt-4 flex-1 px-4 sm:px-6">
                     { children }
                   </div>
                 </div>
