@@ -9,7 +9,6 @@ export const FooterAside = () => {
   const { toast } = useNotify();
   
   const navigate = useNavigate();
-
   return (
     <div className="text-white">
       {/* <button
@@ -67,7 +66,7 @@ export const FooterAside = () => {
         <button
           type="button"
           onClick={() => redirectToApp(
-            { url: `${getUrls('front')?.portal}/perfil` },
+            { url: `${getUrls('front')?.portal}perfil` },
             toast,
             navigate
           )}
