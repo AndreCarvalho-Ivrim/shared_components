@@ -74,6 +74,7 @@ export const DropdownChooseEnterprise = () => {
       
     >
       <>
+        {user && (<strong className="text-xs text-center truncate max-w-full block -mt-1 mb-1">{user.email}</strong>)}
         {clients.map(c => (
           <button
             key={c.id}
