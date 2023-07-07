@@ -1,6 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useNotify } from '../../../../contexts/NotifyContext';
-import { SettingIcon } from '../../../utils/icons';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { getUrls } from '../../../services/conn/api';
 import { redirectToApp } from '../../../MenuSlider';
@@ -78,10 +77,10 @@ export const FooterAside = () => {
             max-w-[calc(100%-3rem)]
           "
         >
-          <strong className="text-sm text-ellipsis whitespace-nowrap overflow-hidden">
+          <strong className="text-sm text-ellipsis whitespace-nowrap overflow-hidden max-w-full">
             {user?.name ?? '...'}
           </strong>
-          <span className="text-xs text-ellipsis whitespace-nowrap overflow-hidden">
+          <span className="text-xs text-ellipsis whitespace-nowrap overflow-hidden max-w-full">
             {user?.email ?? '...'}
           </span>
         </button>
