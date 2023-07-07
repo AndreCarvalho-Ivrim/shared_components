@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from './v3/Wrapper';
 import { AsideItems } from './v3/Aside';
 import { useAuth } from '../../contexts/AuthContext';
-import { DetalistIcon, MoneyIcon, ProjectIcon, UsersIcon, WorkflowIcon } from '../utils/icons';
+import { DetalistIcon, MoneyIcon, ProjectIcon, SettingIcon, UploadIcon, UsersIcon, WorkflowIcon } from '../utils/icons';
 import { applicationRedirection } from '../MenuSlider';
 import { AvailableWorkflowThemeType, PossiblePermissions, User, WorkflowType } from '../../types';
 import { getPublishedFlows } from '../services/workflow';
@@ -108,7 +108,11 @@ export const getAsideItems = ({
     { id: 'aside-item-finance', name: 'Comercial',   href: '/co-pilot-dashboard/comercial'   },
     { id: 'aside-item-finance', name: 'Operacional', href: '/co-pilot-dashboard/operacional' }
   ];
-  else if(module_name === 'Configurações') defaultAsideItems = applicationRedirection(user);
+  else if(module_name === 'Configurações') defaultAsideItems = [
+    { id: 'aside-item-perfil',       name: 'Perfil',       href: '/perfil', icon: <UsersIcon w={22} h={22}/> },
+    { id: 'aside-item-gallery',      name: 'Armazenamento',disabled: true,  icon: <UploadIcon w={22} h={22}/>},
+    { id: 'aside-item-painel-admin', name: 'Painel Admin', href: '/painel-adm', icon: <SettingIcon w={22} h={22}/>, disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN) }
+  ];
   else if(module_name === 'System Archictect') defaultAsideItems = [
     { id: 'aside-item-workflows', href: '/', icon: <WorkflowIcon w={22} h={22}/>, name: 'Workflows' },
     { id: 'aside-item-template',  href: '/modelos', icon: <DetalistIcon w={22} h={22}/>, name: 'Modelos'}
