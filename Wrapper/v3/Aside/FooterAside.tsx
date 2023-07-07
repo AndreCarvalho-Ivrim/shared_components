@@ -1,14 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useNotify } from '../../../../contexts/NotifyContext';
 import { SettingIcon } from '../../../utils/icons';
 import { useAuth } from '../../../../contexts/AuthContext';
+import { getUrls } from '../../../services/conn/api';
+import { redirectToApp } from '../../../MenuSlider';
 
 export const FooterAside = () => {
   const { user } = useAuth();
   const { toast } = useNotify();
+  
+  const navigate = useNavigate();
+
   return (
     <div className="text-white">
-      <button
+      {/* <button
         type="button"
         className={`
           flex items-center
@@ -26,7 +31,7 @@ export const FooterAside = () => {
           group-[.collapsed]:hidden
           group-[.collapsed-desktop-aside]:hidden
         ">Configurações</span>
-      </button>
+      </button> */}
       <footer className="
         flex items-center sm:justify-center md:justify-start 
         group-[.collapsed]:justify-center group-[.collapsed-desktop-aside]:justify-center
@@ -34,8 +39,13 @@ export const FooterAside = () => {
       " style={{
         borderTop: '1px dashed rgba(255, 248, 248, 0.17)'
       }}>
-        <Link
-          to={'/perfil'}
+        <button
+          type="button"
+          onClick={() => redirectToApp(
+            { url: `${getUrls('front')?.portal}/perfil` },
+            toast,
+            navigate
+          )}
           className={`
             w-8 h-8 md:w-10 md:h-10
             text-sm md:text-base
@@ -54,9 +64,14 @@ export const FooterAside = () => {
           ):(
             user ? user.name.substr(0,2) :'..'
           )}
-        </Link>
-        <Link
-          to={'/perfil'}
+        </button>
+        <button
+          type="button"
+          onClick={() => redirectToApp(
+            { url: `${getUrls('front')?.portal}/perfil` },
+            toast,
+            navigate
+          )}
           className="
             flex sm:hidden md:flex flex-col
             group-[.collapsed]:hidden group-[.collapsed-desktop-aside]:hidden
@@ -69,7 +84,7 @@ export const FooterAside = () => {
           <span className="text-xs text-ellipsis whitespace-nowrap overflow-hidden">
             {user?.email ?? '...'}
           </span>
-        </Link>
+        </button>
       </footer>
     </div>
   );
