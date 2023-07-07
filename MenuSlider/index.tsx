@@ -130,7 +130,7 @@ export const MenuSlider = () => {
                 px-8 py-14 text-gray-100 w-56 h-44
                 flex flex-col items-center justify-center text-center gap-1
               "
-              onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}` }, toast, navigate)}
+              onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
             >
               <h3 className="text-xl font-semibold leading-none">{flow.title}</h3>
               <em className="text-xs uppercase text-gray-300">Fluxo: {flow.theme}</em>
