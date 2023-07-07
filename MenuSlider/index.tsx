@@ -105,7 +105,7 @@ export const MenuSlider = () => {
         <DropdownChooseEnterprise/>
       </div>
       <div className="overflow-auto h-full flex-col sm:flex-row flex items-start sm:justify-between py-15 px-6 lg:max-w-[95%] w-full mx-auto">
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 mb-4">
           {isacItem && (
             <button
               type="button"
