@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { HeaderAside } from './HeaderAside';
 import { FooterAside } from './FooterAside';
 import { AsideLiItem } from './AsideLiItem';
+import bgWrapper from '../../../assets/wrapper-bg.svg';
 
 export interface AsideItems{
   id: string,
@@ -33,6 +34,7 @@ export const Aside = ({ active, items, dynamicItems, isCollapsed, dotColor, modu
     <aside className={`
       max-sm:bg-gray-900
       bg-gradient-aside
+      
       sm:rounded-xl group
       max-sm:flex sm:flex 
       flex-col ${isCollapsed ? 'collapsed':''} 

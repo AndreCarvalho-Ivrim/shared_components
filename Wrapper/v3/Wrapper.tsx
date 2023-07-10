@@ -13,7 +13,7 @@ interface WrapperProps{
   module_name?: string,
 }
 export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, asideActive, module_name }: WrapperProps) => (
-  <div className="w-screen h-screen bg-gradient-bg sm:p-4 !pr-0">
+  <div className="w-screen h-screen bg-background sm:p-4 !pr-0">
     <div className="
       grid max-w-[1496px] min-[1700px]:max-w-[85%] mx-auto h-full 
       sm:grid-cols-aside-collapsed md:grid-cols-aside-expanded-md 

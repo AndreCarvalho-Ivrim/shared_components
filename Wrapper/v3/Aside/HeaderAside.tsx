@@ -14,7 +14,7 @@ export const HeaderAside = ({ isCollapsed, dotColor, module_name } : HeaderAside
 
   return (
     <header className={`relative`} style={{
-      borderBottom: '1px dashed rgba(255, 248, 248, 0.17)'
+      borderBottom: '2px dashed rgba(255, 255, 255, .3)'
     }}>
       <button
         type="button"
@@ -65,7 +65,7 @@ export const HeaderAside = ({ isCollapsed, dotColor, module_name } : HeaderAside
         }}
       >
         <div className="overflow-clip w-[50%]">
-          <div className="bg-[#1C71D3] p-1 w-[62px] h-[62px] rounded-full"/>
+          <div className="bg-background p-1 w-[62px] h-[62px] rounded-full"/>
         </div>
         <img className="bg-white rounded-full w-[54px] h-[54px] absolute ml-1" src={logo}/>
       </button>
@@ -79,8 +79,8 @@ const HeaderDots = ({ dotColor } : { dotColor? : string }) => (
       w-1 h-2 block overflow-hidden
       absolute -bottom-1 left-0
     `}>
-      <span style={{ background: dotColor ?? '#1C71D3' }} className={`
-        rounded-full
+      <span className={`
+        rounded-full bg-background
         w-2 h-2 sm:block -translate-x-1
       `}/>
     </span>
@@ -88,8 +88,8 @@ const HeaderDots = ({ dotColor } : { dotColor? : string }) => (
       w-1 h-2 block overflow-hidden
       absolute -bottom-1 right-0
     `}>
-      <span style={{ background: dotColor ?? '#1C71D3' }}className={`
-        rounded-full
+      <span className={`
+        rounded-full bg-background
         w-2 h-2 block
       `}/>
     </span>

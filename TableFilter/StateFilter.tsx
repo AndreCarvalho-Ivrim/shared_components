@@ -33,7 +33,7 @@ export const StateFilter = ({
 }: StateFilterProps) => {
   return (
     <div className="flex justify-between items-center gap-2">
-      <div className="text-sm text-gray-200 flex flex-wrap gap-2">
+      <div className="text-sm text-primary-700/70 flex flex-wrap gap-2">
         {availableSteps && selectedStep && selectedStep.filter(s => s !== 'Todos').length > 0 && (
           <StateFilterItem
             title="Status"
@@ -74,7 +74,8 @@ export const StateFilter = ({
 
       {!isApplied && (
         <button type="button" className="
-          text-gray-100 font-semibold text-xs 
+        text-primary-700 font-semibold bg-gradient-light
+          bg-gray-100 hover:bg-gray-50 text-xs 
           rounded-lg text-center py-2.5 px-3
           outline-none focus:ring-gray-100/50 focus:ring-1
           bg-gray-50/20 hover:bg-gray-50/30

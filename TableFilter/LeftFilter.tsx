@@ -24,10 +24,10 @@ export const LeftFilter = ({
           className="
             text-sm text-start
             w-40 h-10 p-4
-            border border-gray-50/10
+            border border-primary-500/20 bg-gray-100/5
             outline-none focus:ring-gray-100/50 focus:ring-1
             flex items-center justify-between gap-2
-            rounded-md bg-gray-100/5 backdrop-blur-[25px]
+            rounded-md backdrop-blur-[25px]
           "
           onClick={() => {
             if(!divStatusRef.current) return;
@@ -35,7 +35,7 @@ export const LeftFilter = ({
             divStatusRef.current.classList.toggle('expanded');
           }}
         >
-          <span className="truncate">
+          <span className="truncate font-semibold">
             {selectedStep.length === 0 || selectedStep.length === (availableSteps ?? []).length ? 'Todos' : (
               selectedStep.length === 1 ? availableSteps?.find(s => s._id === selectedStep[0])?.name : 
               `${selectedStep!.length} etapas selecionadas`
@@ -50,10 +50,10 @@ export const LeftFilter = ({
               flex justify-center items-center
               my-auto p-2 border-transparent
               rounded-lg outline-none focus:ring-gray-100/50 focus:ring-1
-              hover:bg-gray-100/20 hover:border-gray-300
+              hover:bg-gray-100/40 hover:border-gray-300
             "
             onClick={handleDeleteMultiple}
-          ><TrashIcon className="w-5 h-5 text-gray-200 dark:text-gray-400"/></button>
+          ><TrashIcon className="w-5 h-5 text-primary-700 dark:text-gray-400"/></button>
         )}
       </div>
       <div className={`
@@ -62,14 +62,14 @@ export const LeftFilter = ({
         focus:outline-none p-2
         ring-1 ring-black ring-opacity-5
         mt-0.5 w-72 origin-top-right rounded-md
-        bg-gray-100/40 backdrop-blur-[25px] shadow-lg
+        bg-gray-100/70 backdrop-blur-[25px] shadow-lg
       `}>
         <div className="grid grid-cols-2 gap-2">
           {[{ name: 'Todos', _id: 'all' }, ...(availableSteps ?? [])].map((step) => (
             <button
               className={`
                 font-semibold text-gray-700 text-sm text-start truncate
-                backdrop-blur-[25px] hover:bg-gray-50/30 
+                backdrop-blur-[25px] hover:bg-gray-50/60 
                 rounded-lg w-full p-2 ${
                   (step.name === 'Todos' && (
                     selectedStep.length === 0 || selectedStep.length === (availableSteps ?? []).length

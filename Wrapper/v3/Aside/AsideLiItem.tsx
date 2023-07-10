@@ -52,7 +52,7 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
           flex items-center justify-center
           w-[22px] h-[22px] leading-[-1]
           border-2 border-gray-300 rounded-full
-          text-[10px] text-gray-white font-semibold
+          text-[10px] text-white font-semibold 
           ${isSubItem ? `
             sm:hidden md:flex
             group-[.collapsed]:hidden

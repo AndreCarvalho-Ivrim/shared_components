@@ -31,8 +31,8 @@ export const RightFilter = ({ availableFilters, setDynamicFilter, dynamicFilter 
           trigger={
             <div className="
               p-4 w-40 h-10 rounded-md
-              border border-gray-50/10 bg-gray-100/5
-              flex items-center justify-between 
+              border border-primary-500/20 bg-gray-100/5
+              flex items-center justify-between font-semibold
               text-sm backdrop-blur-[25px]
             ">
               {searchType.name}
@@ -55,10 +55,11 @@ export const RightFilter = ({ availableFilters, setDynamicFilter, dynamicFilter 
           id="simple-search"
           className="
             hidden group-[.show]:block
-          bg-gray-100/10 backdrop-blur-[25px]
+            bg-gray-100/10 backdrop-blur-[25px]
             
-            text-white text-sm rounded-lg 
-            placeholder-white
+            border-primary-500/20
+            text-gray-600 text-sm rounded-lg 
+            placeholder-primary-700
 
             focus:ring-gray-100/20 focus:border-gray-100/20 w-44 pr-10 p-2.5
           "
@@ -77,12 +78,13 @@ export const RightFilter = ({ availableFilters, setDynamicFilter, dynamicFilter 
         <div className="hidden group-[.show]:block mr-10">
           <Datepicker
             inputClassName={`
+              border border-primary-500/20 bg-gray-100/5
               bg-gray-100/10 backdrop-blur-[25px]
               
-              text-white text-sm rounded-lg 
-              placeholder-white
+              text-primary-700 text-sm rounded-lg 
+              placeholder-primary-700
 
-              focus:ring-gray-100/20 focus:border-gray-100/20 w-44 p-2.5
+              focus:ring-gray-100/20 focus:border-primary-500/30 w-44 p-2.5
             `}
             value={dynamicFilter[searchType.name]?.value ?? {
               startDate: null,
@@ -116,7 +118,7 @@ export const RightFilter = ({ availableFilters, setDynamicFilter, dynamicFilter 
           let input = divSearchRef.current.childNodes[0] as HTMLInputElement;
           if(divSearchRef.current.classList.contains('show')) input.focus();
         }}
-      ><SearchIcon className="w-5 h-5 text-gray-200 dark:text-gray-400"/></button>
+      ><SearchIcon className="w-5 h-5 text-primary-700 dark:text-gray-400"/></button>
     </div>
   );
 }

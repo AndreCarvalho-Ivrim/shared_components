@@ -18,7 +18,7 @@ export const StateFilterItem = ({
     hover:bg-gray-100/10 hover:px-2 rounded-lg group/filter
   ">
     <div className="flex flex-col min-w-[10rem] max-w-[15rem] pt-2 pb-1.5">
-      <span className="text-[10px] leading-tight text-white font-semibold uppercase">
+      <span className="text-[10px] leading-tight text-primary-700 font-semibold uppercase">
         {isApplied ? 'Filtrado' : 'Filtrar'} por {title}</span>
       <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-full">{children}</span>
     </div>

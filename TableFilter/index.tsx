@@ -58,8 +58,8 @@ export const TableFilter = ({
 
   return (
     <div className="
-      relative bg-gradient-glass backdrop-blur-[25px] rounded-lg
-      flex flex-col gap-2 mt-4 px-4 py-3 text-gray-100 mb-4 z-10
+      relative bg-gradient-light backdrop-blur-[25px] rounded-lg shadow-md
+      flex flex-col gap-2 mt-4 px-4 py-3 text-primary-700 mb-4 z-10
     ">
       <div className="flex flex-wrap justify-between gap-2 min-h-[2rem]">
         <LeftFilter {...{

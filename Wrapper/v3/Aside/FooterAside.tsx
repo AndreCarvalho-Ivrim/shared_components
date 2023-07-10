@@ -35,7 +35,7 @@ export const FooterAside = () => {
         group-[.collapsed]:justify-center group-[.collapsed-desktop-aside]:justify-center
         gap-2 px-6 pt-4 pb-6
       " style={{
-        borderTop: '1px dashed rgba(255, 248, 248, 0.17)'
+        borderTop: '2px dashed rgba(255, 255, 255, .3)'
       }}>
         <button
           type="button"
