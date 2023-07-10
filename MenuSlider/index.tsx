@@ -2,7 +2,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import style from "./style.module.scss";
-import logo from "../assets/Logo_Negativo_semFundo.png";
+import logo from "../assets/Logo_semFundo 1.png";
+import wallet from "../assets/icon _wallet_.svg";
+import coin from "../assets/icon _coin_.svg";
+import homeSale from "../assets/icon _home sale_.svg";
+import cart from "../assets/icon _cart_.svg";
 import { PossiblePermissions, User, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
@@ -24,18 +28,18 @@ const clientsWithAccessToCAP = {
 export const applicationRedirection = (user: User | undefined) => {
   let urls = { portal: '', wf: '' }
 
-  try{
+  try {
     // @ts-ignore
     const WORKFLOW_MODULE = process.env.REACT_APP_WORKFLOW_MODULAR;
     urls.wf = WORKFLOW_MODULE!;
-  }catch(e){ }
-  try{
+  } catch (e) { }
+  try {
     // @ts-ignore
     const PORTAL = import.meta.env.VITE_PORTAL_URL;
     urls.portal = PORTAL;
-  }catch(e){ }
-  
-  if(!urls.portal && !urls.wf) console.error(
+  } catch (e) { }
+
+  if (!urls.portal && !urls.wf) console.error(
     '[undeclared-env-variables-<REACT_APP_WORKFLOW_MODULAR|VITE_PORTAL_URL>]'
   )
   return [
@@ -44,10 +48,10 @@ export const applicationRedirection = (user: User | undefined) => {
       id: 'ivrim-flows', name: 'Portal de Soluções Ivrim', url: `${urls.portal}/compras-e-contas-a-pagar`, img: 'https://source.unsplash.com/random/?city,night',
       disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
     },
-    { id: 'ivrim-automator',    name: 'Ivrim System Architect',    url: `${urls.wf}?token=${user?.token}`, img: 'https://source.unsplash.com/random/?business-work' },
-    { id: 'ivrim-learn-center', name: 'Ivrim Learning Center',     url: undefined, img: "https://source.unsplash.com/random/?technology" },
+    { id: 'ivrim-automator', name: 'Ivrim System Architect', url: `${urls.wf}?token=${user?.token}`, img: 'https://source.unsplash.com/random/?business-work' },
+    { id: 'ivrim-learn-center', name: 'Ivrim Learning Center', url: undefined, img: "https://source.unsplash.com/random/?technology" },
     {
-      id: 'admin-panel',        name: 'Admin Panel', url: `${urls.portal}/painel-adm`, img: "https://source.unsplash.com/random/?textures-patterns",
+      id: 'admin-panel', name: 'Admin Panel', url: `${urls.portal}/painel-adm`, img: "https://source.unsplash.com/random/?textures-patterns",
       disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN)
     },
     { id: 'co-pilot-dashboard', name: 'Ivrim Office Intelligence', url: `${urls.portal}/co-pilot-dashboard/financeiro`, img: "https://source.unsplash.com/random/?3d-renders" },
@@ -72,7 +76,7 @@ export const MenuSlider = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const [workflows, setWorkflows] = useState<WorkflowType[]>([]); 
+  const [workflows, setWorkflows] = useState<WorkflowType[]>([]);
   const itemsSlider = applicationRedirection(user);
 
   const painelItem = itemsSlider.find(item => item.id === 'admin-panel')
@@ -82,29 +86,65 @@ export const MenuSlider = () => {
   const copilotItem = itemsSlider.find(item => item.id === 'co-pilot-dashboard')
 
   useEffect(() => {
-    if(!user) return;
+    if (!user) return;
     (async () => {
       const res = await getPublishedFlows(user.token, user.current_client);
-      if(!res.result){
+      if (!res.result) {
         toast.error(res.response)
         return;
       }
-      
-      if(!res.data) return;
+
+      if (!res.data) return;
 
       setWorkflows(res.data)
     })()
   }, [user?.token]);
 
   return (
-    <div className="w-screen h-screen bg-gradient-bg overflow-hidden">
+    <div className="w-screen h-screen bg-bg-background overflow-hidden">
       <div className={style.header}>
         <div className={style.header__logo}>
-          <img src={logo} alt="Ivrim Consulting"/>
+          <img src={logo} alt="Ivrim Consulting" />
         </div>
-        <DropdownChooseEnterprise/>
+        <DropdownChooseEnterprise />
       </div>
       <div className="overflow-auto h-full flex-col sm:flex-row flex items-start sm:justify-between py-15 px-6 lg:max-w-[95%] w-full mx-auto">
+        <div className="flex bg-card-gray w-[433px] h-[728px] shrink-0 rounded-2xl space-x-12">
+          <div className="flex flex-wrap mt-12 ml-4 mr-7 mb-40">
+            
+            <div className="flex flex-col">
+              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg mr-12 drop-shadow-xl">
+                <img src={wallet} alt="wallet icon" className="ml-4" />
+              </button>
+              <span className="text-primary-500 text-lg text-center mr-12 mt-3">WF CaP</span>
+            </div>
+
+            <div className="flex flex-col ml-1.5">
+              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg mr-16">
+                <img src={coin} alt="coin icon" className="ml-4" />
+              </button>
+              <span className="text-primary-500 text-lg text-center mr-16 mt-3">WF CaR</span>
+            </div>
+
+            <div className="flex flex-col">
+              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg">
+                <img src={homeSale} alt="home sale icon" className="ml-4" />
+              </button>
+              <span className="text-primary-500 text-lg text-center mr-1 mt-3">WF CoB</span>
+            </div>
+
+            <div className="flex flex-col">
+              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg">
+                <img src={cart} alt="cart icon" className="ml-4" />
+              </button>
+              <span className="text-primary-500 text-lg text-center">WF Com</span>
+            </div>
+          </div>
+        </div>
+        <div></div>
+        <div></div>
+
+
         <div className="flex flex-wrap gap-4 mb-4">
           {isacItem && (
             <button
@@ -115,10 +155,10 @@ export const MenuSlider = () => {
                 px-8 py-14 text-gray-100
                 flex flex-col items-center justify-center text-center gap-1
               "
-              onClick={() => redirectToApp({ url: isacItem.url, disabled: isacItem.disabled}, toast, navigate)}
+              onClick={() => redirectToApp({ url: isacItem.url, disabled: isacItem.disabled }, toast, navigate)}
             >
               <h3 className="text-xl font-semibold leading-none">Criar Workflow</h3>
-              <PlusIcon/>
+              <PlusIcon />
             </button>
           )}
           {workflows.map((flow) => (
@@ -145,7 +185,7 @@ export const MenuSlider = () => {
                 px-8 py-14 text-gray-100 w-56 h-44
                 flex flex-col items-center justify-center text-center gap-1
               "
-              onClick={() => redirectToApp({ url: portalItem.url, disabled: portalItem.disabled}, toast, navigate)}
+              onClick={() => redirectToApp({ url: portalItem.url, disabled: portalItem.disabled }, toast, navigate)}
             >
               <h3 className="text-xl font-semibold leading-none">Contas a Pagar</h3>
               <em className="text-xs uppercase text-gray-300">Fluxo: Financeiro</em>
@@ -160,7 +200,7 @@ export const MenuSlider = () => {
                 px-8 py-14 text-gray-100 w-56 h-44
                 flex flex-col items-center justify-center text-center gap-1
               "
-              onClick={() => redirectToApp({ url: copilotItem.url, disabled: copilotItem.disabled}, toast, navigate)}
+              onClick={() => redirectToApp({ url: copilotItem.url, disabled: copilotItem.disabled }, toast, navigate)}
             >
               <h3 className="text-xl font-semibold leading-none">Dashboards</h3>
               <em className="text-xs uppercase text-gray-300">Copilot</em>
@@ -175,7 +215,7 @@ export const MenuSlider = () => {
                 <button
                   type="button"
                   className="h-20 w-full p-4 text-center text-sm truncate"
-                  onClick={() => redirectToApp({ url: profileItem.url, disabled: profileItem.disabled}, toast, navigate)}
+                  onClick={() => redirectToApp({ url: profileItem.url, disabled: profileItem.disabled }, toast, navigate)}
                 >Perfil</button>
               </li>
             )}
@@ -186,20 +226,20 @@ export const MenuSlider = () => {
                 onClick={() => toast.warning('Em Desenvolvimento')}
               >Armazenamento</button>
             </li>
-            
+
             {painelItem && (
               <li className="bg-gray-100/10 hover:bg-gray-100/20 rounded-lg font-semibold">
                 <button
                   type="button"
                   className="h-20 w-full p-4 text-center text-sm truncate"
-                  onClick={() => redirectToApp({ url: painelItem.url, disabled: painelItem.disabled}, toast, navigate)}
+                  onClick={() => redirectToApp({ url: painelItem.url, disabled: painelItem.disabled }, toast, navigate)}
                 >Painel Admin</button>
               </li>
             )}
           </ul>
         </div>
         <div className="absolute bottom-4 z-50 w-[95%] flex justify-end pr-1">
-          <ButtonHelp/>
+          <ButtonHelp />
         </div>
       </div>
     </div>
