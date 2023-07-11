@@ -7,6 +7,13 @@ import wallet from "../assets/icon _wallet_.svg";
 import coin from "../assets/icon _coin_.svg";
 import homeSale from "../assets/icon _home sale_.svg";
 import cart from "../assets/icon _cart_.svg";
+import view from "../assets/icon _view_.svg";
+import leaderboard from "../assets/icon _leaderboard_.svg";
+import addFolder from "../assets/icon _add folder_.svg";
+import profileCircle from "../assets/icon _profile circled_.svg";
+import multiplePages from "../assets/icon _multiple pages empty_.svg";
+import settings from "../assets/icon _settings_.svg";
+
 import { PossiblePermissions, User, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
@@ -17,6 +24,8 @@ import { PlusIcon } from "../utils/icons";
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
+
+const frontURL = getUrls("front")!
 
 const clientsWithAccessToCAP = {
   "3c2c7801-9b58-417f-9809-7313cbbb287f": "IVRIM",
@@ -108,139 +117,111 @@ export const MenuSlider = () => {
         </div>
         <DropdownChooseEnterprise />
       </div>
-      <div className="overflow-auto h-full flex-col sm:flex-row flex items-start sm:justify-between py-15 px-6 lg:max-w-[95%] w-full mx-auto">
-        <div className="flex bg-card-gray w-[433px] h-[728px] shrink-0 rounded-2xl space-x-12">
-          <div className="flex flex-wrap mt-12 ml-4 mr-7 mb-40">
-            
+
+      <div className="overflow-auto flex-col sm:flex-row flex items-start sm:justify-between px-6 lg:max-w-[95%] w-full mx-auto gap-5">
+        <section className="flex bg-card-gray w-[375px] h-[460px] shrink-0 rounded-2xl space-x-12">
+          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80 gap-4">
+            {workflows.map((flow) => (
+              <div className="flex flex-col" key={flow._id}>
+                <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                  onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
+                >
+                  {flow.theme === "Cobrança" ? (<img src={homeSale} alt="homeSale icon" className="pl-3" />) : flow.theme === "Financeiro" ? (<img src={coin} alt="coin icon" className="pl-3" />) : flow.theme === "Comercial" ? (<img src={cart} alt="cart icon" className="pl-3" />) : <></>}
+
+                </button>
+                <span className="text-primary-500 text-sm text-center mr-12 mt-3">{flow.title}</span>
+              </div>
+            ))}
+
+            {user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client) && portalItem && (
+              <div className="flex flex-col">
+                <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                  onClick={() => redirectToApp({ url: portalItem.url, disabled: portalItem.disabled }, toast, navigate)}
+                >
+                  <img src={wallet} alt="wallet icon" className="pl-3.5 pt-1" />
+                </button>
+                <span className="text-primary-500 text-sm text-center mr-1 mt-3">Contas <br></br> a pagar</span>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="flex bg-card-gray w-[375px] h-[460px] shrink-0 rounded-2xl space-x-12">
+          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80">
+
             <div className="flex flex-col">
-              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg mr-12 drop-shadow-xl">
-                <img src={wallet} alt="wallet icon" className="ml-4" />
+              <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => toast.warning("Em desenvolvimento!")
+                }
+              >
+                <img src={view} alt="wallet icon" className="pl-3.5 pt-1" />
               </button>
-              <span className="text-primary-500 text-lg text-center mr-12 mt-3">WF CaP</span>
+              <span className="text-primary-500 text-sm text-center mr-12 mt-3">Vision 360</span>
             </div>
 
-            <div className="flex flex-col ml-1.5">
-              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg mr-16">
-                <img src={coin} alt="coin icon" className="ml-4" />
+            <div className="flex flex-col ml-5">
+              <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => redirectToApp({
+                  url: `${frontURL!.portal}/co-pilot-dashboard/financeiro`,
+                },
+                  toast, navigate
+                )}
+              >
+                <img src={leaderboard} alt="coin icon" className="pl-4" />
               </button>
-              <span className="text-primary-500 text-lg text-center mr-16 mt-3">WF CaR</span>
+              <span className="text-primary-500 text-sm text-center pr-16 mt-3">Dashboard</span>
             </div>
 
             <div className="flex flex-col">
-              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg">
-                <img src={homeSale} alt="home sale icon" className="ml-4" />
+              <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => toast.warning("Em desenvolvimento!")
+                }
+              >
+                <img src={addFolder} alt="home sale icon" className="ml-4" />
               </button>
-              <span className="text-primary-500 text-lg text-center mr-1 mt-3">WF CoB</span>
-            </div>
-
-            <div className="flex flex-col">
-              <button className="bg-primary-500 w-[90px] h-[90px] shrink-0 rounded-lg">
-                <img src={cart} alt="cart icon" className="ml-4" />
-              </button>
-              <span className="text-primary-500 text-lg text-center">WF Com</span>
+              <span className="text-primary-500 text-sm text-center mt-3">Reports</span>
             </div>
           </div>
-        </div>
-        <div></div>
-        <div></div>
+        </section>
 
+        <section className="flex bg-card-gray w-[375px] h-[460px] shrink-0 rounded-2xl space-x-12">
+          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80">
 
-        <div className="flex flex-wrap gap-4 mb-4">
-          {isacItem && (
-            <button
-              type="button"
-              className="
-                bg-gradient-glass backdrop-blur-[25px] rounded-lg 
-                hover:bg-gray-100/10 w-56 h-44
-                px-8 py-14 text-gray-100
-                flex flex-col items-center justify-center text-center gap-1
-              "
-              onClick={() => redirectToApp({ url: isacItem.url, disabled: isacItem.disabled }, toast, navigate)}
-            >
-              <h3 className="text-xl font-semibold leading-none">Criar Workflow</h3>
-              <PlusIcon />
-            </button>
-          )}
-          {workflows.map((flow) => (
-            <button
-              type="button"
-              className="
-                bg-gradient-glass backdrop-blur-[25px] rounded-lg 
-                hover:bg-gray-100/10
-                px-8 py-14 text-gray-100 w-56 h-44
-                flex flex-col items-center justify-center text-center gap-1
-              "
-              onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
-            >
-              <h3 className="text-xl font-semibold leading-none">{flow.title}</h3>
-              <em className="text-xs uppercase text-gray-300">Fluxo: {flow.theme}</em>
-            </button>
-          ))}
-          {user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client) && portalItem && (
-            <button
-              type="button"
-              className="
-                bg-gradient-glass backdrop-blur-[25px] rounded-lg 
-                hover:bg-gray-100/10
-                px-8 py-14 text-gray-100 w-56 h-44
-                flex flex-col items-center justify-center text-center gap-1
-              "
-              onClick={() => redirectToApp({ url: portalItem.url, disabled: portalItem.disabled }, toast, navigate)}
-            >
-              <h3 className="text-xl font-semibold leading-none">Contas a Pagar</h3>
-              <em className="text-xs uppercase text-gray-300">Fluxo: Financeiro</em>
-            </button>
-          )}
-          {copilotItem && (
-            <button
-              type="button"
-              className="
-                bg-gradient-glass backdrop-blur-[25px] rounded-lg 
-                hover:bg-gray-100/10
-                px-8 py-14 text-gray-100 w-56 h-44
-                flex flex-col items-center justify-center text-center gap-1
-              "
-              onClick={() => redirectToApp({ url: copilotItem.url, disabled: copilotItem.disabled }, toast, navigate)}
-            >
-              <h3 className="text-xl font-semibold leading-none">Dashboards</h3>
-              <em className="text-xs uppercase text-gray-300">Copilot</em>
-            </button>
-          )}
-        </div>
-        <div className="bg-gradient-glass backdrop-blur-[25px] rounded-lg flex flex-col gap-2 p-4 text-gray-100">
-          <strong className="text-sm text-center text-gray-100 uppercase block -mt-1">Menu de Navegação</strong>
-          <ul className="grid grid-cols-2 gap-2 pb-2">
-            {profileItem && (
-              <li className="bg-gray-100/10 hover:bg-gray-100/20 rounded-lg font-semibold">
-                <button
-                  type="button"
-                  className="h-20 w-full p-4 text-center text-sm truncate"
-                  onClick={() => redirectToApp({ url: profileItem.url, disabled: profileItem.disabled }, toast, navigate)}
-                >Perfil</button>
-              </li>
-            )}
-            <li className="bg-gray-100/10 hover:bg-gray-100/20 rounded-lg font-semibold">
-              <button
-                type="button"
-                className="h-20 w-full p-4 text-center text-sm truncate"
-                onClick={() => toast.warning('Em Desenvolvimento')}
-              >Armazenamento</button>
-            </li>
+            <div className="flex flex-col">
+              <button className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg mr-12 hover:bg-primary-100 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }} onClick={() => redirectToApp({
+                url: `${frontURL.portal}/perfil`
+              },
+                toast, navigate
+              )}>
+                <img src={profileCircle} alt="wallet icon" className="pl-4" />
+              </button>
+              <span className="text-primary-200 text-sm text-center mr-12 mt-3">Perfil</span>
+            </div>
 
-            {painelItem && (
-              <li className="bg-gray-100/10 hover:bg-gray-100/20 rounded-lg font-semibold">
-                <button
-                  type="button"
-                  className="h-20 w-full p-4 text-center text-sm truncate"
-                  onClick={() => redirectToApp({ url: painelItem.url, disabled: painelItem.disabled }, toast, navigate)}
-                >Painel Admin</button>
-              </li>
-            )}
-          </ul>
-        </div>
-        <div className="absolute bottom-4 z-50 w-[95%] flex justify-end pr-1">
-          <ButtonHelp />
-        </div>
+            <div className="flex flex-col ml-5">
+              <button className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-100 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => toast.warning("Em desenvolvimento!")
+                }
+              >
+                <img src={multiplePages} alt="coin icon" className="pl-4" />
+              </button>
+              <span className="text-primary-200 text-sm text-center mr-16 mt-3">Meus Doc.</span>
+            </div>
+
+            <div className="flex flex-col">
+              <button className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-100 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => redirectToApp({
+                  url: `${frontURL.portal}/painel-adm`,
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN)
+                },
+                  toast, navigate
+                )}>
+                <img src={settings} alt="home sale icon" className="ml-4" />
+              </button>
+              <span className="text-primary-200 text-sm text-center mt-3">Adm <br></br> Center</span>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   )
