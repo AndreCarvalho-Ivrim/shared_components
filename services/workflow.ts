@@ -9,7 +9,7 @@ export const clearCachePublishedFlows = () => cachePublishedFlows = null;
 interface ResponseWorkflows extends ResultAndResponse{
   data?: WorkflowType[]
 }
-export const getPublishedFlows = async (token: string, client_id: string) : Promise<ResponseWorkflows> => {
+export const getPublishedFlows = async (token: string) : Promise<ResponseWorkflows> => {
   if(cachePublishedFlows && cachePublishedFlows.token === token){
     console.log('[cached-published-flows]');
     return {
@@ -19,7 +19,7 @@ export const getPublishedFlows = async (token: string, client_id: string) : Prom
     };
   }
   try{
-    const { data } = await wf.get(`/flows/published/${client_id}`, headerBearer(token));
+    const { data } = await wf.get(`/flows/published`, headerBearer(token));
     console.log('[requested-published-flows]')
 
     if(data.result) cachePublishedFlows = { token, data: data.data };
