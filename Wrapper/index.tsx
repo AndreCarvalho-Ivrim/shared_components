@@ -37,7 +37,7 @@ export function Wrapper({
   async function loadPublishedFlows(){
     if(!user) return;
     
-    const res = await getPublishedFlows(user.token, user.current_client);
+    const res = await getPublishedFlows(user.token);
     if(res.result && res.data) setPublishedFlows(res.data);
   }
 

@@ -84,7 +84,7 @@ export const MenuSlider = () => {
   useEffect(() => {
     if(!user) return;
     (async () => {
-      const res = await getPublishedFlows(user.token, user.current_client);
+      const res = await getPublishedFlows(user.token);
       if(!res.result){
         toast.error(res.response)
         return;
