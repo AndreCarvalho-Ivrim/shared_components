@@ -89,7 +89,6 @@ export const MenuSlider = () => {
   const itemsSlider = applicationRedirection(user);
 
   const painelItem = itemsSlider.find(item => item.id === 'admin-panel')
-  const profileItem = itemsSlider.find(item => item.id === 'profile')
   const isacItem = itemsSlider.find(item => item.id === 'ivrim-automator')
   const portalItem = itemsSlider.find(item => item.id === 'ivrim-flows')
   const copilotItem = itemsSlider.find(item => item.id === 'co-pilot-dashboard')
@@ -110,7 +109,7 @@ export const MenuSlider = () => {
   }, [user?.token]);
 
   return (
-    <div className="w-screen h-screen bg-bg-background overflow-hidden">
+    <div className="w-screen h-screen bg-background overflow-auto">
       <div className={style.header}>
         <div className={style.header__logo}>
           <img src={logo} alt="Ivrim Consulting" />
@@ -118,107 +117,107 @@ export const MenuSlider = () => {
         <DropdownChooseEnterprise />
       </div>
 
-      <div className="overflow-auto flex-col sm:flex-row flex items-start sm:justify-between px-6 lg:max-w-[95%] w-full mx-auto gap-5">
-        <section className="flex bg-card-gray w-[375px] h-[460px] shrink-0 rounded-2xl space-x-12">
-          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80 gap-4">
+      <div className="flex-col sm:flex-row flex-wrap flex sm:justify-between px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-6">
+        <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
+          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80 gap-8">
             {workflows.map((flow) => (
-              <div className="flex flex-col" key={flow._id}>
+              <div className="flex flex-col w-[65px]" key={flow._id}>
                 <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                   onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
                 >
                   {flow.theme === "Cobrança" ? (<img src={homeSale} alt="homeSale icon" className="pl-3" />) : flow.theme === "Financeiro" ? (<img src={coin} alt="coin icon" className="pl-3" />) : flow.theme === "Comercial" ? (<img src={cart} alt="cart icon" className="pl-3" />) : <></>}
 
                 </button>
-                <span className="text-primary-500 text-sm text-center mr-12 mt-3">{flow.title}</span>
+                <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
               </div>
             ))}
 
             {user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client) && portalItem && (
-              <div className="flex flex-col">
-                <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+              <div className="flex flex-col w-[65px]">
+                <button
+                  className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105"
+                  style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                   onClick={() => redirectToApp({ url: portalItem.url, disabled: portalItem.disabled }, toast, navigate)}
                 >
                   <img src={wallet} alt="wallet icon" className="pl-3.5 pt-1" />
                 </button>
-                <span className="text-primary-500 text-sm text-center mr-1 mt-3">Contas <br></br> a pagar</span>
+                <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
               </div>
             )}
           </div>
         </section>
 
-        <section className="flex bg-card-gray w-[375px] h-[460px] shrink-0 rounded-2xl space-x-12">
-          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80">
+        <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
+          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80 gap-8">
 
-            <div className="flex flex-col">
-              <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => toast.warning("Em desenvolvimento!")
-                }
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => toast.warning("Em desenvolvimento!")}
               >
                 <img src={view} alt="wallet icon" className="pl-3.5 pt-1" />
               </button>
-              <span className="text-primary-500 text-sm text-center mr-12 mt-3">Vision 360</span>
+              <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Vision 360</span>
             </div>
 
-            <div className="flex flex-col ml-5">
-              <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => redirectToApp({
-                  url: `${frontURL!.portal}/co-pilot-dashboard/financeiro`,
-                },
-                  toast, navigate
-                )}
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => redirectToApp({ url: `${frontURL!.portal}/co-pilot-dashboard/financeiro` }, toast, navigate)}
               >
                 <img src={leaderboard} alt="coin icon" className="pl-4" />
               </button>
-              <span className="text-primary-500 text-sm text-center pr-16 mt-3">Dashboard</span>
+              <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Dashboard</span>
             </div>
 
-            <div className="flex flex-col">
-              <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => toast.warning("Em desenvolvimento!")
-                }
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => toast.warning("Em desenvolvimento!")}
               >
-                <img src={addFolder} alt="home sale icon" className="ml-4" />
+                <img src={addFolder} alt="add folder icon" className="ml-4"/>
               </button>
-              <span className="text-primary-500 text-sm text-center mt-3">Reports</span>
+              <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Reports</span>
             </div>
           </div>
         </section>
 
-        <section className="flex bg-card-gray w-[375px] h-[460px] shrink-0 rounded-2xl space-x-12">
-          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80">
+        <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
+          <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80 gap-8">
 
-            <div className="flex flex-col">
-              <button className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg mr-12 hover:bg-primary-100 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }} onClick={() => redirectToApp({
-                url: `${frontURL.portal}/perfil`
-              },
-                toast, navigate
-              )}>
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg mr-12 hover:bg-primary-100 hover:scale-105"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => redirectToApp({ url: `${frontURL.portal}/perfil` }, toast, navigate)}>
                 <img src={profileCircle} alt="wallet icon" className="pl-4" />
               </button>
-              <span className="text-primary-200 text-sm text-center mr-12 mt-3">Perfil</span>
+              <span className="text-primary-200 text-xs text-center truncate hover:whitespace-normal mt-3">Perfil</span>
             </div>
 
-            <div className="flex flex-col ml-5">
-              <button className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-100 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => toast.warning("Em desenvolvimento!")
-                }
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-100 hover:scale-105"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => toast.warning("Em desenvolvimento!")}
               >
                 <img src={multiplePages} alt="coin icon" className="pl-4" />
               </button>
-              <span className="text-primary-200 text-sm text-center mr-16 mt-3">Meus Doc.</span>
+              <span className="text-primary-200 text-xs text-center truncate hover:whitespace-normal mt-3">Meus Doc.</span>
             </div>
 
-            <div className="flex flex-col">
-              <button className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-100 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => redirectToApp({
-                  url: `${frontURL.portal}/painel-adm`,
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN)
-                },
-                  toast, navigate
-                )}>
-                <img src={settings} alt="home sale icon" className="ml-4" />
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-100 hover:scale-105"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => redirectToApp({ url: `${frontURL.portal}/painel-adm`, disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN) }, toast, navigate)}
+              >
+                <img src={settings} alt="home sale icon" className="ml-4"/>
               </button>
-              <span className="text-primary-200 text-sm text-center mt-3">Adm <br></br> Center</span>
+              <span className="text-primary-200 text-xs text-center truncate hover:whitespace-normal mt-3">Adm Center</span>
             </div>
           </div>
         </section>
