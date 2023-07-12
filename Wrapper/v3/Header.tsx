@@ -35,7 +35,7 @@ export const Header = ({ breadcrumbs } : HeaderProps) => {
           <button
             type="button"
             className="
-              text-gray-200/70 rounded-lg
+            text-primary-800/70 rounded-lg
               focus:ring-gray-50/50 focus:outline-none 
               focus:ring-2 focus:ring-offset-2
               sm:max-md:hidden

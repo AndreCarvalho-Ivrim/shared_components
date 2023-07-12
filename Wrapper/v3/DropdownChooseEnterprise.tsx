@@ -3,13 +3,14 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { Client } from "../../../types";
 
 import logo from '../../../assets/default-client-logo.png';
+import colapse from "../../assets/colapse.svg"
 import { Dropdown } from "../../utils/Dropdown";
 import { useNotify } from "../../../contexts/NotifyContext";
 
-interface ClientProps extends Client{
+interface ClientProps extends Client {
   active?: boolean
 }
-interface HeaderProps{
+interface HeaderProps {
   breadcrumbs: { name: string, href: string }[],
 }
 export const DropdownChooseEnterprise = () => {
@@ -19,10 +20,10 @@ export const DropdownChooseEnterprise = () => {
   const [clients, setClients] = useState<ClientProps[]>([]);
 
   useEffect(() => {
-    if(!user || !user.clients) return;
+    if (!user || !user.clients) return;
 
     let findedClient = user.clients?.find(c => c.id === user.current_client);
-    if(findedClient) setClient(findedClient);
+    if (findedClient) setClient(findedClient);
 
     setClients([
       ...user.clients.map(client => {
@@ -34,8 +35,8 @@ export const DropdownChooseEnterprise = () => {
     ]);
   }, [user]);
 
-  async function handleChangeClient(client_id: string, client_name: string){
-    if(!user) return;
+  async function handleChangeClient(client_id: string, client_name: string) {
+    if (!user) return;
     toast.promise(changeClient(client_id, client_name, user.token), {
       'pending': 'Alterando empresa',
       'error': 'Houve um erro ao alterar a empresa',
@@ -45,7 +46,8 @@ export const DropdownChooseEnterprise = () => {
 
   return (
     <Dropdown
-      classNames={{ list: `
+      classNames={{
+        list: `
         absolute right-0 z-50
         -mt-1 w-56 origin-top-right rounded-md
         bg-gray-100/40 backdrop-blur-[25px] shadow-lg
@@ -60,18 +62,25 @@ export const DropdownChooseEnterprise = () => {
           uppercase border-2
         ">
           {client ? (<> {client.picture ? (
-            <img
-              className="object-cover w-full h-full rounded-md"
-              src={client.picture}
-              onError={(e) => {
-                let img = e.target as HTMLImageElement;
-                img.src = logo;
-              }}
-            />
-          ) : client.nome_fantasia.substr(0,2) } </>) : '..'}
+            <>
+              <img
+                className="object-cover w-full h-full rounded-md ml-3"
+                src={client.picture}
+                onError={(e) => {
+                  let img = e.target as HTMLImageElement;
+                  img.src = logo;
+                }} />
+              <div>
+                <img
+                  src={colapse}
+                  className="ml-3"
+                />
+              </div>
+            </>
+          ) : client.nome_fantasia.substr(0, 2)} </>) : '..'}
         </div>
       }
-      
+
     >
       <>
         {user && (<strong className="text-xs text-center truncate max-w-full block -mt-1 mb-1">{user.email}</strong>)}
@@ -108,7 +117,7 @@ export const DropdownChooseEnterprise = () => {
           </button>
         ))}
         {user && (
-          <button 
+          <button
             type="button"
             className="
               text-gray-700 font-semibold text-xs
