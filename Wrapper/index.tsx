@@ -3,8 +3,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from './v3/Wrapper';
 import { AsideItems } from './v3/Aside';
 import { useAuth } from '../../contexts/AuthContext';
-import { DetalistIcon, MoneyIcon, ProjectIcon, SettingIcon, UploadIcon, UsersIcon, WorkflowIcon } from '../utils/icons';
-import { applicationRedirection } from '../MenuSlider';
+import { EnvelopeIcon, MoneyIcon, ProjectIcon, SettingIcon, UploadIcon, UsersIcon, WorkflowIcon } from '../utils/icons';
 import { AvailableWorkflowThemeType, PossiblePermissions, User, WorkflowType } from '../../types';
 import { getPublishedFlows } from '../services/workflow';
 
@@ -115,7 +114,7 @@ export const getAsideItems = ({
   ];
   else if(module_name === 'System Archictect') defaultAsideItems = [
     { id: 'aside-item-workflows', href: '/', icon: <WorkflowIcon w={22} h={22}/>, name: 'Workflows' },
-    { id: 'aside-item-template',  href: '/modelos', icon: <DetalistIcon w={22} h={22}/>, name: 'Modelos'}
+    { id: 'aside-item-template',  href: '/modelos', icon: <EnvelopeIcon w={22} h={22}/>, name: 'Modelos'}
   ];
   else if(module_name === 'Ivrim Flows') defaultAsideItems = [
     { id: 'aside-item-compras-e-contas-a-pagar',              name: 'Contas a Pagar',

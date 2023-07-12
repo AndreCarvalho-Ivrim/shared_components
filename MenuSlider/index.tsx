@@ -1,6 +1,3 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import style from "./style.module.scss";
 import logo from "../assets/Logo_semFundo 1.png";
 import wallet from "../assets/icon _wallet_.svg";
@@ -20,7 +17,7 @@ import { useNotify } from "../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
 import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
-import { PlusIcon } from "../utils/icons";
+import { EnvelopeIcon, FlowIcon } from "../utils/icons";
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
@@ -149,7 +146,26 @@ export const MenuSlider = () => {
 
         <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
           <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80 gap-8">
-
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105 flex items-center justify-center text-white"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => redirectToApp({ url: `${frontURL.wf}?token=${user?.token}` }, toast, navigate)}
+              >
+                <FlowIcon w={34} h={34}/>
+              </button>
+              <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">ISAC</span>
+            </div>
+            <div className="flex flex-col w-[65px]">
+              <button
+                className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105 flex items-center justify-center text-white"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                onClick={() => redirectToApp({ url: `${frontURL.wf}modelos/?token=${user?.token}` }, toast, navigate)}
+              >
+                <EnvelopeIcon w={34} h={34}/>
+              </button>
+              <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Modelo de Mensagens</span>
+            </div>
             <div className="flex flex-col w-[65px]">
               <button
                 className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105"
@@ -165,7 +181,7 @@ export const MenuSlider = () => {
               <button
                 className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105"
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => redirectToApp({ url: `${frontURL!.portal}/co-pilot-dashboard/financeiro` }, toast, navigate)}
+                onClick={() => redirectToApp({ url: `${frontURL.portal}/co-pilot-dashboard/financeiro` }, toast, navigate)}
               >
                 <img src={leaderboard} alt="coin icon" className="mx-auto" />
               </button>
