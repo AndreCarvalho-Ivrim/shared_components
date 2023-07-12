@@ -72,11 +72,8 @@ export const getAsideItems = ({
   const canAccessAdminPanel = !!(
     user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ADMIN)
   );
-  const canManagement= !!(
-    user?.permitions_slug && (
-      user.permitions_slug.includes(PossiblePermissions.GESTAO) || 
-      user.permitions_slug.includes(PossiblePermissions.PLANILHA)
-    )
+  const canManagement = !!(
+    user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO)
   );
 
   let defaultAsideItems : AsideItems[] = [];
@@ -95,8 +92,8 @@ export const getAsideItems = ({
           href: '/painel-adm/projetos',disabled: !canAccessAdminPanel,
         },
         { 
-          id: 'aside-subitem-gestao',     name: 'Dashboards',
-          href: '/painel-adm/gestao',  disabled: !canManagement,
+          id: 'aside-subitem-dashboards',     name: 'Dashboards',
+          href: '/painel-adm/dashboards',  disabled: !canManagement,
         },
       ]
 

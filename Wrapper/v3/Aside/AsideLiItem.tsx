@@ -17,7 +17,7 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
     w-full px-3 py-1.5 rounded-lg
 
     ${isSubItem && `
-      ${item.name === currentActive ? 'font-semibold':' brightness-75'}
+      ${item.name === currentActive ? 'font-semibold':' brightness-90'}
       text-sm
     `}
     ${!items && !isSubItem && `
@@ -26,7 +26,7 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
     `}
     disabled:hover:bg-transparent
 
-    disabled:opacity-70
+    disabled:opacity-50
     disabled:cursor-default
   `;
 
@@ -65,7 +65,7 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
       sm:hidden md:inline
       group-[.collapsed]:hidden
       group-[.collapsed-desktop-aside]:hidden
-      truncate
+      truncate text-white
     ">{item.name}</span>
   </>;
 
