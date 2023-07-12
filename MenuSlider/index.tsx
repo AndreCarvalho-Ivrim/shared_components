@@ -125,7 +125,7 @@ export const MenuSlider = () => {
                 <button className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                   onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
                 >
-                  {flow.theme === "Cobrança" ? (<img src={homeSale} alt="homeSale icon" className="pl-3" />) : flow.theme === "Financeiro" ? (<img src={coin} alt="coin icon" className="pl-3" />) : flow.theme === "Comercial" ? (<img src={cart} alt="cart icon" className="pl-3" />) : <></>}
+                  {flow.theme === "Cobrança" ? (<img src={homeSale} alt="homeSale icon" className="mx-auto" />) : flow.theme === "Financeiro" ? (<img src={coin} alt="coin icon" className="pl-3" />) : flow.theme === "Comercial" ? (<img src={cart} alt="cart icon" className="pl-3" />) : <></>}
 
                 </button>
                 <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
@@ -139,7 +139,7 @@ export const MenuSlider = () => {
                   style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                   onClick={() => redirectToApp({ url: portalItem.url, disabled: portalItem.disabled }, toast, navigate)}
                 >
-                  <img src={wallet} alt="wallet icon" className="pl-3.5 pt-1" />
+                  <img src={wallet} alt="wallet icon" className="mx-auto"/>
                 </button>
                 <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
               </div>
@@ -156,7 +156,7 @@ export const MenuSlider = () => {
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                 onClick={() => toast.warning("Em desenvolvimento!")}
               >
-                <img src={view} alt="wallet icon" className="pl-3.5 pt-1" />
+                <img src={view} alt="wallet icon" className="mx-auto pt-1" />
               </button>
               <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Vision 360</span>
             </div>
@@ -167,7 +167,7 @@ export const MenuSlider = () => {
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                 onClick={() => redirectToApp({ url: `${frontURL!.portal}/co-pilot-dashboard/financeiro` }, toast, navigate)}
               >
-                <img src={leaderboard} alt="coin icon" className="pl-4" />
+                <img src={leaderboard} alt="coin icon" className="mx-auto" />
               </button>
               <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Dashboard</span>
             </div>
@@ -178,7 +178,7 @@ export const MenuSlider = () => {
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                 onClick={() => toast.warning("Em desenvolvimento!")}
               >
-                <img src={addFolder} alt="add folder icon" className="ml-4"/>
+                <img src={addFolder} alt="add folder icon" className="mx-auto"/>
               </button>
               <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Reports</span>
             </div>
@@ -193,7 +193,7 @@ export const MenuSlider = () => {
                 className="bg-primary-200 w-[65px] h-[65px] shrink-0 rounded-lg mr-12 hover:bg-primary-100 hover:scale-105"
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                 onClick={() => redirectToApp({ url: `${frontURL.portal}/perfil` }, toast, navigate)}>
-                <img src={profileCircle} alt="wallet icon" className="pl-4" />
+                <img src={profileCircle} alt="wallet icon" className="mx-auto" />
               </button>
               <span className="text-primary-200 text-xs text-center truncate hover:whitespace-normal mt-3">Perfil</span>
             </div>
@@ -204,7 +204,7 @@ export const MenuSlider = () => {
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                 onClick={() => toast.warning("Em desenvolvimento!")}
               >
-                <img src={multiplePages} alt="coin icon" className="pl-4" />
+                <img src={multiplePages} alt="coin icon" className="mx-auto" />
               </button>
               <span className="text-primary-200 text-xs text-center truncate hover:whitespace-normal mt-3">Meus Doc.</span>
             </div>
@@ -215,7 +215,7 @@ export const MenuSlider = () => {
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
                 onClick={() => redirectToApp({ url: `${frontURL.portal}/painel-adm`, disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN) }, toast, navigate)}
               >
-                <img src={settings} alt="home sale icon" className="ml-4"/>
+                <img src={settings} alt="home sale icon" className="mx-auto"/>
               </button>
               <span className="text-primary-200 text-xs text-center truncate hover:whitespace-normal mt-3">Adm Center</span>
             </div>
