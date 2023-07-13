@@ -1,5 +1,5 @@
 import style from "./style.module.scss";
-import logo from "../assets/Logo_semFundo 1.png";
+import logo from "../assets/logo-hub.png";
 import wallet from "../assets/icon _wallet_.svg";
 import coin from "../assets/icon _coin_.svg";
 import homeSale from "../assets/icon _home sale_.svg";
@@ -237,6 +237,9 @@ export const MenuSlider = () => {
             </div>
           </div>
         </section>
+        <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
+          <ButtonHelp/>
+        </div>
       </div>
     </div>
   )
