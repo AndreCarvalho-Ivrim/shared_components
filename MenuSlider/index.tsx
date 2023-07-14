@@ -176,18 +176,19 @@ export const MenuSlider = () => {
               </button>
               <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Vision 360</span>
             </div>
-
             <div className="flex flex-col w-[65px]">
               <button
                 className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105"
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => redirectToApp({ url: `${frontURL.portal}/co-pilot-dashboard/financeiro` }, toast, navigate)}
+                onClick={() => redirectToApp({
+                  url: `${frontURL.portal}/co-pilot-dashboard`,
+                  disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.DASH))
+                }, toast, navigate)}
               >
                 <img src={leaderboard} alt="coin icon" className="mx-auto" />
               </button>
               <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">Dashboard</span>
             </div>
-
             <div className="flex flex-col w-[65px]">
               <button
                 className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105"
