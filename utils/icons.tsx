@@ -681,3 +681,8 @@ export const listAvailableIcons = [
   {component: <UsersIcon/>,           title: 'UsersIcon'            },
   {component: <ErrorCircleIcon/>,     title: 'ErrorCircleIcon'      },
 ];
+export const getIconByName = (title: string) => {
+  const findedIcon = listAvailableIcons.find(icon => icon.title === title);
+  if(findedIcon) return findedIcon.component;
+  return <></>;
+}
