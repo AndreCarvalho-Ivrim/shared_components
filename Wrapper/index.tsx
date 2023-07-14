@@ -99,11 +99,6 @@ export const getAsideItems = ({
 
     },
   ];
-  else if(module_name === 'Co-Pilot Dashboard') defaultAsideItems = [
-    { id: 'aside-item-finance', name: 'Financeiro',  href: '/co-pilot-dashboard/financeiro'  },
-    { id: 'aside-item-finance', name: 'Comercial',   href: '/co-pilot-dashboard/comercial'   },
-    { id: 'aside-item-finance', name: 'Operacional', href: '/co-pilot-dashboard/operacional' }
-  ];
   else if(module_name === 'Configurações') defaultAsideItems = [
     { id: 'aside-item-perfil',       name: 'Perfil',       href: '/perfil', icon: <UsersIcon w={22} h={22}/> },
     { id: 'aside-item-gallery',      name: 'Armazenamento',disabled: true,  icon: <UploadIcon w={22} h={22}/>},
