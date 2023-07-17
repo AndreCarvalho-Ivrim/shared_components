@@ -3,6 +3,8 @@ import { useNotify } from '../../../../contexts/NotifyContext';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { getUrls } from '../../../services/conn/api';
 import { redirectToApp } from '../../../MenuSlider';
+import { Progress } from 'flowbite-react';
+import Cloud from "../../../assets/cloud.svg"
 
 export const FooterAside = () => {
   const { user } = useAuth();
@@ -11,6 +13,20 @@ export const FooterAside = () => {
   const navigate = useNavigate();
   return (
     <div className="text-white">
+      <div className='text-white text-xs mt-16 pt-16 pl-2 pb-4'>
+          <div className='flex pb-1'>
+            <img src={Cloud} alt='icone de nuvem' className='pl-3' />
+
+            <div className='flex gap-6 pt-0.5'>
+              <p className='text-xs pl-1'>Armazenamento</p>
+              <span className='text-xs'>35%</span>
+            </div>
+          </div>
+
+          <Progress progress={35} size="sm" className='custom-progress' />
+
+          <p className='pt-1 text-gray-200 pl-6'><span className='font-bold'>35 GB</span> de 100 GB usados</p>
+        </div>
       {/* <button
         type="button"
         className={`
