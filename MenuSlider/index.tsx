@@ -146,11 +146,15 @@ export const MenuSlider = () => {
 
         <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
           <div className="flex flex-wrap mt-12 ml-6 mr-5 mb-80 gap-8">
+
             <div className="flex flex-col w-[65px]">
               <button
                 className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105 flex items-center justify-center text-white"
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => redirectToApp({ url: `${frontURL.wf}?token=${user?.token}` }, toast, navigate)}
+                onClick={() => redirectToApp({
+                  url: `${frontURL.wf}?token=${user?.token}`,
+                  disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC))
+                }, toast, navigate)}
               >
                 <FlowIcon w={34} h={34}/>
               </button>
@@ -160,7 +164,10 @@ export const MenuSlider = () => {
               <button
                 className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg hover:bg-primary-600 hover:scale-105 flex items-center justify-center text-white"
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                onClick={() => redirectToApp({ url: `${frontURL.wf}modelos/?token=${user?.token}` }, toast, navigate)}
+                onClick={() => redirectToApp({
+                  url: `${frontURL.wf}modelos/?token=${user?.token}`,
+                  disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC))
+                }, toast, navigate)}
               >
                 <EnvelopeIcon w={34} h={34}/>
               </button>
