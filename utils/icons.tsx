@@ -637,7 +637,43 @@ export const ErrorCircleIcon = (props: IconProps) => (
     className={props.className}
   ><path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
 );
-
+export const LockIcon = (props: IconProps) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+  >
+    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path>
+  </svg>
+);
+export const RefreshIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+  >
+    <path d="M10 11H7.101l.001-.009a4.956 4.956 0 0 1 .752-1.787 5.054 5.054 0 0 1 2.2-1.811c.302-.128.617-.226.938-.291a5.078 5.078 0 0 1 2.018 0 4.978 4.978 0 0 1 2.525 1.361l1.416-1.412a7.036 7.036 0 0 0-2.224-1.501 6.921 6.921 0 0 0-1.315-.408 7.079 7.079 0 0 0-2.819 0 6.94 6.94 0 0 0-1.316.409 7.04 7.04 0 0 0-3.08 2.534 6.978 6.978 0 0 0-1.054 2.505c-.028.135-.043.273-.063.41H2l4 4 4-4zm4 2h2.899l-.001.008a4.976 4.976 0 0 1-2.103 3.138 4.943 4.943 0 0 1-1.787.752 5.073 5.073 0 0 1-2.017 0 4.956 4.956 0 0 1-1.787-.752 5.072 5.072 0 0 1-.74-.61L7.05 16.95a7.032 7.032 0 0 0 2.225 1.5c.424.18.867.317 1.315.408a7.07 7.07 0 0 0 2.818 0 7.031 7.031 0 0 0 4.395-2.945 6.974 6.974 0 0 0 1.053-2.503c.027-.135.043-.273.063-.41H22l-4-4-4 4z"></path>
+  </svg>
+);
+export const CloudIcon = (props: IconProps) => (
+  <svg
+    fill="none"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke={props.color ?? "currentColor"}
+    width={props.w ?? "20px"} height={props.h ?? "20px"}
+    className={props.className}
+  >
+    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+    <g id="SVGRepo_iconCarrier">
+      <path d="M16.2857 20C19.4416 20 22 17.4717 22 14.3529C22 11.8811 20.393 9.78024 18.1551 9.01498C17.8371 6.19371 15.4159 4 12.4762 4C9.32028 4 6.7619 6.52827 6.7619 9.64706C6.7619 10.3369 6.88706 10.9978 7.11616 11.6089C6.8475 11.5567 6.56983 11.5294 6.28571 11.5294C3.91878 11.5294 2 13.4256 2 15.7647C2 18.1038 3.91878 20 6.28571 20H16.2857Z" fill={props.color ?? 'currentColor'}/>
+    </g>
+  </svg>
+)
 export const listAvailableIcons = [
   {component: <ChevronDownIcon/>,     title: 'ChevronDownIcon'      },
   {component: <ChevronUpDownIcon/>,   title: 'ChevronUpDownIcon'    },
@@ -680,6 +716,8 @@ export const listAvailableIcons = [
   {component: <ProjectIcon/>,         title: 'ProjectIcon'          },
   {component: <UsersIcon/>,           title: 'UsersIcon'            },
   {component: <ErrorCircleIcon/>,     title: 'ErrorCircleIcon'      },
+  {component: <LockIcon/>,            title: 'LockIcon'             },
+  {component: <RefreshIcon/>,         title: 'RefreshIcon'          },
 ];
 export const getIconByName = (title: string) => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
