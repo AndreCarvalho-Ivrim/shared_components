@@ -3,33 +3,56 @@ import { useNotify } from '../../../../contexts/NotifyContext';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { getUrls } from '../../../services/conn/api';
 import { redirectToApp } from '../../../MenuSlider';
+import { AsideItems } from '.';
+import { Fragment, ReactNode } from 'react';
+import { AsideLiItem } from './AsideLiItem';
+import { SettingIcon } from '../../../utils/icons';
 
-export const FooterAside = () => {
+export interface FooterAsideProps{
+  footerItems?: (
+    { type: 'aside-item', content: AsideItems } |
+    { type: 'raw', content: ReactNode }
+  )[]
+}
+export const FooterAside = ({ footerItems }: FooterAsideProps) => {
   const { user } = useAuth();
   const { toast } = useNotify();
   
   const navigate = useNavigate();
   return (
     <div className="text-white">
-      {/* <button
-        type="button"
-        className={`
-          flex items-center
-          sm:justify-center md:justify-start 
-          group-[.collapsed]:justify-center group-[.collapsed-desktop-aside]:justify-center
-          group-[.collapsed]:mx-auto group-[.collapsed-desktop-aside]:mx-auto
-          sm:mx-auto md:m-0 
-          gap-2 px-6 py-4 hover:text-gray-300  
-        `}
-        onClick={() => toast.warning('Em desenvolvimento')}
-      >
-        <SettingIcon w={22}/>
-        <span className="
-          sm:hidden md:inline
-          group-[.collapsed]:hidden
-          group-[.collapsed-desktop-aside]:hidden
-        ">Configurações</span>
-      </button> */}
+      {footerItems && footerItems.length > 0 && (
+        <ul className="px-2 py-4 text-white">
+          {footerItems.map((item, i) => (
+            <Fragment key={`${item.type}-${i}`}>
+              {item.type === 'aside-item' ? (
+                <div className="bg-gray-100/20 rounded-lg">
+                  <AsideLiItem item={item.content}/>
+                </div>
+              ): item.content}
+            </Fragment>
+          ))}
+          {/* <button
+            type="button"
+            className={`
+              flex items-center
+              sm:justify-center md:justify-start 
+              group-[.collapsed]:justify-center group-[.collapsed-desktop-aside]:justify-center
+              group-[.collapsed]:mx-auto group-[.collapsed-desktop-aside]:mx-auto
+              sm:mx-auto md:m-0 
+              gap-2 px-3 pt-1 pb-0 hover:text-gray-300  
+            `}
+            onClick={() => toast.warning('Em desenvolvimento')}
+          >
+            <SettingIcon w={22}/>
+            <span className="
+              sm:hidden md:inline
+              group-[.collapsed]:hidden
+              group-[.collapsed-desktop-aside]:hidden
+            ">Configurações</span>
+          </button> */}
+        </ul>
+      )}
       <footer className="
         flex items-center sm:justify-center md:justify-start 
         group-[.collapsed]:justify-center group-[.collapsed-desktop-aside]:justify-center

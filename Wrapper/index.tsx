@@ -3,9 +3,10 @@ import { ReactNode, useEffect, useState } from 'react';
 import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from './v3/Wrapper';
 import { AsideItems } from './v3/Aside';
 import { useAuth } from '../../contexts/AuthContext';
-import { EnvelopeIcon, MoneyIcon, ProjectIcon, SettingIcon, UploadIcon, UsersIcon, WorkflowIcon } from '../utils/icons';
+import { EnvelopeIcon, MoneyIcon, ProjectIcon, SettingIcon, UploadIcon, UsersIcon, FlowIcon, WorkflowIcon } from '../utils/icons';
 import { AvailableWorkflowThemeType, PossiblePermissions, User, WorkflowType } from '../../types';
 import { getPublishedFlows } from '../services/workflow';
+import { FooterAsideProps } from './v3/Aside/FooterAside';
 
 interface WrapperProps{
   v?: 3,
@@ -14,6 +15,7 @@ interface WrapperProps{
   isAdmin?: boolean,
   asideActive?: string | string[],
   asideItems?: AsideItems[],
+  footerItems?: FooterAsideProps['footerItems'],
   breadcrumbs?: HeaderBreadcrumbs[] 
 }
 export function Wrapper({
@@ -22,6 +24,7 @@ export function Wrapper({
   asideActive,
   asideItems,
   breadcrumbs,
+  footerItems,
   isAdmin = false,
   v = 3,
 } : WrapperProps){
@@ -52,6 +55,7 @@ export function Wrapper({
         icon: iconByTheme(flow.theme),
         name:  flow.title
       })):[],
+      footerItems,
       asideActive,
       module_name,
       children,
@@ -105,7 +109,7 @@ export const getAsideItems = ({
     { id: 'aside-item-painel-admin', name: 'Painel Admin', href: '/painel-adm', icon: <SettingIcon w={22} h={22}/>, disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN) }
   ];
   else if(module_name === 'System Archictect') defaultAsideItems = [
-    { id: 'aside-item-workflows', href: '/', icon: <WorkflowIcon w={22} h={22}/>, name: 'Workflows' },
+    { id: 'aside-item-workflows', href: '/', icon: <FlowIcon w={22} h={22}/>, name: 'Workflows' },
     { id: 'aside-item-template',  href: '/modelos', icon: <EnvelopeIcon w={22} h={22}/>, name: 'Modelos'}
   ];
   else if(module_name === 'Ivrim Flows') defaultAsideItems = [

@@ -1,7 +1,7 @@
 import { CloseIcon } from '../../../utils/icons';
 import { ReactNode } from 'react';
 import { HeaderAside } from './HeaderAside';
-import { FooterAside } from './FooterAside';
+import { FooterAside, FooterAsideProps } from './FooterAside';
 import { AsideLiItem } from './AsideLiItem';
 import bgWrapper from '../../../assets/wrapper-bg.svg';
 
@@ -18,11 +18,12 @@ interface AsideProps{
   active?: string | string[],
   items: AsideItems[],
   dynamicItems: AsideItems[],
+  footerItems?: FooterAsideProps['footerItems'],
   isCollapsed?: boolean,
   dotColor?: string,
   module_name?: string
 }
-export const Aside = ({ active, items, dynamicItems, isCollapsed, dotColor, module_name } : AsideProps) => (
+export const Aside = ({ active, items, dynamicItems, footerItems, isCollapsed, dotColor, module_name } : AsideProps) => (
   <div className="
     w-full h-full max-sm:hidden
     group-[.expanded-aside]:max-sm:bg-gray-700/75
@@ -54,7 +55,7 @@ export const Aside = ({ active, items, dynamicItems, isCollapsed, dotColor, modu
           )}
           {dynamicItems.map((item) => <AsideLiItem item={item} key={item.id} active={active}/>)}
         </ul>
-        <FooterAside />
+        <FooterAside {...{ footerItems }}/>
       </div>
     </aside>
     <div
