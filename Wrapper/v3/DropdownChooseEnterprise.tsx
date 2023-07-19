@@ -55,29 +55,29 @@ export const DropdownChooseEnterprise = () => {
         focus:outline-none pb-2
       ` }}
       trigger={
-        <div className="
-          bg-white w-10 h-10 rounded-lg
-          flex items-center justify-center
-          font-medium text-xl text-gray-800
-          uppercase border-2
-        ">
-          {client ? (<> {client.picture ? (
-            <>
-              <img
-                className="object-cover w-full h-full rounded-md ml-3"
-                src={client.picture}
-                onError={(e) => {
-                  let img = e.target as HTMLImageElement;
-                  img.src = logo;
-                }} />
-              <div>
-                <img
-                  src={colapse}
-                  className="ml-3"
-                />
-              </div>
-            </>
-          ) : client.nome_fantasia.substr(0, 2)} </>) : '..'}
+        <div className="flex items-center gap-1">
+          <div className="
+            bg-white w-10 h-10 rounded-lg
+            flex items-center justify-center
+            font-medium text-xl text-gray-800
+            uppercase border-2
+          ">
+            {client ? (
+              <>
+                {client.picture ? (
+                  <img
+                    className="object-cover min-w-[100%] w-full h-full rounded-md"
+                    src={client.picture}
+                    onError={(e) => {
+                      let img = e.target as HTMLImageElement;
+                      img.src = logo;
+                    }}
+                  />
+                ) : client.nome_fantasia.substr(0, 2)} 
+              </>
+            ) : '..'}
+          </div>
+          <img src={colapse}/>
         </div>
       }
 
