@@ -71,7 +71,7 @@ export const FooterAside = () => {
             navigate
           )}
           className="
-            flex sm:hidden md:flex flex-col
+            flex sm:hidden md:flex flex-col text-start
             group-[.collapsed]:hidden group-[.collapsed-desktop-aside]:hidden
             max-w-[calc(100%-3rem)]
           "
