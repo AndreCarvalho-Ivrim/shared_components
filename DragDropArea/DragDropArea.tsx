@@ -5,14 +5,23 @@ import File from "../../shared-components/assets/file.svg";
 import { DeleteIcon, DownloadIcon, InfoIcon } from '../../components/SvgIcons';
 import JSZip from "jszip";
 import 'react-circular-progressbar/dist/styles.css';
+import { CloseIcon } from '../utils/icons';
 
 
 interface CustomFile {
   file: File;
   selected: boolean;
-  progress: number; // Adicionado o progresso do upload
+  progress: number;
   uploaded: boolean;
 }
+
+interface FileInfo {
+  type: string;
+  size: string;
+  description: string;
+  link: string;
+}
+
 
 const DragDropArea = () => {
   const [dragging, setDragging] = useState(false);
@@ -22,6 +31,8 @@ const DragDropArea = () => {
   const [selectedFiles, setSelectedFiles] = useState<CustomFile[]>([]);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [infoModalOpen, setInfoModalOpen] = useState(false);
+  const [selectedFileInfo, setSelectedFileInfo] = useState<FileInfo | null>(null);
 
   const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -50,7 +61,7 @@ const DragDropArea = () => {
 
     setFiles((prevFiles) => [...prevFiles, ...customFiles]);
     if (customFiles.length > 0) {
-      setUploadModalOpen(true); // Abre o modal quando arquivos são carregados
+      setUploadModalOpen(true);
     }
 
     customFiles.forEach((file) => {
@@ -70,8 +81,8 @@ const DragDropArea = () => {
     const customFiles = selectedFiles.map(file => ({
       file,
       selected: false,
-      progress: 0,       // Definindo o progresso inicial como 0
-      uploaded: false    // Definindo o status de uploaded como false
+      progress: 0,
+      uploaded: false
     }));
     setFiles(prevFiles => [...prevFiles, ...customFiles]);
   };
@@ -122,8 +133,17 @@ const DragDropArea = () => {
     }
   };
 
-  const handleInformationFile = () => {
-    // Implement your logic for handling information file
+  const handleInformationFile = (file: CustomFile) => {
+    setSelectedFile(file);
+
+    const fileInfo: FileInfo = {
+      type: `${file.file.type}`,
+      size: `${formatFileSize(file.file.size)}`,
+      description: `${file.file.name}`,
+      link: `https://exemplo.com/${file.file.name}`,
+    };
+    setSelectedFileInfo(fileInfo);
+    setInfoModalOpen(true);
   };
 
   const handleDownloadSelectedFiles = async () => {
@@ -279,7 +299,7 @@ const DragDropArea = () => {
 
                   <button
                     className="transition-transform transform-gpu hover:scale-125"
-                    onClick={() => handleInformationFile()}
+                    onClick={() => handleInformationFile(file)}
                   >
                     <InfoIcon />
                   </button>
@@ -291,9 +311,17 @@ const DragDropArea = () => {
 
         {/* Componente de Modal para exibir informações dos arquivos carregados */}
         {uploadModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white w-96 p-4 rounded-lg shadow-lg">
-              <h2 className="text-xl font-bold mb-4">Arquivos Carregados</h2>
+          <div className="fixed inset-0 flex items-end justify-end z-50 overflow-y-visible">
+            <div className="bg-white w-96 p-4 rounded-lg shadow-lg max-h-[80vh] overflow-y-auto">
+              <div className="flex mb-3">
+                <div className='flex flex-row justify-between w-full'>
+                  <h1 className='font-bold text-md'>Fazendo upload...</h1>
+                  <button className="px-2 text-primary-100 mb-2" onClick={handleCloseUploadModal}>
+                    <CloseIcon w={24} h={24} />
+                  </button>
+                </div>
+              </div>
+
               <ul>
                 {files.map((file, index) => (
                   <li key={index} className="mb-8">
@@ -333,15 +361,47 @@ const DragDropArea = () => {
                   </li>
                 ))}
               </ul>
-              <div className="flex justify-end mt-6">
-                <button className="px-2 py-2 bg-primary-500 text-white text-sm rounded-lg" onClick={handleCloseUploadModal}>
-                  Fechar
-                </button>
-              </div>
             </div>
           </div>
         )}
 
+        {/* Modal de informações */}
+        {infoModalOpen && selectedFileInfo && (
+          <div className="fixed inset-0 flex justify-end z-50 overflow-y-visible">
+            <div className="bg-white w-64 p-4 rounded-lg shadow-lg">
+              <div className="flex justify-between">
+                <h1 className='font-bold text-md'>Informações</h1>
+                <button className="px-2 text-primary-100 mb-2 flex items-end" onClick={() => setInfoModalOpen(false)}>
+                  <CloseIcon w={24} h={24} />
+                </button>
+              </div>
+
+              <div className='pt-6'>
+                <div className='pb-3'>
+                  <h3 className='font-bold text-xs'>Tipo</h3>
+                  <p className='text-sm'>{selectedFileInfo.type}</p>
+                </div>
+
+                <div className='pb-3'>
+                  <h3 className='font-bold text-xs'>Tamanho</h3>
+                  <p className='text-sm'>{selectedFileInfo.size}</p>
+                </div>
+
+                <div className='pb-3'>
+                  <h3 className='font-bold text-xs'>Descrição</h3>
+                  <h2 className="text-sm">{selectedFileInfo.description}</h2>
+                </div>
+
+                <div className='pb-3'>
+                  <h3 className='font-bold text-xs'>Local</h3>
+                  <a className="text-blue-600 text-sm" href={selectedFileInfo.link} target="_blank" rel="noopener noreferrer">
+                    {selectedFileInfo.link}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Componente de Modal para confirmação de exclusão */}
         {selectedFile && deleteConfirmationOpen && (
