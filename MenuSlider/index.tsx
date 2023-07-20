@@ -209,7 +209,8 @@ export const MenuSlider = () => {
                 name: 'Perfil'
               },{
                 icon: <img src={multiplePages} alt="coin icon" className="mx-auto" />,
-                name: 'Meus Docs.'
+                name: 'Meus Docs.',
+                redirect: { url: `${frontURL.portal}/meus-docs` }
               },{
                 redirect: {
                   url: `${frontURL.portal}/painel-adm`,

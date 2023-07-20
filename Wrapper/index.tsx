@@ -104,8 +104,8 @@ export const getAsideItems = ({
     },
   ];
   else if(module_name === 'Configurações') defaultAsideItems = [
-    { id: 'aside-item-perfil',       name: 'Perfil',       href: '/perfil', icon: <UsersIcon w={22} h={22}/> },
-    { id: 'aside-item-gallery',      name: 'Armazenamento',disabled: true,  icon: <UploadIcon w={22} h={22}/>},
+    { id: 'aside-item-perfil',       name: 'Perfil',       href: '/perfil',     icon: <UsersIcon w={22} h={22}/> },
+    { id: 'aside-item-gallery',      name: 'Meus Docs.',   href: '/meus-docs',  icon: <UploadIcon w={22} h={22}/>},
     { id: 'aside-item-painel-admin', name: 'Painel Admin', href: '/painel-adm', icon: <SettingIcon w={22} h={22}/>, disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN) }
   ];
   else if(module_name === 'System Archictect') defaultAsideItems = [
