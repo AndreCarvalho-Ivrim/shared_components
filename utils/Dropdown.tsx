@@ -29,7 +29,7 @@ export const Dropdown = ({
   activeClass
 }: DropdownType) => {
   return (
-  <Menu as="div" className={ classNames?.wrapper ?? "relative inline-block text-left"} style={styles?.wrapper ?? {}}>
+  <Menu as="div" className={ classNames?.wrapper ?? "relative inline-block text-left group"} style={styles?.wrapper ?? {}}>
     <div>
       <Menu.Button className={
         trigger ? (classNames?.button ?? '') : (
