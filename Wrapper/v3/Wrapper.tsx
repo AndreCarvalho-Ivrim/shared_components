@@ -13,8 +13,9 @@ interface WrapperProps{
   footerItems: FooterAsideProps['footerItems'],
   children: ReactNode,
   module_name?: string,
+  omit: ('button-help' | 'header' | 'aside')[]
 }
-export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, footerItems, asideActive, module_name }: WrapperProps) => (
+export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, footerItems, asideActive, module_name, omit }: WrapperProps) => (
   <div className="w-screen h-screen bg-background sm:p-4 !pr-0">
     <div className="
       grid max-w-[1496px] min-[1700px]:max-w-[85%] mx-auto h-full 
@@ -30,12 +31,16 @@ export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, 
         footerItems={footerItems}
       />
       <div className="pr-8 py-8 pl-8 sm:pl-12 max-h-screen -my-4 overflow-y-auto">
-        <Header breadcrumbs={breadcrumbs}/>
+        {!omit.includes('header') && (
+          <Header breadcrumbs={breadcrumbs}/>
+        )}
 
         {children}
-        <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
-          <ButtonHelp/>
-        </div>
+        {!omit.includes('button-help') && (
+          <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
+            <ButtonHelp/>
+          </div>
+        )}
       </div>
     </div>
   </div>

@@ -16,7 +16,8 @@ interface WrapperProps{
   asideActive?: string | string[],
   asideItems?: AsideItems[],
   footerItems?: FooterAsideProps['footerItems'],
-  breadcrumbs?: HeaderBreadcrumbs[] 
+  breadcrumbs?: HeaderBreadcrumbs[],
+  omit?: ('button-help' | 'header' | 'aside')[]
 }
 export function Wrapper({
   module_name,
@@ -26,6 +27,7 @@ export function Wrapper({
   breadcrumbs,
   footerItems,
   isAdmin = false,
+  omit = [],
   v = 3,
 } : WrapperProps){
   const { user } = useAuth();
@@ -59,6 +61,7 @@ export function Wrapper({
       asideActive,
       module_name,
       children,
+      omit
     }}/>
   );
   
