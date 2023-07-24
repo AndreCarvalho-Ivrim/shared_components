@@ -10,6 +10,11 @@ import addFolder from "../assets/icon _add folder_.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
 import multiplePages from "../assets/icon _multiple pages empty_.svg";
 import settings from "../assets/icon _settings_.svg";
+import teste from "../assets/circulo 1.svg"
+import teste2 from "../assets/circulo 2.svg"
+import teste3 from "../assets/cube.svg"
+import teste4 from "../assets/cubos.svg"
+
 
 import { PossiblePermissions, User, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
@@ -21,6 +26,7 @@ import { EnvelopeIcon, FlowIcon, LockIcon, RefreshIcon } from "../utils/icons";
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
+
 
 const frontURL = getUrls("front")!
 
@@ -114,7 +120,23 @@ export const MenuSlider = () => {
         <DropdownChooseEnterprise />
       </div>
 
-      <div className="flex-col sm:flex-row flex-wrap flex sm:justify-between px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-6">
+      <div className="flex-row sm:flex-col flex-wrap flex sm:justify-between px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-6">
+        <div className="flex flex-row sm:flex-col">
+          <div className="grid grid-cols-2">
+            <button className="bg-primary-500 m-2">teste</button>
+            <button className="bg-primary-500 m-2">teste2</button>
+            <button className="bg-primary-500 m-2">teste3</button>
+            <button className="bg-primary-500 m-2">teste4</button>
+          </div>
+          <div></div>
+        </div>
+
+        <div></div>
+      </div>
+
+
+      {/*
+<div className="flex-col sm:flex-row flex-wrap flex sm:justify-between px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-6">
         <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
           <div className="flex flex-wrap my-12 mx-6 gap-8 w-full content-start">
             {workflows.map((flow) => (
@@ -151,6 +173,12 @@ export const MenuSlider = () => {
         </section>
 
         <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
+          <div className="bg-primary-500">
+            <img src={teste} alt="" />
+            <img src={teste2} alt="" />
+            <img src={teste3} alt="" />
+            <img src={teste4} alt="" />
+          </div>
           <div className="flex flex-wrap my-12 mx-6 gap-8 w-full content-start">
             {[
               { 
@@ -250,6 +278,8 @@ export const MenuSlider = () => {
           <ButtonHelp/>
         </div>
       </div>
+*/}
+
     </div>
   )
 }
