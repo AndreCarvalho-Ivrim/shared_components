@@ -1,28 +1,20 @@
 import style from "./style.module.scss";
 import logo from "../assets/logo-hub.png";
-import wallet from "../assets/icon _wallet_.svg";
-import coin from "../assets/icon _coin_.svg";
-import homeSale from "../assets/icon _home sale_.svg";
-import cart from "../assets/icon _cart_.svg";
-import view from "../assets/icon _view_.svg";
-import leaderboard from "../assets/icon _leaderboard_.svg";
+import wallet from "../assets/wallet-menu.svg";
 import addFolder from "../assets/icon _add folder_.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
-import multiplePages from "../assets/icon _multiple pages empty_.svg";
 import settings from "../assets/icon _settings_.svg";
-import teste from "../assets/circulo 1.svg"
-import teste2 from "../assets/circulo 2.svg"
-import teste3 from "../assets/cube.svg"
-import teste4 from "../assets/cubos.svg"
-
+import teste from "../assets/IconsGeo_Prancheta 2.svg"
+import teste2 from "../assets/IconsGeo_Prancheta 3.svg"
+import teste4 from "../assets/IconsGeo_Prancheta 1.svg"
+import teste3 from "../assets/IconsGeo_Prancheta 4.svg"
+import { ChevronDownIcon } from "../../components/SvgIcons";
 
 import { PossiblePermissions, User, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
 import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise";
-import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
-import { EnvelopeIcon, FlowIcon, LockIcon, RefreshIcon } from "../utils/icons";
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
@@ -120,18 +112,85 @@ export const MenuSlider = () => {
         <DropdownChooseEnterprise />
       </div>
 
-      <div className="flex-row sm:flex-col flex-wrap flex sm:justify-between px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-6">
-        <div className="flex flex-row sm:flex-col">
+      <div className="flex-row flex-wrap flex sm:justify-evenly px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-2">
+        <div className="flex flex-row">
           <div className="grid grid-cols-2">
-            <button className="bg-primary-500 m-2">teste</button>
-            <button className="bg-primary-500 m-2">teste2</button>
-            <button className="bg-primary-500 m-2">teste3</button>
-            <button className="bg-primary-500 m-2">teste4</button>
+            <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
+              <div>
+                <img src={teste} alt="" width={100} height={100} />
+              </div>
+            </button>
+            <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
+              <div>
+                <img src={teste2} alt="" width={100} height={100} />
+              </div>
+            </button>
+            <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
+              <div>
+                <img src={teste3} alt="" width={100} height={100} />
+              </div>
+            </button>
+            <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
+              <div>
+                <img src={teste4} alt="" width={100} height={100} />
+              </div>
+            </button>
           </div>
-          <div></div>
+
+          <div className="flex flex-col">
+            <div className="flex flex-col">
+              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">1</button>
+              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">2</button>
+              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">3</button>
+              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">4</button>
+            </div>
+
+            <div>
+              <button className="ml-8 pt-2">
+                <ChevronDownIcon />
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div></div>
+        <div className="flex flex-row -mt-2">
+          <div className="flex flex-col">
+            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
+              <div className="flex flex-col items-center">
+                <img src={wallet} alt="" width={65} height={65} className="pt-4" />
+                <span className="text-xs text-white pt-1 pr-16">Carteira Contas a Receber</span>
+              </div>
+            </button>
+            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
+              <div className="flex flex-col items-center">
+                <img src={addFolder} alt="" width={50} height={100} />
+              </div>
+            </button>
+            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
+              <div className="flex flex-col items-center">
+                <img src={teste3} alt="" width={50} height={100} />
+              </div>
+            </button>
+            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
+              <div className="flex flex-col items-center">
+                <img src={teste4} alt="" width={50} height={100} />
+              </div>
+            </button>
+          </div>
+
+          <div className="flex flex-col mx-auto">
+            <button className="bg-primary-100/90 m-1 w-24 h-28 rounded-md flex flex-col justify-center items-center">
+                <img src={settings} alt="" width={50} height={100} className="pt-6" />
+                <span className="text-xs text-white pt-3">Admin Console</span>
+            </button>
+
+            <button className="bg-primary-100/90 m-1 w-24 h-28 rounded-md flex flex-col justify-center items-center">
+                <img src={profileCircle} alt="" width={50} height={100} className="pt-6" />
+                <span className="text-xs text-white pt-3 pr-6">Usuário</span>
+            </button>
+          </div>
+
+        </div>
       </div>
 
 
