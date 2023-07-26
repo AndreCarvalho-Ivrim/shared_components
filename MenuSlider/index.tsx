@@ -1,14 +1,23 @@
 import style from "./style.module.scss";
 import logo from "../assets/logo-hub.png";
+import ISAC from "../assets/ISAC_PB.png";
+import DASHBOARD from "../assets/IVRIM-DASHBOARD_PB.png";
+import REPORT from "../assets/IVRIM-REPORT_PB.png";
+import VISION from "../assets/IVRIM-VISION360_PB.png";
+import waves from "../assets/waves.png";
 import wallet from "../assets/wallet-menu.svg";
-import addFolder from "../assets/icon _add folder_.svg";
+import Folder from "../../shared-components/assets/folder-user.svg";
+import Mail from "../../shared-components/assets/mail.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
 import settings from "../assets/icon _settings_.svg";
+import homeSale from "../assets/icon _home sale_.svg";
+import coin from "../assets/icon _coin_.svg";
+import cart from "../assets/icon _cart_.svg";
 import teste from "../assets/IconsGeo_Prancheta 2.svg"
 import teste2 from "../assets/IconsGeo_Prancheta 3.svg"
 import teste4 from "../assets/IconsGeo_Prancheta 1.svg"
 import teste3 from "../assets/IconsGeo_Prancheta 4.svg"
-import { ChevronDownIcon } from "../../components/SvgIcons";
+import { ChevronDownIcon, ChevronUpIcon } from "../../components/SvgIcons";
 
 import { PossiblePermissions, User, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
@@ -103,6 +112,21 @@ export const MenuSlider = () => {
     })()
   }, [user?.token]);
 
+  const [firstItemIndex, setFirstItemIndex] = useState(0);
+
+  const itemsPerPage = 4;
+  const totalItems = workflows.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handleNextPage = () => {
+    setFirstItemIndex((prevIndex) => Math.min(prevIndex + itemsPerPage, totalItems - itemsPerPage));
+  };
+
+  const handlePreviousPage = () => {
+    setFirstItemIndex((prevIndex) => Math.max(prevIndex - itemsPerPage, 0));
+  };
+
+
   return (
     <div className="w-screen h-screen bg-background overflow-auto">
       <div className={style.header}>
@@ -113,80 +137,113 @@ export const MenuSlider = () => {
       </div>
 
       <div className="flex-row flex-wrap flex sm:justify-evenly px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-2">
-        <div className="flex flex-row">
+        <section className="flex flex-row">
           <div className="grid grid-cols-2">
+            <button
+              className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center"
+              onClick={() => redirectToApp({ url: `${frontURL.wf}?token=${user?.token}`, disabled: !user?.permitions_slug?.includes(PossiblePermissions.ISAC) }, toast, navigate)}
+              disabled={!user?.permitions_slug?.includes(PossiblePermissions.ISAC)}
+            >
+              <div className="flex flex-col mr-14 mb-3">
+                <img src={teste} alt="" width={100} height={100} className="mt-10 ml-14" />
+                <img src={ISAC} alt="" width={100} height={100} className="mt-12 ml-2" />
+              </div>
+            </button>
+
             <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
-              <div>
-                <img src={teste} alt="" width={100} height={100} />
+              <div className="flex flex-col mr-14 mb-3">
+                <img src={teste2} alt="" width={100} height={100} className="mt-10 ml-14" />
+                <img src={VISION} alt="" width={100} height={100} className="mt-12 ml-2 h-3" />
               </div>
             </button>
             <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
-              <div>
-                <img src={teste2} alt="" width={100} height={100} />
+              <div className="flex flex-col mr-14 mb-3">
+                <img src={teste3} alt="" width={100} height={100} className="mt-10 ml-14" />
+                <img src={REPORT} alt="" width={100} height={100} className="mt-12 ml-2" />
               </div>
             </button>
             <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
-              <div>
-                <img src={teste3} alt="" width={100} height={100} />
-              </div>
-            </button>
-            <button className="bg-primary-500 m-1 w-56 h-52 rounded-md flex justify-center items-center">
-              <div>
-                <img src={teste4} alt="" width={100} height={100} />
+              <div className="flex flex-col mr-14 mb-3">
+                <img src={teste4} alt="" width={100} height={100} className="mt-10 ml-14" />
+                <img src={DASHBOARD} alt="" width={100} height={100} className="mt-12 ml-2 h-3" />
               </div>
             </button>
           </div>
 
           <div className="flex flex-col">
-            <div className="flex flex-col">
-              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">1</button>
-              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">2</button>
-              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">3</button>
-              <button className="bg-primary-700 m-1 w-24 h-24 rounded-md">4</button>
-            </div>
+            {workflows.map((flow) => (
+              <div className="flex flex-col" key={flow._id}>
+                <div>
+                  {firstItemIndex !== 0 && (
+                    <button className="ml-8" onClick={handlePreviousPage}>
+                      <ChevronUpIcon />
+                    </button>
+                  )}
+                </div>
+
+                <button className="bg-primary-700 hover:bg-primary-600 m-1 w-24 h-24 rounded-md flex flex-col items-center justify-center"
+                  onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
+                >
+                  {flow.theme === "Cobrança" ? (<img src={homeSale} alt="homeSale icon" className="pt-2" />) : flow.theme === "Financeiro" ? (<img src={coin} alt="coin icon" className="pt-2" />) : flow.theme === "Comercial" ? (<img src={cart} alt="cart icon" className="pt-2" />) : <></>}
+                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
+                </button>
+              </div>
+            ))}
 
             <div>
-              <button className="ml-8 pt-2">
+              <button className="ml-8 pt-1" onClick={handleNextPage} disabled={firstItemIndex === 0}>
                 <ChevronDownIcon />
               </button>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="flex flex-row -mt-2">
+
+        <div className="flex flex-row">
           <div className="flex flex-col">
-            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
-              <div className="flex flex-col items-center">
-                <img src={wallet} alt="" width={65} height={65} className="pt-4" />
-                <span className="text-xs text-white pt-1 pr-16">Carteira Contas a Receber</span>
-              </div>
+            <button className="bg-primary-600 m-1 w-60 h-26 rounded-md flex flex-col justify-center items-center">
+              <span className="text-lg text-white mr-2 ml-auto">2</span>
+              <img src={wallet} alt="" width={60} height={100} />
+              <span className="text-xs text-white pt-1 pb-1 pl-3 mr-auto">Carteira Contas a Receber</span>
             </button>
-            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
-              <div className="flex flex-col items-center">
-                <img src={addFolder} alt="" width={50} height={100} />
-              </div>
+
+            <button className="bg-primary-600 m-1 w-60 h-24 rounded-md flex flex-col justify-center items-center">
+              <img src={Mail} alt="" width={65} height={100} className="mt-3" />
+              <span className="text-xs text-white pt-1 pb-1 pl-3 mr-auto">Modelo de Carta</span>
             </button>
-            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
-              <div className="flex flex-col items-center">
-                <img src={teste3} alt="" width={50} height={100} />
-              </div>
+
+            <button className="bg-primary-600 m-1 w-60 h-24 rounded-md flex flex-col justify-center items-center">
+              <img src={Folder} alt="" width={65} height={100} className="mt-3" />
+              <span className="text-xs text-white pt-1 pb-1 pl-3 mr-auto">Meus Documentos</span>
             </button>
-            <button className="bg-blue-700 m-1 w-60 h-28 rounded-md flex justify-center items-center">
-              <div className="flex flex-col items-center">
-                <img src={teste4} alt="" width={50} height={100} />
-              </div>
+
+            <button
+              className="relative bg-primary-600 m-1 pb-14 w-60 h-24 rounded-md flex flex-col justify-start items-start"
+              style={{
+                backgroundImage: `url(${waves})`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right center",
+                backgroundSize: "auto 100%",
+              }}
+            >
+              <span className="text-xs text-white pt-2 pl-3 mr-auto text-start">
+                Hoje você tem 34 <br />
+                transações bancárias<br />
+                previstas
+              </span>
             </button>
+
           </div>
 
           <div className="flex flex-col mx-auto">
-            <button className="bg-primary-100/90 m-1 w-24 h-28 rounded-md flex flex-col justify-center items-center">
-                <img src={settings} alt="" width={50} height={100} className="pt-6" />
-                <span className="text-xs text-white pt-3">Admin Console</span>
+            <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center">
+              <img src={settings} alt="" width={50} height={100} className="pt-6" />
+              <span className="text-xs text-white pt-3 pb-1.5">Admin Console</span>
             </button>
 
-            <button className="bg-primary-100/90 m-1 w-24 h-28 rounded-md flex flex-col justify-center items-center">
-                <img src={profileCircle} alt="" width={50} height={100} className="pt-6" />
-                <span className="text-xs text-white pt-3 pr-6">Usuário</span>
+            <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center">
+              <img src={profileCircle} alt="" width={50} height={100} className="pt-4" />
+              <span className="text-xs text-white pt-3 pb-1 pr-10">Usuário</span>
             </button>
           </div>
 
@@ -195,7 +252,7 @@ export const MenuSlider = () => {
 
 
       {/*
-<div className="flex-col sm:flex-row flex-wrap flex sm:justify-between px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-6">
+      <div className="flex-col sm:flex-row flex-wrap flex sm:justify-between px-6 lg:max-w-[95%] xl:max-w-[1580px] w-full mx-auto gap-6">
         <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
           <div className="flex flex-wrap my-12 mx-6 gap-8 w-full content-start">
             {workflows.map((flow) => (
@@ -232,12 +289,6 @@ export const MenuSlider = () => {
         </section>
 
         <section className="flex bg-card-gray flex-1 min-w-[375px] h-[460px] rounded-2xl">
-          <div className="bg-primary-500">
-            <img src={teste} alt="" />
-            <img src={teste2} alt="" />
-            <img src={teste3} alt="" />
-            <img src={teste4} alt="" />
-          </div>
           <div className="flex flex-wrap my-12 mx-6 gap-8 w-full content-start">
             {[
               { 
