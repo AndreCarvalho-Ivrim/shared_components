@@ -17,7 +17,6 @@ import isac from "../assets/IconsGeo_Prancheta 2.svg"
 import vision from "../assets/IconsGeo_Prancheta 3.svg"
 import report from "../assets/IconsGeo_Prancheta 1.svg"
 import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
-import { ChevronDownIcon, ChevronUpIcon } from "../../components/SvgIcons";
 
 import { PossiblePermissions, User, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
