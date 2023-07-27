@@ -246,7 +246,7 @@ export const MenuSlider = () => {
 
             <button
               type="button"
-              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60"
+              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60 relative"
               onClick={() => redirectToApp({
                 url: `${frontURL.wf}modelos/?token=${user?.token}`,
                 disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC))
@@ -254,6 +254,12 @@ export const MenuSlider = () => {
             >
               <img src={Mail} alt="Icone de carta" width={65} height={100} className="mt-3" />
               <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Modelo de Carta</span>
+
+              {!(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC)) && (
+                <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
+                  <LockIcon w={26} h={26}/>
+                </span>
+              )}
             </button>
 
             <button
