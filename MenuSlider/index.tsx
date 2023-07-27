@@ -180,7 +180,7 @@ export const MenuSlider = () => {
                 </div>
 
                 {(!item.redirect || item.redirect.disabled) && (
-                  <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white">
+                  <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
                     {item.redirect ? <LockIcon w={26} h={26}/> : <RefreshIcon w={26} h={26}/> }
                   </span>
                 )}
@@ -188,18 +188,18 @@ export const MenuSlider = () => {
             ))}
           </div>
 
-          <div className="flex sm:flex-col">
-            {(workflows.length + (
+          <div className="flex sm:flex-col overflow-y-auto min-w-[7.2rem] max-h-[calc(6.25rem*4+2.25rem)]">
+            {/* {(workflows.length + (
               (user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? 1 : 0
             )) > 4 && (
               <button className="ml-8" onClick={handlePreviousPage}>
                 <ChevronUpIcon />
               </button>
-            )}
+            )} */}
 
             {workflows.map((flow) => (
               <button
-                className="bg-primary-700 hover:bg-primary-600 m-1 w-24 h-24 rounded-md flex flex-col items-center justify-center"
+                className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
                 onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
               >
                 {flow.theme === "Cobrança" ? (
@@ -214,27 +214,25 @@ export const MenuSlider = () => {
             ))}
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
               <button
-                className="bg-primary-700 hover:bg-primary-600 m-1 w-24 h-24 rounded-md flex flex-col items-center justify-center"
+                className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
                 onClick={() => redirectToApp({ url: `${frontURL.portal}/compras-e-contas-a-pagar`, disabled: user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)}
               >
                 <img src={wallet} alt="wallet icon" className="pt-2"/>
                 <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
               </button>
             ) : workflows.length === 0 ? (
-              <p className="
-                w-full h-full
-                flex items-center justify-center
-                text-center text-sm text-gray-500
-              ">Você não possui nenhum aplicativo criado</p>
+              <div className="
+                bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
+                text-center text-xs text-gray-500 opacity-75
+              ">Você não<br/>possui nenhum aplicativo<br/>criado</div>
             ) : <></>}
-
-            {(workflows.length + (
+            {/* {(workflows.length + (
               (user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? 1 : 0
             )) > 4 && (
               <button className="ml-8 pt-1" onClick={handleNextPage} disabled={firstItemIndex === 0}>
                 <ChevronDownIcon />
               </button>
-            )}
+            )} */}
           </div>
         </section>
 
@@ -256,7 +254,7 @@ export const MenuSlider = () => {
               }, toast, navigate)}
             >
               <img src={Mail} alt="Icone de carta" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pt-1 pb-1 pl-3 mr-auto">Modelo de Carta</span>
+              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Modelo de Carta</span>
             </button>
 
             <button
@@ -265,7 +263,7 @@ export const MenuSlider = () => {
               onClick={() => redirectToApp({ url: `${frontURL.portal}/meus-docs` }, toast, navigate)}
             >
               <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pt-1 pb-1 pl-3 mr-auto">Meus Documentos</span>
+              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Meus Documentos</span>
             </button>
 
             {/* <button
@@ -291,14 +289,14 @@ export const MenuSlider = () => {
              onClick={() => redirectToApp({ url: `${frontURL.portal}painel-adm` }, toast, navigate)}
             >
               <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1.5">Admin Console</span>
+              <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal">Admin Console</span>
             </button>
 
             <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
             onClick={() => redirectToApp({ url: `${frontURL.portal}perfil` }, toast, navigate)}
             >
               <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1 pr-10">Usuário</span>
+              <span className="text-xs text-white pt-3 pb-1 pr-10 truncate hover:whitespace-normal">Usuário</span>
             </button>
           </div>
 
