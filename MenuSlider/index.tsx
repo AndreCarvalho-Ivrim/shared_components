@@ -29,62 +29,97 @@ import { getUrls } from "../services/conn/api";
 import { LockIcon, RefreshIcon } from "../utils/icons";
 
 
-const frontURL = getUrls("front")!
+const frontURL = getUrls("front")!;
 
 const clientsWithAccessToCAP = {
   "3c2c7801-9b58-417f-9809-7313cbbb287f": "IVRIM",
   "eb5039d9-22ec-4204-b120-d58d6ed9ade8": "LEAD",
   "e1a862da-0078-41c7-94bb-cd8bef12fbfb": "SEG4",
   "d92808ac-9848-4f7d-b8f3-4c73765d0035": "VESPER",
-  "2d6c36ea-f8d5-11ed-be56-0242ac120002": "ZAON"
+  "2d6c36ea-f8d5-11ed-be56-0242ac120002": "ZAON",
 };
 // TODO FUNÇÃO OBSOLETA, REMOVER TODAS AS MENÇOES A ELA E DEPOIS REMOVER FUNÇÃO
 export const applicationRedirection = (user: User | undefined) => {
-  let urls = { portal: '', wf: '' }
+  let urls = { portal: "", wf: "" };
 
   try {
     // @ts-ignore
     const WORKFLOW_MODULE = process.env.REACT_APP_WORKFLOW_MODULAR;
     urls.wf = WORKFLOW_MODULE!;
-  } catch (e) { }
+  } catch (e) {}
   try {
     // @ts-ignore
     const PORTAL = import.meta.env.VITE_PORTAL_URL;
     urls.portal = PORTAL;
-  } catch (e) { }
+  } catch (e) {}
 
-  if (!urls.portal && !urls.wf) console.error(
-    '[undeclared-env-variables-<REACT_APP_WORKFLOW_MODULAR|VITE_PORTAL_URL>]'
-  )
+  if (!urls.portal && !urls.wf)
+    console.error(
+      "[undeclared-env-variables-<REACT_APP_WORKFLOW_MODULAR|VITE_PORTAL_URL>]"
+    );
   return [
-    { id: 'profile', name: 'Perfil', url: `${urls.portal}/perfil`, img: "https://source.unsplash.com/random/?textures-patterns" },
     {
-      id: 'ivrim-flows', name: 'Portal de Soluções Ivrim', url: `${urls.portal}/compras-e-contas-a-pagar`, img: 'https://source.unsplash.com/random/?city,night',
-      disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
+      id: "profile",
+      name: "Perfil",
+      url: `${urls.portal}/perfil`,
+      img: "https://source.unsplash.com/random/?textures-patterns",
     },
-    { id: 'ivrim-automator', name: 'Ivrim System Architect', url: `${urls.wf}?token=${user?.token}`, img: 'https://source.unsplash.com/random/?business-work' },
-    { id: 'ivrim-learn-center', name: 'Ivrim Learning Center', url: undefined, img: "https://source.unsplash.com/random/?technology" },
     {
-      id: 'admin-panel', name: 'Admin Panel', url: `${urls.portal}/painel-adm`, img: "https://source.unsplash.com/random/?textures-patterns",
-      disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN)
+      id: "ivrim-flows",
+      name: "Portal de Soluções Ivrim",
+      url: `${urls.portal}/compras-e-contas-a-pagar`,
+      img: "https://source.unsplash.com/random/?city,night",
+      disabled: !user?.permitions_slug?.includes(
+        PossiblePermissions.CONTAS_A_PAGAR
+      ),
     },
-    { id: 'co-pilot-dashboard', name: 'Ivrim Office Intelligence', url: `${urls.portal}/co-pilot-dashboard/financeiro`, img: "https://source.unsplash.com/random/?3d-renders" },
+    {
+      id: "ivrim-automator",
+      name: "Ivrim System Architect",
+      url: `${urls.wf}?token=${user?.token}`,
+      img: "https://source.unsplash.com/random/?business-work",
+    },
+    {
+      id: "ivrim-learn-center",
+      name: "Ivrim Learning Center",
+      url: undefined,
+      img: "https://source.unsplash.com/random/?technology",
+    },
+    {
+      id: "admin-panel",
+      name: "Admin Panel",
+      url: `${urls.portal}/painel-adm`,
+      img: "https://source.unsplash.com/random/?textures-patterns",
+      disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN),
+    },
+    {
+      id: "co-pilot-dashboard",
+      name: "Ivrim Office Intelligence",
+      url: `${urls.portal}/co-pilot-dashboard/financeiro`,
+      img: "https://source.unsplash.com/random/?3d-renders",
+    },
   ];
-}
-export const redirectToApp = ({ url, disabled }: { url: string | undefined, disabled?: boolean }, toast: any, navigate: any) => {
+};
+export const redirectToApp = (
+  { url, disabled }: { url: string | undefined; disabled?: boolean },
+  toast: any,
+  navigate: any
+) => {
   if (!url) {
-    toast.warning('Está solução ainda não está disponível');
+    toast.warning("Está solução ainda não está disponível");
     return;
   }
 
   if (disabled) {
-    toast.error('Você não tem permissão para acessar essa sessão com esta empresa');
+    toast.error(
+      "Você não tem permissão para acessar essa sessão com esta empresa"
+    );
     return;
   }
 
-  if (url.substring(0, 4) === 'http') window.location.href = url;
+  if (url.substring(0, 4) === "http") window.location.href = url;
   else navigate(url);
-}
+};
 export const MenuSlider = () => {
   const { toast } = useNotify();
   const { user } = useAuth();
@@ -98,7 +133,7 @@ export const MenuSlider = () => {
     (async () => {
       const res = await getPublishedFlows(user.token);
       if (!res.result) {
-        toast.error(res.response)
+        toast.error(res.response);
         return;
       }
 
@@ -159,7 +194,11 @@ export const MenuSlider = () => {
                 id: 'dashboard',
                 redirect: {
                   url: `${frontURL.portal}/co-pilot-dashboard`,
-                  disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.DASH))
+                  disabled: !(
+                    user &&
+                    user.permitions_slug &&
+                    user.permitions_slug.includes(PossiblePermissions.DASH)
+                  ),
                 },
                 icon: <img src={dashboard} alt="imagem geometrica dashboard" width={100} height={100} className="mt-10 mx-auto" />,
                 name: <img src={DASHBOARD} alt="logo dashboard" height={100} className="h-3 object-contain" />
@@ -211,6 +250,23 @@ export const MenuSlider = () => {
                 <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
               </button>
             ))}
+            {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
+              <div className="flex flex-col w-[65px]">
+                <button
+                  className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105"
+                  style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                  onClick={() => redirectToApp({
+                    url: getUrls("front")!.portal + "contas-a-receber",
+                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
+                  }, toast, navigate)}
+                >
+                  <img src={wallet} alt="wallet icon" className="mx-auto" />
+                </button>
+                <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">
+                  Contas a Receber
+                </span>
+              </div>
+            )}
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
@@ -219,7 +275,7 @@ export const MenuSlider = () => {
                 <img src={wallet} alt="wallet icon" className="pt-2"/>
                 <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
               </button>
-            ) : workflows.length === 0 ? (
+            ) : !(user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
               <div className="
                 bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
                 text-center text-xs text-gray-500 opacity-75
@@ -309,9 +365,9 @@ export const MenuSlider = () => {
       </div>
       {/*
         <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
-          <ButtonHelp/>
+          <ButtonHelp />
         </div>
       */}
     </div>
-  )
-}
+  );
+};

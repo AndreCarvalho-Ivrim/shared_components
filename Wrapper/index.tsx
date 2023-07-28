@@ -135,6 +135,24 @@ export const getAsideItems = ({
       ]
     },
   ];
+  else if(module_name === 'Ivrim Conciliation') defaultAsideItems = [
+    { id: 'aside-item-compras-e-contas-a-pagar',              name: 'Contas a Receber',
+      items: [
+        {
+          id: 'aside-subitem-contas-a-receber',
+          name: 'Conciliação',
+          href: '/conciliacao',
+          disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
+        },
+        {
+          id: 'aside-subitem-contas-a-receber',
+          name: 'Gerenciamento',
+          href: '/conciliacao/gerenciamento',
+          disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
+        },
+      ]
+    },
+  ]
 
   return defaultAsideItems
 }
