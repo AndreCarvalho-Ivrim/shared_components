@@ -251,21 +251,24 @@ export const MenuSlider = () => {
               </button>
             ))}
             {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
-              <div className="flex flex-col w-[65px]">
-                <button
-                  className="bg-primary-500 w-[65px] h-[65px] shrink-0 rounded-lg mr-1 hover:bg-primary-600 hover:scale-105"
-                  style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-                  onClick={() => redirectToApp({
-                    url: getUrls("front")!.portal + "contas-a-receber",
-                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
-                  }, toast, navigate)}
-                >
-                  <img src={wallet} alt="wallet icon" className="mx-auto" />
-                </button>
-                <span className="text-primary-500 text-xs text-center truncate hover:whitespace-normal mt-3">
+              <button
+                className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center relative"
+                onClick={() => redirectToApp({
+                  url: getUrls("front")!.portal + "contas-a-receber",
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
+                }, toast, navigate)}
+              >
+                <img src={wallet} alt="wallet icon" className="pt-2" />
+                <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">
                   Contas a Receber
                 </span>
-              </div>
+
+                {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
+                  <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
+                    <LockIcon w={26} h={26}/>
+                  </span>
+                )}
+              </button>
             )}
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
               <button
