@@ -254,7 +254,7 @@ export const MenuSlider = () => {
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center relative"
                 onClick={() => redirectToApp({
-                  url: getUrls("front")!.portal + "contas-a-receber",
+                  url: getUrls("front")!.portal + "conciliacao",
                   disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
                 }, toast, navigate)}
               >

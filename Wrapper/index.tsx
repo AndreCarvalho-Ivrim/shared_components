@@ -206,7 +206,7 @@ export const getAsideItems = ({
   else if (module_name === "Ivrim Conciliation")
     defaultAsideItems = [
       {
-        id: "aside-subitem-contas-a-receber",
+        id: "aside-item-contas-a-receber",
         icon: <FileIcon  w={22} h={22} />,
         name: "Conciliação",
         href: "/conciliacao",
@@ -215,7 +215,7 @@ export const getAsideItems = ({
         ),
       },
       {
-        id: "aside-subitem-contas-a-receber",
+        id: "aside-item-contas-a-receber",
         icon: <UploadIcon w={22} h={22}/>,
         name: "Gerenciamento",
         href: "/conciliacao/gerenciamento",
