@@ -13,6 +13,7 @@ import {
   FlowIcon,
   WorkflowIcon,
   FileIcon,
+  WhatsappIcon,
 } from "../utils/icons";
 import {
   AvailableWorkflowThemeType,
@@ -72,11 +73,11 @@ export function Wrapper({
           dynamicAsideItems:
             module_name === "System Archictect"
               ? publishedFlows.map((flow) => ({
-                  id: flow._id,
-                  href: `/modulo/${flow._id}`,
-                  icon: iconByTheme(flow.theme),
-                  name: flow.title,
-                }))
+                id: flow._id,
+                href: `/modulo/${flow._id}`,
+                icon: iconByTheme(flow.theme),
+                name: flow.title,
+              }))
               : [],
           footerItems,
           asideActive,
@@ -135,6 +136,20 @@ export const getAsideItems = ({
             name: "Dashboards",
             href: "/painel-adm/dashboards",
             disabled: !canManagement,
+          },
+        ],
+      },
+      {
+        id: "aside-item-admin-integracoes",
+        name: "Admin Integrações",
+        icon: <WhatsappIcon w="22" h="22" />,
+        disabled: !canAccessAdminPanel,
+        items: [
+          {
+            id: "aside-subitem-whatsapp",
+            name: "Whatsapp",
+            href: "/painel-adm/integracao-whatsapp",
+            disabled: !canAccessAdminPanel,
           },
         ],
       },
@@ -207,7 +222,7 @@ export const getAsideItems = ({
     defaultAsideItems = [
       {
         id: "aside-item-contas-a-receber",
-        icon: <FileIcon  w={22} h={22} />,
+        icon: <FileIcon w={22} h={22} />,
         name: "Conciliação",
         href: "/conciliacao",
         disabled: !user?.permitions_slug?.includes(
@@ -216,7 +231,7 @@ export const getAsideItems = ({
       },
       {
         id: "aside-item-contas-a-receber",
-        icon: <UploadIcon w={22} h={22}/>,
+        icon: <UploadIcon w={22} h={22} />,
         name: "Gerenciamento",
         href: "/conciliacao/gerenciamento",
         disabled: !user?.permitions_slug?.includes(
