@@ -158,7 +158,7 @@ export const MenuSlider = () => {
 
 
   return (
-    <div className="w-screen h-screen bg-background overflow-auto">
+    <div className="w-screen h-screen bg-background overflow-auto flex flex-col">
       <div className={style.header}>
         <div className={style.header__logo}>
           <img src={logo} alt="Ivrim Consulting" />
@@ -366,6 +366,11 @@ export const MenuSlider = () => {
 
         </div>
       </div>
+
+      <footer className="mt-auto d-flex items-center justify-center text-center py-4">
+        <p className="text-gray-600 text-sm">Ivrim 2023 © Todos os direitos reservados</p>
+      </footer>
+
       {/*
         <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
           <ButtonHelp />
