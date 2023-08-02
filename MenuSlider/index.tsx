@@ -273,7 +273,7 @@ export const MenuSlider = () => {
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                onClick={() => redirectToApp({ url: `${frontURL.portal}/compras-e-contas-a-pagar`, disabled: user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)}
+                onClick={() => redirectToApp({ url: `${frontURL.portal}/compras-e-contas-a-pagar`, disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)}
               >
                 <img src={wallet} alt="wallet icon" className="pt-2"/>
                 <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
