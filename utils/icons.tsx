@@ -675,7 +675,8 @@ export const CloudIcon = (props: IconProps) => (
   </svg>
 )
 export const InfoIcon = (props: IconProps) => (
-  <svg width={props.w ?? "24"} height={props.h ?? "24"}
+  <svg
+    width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
   >
@@ -684,7 +685,15 @@ export const InfoIcon = (props: IconProps) => (
         </path>
       </g>
   </svg>
-);
+)
+export const CalendarIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    viewBox="0 0 24 24"
+  ><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg>
+)
 export const listAvailableIcons = [
   {component: <ChevronDownIcon/>,     title: 'ChevronDownIcon'      },
   {component: <ChevronUpDownIcon/>,   title: 'ChevronUpDownIcon'    },
@@ -731,6 +740,7 @@ export const listAvailableIcons = [
   {component: <RefreshIcon/>,         title: 'RefreshIcon'          },
   {component: <CloudIcon/>,           title: 'CloudIcon'            },
   {component: <InfoIcon/>,            title: 'InfoIcon'             },
+  {component: <CalendarIcon/>,        title: 'CalendarIcon'         },
 ];
 export const getIconByName = (title: string) => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
