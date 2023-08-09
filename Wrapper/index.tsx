@@ -114,7 +114,7 @@ export const getAsideItems = ({
     defaultAsideItems = [
       {
         id: "aside-item-admin-users",
-        name: "Admin Empresas",
+        name: "Admin Empresa",
         href: "/painel-adm/empresa",
         disabled: !canAccessAdminPanel,
         icon: <CompanyIcon w="22" h="22" />,
