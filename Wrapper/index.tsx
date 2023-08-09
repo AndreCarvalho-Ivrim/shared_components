@@ -13,6 +13,7 @@ import {
   FlowIcon,
   WorkflowIcon,
   FileIcon,
+  CompanyIcon,
 } from "../utils/icons";
 import {
   AvailableWorkflowThemeType,
@@ -111,6 +112,13 @@ export const getAsideItems = ({
   let defaultAsideItems: AsideItems[] = [];
   if (isAdmin)
     defaultAsideItems = [
+      {
+        id: "aside-item-admin-users",
+        name: "Admin Empresa",
+        href: "/painel-adm/empresa",
+        disabled: !canAccessAdminPanel,
+        icon: <CompanyIcon w="22" h="22" />,
+      },
       {
         id: "aside-item-admin-users",
         name: "Admin Usuários",
