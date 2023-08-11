@@ -1,4 +1,3 @@
-import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 import { StateFilterItem } from "./StateFilterItem";
 import { WorkflowConfigFilterType } from "../../shared-types";
 import { Fragment } from "react";
