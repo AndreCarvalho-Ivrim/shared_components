@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowRightIcon, TrashIcon } from "../utils/icons";
 
 interface LeftFilterProps{
@@ -16,6 +16,20 @@ export const LeftFilter = ({
   handleDeleteMultiple,
 }: LeftFilterProps) => {
   const divStatusRef = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (divStatusRef.current && !divStatusRef.current.contains(event.target as Node)) {
+      divStatusRef.current.classList.remove('expanded');
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
   return (
     <div className="relative group" ref={divStatusRef}>
       <div className="flex items-center gap-3">
