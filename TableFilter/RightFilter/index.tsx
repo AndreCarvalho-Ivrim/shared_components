@@ -77,6 +77,7 @@ export const RightFilter = ({ availableFilters, setDynamicFilter, dynamicFilter 
       ) : searchType.type === 'select' ? <></> : searchType.type === 'date'   ? (
         <div className="hidden group-[.show]:block mr-10">
           <Datepicker
+            popoverDirection="down"
             inputClassName={`
               border border-primary-500/20 bg-gray-100/5
               bg-gray-100/10 backdrop-blur-[25px]
