@@ -725,6 +725,16 @@ export const MagicWandIcon = (props: IconProps) => (
     <path d="m11 4-.5-1-.5 1-1 .125.834.708L9.5 6l1-.666 1 .666-.334-1.167.834-.708zm8.334 10.666L18.5 13l-.834 1.666-1.666.209 1.389 1.181L16.834 18l1.666-1.111L20.166 18l-.555-1.944L21 14.875zM6.667 6.333 6 5l-.667 1.333L4 6.5l1.111.944L4.667 9 6 8.111 7.333 9l-.444-1.556L8 6.5zM3.414 17c0 .534.208 1.036.586 1.414L5.586 20c.378.378.88.586 1.414.586s1.036-.208 1.414-.586L20 8.414c.378-.378.586-.88.586-1.414S20.378 5.964 20 5.586L18.414 4c-.756-.756-2.072-.756-2.828 0L4 15.586c-.378.378-.586.88-.586 1.414zM17 5.414 18.586 7 15 10.586 13.414 9 17 5.414z"></path>
   </svg>
 )
+export const SquareCheckedIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    viewBox="0 0 24 24"
+  >
+    <path d="M7 5c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2H7zm0 12V7h10l.002 10H7z"></path><path d="M10.996 12.556 9.7 11.285l-1.4 1.43 2.704 2.647 4.699-4.651-1.406-1.422z"></path>
+  </svg>
+)
 export const listAvailableIcons = [
   {component: <ChevronDownIcon/>,     title: 'ChevronDownIcon'      },
   {component: <ChevronUpDownIcon/>,   title: 'ChevronUpDownIcon'    },
@@ -775,6 +785,7 @@ export const listAvailableIcons = [
   {component: <CompanyIcon/>,         title: 'CompanyIcon'          },
   {component: <PencilIcon/>,          title: 'PencilIcon'           },
   {component: <MagicWandIcon/>,       title: 'MagicWandIcon'        },
+  {component: <SquareCheckedIcon/>,   title: 'SquareCheckedIcon'    },
 ];
 export const getIconByName = (title: string) => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
