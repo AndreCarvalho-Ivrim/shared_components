@@ -14,6 +14,7 @@ import {
   WorkflowIcon,
   FileIcon,
   CompanyIcon,
+  SquareCheckedIcon,
 } from "../utils/icons";
 import {
   AvailableWorkflowThemeType,
@@ -214,34 +215,38 @@ export const getAsideItems = ({
   else if (module_name === "Ivrim Conciliation")
     defaultAsideItems = [
       {
-        id: "aside-item-contas-a-receber",
-        icon: <FileIcon  w={22} h={22} />,
-        name: "Conciliação",
-        href: "/conciliacao",
-        disabled: !user?.permitions_slug?.includes(
-          PossiblePermissions.FINANCEIRO
-        ),
-      },
-      {
-        id: "aside-item-contas-a-receber",
+        id: "aside-item-contas-a-receber-gerenciamento",
         icon: <UploadIcon w={22} h={22}/>,
         name: "Gerenciamento",
         href: "/conciliacao/gerenciamento",
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.FINANCEIRO
         ),
-      },
+      },{
+        id: "aside-item-contas-a-receber-conciliacao",
+        icon: <FileIcon  w={22} h={22} />,
+        name: "Em Conciliação",
+        href: "/conciliacao",
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.FINANCEIRO
+        ),
+      },{
+        id: "aside-item-contas-a-receber-conciliados",
+        icon: <SquareCheckedIcon  w={22} h={22} />,
+        name: "Conciliados",
+        href: "/conciliacao/conciliados",
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.FINANCEIRO
+        ),
+      }
     ];
 
   return defaultAsideItems;
 };
 export const iconByTheme = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
-    case "Cobrança":
-      return <MoneyIcon w={22} h={22} />;
-    case "Comercial":
-      return <WorkflowIcon w={22} h={22} />;
-    case "Financeiro":
-      return <MoneyIcon w={22} h={22} />;
+    case "Cobrança":   return <MoneyIcon    w={22} h={22}/>;
+    case "Comercial":  return <WorkflowIcon w={22} h={22}/>;
+    case "Financeiro": return <MoneyIcon    w={22} h={22}/>;
   }
 };
