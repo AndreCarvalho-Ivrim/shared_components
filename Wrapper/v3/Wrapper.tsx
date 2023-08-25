@@ -30,7 +30,7 @@ export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, 
         module_name={module_name}
         footerItems={footerItems}
       />
-      <div className="pr-8 py-8 pl-8 sm:pl-12 max-h-screen -my-4 overflow-y-auto">
+      <div className="pr-8 py-8 pl-8 sm:pl-12 max-h-screen -my-4 overflow-y-auto" id="wrapper-content">
         {!omit.includes('header') && (
           <Header breadcrumbs={breadcrumbs}/>
         )}
