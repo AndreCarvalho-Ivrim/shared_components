@@ -21,7 +21,9 @@ interface DropdownType {
     list?: React.CSSProperties,
     button?: React.CSSProperties
   }
-  activeClass?: string
+  activeClass?: string,
+  scrollerRef?: React.RefObject<HTMLElement>,
+  autoPosition?: boolean
 }
 export const Dropdown = ({
   children,
@@ -30,13 +32,19 @@ export const Dropdown = ({
   orientation = 'right',
   classNames,
   styles,
-  activeClass
+  activeClass,
+  scrollerRef,
+  autoPosition = false
 }: DropdownType) => {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
+  const observeScroll = scrollerRef ? scrollerRef.current : document.getElementById('wrapper-content') as HTMLElement
+
   useEffect(() => {
-    const observeScroll = document.getElementById('wrapper-content') as HTMLDivElement
-    if(!observeScroll) return;
+    if(!autoPosition || 
+      (classNames?.list && classNames.list.includes('absolute')) ||
+      !observeScroll
+    ) return;
 
     observeScroll.addEventListener('scroll', () => handlePosition());
     return () => observeScroll.removeEventListener('scroll', () => handlePosition());
@@ -44,7 +52,11 @@ export const Dropdown = ({
 
   let isHandleDelay = false
   async function handlePosition(handleDelay = false){
-    if(!dropdownRef.current) return;
+    if(
+      (classNames?.list && classNames.list.includes('absolute')) ||
+      !dropdownRef.current ||
+      !autoPosition
+    ) return;
 
     if(handleDelay){
       if(dropdownRef.current.dataset.headlessuiState === 'open') return;
@@ -71,14 +83,16 @@ export const Dropdown = ({
     const container = dropdownRef.current.childNodes[1] as HTMLDivElement
     const dropdownRect = dropdownRef.current.getBoundingClientRect();
 
-    container.style.left = `${dropdownRect.left-30}px`
-    
+    if(!scrollerRef?.current) container.style.left = `${dropdownRect.left}px`
+
+    const height = window.innerHeight
+
     if(
-      dropdownRect.top > (window.innerHeight / 2) && 
+      dropdownRect.top > (height / 2) && 
       dropdownRect.top > container.clientHeight
     ){
       container.style.top = 'auto'
-      container.style.bottom = `${(window.innerHeight - dropdownRect.bottom)}px`
+      container.style.bottom = `${(height - dropdownRect.bottom)}px`
     }
     else{
       container.style.top = `${dropdownRect.top}px`
@@ -121,7 +135,7 @@ export const Dropdown = ({
 
         >
           <Menu.Items className={classNames?.list ?? `
-            fixed ${orientation ? orientation + '-0' : ''} z-10
+            ${autoPosition ? 'fixed':'absolute'} ${orientation ? orientation + '-0' : ''} z-10
             mt-2 w-56 origin-top-right
             rounded-md bg-white shadow-lg
             ring-1 ring-black ring-opacity-5
