@@ -4,9 +4,10 @@ import { MenuCollapsedIcon, MenuIcon, NotificationIcon } from "../../utils/icons
 import { useNotify } from "../../../contexts/NotifyContext";
 import { DropdownChooseEnterprise } from "./DropdownChooseEnterprise";
 import { getUrls } from "../../services/conn/api";
+import { HeaderBreadcrumbs } from "./Wrapper";
 
 interface HeaderProps{
-  breadcrumbs: { name: string, href: string }[],
+  breadcrumbs: HeaderBreadcrumbs[],
 }
 export const Header = ({ breadcrumbs } : HeaderProps) => {
   const { toast } = useNotify();
@@ -66,6 +67,9 @@ export const Header = ({ breadcrumbs } : HeaderProps) => {
         </div>
         
         <h1 className="text-primary-500 text-4xl font-bold mt-4 max-sm:hidden">{breadcrumbs[breadcrumbs.length - 1].name}</h1>
+        {breadcrumbs[breadcrumbs.length - 1].subtitle && (
+          <span className="text-gray-400 text-lg italic -mt-0.5 block">{breadcrumbs[breadcrumbs.length - 1].subtitle}</span>
+        )}
       </div>
       <div className="flex items-center gap-4">
         <button

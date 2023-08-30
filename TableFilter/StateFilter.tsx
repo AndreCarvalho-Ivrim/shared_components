@@ -40,9 +40,9 @@ export const StateFilter = ({
             onClear={() => setSelectedStep([])}
           >{availableSteps.filter(s => selectedStep.includes(s._id)).map((s) => s.name).join(', ')}</StateFilterItem>
         )}
-        {Object.entries(dynamicFilter).map(([key, data]) => data.type === 'text' ? (
-          <>
-            {data.value ? (
+        {Object.entries(dynamicFilter).map(([key, data]) => (data.type === 'text' || data.type === 'select') ? (
+          <Fragment key={key}>
+            {data.value && (
               <StateFilterItem
                 title={key}
                 isApplied={isApplied}
@@ -53,10 +53,10 @@ export const StateFilter = ({
                     value: undefined
                   }
                 }))}
-                key={key}
+
               >{data.value}</StateFilterItem>
-            ):<></>}
-          </>
+            )}
+          </Fragment>
         ) : data.type === 'date' ? (
           <Fragment key={key}>
             {data.value.startDate && data.value.endDate && (
