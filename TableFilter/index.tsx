@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StateFilter } from "./StateFilter";
-import { WorkflowConfigFilterType } from "../../shared-types";
+import { WorkflowConfigFilterType, WorkflowViewModeTable } from "../../shared-types";
 import { LeftFilter } from "./LeftFilter";
 import { RightFilter } from "./RightFilter";
 
@@ -12,8 +12,14 @@ export interface FilterProps{
   filterDynamicFields: Record<string,{ value: any, ref: (string | string[]), type: WorkflowConfigFilterType['type'] }>,
   setFilterDynamicFields: React.Dispatch<React.SetStateAction<Record<string,{ value: any, ref: (string | string[]), type: WorkflowConfigFilterType['type'] }>>>,
   isFiltering: boolean,
-  handleDeleteMultiple: () => void,
-  hasSelectedForDelete: boolean,
+  hasSelected: boolean,
+  view_mode: WorkflowViewModeTable,
+  fn: {
+    start: () => void,
+    delete: () => void,
+    callStep: (target: string) => void,
+    updateSelected: () => void
+  }
 }
 export const TableFilter = ({
   availableFilters,
@@ -22,7 +28,9 @@ export const TableFilter = ({
   setFilterStep,
   filterDynamicFields,
   setFilterDynamicFields,
-  handleDeleteMultiple, hasSelectedForDelete
+  hasSelected,
+  view_mode,
+  fn,
 } : FilterProps) => {
   const [isApplied, setIsApplied] = useState(false);
   const [selectedStep, setSelectedStep] = useState<string[]>(filterStep ?? []);
@@ -66,8 +74,9 @@ export const TableFilter = ({
           selectedStep,
           setSelectedStep,
           availableSteps,
-          hasSelectedForDelete,
-          handleDeleteMultiple
+          hasSelected,
+          view_mode,
+          fn,
         }}/>
         {availableFilters && availableFilters.length > 0 && (
           <RightFilter {...{
