@@ -1,4 +1,4 @@
-interface IconProps{ w?: string | number, h?: string | number, className?: string, color?: string }
+export interface IconProps{ w?: string | number, h?: string | number, className?: string, color?: string }
 export const ChevronDownIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

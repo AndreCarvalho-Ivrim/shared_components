@@ -1,20 +1,33 @@
 import { useEffect, useRef } from "react";
 import { ArrowRightIcon, TrashIcon } from "../utils/icons";
+import { useExecuteFlow } from "../../contexts/ExecuteFlowContext";
+import { FlowActions } from "../../components/ExecuteFlow/FlowActions";
+import { toast } from "react-toastify";
+import { WorkflowViewModeTable } from "../../shared-types";
 
 interface LeftFilterProps{
   selectedStep: string[],
   setSelectedStep: React.Dispatch<React.SetStateAction<string[]>>
   availableSteps: { name: string, _id: string }[],
-  hasSelectedForDelete: boolean,
-  handleDeleteMultiple: () => void,
+  hasSelected: boolean,
+  view_mode: WorkflowViewModeTable,
+  fn: {
+    start: () => void,
+    delete: () => void,
+    callStep: (target: string) => void,
+    updateSelected: () => void
+  }
 }
 export const LeftFilter = ({
   selectedStep,
   setSelectedStep,
   availableSteps,
-  hasSelectedForDelete,
-  handleDeleteMultiple,
+  hasSelected,
+  view_mode,
+  fn,
 }: LeftFilterProps) => {
+  const { workflow } = useExecuteFlow()
+
   const divStatusRef = useRef<HTMLDivElement>(null);
 
   const handleOutsideClick = (event: MouseEvent) => {
@@ -57,17 +70,14 @@ export const LeftFilter = ({
           </span>
           <ArrowRightIcon className="rotate-90 group-[.expanded]:-rotate-90"/>
         </button>
-        {hasSelectedForDelete && (
-          <button
-            type="button"
-            className="
-              flex justify-center items-center
-              my-auto p-2 border-transparent
-              rounded-lg outline-none focus:ring-gray-100/50 focus:ring-1
-              hover:bg-gray-100/40 hover:border-gray-300
-            "
-            onClick={handleDeleteMultiple}
-          ><TrashIcon className="w-5 h-5 text-primary-700 dark:text-gray-400"/></button>
+        {workflow && workflow.config && workflow.config.actions && (
+          <FlowActions
+            actions={workflow.config.actions}
+            view_mode={view_mode.slug}
+            render_in="filter-bar"
+            hasSelected={hasSelected}
+            fn={fn}
+          />
         )}
       </div>
       <div className={`

@@ -1,8 +1,9 @@
 import { ArrowRightIcon, SearchIcon } from "../../utils/icons";
 import { Dropdown } from "../../../shared-components/utils/Dropdown";
 import { useRef, useState } from "react";
-import { WorkflowConfigFilterType } from "../../../shared-types";
+import { StepItemAttrMaskType, WorkflowConfigFilterType } from "../../../shared-types";
 import Datepicker from "react-tailwindcss-datepicker";
+import Select, { OptionType } from "../../../components/utils/Select";
 
 interface RightFilterProps{
   availableFilters: WorkflowConfigFilterType[],
@@ -74,7 +75,48 @@ export const RightFilter = ({ availableFilters, setDynamicFilter, dynamicFilter 
           }))}
           placeholder="Pesquisar..."
         />
-      ) : searchType.type === 'select' ? <></> : searchType.type === 'date'   ? (
+      ) : searchType.type === 'select' ?
+        <div className="hidden group-[.show]:block mr-10">
+          <select
+            className="
+              bg-gray-100/10 backdrop-blur-[25px]
+              
+              border-primary-500/20
+              text-gray-600 text-sm rounded-lg 
+              placeholder-primary-700
+
+              focus:ring-gray-100/20 focus:border-gray-100/20 w-44 pr-10 p-2.5
+            "
+            defaultValue={dynamicFilter[searchType.name]?.value ?? ''}
+            onChange={(e) => {
+              if(!dynamicFilter[searchType.name]) return;
+
+              if(!e.target.value) dynamicFilter[searchType.name].value = undefined;
+              else dynamicFilter[searchType.name].value = e.target.value;
+            }}
+          >
+            <option value="">Selecione...</option>
+            {searchType.options && searchType.options.length > 0 ? (
+              typeof searchType.options[0] === 'string' ? (
+                <>
+                  {(searchType.options as string[]).map((op) => (
+                    <option>{op}</option>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {(searchType.options as {
+                    value: string;
+                    name: string;
+                  }[]).map((op) => (
+                    <option value={op.value}>{op.name}</option>
+                  ))}
+                </>
+              )
+            ):''}
+          </select>
+        </div>
+      : searchType.type === 'date'   ? (
         <div className="hidden group-[.show]:block mr-10">
           <Datepicker
             popoverDirection="down"

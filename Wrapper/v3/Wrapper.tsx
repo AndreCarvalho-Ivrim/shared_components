@@ -4,7 +4,11 @@ import { Aside, AsideItems } from "./Aside";
 import { ButtonHelp } from "./ButtonHelp";
 import { FooterAsideProps } from "./Aside/FooterAside";
 
-export interface HeaderBreadcrumbs{ name: string, href: string }
+export interface HeaderBreadcrumbs{
+  name: string,
+  href: string,
+  subtitle?: string
+}
 interface WrapperProps{
   breadcrumbs: HeaderBreadcrumbs[],
   asideItems: AsideItems[],
