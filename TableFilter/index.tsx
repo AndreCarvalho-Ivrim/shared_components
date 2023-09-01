@@ -18,7 +18,7 @@ export interface FilterProps{
     start: () => void,
     delete: () => void,
     callStep: (target: string) => void,
-    updateSelected: () => void
+    updateSelected: (action_id: string, _id?: string) => void
   }
 }
 export const TableFilter = ({
