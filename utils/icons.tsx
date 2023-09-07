@@ -1,3 +1,6 @@
+import { ReactNode } from "react";
+import { AvailableIcons } from "../../shared-types/icon.type";
+
 export interface IconProps{ w?: string | number, h?: string | number, className?: string, color?: string }
 export const ChevronDownIcon = (props: IconProps) => (
   <svg
@@ -505,7 +508,6 @@ export const WindowsIcon = (props: IconProps) => (
     <path d="M16 7H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zM4 19v-8h12V9l.002 10H4z"></path><path d="M22 5c0-1.103-.897-2-2-2H7c-1.103 0-2 .897-2 2h13.001c1.101 0 1.996.895 1.999 1.994L20.002 15H20v2c1.103 0 2-.897 2-2V8.007L22.001 8V6L22 5.99V5z"></path>
   </svg>
 )
-// MAPED TO HERE
 export const GitIcon = (props: IconProps) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg"
@@ -735,7 +737,8 @@ export const SquareCheckedIcon = (props: IconProps) => (
     <path d="M7 5c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2H7zm0 12V7h10l.002 10H7z"></path><path d="M10.996 12.556 9.7 11.285l-1.4 1.43 2.704 2.647 4.699-4.651-1.406-1.422z"></path>
   </svg>
 )
-export const listAvailableIcons = [
+
+export const listAvailableIcons : { component: ReactNode, title: AvailableIcons }[] = [
   {component: <ChevronDownIcon/>,     title: 'ChevronDownIcon'      },
   {component: <ChevronUpDownIcon/>,   title: 'ChevronUpDownIcon'    },
   {component: <ChevronsRightIcon/>,   title: 'ChevronsRightIcon'    },
@@ -787,7 +790,7 @@ export const listAvailableIcons = [
   {component: <MagicWandIcon/>,       title: 'MagicWandIcon'        },
   {component: <SquareCheckedIcon/>,   title: 'SquareCheckedIcon'    },
 ];
-export const getIconByName = (title: string) => {
+export const getIconByName = (title: AvailableIcons) => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
   if(findedIcon) return findedIcon.component;
   return <></>;
