@@ -679,6 +679,7 @@ export const CloudIcon = (props: IconProps) => (
 export const InfoIcon = (props: IconProps) => (
   <svg
     width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
   >
@@ -692,6 +693,7 @@ export const CalendarIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24"
   ><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg>
@@ -700,6 +702,7 @@ export const CompanyIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24"
   >
@@ -710,6 +713,7 @@ export const PencilIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24"
   >
@@ -721,6 +725,7 @@ export const MagicWandIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24"
   >
@@ -732,9 +737,33 @@ export const SquareCheckedIcon = (props: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
     viewBox="0 0 24 24"
   >
     <path d="M7 5c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2H7zm0 12V7h10l.002 10H7z"></path><path d="M10.996 12.556 9.7 11.285l-1.4 1.43 2.704 2.647 4.699-4.651-1.406-1.422z"></path>
+  </svg>
+)
+export const PackageIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M22 8a.76.76 0 0 0 0-.21v-.08a.77.77 0 0 0-.07-.16.35.35 0 0 0-.05-.08l-.1-.13-.08-.06-.12-.09-9-5a1 1 0 0 0-1 0l-9 5-.09.07-.11.08a.41.41 0 0 0-.07.11.39.39 0 0 0-.08.1.59.59 0 0 0-.06.14.3.3 0 0 0 0 .1A.76.76 0 0 0 2 8v8a1 1 0 0 0 .52.87l9 5a.75.75 0 0 0 .13.06h.1a1.06 1.06 0 0 0 .5 0h.1l.14-.06 9-5A1 1 0 0 0 22 16V8zm-10 3.87L5.06 8l2.76-1.52 6.83 3.9zm0-7.72L18.94 8 16.7 9.25 9.87 5.34zM4 9.7l7 3.92v5.68l-7-3.89zm9 9.6v-5.68l3-1.68V15l2-1v-3.18l2-1.11v5.7z"></path>
+  </svg>
+)
+export const ReceiptIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M21 11h-3V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v14c0 1.654 1.346 3 3 3h14c1.654 0 3-1.346 3-3v-6a1 1 0 0 0-1-1zM5 19a1 1 0 0 1-1-1V5h12v13c0 .351.061.688.171 1H5zm15-1a1 1 0 0 1-2 0v-5h2v5z"></path>
+    <path d="M6 7h8v2H6zm0 4h8v2H6zm5 4h3v2h-3z"></path>
   </svg>
 )
 
@@ -789,6 +818,8 @@ export const listAvailableIcons : { component: ReactNode, title: AvailableIcons 
   {component: <PencilIcon/>,          title: 'PencilIcon'           },
   {component: <MagicWandIcon/>,       title: 'MagicWandIcon'        },
   {component: <SquareCheckedIcon/>,   title: 'SquareCheckedIcon'    },
+  {component: <PackageIcon/>,         title: 'PackageIcon'          },
+  {component: <ReceiptIcon/>,         title: 'ReceiptIcon'          },
 ];
 export const getIconByName = (title: AvailableIcons) => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
