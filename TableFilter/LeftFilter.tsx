@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
-import { ArrowRightIcon, TrashIcon } from "../utils/icons";
+import { ArrowRightIcon } from "../utils/icons";
 import { useExecuteFlow } from "../../contexts/ExecuteFlowContext";
 import { FlowActions } from "../../components/ExecuteFlow/FlowActions";
-import { toast } from "react-toastify";
 import { WorkflowViewModeTable } from "../../shared-types";
 
 interface LeftFilterProps{
