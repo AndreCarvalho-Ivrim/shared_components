@@ -1,4 +1,3 @@
-import { ReactNode } from "react"
 import { NotificationType } from "../../../../shared-types/notification.type"
 import { IconProps, getIconByName } from "../../../utils/icons"
 
