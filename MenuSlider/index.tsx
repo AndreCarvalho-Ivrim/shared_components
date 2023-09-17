@@ -4,7 +4,6 @@ import ISAC from "../assets/ISAC_PB.png";
 import DASHBOARD from "../assets/IVRIM-DASHBOARD_PB.png";
 import REPORT from "../assets/IVRIM-REPORT_PB.png";
 import VISION from "../assets/IVRIM-VISION360_PB.png";
-import waves from "../assets/waves.png";
 import wallet from "../assets/wallet-menu.svg";
 import Folder from "../../shared-components/assets/folder-user.svg";
 import Mail from "../../shared-components/assets/mail.svg";
@@ -26,7 +25,7 @@ import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
-import { LockIcon, RefreshIcon } from "../utils/icons";
+import { LockIcon, RefreshIcon, UserIcon } from "../utils/icons";
 
 
 const frontURL = getUrls("front")!;

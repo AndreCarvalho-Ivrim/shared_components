@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { MenuCollapsedIcon, MenuIcon, NotificationIcon } from "../../utils/icons";
 import { useNotify } from "../../../contexts/NotifyContext";
 import { DropdownChooseEnterprise } from "./DropdownChooseEnterprise";
 import { getUrls } from "../../services/conn/api";
 import { HeaderBreadcrumbs } from "./Wrapper";
+import { BellNotification } from "./Notification/BellNotification";
 
 interface HeaderProps{
   breadcrumbs: HeaderBreadcrumbs[],
@@ -72,13 +73,7 @@ export const Header = ({ breadcrumbs } : HeaderProps) => {
         )}
       </div>
       <div className="flex items-center gap-4">
-        <button
-          type="button"
-          className="rounded-full"
-          onClick={() => toast.warning('Em desenvolvimento')}
-        >
-          <NotificationIcon className="text-primary-800 max-sm:hidden"/>
-        </button>
+        <BellNotification/>
 
         <DropdownChooseEnterprise/>
       </div>

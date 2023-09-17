@@ -15,6 +15,8 @@ import {
   FileIcon,
   CompanyIcon,
   SquareCheckedIcon,
+  UserIcon,
+  MyDocsIcon,
 } from "../utils/icons";
 import {
   AvailableWorkflowThemeType,
@@ -154,13 +156,13 @@ export const getAsideItems = ({
         id: "aside-item-perfil",
         name: "Perfil",
         href: "/perfil",
-        icon: <UsersIcon w={22} h={22} />,
+        icon: <UserIcon w={22} h={22} />,
       },
       {
         id: "aside-item-gallery",
         name: "Meus Docs.",
         href: "/meus-docs",
-        icon: <UploadIcon w={22} h={22} />,
+        icon: <MyDocsIcon w={22} h={22} />,
       },
       {
         id: "aside-item-painel-admin",
