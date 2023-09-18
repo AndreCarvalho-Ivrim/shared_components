@@ -17,6 +17,7 @@ import {
   SquareCheckedIcon,
   UserIcon,
   MyDocsIcon,
+  NotificationIcon,
 } from "../utils/icons";
 import {
   AvailableWorkflowThemeType,
@@ -26,6 +27,7 @@ import {
 } from "../../types";
 import { getPublishedFlows } from "../services/workflow";
 import { FooterAsideProps } from "./v3/Aside/FooterAside";
+import { hubRoutes } from "../../shared-types/utils/routes";
 
 interface WrapperProps {
   v?: 3;
@@ -113,19 +115,58 @@ export const getAsideItems = ({
   );
 
   let defaultAsideItems: AsideItems[] = [];
-  if (isAdmin)
+
+  if(module_name === "Configurações" || isAdmin){
     defaultAsideItems = [
+      {
+        id: "aside-item-perfil",
+        name: "Perfil",
+        href: hubRoutes.profile.home(),
+        icon: <UserIcon w={22} h={22} />,
+      },
+      {
+        id: "aside-item-gallery",
+        name: "Meus Docs.",
+        href: hubRoutes.gallery.home(),
+        icon: <MyDocsIcon w={22} h={22} />,
+      },
+      {
+        id: 'aside-item-notification',
+        name: 'Notificações',
+        icon: <NotificationIcon w={22} h={22} />,
+        items: [
+          {
+            id: 'aside-subitem-all-notifications',
+            name: 'Todas',
+            href: hubRoutes.notification.all()
+          },{
+            id: 'aside-subitem-preferences',
+            name: 'Preferências',
+            href: hubRoutes.notification.preference()
+          }, ...((
+            user?.permitions_slug?.includes(PossiblePermissions.ADMIN_HUB) ||
+            user?.permitions_slug?.includes(PossiblePermissions.MANAGE_NOTIFICATION)
+          ) ? [{
+            id: 'aside-subitem-create-notifications',
+            name: 'Criar Notificações',
+            href: hubRoutes.notification.create()
+          }]:[])
+        ]
+      }
+    ];
+    
+    if(user?.permitions_slug?.includes(PossiblePermissions.ADMIN)) defaultAsideItems.push(...[
       {
         id: "aside-item-admin-users",
         name: "Admin Empresa",
-        href: "/painel-adm/empresa",
+        href: hubRoutes.admin_panel.client(),
         disabled: !canAccessAdminPanel,
         icon: <CompanyIcon w="22" h="22" />,
       },
       {
         id: "aside-item-admin-users",
         name: "Admin Usuários",
-        href: "/painel-adm",
+        href: hubRoutes.admin_panel.users(),
         disabled: !canAccessAdminPanel,
         icon: <UsersIcon w="22" h="22" />,
       },
@@ -138,40 +179,19 @@ export const getAsideItems = ({
           {
             id: "aside-subitem-projetos",
             name: "Projetos",
-            href: "/painel-adm/projetos",
+            href: hubRoutes.admin_panel.projects(),
             disabled: !canAccessAdminPanel,
           },
           {
             id: "aside-subitem-dashboards",
             name: "Dashboards",
-            href: "/painel-adm/dashboards",
+            href: hubRoutes.admin_panel.dashboards(),
             disabled: !canManagement,
           },
         ],
       },
-    ];
-  else if (module_name === "Configurações")
-    defaultAsideItems = [
-      {
-        id: "aside-item-perfil",
-        name: "Perfil",
-        href: "/perfil",
-        icon: <UserIcon w={22} h={22} />,
-      },
-      {
-        id: "aside-item-gallery",
-        name: "Meus Docs.",
-        href: "/meus-docs",
-        icon: <MyDocsIcon w={22} h={22} />,
-      },
-      {
-        id: "aside-item-painel-admin",
-        name: "Painel Admin",
-        href: "/painel-adm",
-        icon: <SettingIcon w={22} h={22} />,
-        disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN),
-      },
-    ];
+    ]);
+  }
   else if (module_name === "System Archictect")
     defaultAsideItems = [
       {
