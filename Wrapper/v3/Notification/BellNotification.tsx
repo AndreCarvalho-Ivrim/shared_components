@@ -19,9 +19,6 @@ export const BellNotification = () => {
   const [notifications, setNotifications] = useState<NotificationType[]>();
   const [lastNotificationId, setLastNotificationId] = useState<string>();
   const [unvieweds, setUnviewed] = useState<number>(0);
-  const calculateUnvieweds = (notifs: NotificationType[]) => setUnviewed(
-    notifs.filter(n => !n.viewed).length
-  )
 
   useEffect(() => {
     if(!user) return;
@@ -57,23 +54,21 @@ export const BellNotification = () => {
     }
     if(!res.data) return;
     
-    if(res.data.length > 0) setLastNotificationId(res.data[0].id)
+    if(res.data.datas.length > 0) setLastNotificationId(res.data.datas[0].id)
 
     setNotifications((prevState) => {
-      if(reset){
-        calculateUnvieweds(res.data ?? [])
-        return res.data
-      }
-
-      const newNotificationIds = res.data!.map((d) => d.id)
+      if(reset) return res.data!.datas
+    
+      const newNotificationIds = res.data!.datas.map((d) => d.id)
       const newState = [
-        ...res.data!,
+        ...res.data!.datas,
         ...(prevState ?? []).filter(state => !newNotificationIds.includes(state.id))
       ]
 
-      calculateUnvieweds(newState)
       return newState
     })
+
+    if(res.data.total > - 1) setUnviewed(res.data.total)
   }
   function handleGoToAllNotificactions(){
     const url = handleRegexUrl('@hub:notification.all')

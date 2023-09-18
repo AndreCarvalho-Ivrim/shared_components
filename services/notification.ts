@@ -2,18 +2,26 @@ import { ResultAndResponse } from "../../shared-types"
 import { NotificationType } from "../../shared-types/notification.type"
 import { handleErrorResultAndResponse, headerBearer, portal } from "./conn/api"
 
-let cacheNotification : Record<string, NotificationType[]> = {}
-const addNewNotificationsOnCache = (token: string, notifications: NotificationType[]) => {
-  if(!cacheNotification[token]) cacheNotification[token] = notifications
+interface NotificationData{
+  datas: NotificationType[],
+  total: number
+}
+let cacheNotification : Record<string, NotificationData> = {}
+const addNewNotificationsOnCache = (token: string, { datas, total }: NotificationData) => {
+  if(!cacheNotification[token]) cacheNotification[token] = { datas, total: total === -1 ? 0 : total }
   else{
-    const notificationIds = cacheNotification[token].map((cached) => cached.id);
-    notifications.reverse().forEach((notification) => {
-      if(!notificationIds.includes(notification.id)) cacheNotification[token].unshift(notification) 
-    })  
+    const notificationIds = cacheNotification[token].datas.map((cached) => cached.id);
+    datas.reverse().forEach((notification) => {
+      if(!notificationIds.includes(notification.id)) cacheNotification[token].datas.unshift(notification)
+    })
+    if(total > -1) cacheNotification[token].total = total
   }
 }
 interface NotificationsResponse extends ResultAndResponse{
-  data?: NotificationType[]
+  data?: {
+    datas: NotificationType[],
+    total: number
+  }
 }
 export const getNotifications = async ({ last_notification_id, skip, token }:{
   token: string
@@ -25,7 +33,7 @@ export const getNotifications = async ({ last_notification_id, skip, token }:{
     if(!skip && 
       !last_notification_id && 
       cacheNotification[token] && 
-      cacheNotification[token].length > 0
+      cacheNotification[token].datas.length > 0
     ){
       console.log('[cached-first-notifications]')
       return {
@@ -43,7 +51,7 @@ export const getNotifications = async ({ last_notification_id, skip, token }:{
 
     if(!skip) console.log(
       last_notification_id ? 
-      `[updated-notifications:${(data.data ?? []).length}]` : 
+      `[updated-notifications:${(data.data?.datas ?? []).length}]` : 
       '[requested-notifications]'
     )
 
