@@ -1,10 +1,6 @@
 import { NotificationType } from "../../../../shared-types/notification.type"
 import { IconProps, getIconByName } from "../../../utils/icons"
 
-export const Notification = () => {
-  return (<div/>)
-}
-
 interface NotificationIconOrDefaultByType{
   notification: NotificationType,
   props?: IconProps

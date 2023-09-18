@@ -6,11 +6,16 @@ import { shortclass } from "../../../../styles/styles";
 import { useNotify } from "../../../../contexts/NotifyContext";
 import { getNotifications } from "../../../services/notification";
 import { NotificationType } from "../../../../shared-types/notification.type";
-import { NotificationIconOrDefaultByType } from ".";
+import { handleRegexUrl } from "../../../../shared-types/utils/routes";
+import { useNavigate } from "react-router-dom";
+import { NotificationIconOrDefaultByType } from "./NotificationIconOrDefaultByType";
 
 export const BellNotification = () => {
   const { toast } = useNotify();
   const { user } = useAuth();
+
+  const navigate = useNavigate();
+
   const [notifications, setNotifications] = useState<NotificationType[]>();
   const [lastNotificationId, setLastNotificationId] = useState<string>();
   const [unvieweds, setUnviewed] = useState<number>(0);
@@ -70,6 +75,11 @@ export const BellNotification = () => {
       return newState
     })
   }
+  function handleGoToAllNotificactions(){
+    const url = handleRegexUrl('@hub:notification.all')
+    if(url.slice(0,4) === 'http') window.location.href = url
+    else navigate(url)
+  }
 
   // [ ] QUANDO CLICAR NA NOTIFICAÇÃO DEVE ABRIR A NOTIFICAÇÃO EM UM MODAL PARA VE-LA COMPLETA
   //     [ ] AO ABRIR DEVE MARCAR A NOTIFICAÇÃO COMO VISUALIZADA
@@ -111,7 +121,7 @@ export const BellNotification = () => {
                   className={`
                     ${shortclass.dropdownItem}
                     !flex flex-col
-                    !text-gray-700
+                    !text-primary-900
                   `}
                   key={notification.id}
                 >
@@ -137,7 +147,7 @@ export const BellNotification = () => {
           )}
         </div>
       </div>
-        <button type="button" className={`
+        <button type="button" onClick={handleGoToAllNotificactions} className={`
           hover:bg-gray-50 py-1.5 w-[calc(100%+1rem)] 
           -mx-2 -mb-3 block rounded-b-lg border-t
           text-xs text-gray-400/70 text-center font-semibold
