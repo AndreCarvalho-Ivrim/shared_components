@@ -48,12 +48,13 @@ export const DropdownChooseEnterprise = () => {
     <Dropdown
       classNames={{
         list: `
-        absolute right-0 z-50
-        -mt-1 w-56 origin-top-right rounded-md
-        bg-gray-100/40 backdrop-blur-[25px] shadow-lg
-        ring-1 ring-black ring-opacity-5
-        focus:outline-none pb-2
-      ` }}
+          absolute right-0 z-50
+          -mt-1 w-56 origin-top-right rounded-md
+          bg-gray-100/40 backdrop-blur-[25px] shadow-lg
+          ring-1 ring-black ring-opacity-5
+          focus:outline-none pb-2
+        `
+      }}
       trigger={
         <div className="flex items-center gap-1">
           <div className="

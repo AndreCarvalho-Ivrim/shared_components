@@ -15,7 +15,7 @@ export const Header = ({ breadcrumbs } : HeaderProps) => {
   const urls = getUrls('front')!;
 
   return (
-    <header className="flex items-start max-sm:items-center justify-between gap-2 mb-10">
+    <header className="flex items-start max-sm:items-center justify-between gap-2 mb-10 ">
       <div>
         <div className="flex items-center gap-4 max-sm:scale-105 max-sm:ml-[2.5%]">
           <ul className="flex gap-1.5 text-primary-400 text-sm">

@@ -28,7 +28,7 @@ export const BellNotification = () => {
   useEffect(() => {
     if(!user) return;
 
-    const delay = 15 * 1000
+    const delay = 30 * 1000
     const refreshNotifications = setInterval(() => loadNotifications(
       lastNotificationId
     ), delay)
@@ -92,6 +92,15 @@ export const BellNotification = () => {
   
   return (
     <Dropdown
+      classNames={{ 
+        list: `
+        absolute right-0 z-50
+        -mt-1 w-56 origin-top-right rounded-md
+        bg-gray-100/40 backdrop-blur-[25px] shadow-lg
+        ring-1 ring-black ring-opacity-5
+        focus:outline-none pb-2
+        `
+      }}
       trigger={
         <div className="relative mt-0.5 -mb-0.5">
           <NotificationIcon className="text-primary-800 max-sm:hidden"/>
@@ -114,7 +123,7 @@ export const BellNotification = () => {
                 <button
                   type="button"
                   className={`
-                    ${shortclass.dropdownItem}
+                    ${shortclass.dropdownItemTranslucent}
                     !flex flex-col
                     !text-primary-900
                   `}
@@ -130,23 +139,23 @@ export const BellNotification = () => {
                   </span>
                 </button>
               )):(
-                <p className="text-xs text-center text-gray-400 py-6 px-2 bg-gray-50 mb-1 rounded-sm">
+                <p className="text-xs text-center text-gray-400 py-6 px-2 bg-gray-50/50 mb-1 rounded-sm">
                   Não há nenhuma notificação
                 </p>
               )}
             </>
           ):(
-            <p className="text-xs text-center text-gray-400 py-6 px-2 bg-gray-50 mb-1 rounded-sm animate-pulse">
+            <p className="text-xs text-center text-gray-400 py-6 px-2 bg-gray-50/50 mb-1 rounded-sm animate-pulse">
               Carregando notificações...
             </p>
           )}
         </div>
       </div>
-        <button type="button" onClick={handleGoToAllNotificactions} className={`
-          hover:bg-gray-50 py-1.5 w-[calc(100%+1rem)] 
-          -mx-2 -mb-3 block rounded-b-lg border-t
-          text-xs text-gray-400/70 text-center font-semibold
-        `}>Ver todas Notificações</button>
+      <button type="button" onClick={handleGoToAllNotificactions} className={`
+        hover:bg-gray-50/50 py-1.5 w-[calc(100%+1rem)] 
+        -mx-2 -mb-3 block rounded-b-lg border-t
+        text-xs text-gray-400/70 text-center font-semibold
+      `}>Ver todas Notificações</button>
     </Dropdown>
   )
 }
