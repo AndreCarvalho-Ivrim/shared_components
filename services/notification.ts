@@ -89,9 +89,9 @@ export const getNotifications = async ({ last_notification_id, skip, token, view
     })
   }
 }
-export const markAsViewed = async (ids: string[], token: string) : Promise<ResultAndResponse> => {
+export const markAsViewed = async (ids: string[], token: string, unviewed = false) : Promise<ResultAndResponse> => {
   try{
-    const { data } = await portal.put(`/notification/status/viewed`, {
+    const { data } = await portal.put(`/notification/status/${unviewed ? 'unviewed':'viewed'}`, {
       data: ids
     }, headerBearer(token))
 
@@ -105,9 +105,9 @@ export const markAsViewed = async (ids: string[], token: string) : Promise<Resul
     })
   }
 }
-export const markAsArchived = async (ids: string[], token: string) : Promise<ResultAndResponse> => {
+export const markAsArchived = async (ids: string[], token: string, unarchived = false) : Promise<ResultAndResponse> => {
   try{
-    const { data } = await portal.put(`notification/status/is_archived`, {
+    const { data } = await portal.put(`notification/status/${unarchived ? 'isnt_archived':'is_archived'}`, {
       data: ids
     }, headerBearer(token))
 

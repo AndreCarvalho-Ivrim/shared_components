@@ -850,6 +850,17 @@ export const ArchiveIcon = (props: IconProps) => (
     <path d="M15 12H9v-2H7v4h10v-4h-2z"></path>
   </svg>
 )
+export const DropboxIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24" 
+  >
+    <path d="M7.004 3.5 2 6.689l5.004 3.186 5.002-3.186zm10.005 0-5.003 3.189 5.003 3.186 5.003-3.186zM2 13.062l5.004 3.187 5.002-3.187-5.002-3.187zm15.009-3.187-5.003 3.187 5.003 3.187 5.003-3.187zM7.004 17.311l5.002 3.189 5.003-3.189-5.003-3.186z"></path>
+  </svg>
+)
 
 export const listAvailableIcons : { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   {component: (props?: IconProps) => <ChevronDownIcon {...props}/>,     title: 'ChevronDownIcon'      },
@@ -911,6 +922,7 @@ export const listAvailableIcons : { component: (props?: IconProps) => ReactNode,
   {component: (props?: IconProps) => <StopWatchIcon {...props}/>,       title: 'StopWatchIcon'        },
   {component: (props?: IconProps) => <MentionIcon {...props}/>,         title: 'MentionIcon'          },
   {component: (props?: IconProps) => <ArchiveIcon {...props}/>,         title: 'ArchiveIcon'          },
+  {component: (props?: IconProps) => <DropboxIcon {...props}/>,         title: 'DropboxIcon'          },
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps) : ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
