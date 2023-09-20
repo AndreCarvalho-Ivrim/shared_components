@@ -42,7 +42,6 @@ export const getNotifications = async ({ last_notification_id, skip, token, view
   type?: NotificationTypeType
   is_archived?: boolean,
 }) : Promise<NotificationsResponse> => {
-  console.log({ last_notification_id })
   try{
     if(
       !viewed &&
@@ -121,14 +120,18 @@ export const markAsArchived = async (ids: string[], token: string, unarchived = 
     })
   }
 }
-interface PreferenceRequest{
+export interface PreferenceRequest{
   auto_archive_type: string[],
   notify_by: NotificationPreferenceType['notify_by']
 }
-export const createOrUpdateNotificationPreference = async (fields: PreferenceRequest, replicate: boolean, token: string) : Promise<ResultAndResponse> => {
+interface PreferenceResponse extends ResultAndResponse{ data?: NotificationPreferenceType }
+export const createOrUpdateNotificationPreference = async (fields: PreferenceRequest, replicate: boolean, token: string) : Promise<PreferenceResponse> => {
   try{
-    const { data } = await portal.post(`/notification/preference?${replicate ? 'replicate=true':''}`, fields, headerBearer(token))
-    return data;
+    const { data } = await portal.post<PreferenceResponse>(`/notification/preference?${replicate ? 'replicate=true':''}`, { data: fields }, headerBearer(token))
+    return {
+      ...data,
+      data: data.data ? _parseNotificationPreference(data.data) : data.data
+    };
   }catch(e){
     return handleErrorResultAndResponse(e, {
       result: false,
@@ -141,8 +144,11 @@ interface PreferencesResponse extends ResultAndResponse{
 }
 export const getNotificationPreference = async (token: string) : Promise<PreferencesResponse> => {
   try{
-    const { data } = await portal.get('/notification/preference', headerBearer(token))
-    return data;
+    const { data } = await portal.get<PreferencesResponse>('/notification/preference', headerBearer(token))
+    return {
+      ...data,
+      data: data.data ? data.data.map((preference) => _parseNotificationPreference(preference)) : data.data
+    };
   }catch(e){
     return handleErrorResultAndResponse(e, {
       result: false,
@@ -150,3 +156,10 @@ export const getNotificationPreference = async (token: string) : Promise<Prefere
     })
   }
 }
+const _parseNotificationPreference = (preference: NotificationPreferenceType) : NotificationPreferenceType => ({
+  ...preference,
+  auto_archive_type: typeof preference.auto_archive_type === 'string' ? (preference.auto_archive_type as string).split(',') : preference.auto_archive_type,
+  notify_by: typeof preference.notify_by === 'string' ? (() => {
+    try{ return JSON.parse(preference.notify_by as string) }catch(e){ return []}
+  })() : preference.notify_by
+})
