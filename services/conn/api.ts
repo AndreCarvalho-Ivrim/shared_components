@@ -46,7 +46,9 @@ const baseURL = getUrls('back')!;
 export const wf = axios.create({
   baseURL: baseURL.wf,
 });
-
+export const portal = axios.create({
+  baseURL: baseURL.portal
+})
 
 export const invalidTokenJWT = () => {
   sessionStorage.removeItem(authStorageKeys.user);

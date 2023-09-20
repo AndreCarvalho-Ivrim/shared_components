@@ -1,5 +1,5 @@
 import { CloseIcon } from '../../../utils/icons';
-import { ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { HeaderAside } from './HeaderAside';
 import { FooterAside, FooterAsideProps } from './FooterAside';
 import { AsideLiItem } from './AsideLiItem';
@@ -43,18 +43,35 @@ export const Aside = ({ active, items, dynamicItems, footerItems, isCollapsed, d
       max-sm:w-[200px]
     `}>
       <HeaderAside {...{ dotColor, isCollapsed, module_name }} />
-      <div className="flex flex-col justify-between flex-1">
-        <ul className="
-          p-4 md:p-5 mb-16
-          group-[.collapsed]:p-4 group-[.collapsed-desktop-aside]:p-4
-          text-white
+      <div className="flex flex-col justify-between flex-1 text-white">
+        <div className="
+          flex flex-col justify-between flex-1
+          max-h-[calc(100vh-12rem)] overflow-y-auto
         ">
-          {items.map((item, i) => <AsideLiItem item={item} key={`${item.id}-${i}`} active={active} />)}
-          {dynamicItems.length > 0 && (
-            <div className="w-full h-[1px] my-3 bg-gray-50/50" />
+          <ul className="
+            p-4 md:p-5 mb-8
+            group-[.collapsed]:p-4 group-[.collapsed-desktop-aside]:p-4
+          ">
+            {items.map((item, i) => <AsideLiItem item={item} key={`${item.id}-${i}`} active={active} />)}
+            {dynamicItems.length > 0 && (
+              <div className="w-full h-[1px] my-3 bg-gray-50/50" />
+            )}
+            {dynamicItems.map((item) => <AsideLiItem item={item} key={item.id} active={active} />)}
+          </ul>
+          {footerItems && footerItems.length > 0 && (
+            <ul className="px-2 py-4">
+              {footerItems.map((item, i) => (
+                <Fragment key={`${item.type}-${i}`}>
+                  {item.type === 'aside-item' ? (
+                    <div className="bg-gray-100/20 rounded-lg">
+                      <AsideLiItem item={item.content}/>
+                    </div>
+                  ): item.content}
+                </Fragment>
+              ))}
+            </ul>
           )}
-          {dynamicItems.map((item) => <AsideLiItem item={item} key={item.id} active={active} />)}
-        </ul>
+        </div>
         <FooterAside {...{ footerItems }}/>
       </div>
     </aside>

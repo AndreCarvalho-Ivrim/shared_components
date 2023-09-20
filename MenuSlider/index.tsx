@@ -4,7 +4,6 @@ import ISAC from "../assets/ISAC_PB.png";
 import DASHBOARD from "../assets/IVRIM-DASHBOARD_PB.png";
 import REPORT from "../assets/IVRIM-REPORT_PB.png";
 import VISION from "../assets/IVRIM-VISION360_PB.png";
-import waves from "../assets/waves.png";
 import wallet from "../assets/wallet-menu.svg";
 import Folder from "../../shared-components/assets/folder-user.svg";
 import Mail from "../../shared-components/assets/mail.svg";
@@ -26,7 +25,8 @@ import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
-import { LockIcon, RefreshIcon } from "../utils/icons";
+import { LockIcon, RefreshIcon, UserIcon } from "../utils/icons";
+import { handleRegexUrl, hubRoutes } from "../../shared-types/utils/routes";
 
 
 const frontURL = getUrls("front")!;
@@ -88,7 +88,7 @@ export const applicationRedirection = (user: User | undefined) => {
     {
       id: "admin-panel",
       name: "Admin Panel",
-      url: `${urls.portal}/painel-adm`,
+      url: hubRoutes.admin_panel.client(),
       img: "https://source.unsplash.com/random/?textures-patterns",
       disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN),
     },
@@ -324,7 +324,7 @@ export const MenuSlider = () => {
             <button
               type="button"
               className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60"
-              onClick={() => redirectToApp({ url: `${frontURL.portal}/meus-docs` }, toast, navigate)}
+              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:gallery.home') }, toast, navigate)}
             >
               <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
               <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Meus Documentos</span>
@@ -350,14 +350,14 @@ export const MenuSlider = () => {
 
           <div className="flex xsm:flex-col xsm:mx-auto flex-wrap">
             <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
-             onClick={() => redirectToApp({ url: `${frontURL.portal}painel-adm` }, toast, navigate)}
+             onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client') }, toast, navigate)}
             >
               <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
               <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal">Admin Console</span>
             </button>
 
             <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
-            onClick={() => redirectToApp({ url: `${frontURL.portal}perfil` }, toast, navigate)}
+            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home') }, toast, navigate)}
             >
               <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
               <span className="text-xs text-white pt-3 pb-1 pr-10 truncate hover:whitespace-normal">Usuário</span>
