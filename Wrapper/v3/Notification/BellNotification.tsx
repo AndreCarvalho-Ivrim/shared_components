@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { Dropdown } from "../../../utils/Dropdown"
-import { NotificationIcon } from "../../../utils/icons"
+import { EnvelopeOpenIcon, NotificationIcon } from "../../../utils/icons"
 import { useAuth } from "../../../../contexts/AuthContext";
 import { shortclass } from "../../../../styles/styles";
 import { useNotify } from "../../../../contexts/NotifyContext";
-import { getNotifications } from "../../../services/notification";
+import { getNotifications, markAsViewed } from "../../../services/notification";
 import { NotificationType } from "../../../../shared-types/notification.type";
 import { handleRegexUrl } from "../../../../shared-types/utils/routes";
 import { useNavigate } from "react-router-dom";
 import { NotificationIconOrDefaultByType } from "./NotificationIconOrDefaultByType";
+import notificationSound from "../../../assets/notification.mp3"
 
+const alertNotification = new Audio(notificationSound)
 export const BellNotification = () => {
-  const { toast } = useNotify();
+  const { toast, showMessage } = useNotify();
   const { user } = useAuth();
 
   const navigate = useNavigate();
@@ -39,7 +41,6 @@ export const BellNotification = () => {
 
   },[user, lastNotificationId])
 
-
   async function loadNotifications(last_notification_id?: string, reset = false){
     if(!user) return;
 
@@ -54,7 +55,18 @@ export const BellNotification = () => {
     }
     if(!res.data) return;
     
-    if(res.data.datas.length > 0) setLastNotificationId(res.data.datas[0].id)
+    if(res.data.datas.length > 0){
+      setLastNotificationId(res.data.datas[0].id)
+      if(!reset){
+        try{
+          alertNotification.play();
+
+          const currentPageTitle = document.title
+          document.title = res.data.datas.length === 1 ? `(1) nova notificação` : `(${res.data.datas.length}) novas notificações`
+          setTimeout(() => document.title = currentPageTitle, 5 * 1000)
+        }catch(e){}
+      }
+    }
 
     setNotifications((prevState) => {
       if(reset) return res.data!.datas
@@ -75,6 +87,41 @@ export const BellNotification = () => {
     if(url.slice(0,4) === 'http') window.location.href = url
     else navigate(url)
   }
+  function onDetails(notification: NotificationType){
+    handleMarkAsViewed(notification.id, true)
+    showMessage((
+      <div>
+        <p className="text-gray-500">{notification.description}</p>
+      </div>
+    ),{
+      title: notification.title,
+      cancelButtonText: 'Voltar',
+      ...(notification.redirect_to ? {
+        actionButton: {
+          onClick: () => {
+            const url = handleRegexUrl(notification.redirect_to!)
+            if(url.slice(0,4) === 'http') window.location.href = url
+            else navigate(url)
+          },
+          theme: 'primary',
+          text: 'Acessar'
+        }
+      }:{})
+    })
+  }
+  async function handleMarkAsViewed(id: string, ignoreToast = false){
+    if(!user) return;
+    
+    const res = await markAsViewed([id], user.token)
+    
+    if(!res.result){
+      if(!ignoreToast) toast.error(res.response);
+      return;
+    }
+
+    setNotifications((prevState) => (prevState ?? []).filter((state) => state.id !== id))
+    setUnviewed((prevState) => prevState - 1)
+  }
 
   // [ ] QUANDO CLICAR NA NOTIFICAÇÃO DEVE ABRIR A NOTIFICAÇÃO EM UM MODAL PARA VE-LA COMPLETA
   //     [ ] AO ABRIR DEVE MARCAR A NOTIFICAÇÃO COMO VISUALIZADA
@@ -82,13 +129,10 @@ export const BellNotification = () => {
   //     [ ] DEVE TER ALGUM BOTÃO DE REDIRECIONAMENTO PARA AÇÃO
   //     [ ] CASO TENHA TEMPLATE DO TIPO PLATAFORMA DEVE TER ALGUM LINK PARA ABRIR EM OUTRA PÁGINA
   // [ ] QUANDO FAZER O HOVER ENCIMA DO ITEM, DEVE REVELAR UM BOTÃO POR CIMA NA LATERAL DIREITA, PARA MARCAR COMO VISUALIZADO
-  // [ ] O BOTÃO VER TODAS DEVE REDIRECIONAR PARA A TELA DE NOTIFICAÇÃO
+  // [x] O BOTÃO VER TODAS DEVE REDIRECIONAR PARA A TELA DE NOTIFICAÇÃO
   // [x] LIDAR COM CASH
   // [x] LIDAR COM LAST NOTIFICATION E ATUALIZAÇÃO DE NOTIFICAÇÕES
   // [ ] DISPARAR ALERTA SONORO QUANDO CHEGAR NOVAS NOTIFICAÇÕES.
-  // [ ] BACKEND
-  //     [ ] A RESPOSTA E O CACHE DEVEM CONTER A QUANTIDADE DE NOTIFICAÇÕES NÃO VISUALIZADAS
-  //     [ ] QUANDO CADASTRAR NOVAS NOTIFICAÇÕES ISSO DEVE AFETAR A QUANTIDADE DE NÃO NOTIFICADAS
   
   return (
     <Dropdown
@@ -120,16 +164,16 @@ export const BellNotification = () => {
           {notifications ? (
             <>
               {notifications.length > 0 ? notifications.map((notification) => (
-                <button
-                  type="button"
+                <div
                   className={`
                     ${shortclass.dropdownItemTranslucent}
-                    !flex flex-col
+                    !flex flex-col overflow-hidden
                     !text-primary-900
+                    relative
+                    hover:bg-gray-900/5
                   `}
                   key={notification.id}
                 >
-                  
                   <div className="flex items-center gap-2 max-w-full">
                     <NotificationIconOrDefaultByType notification={notification} props={{ w: 18, h: 18 }}/>
                     <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{notification.title}</strong>
@@ -137,9 +181,24 @@ export const BellNotification = () => {
                   <span className="text-gray-400 text-xs font-normal">
                     {notification.description.slice(0, 80) + (notification.description.length > 80 ? '...':'')}
                   </span>
-                </button>
+
+                  <div className="absolute inset-0 flex opacity-0 hover:opacity-100">
+                    <button
+                      type="button"
+                      className="flex-1 border-none outline-none ring-0"
+                      onClick={() => onDetails(notification)}
+                    />
+                    <button
+                      type="button"
+                      className="bg-gray-50/50 text-gray-700 border-none outline-none ring-0 px-3"
+                      onClick={() => handleMarkAsViewed(notification.id)}
+                    >
+                      <EnvelopeOpenIcon w={20} h={20}/>
+                    </button>
+                  </div>
+                </div>
               )):(
-                <p className="text-xs text-center text-gray-400 py-6 px-2 bg-gray-50/50 mb-1 rounded-sm">
+                <p className="text-xs text-center text-gray-500 py-6 px-2 bg-gray-50/50 mb-1 rounded-sm">
                   Não há nenhuma notificação
                 </p>
               )}
