@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Dropdown } from "../../../utils/Dropdown"
 import { EnvelopeOpenIcon, NotificationIcon } from "../../../utils/icons"
 import { useAuth } from "../../../../contexts/AuthContext";
-import { shortclass } from "../../../../styles/styles";
 import { useNotify } from "../../../../contexts/NotifyContext";
 import { getNotifications, markAsViewed } from "../../../services/notification";
 import { NotificationType } from "../../../../shared-types/notification.type";
@@ -10,6 +9,7 @@ import { handleRegexUrl } from "../../../../shared-types/utils/routes";
 import { useNavigate } from "react-router-dom";
 import { NotificationIconOrDefaultByType } from "./NotificationIconOrDefaultByType";
 import notificationSound from "../../../assets/notification.mp3"
+import { shortclass } from "../../../utils/shortclass";
 
 const alertNotification = new Audio(notificationSound)
 export const BellNotification = () => {
