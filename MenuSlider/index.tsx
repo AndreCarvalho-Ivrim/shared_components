@@ -27,6 +27,7 @@ import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
 import { LockIcon, RefreshIcon, UserIcon } from "../utils/icons";
 import { handleRegexUrl, hubRoutes } from "../../shared-types/utils/routes";
+import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 
 
 const frontURL = getUrls("front")!;
@@ -163,7 +164,10 @@ export const MenuSlider = () => {
         <div className={style.header__logo}>
           <img src={logo} alt="Ivrim Consulting" />
         </div>
-        <DropdownChooseEnterprise />
+        <div className="flex items-center gap-4">
+          <BellNotification/>
+          <DropdownChooseEnterprise />
+        </div>
       </div>
 
       <div
