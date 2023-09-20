@@ -1,5 +1,5 @@
 import { ResultAndResponse } from "../../shared-types"
-import { NotificationType, NotificationTypeType } from "../../shared-types/notification.type"
+import { NotificationPreferenceType, NotificationType, NotificationTypeType } from "../../shared-types/notification.type"
 import { handleErrorResultAndResponse, headerBearer, portal } from "./conn/api"
 
 interface NotificationData{
@@ -118,6 +118,35 @@ export const markAsArchived = async (ids: string[], token: string, unarchived = 
     return handleErrorResultAndResponse(e, {
       result: false,
       response: 'Não foi possível arquivar essa notificação'
+    })
+  }
+}
+interface PreferenceRequest{
+  auto_archive_type: string[],
+  notify_by: NotificationPreferenceType['notify_by']
+}
+export const createOrUpdateNotificationPreference = async (fields: PreferenceRequest, replicate: boolean, token: string) : Promise<ResultAndResponse> => {
+  try{
+    const { data } = await portal.post(`/notification/preference?${replicate ? 'replicate=true':''}`, fields, headerBearer(token))
+    return data;
+  }catch(e){
+    return handleErrorResultAndResponse(e, {
+      result: false,
+      response: 'Não foi possível salvar sua preferência de notificação'
+    })
+  }
+}
+interface PreferencesResponse extends ResultAndResponse{
+  data?: NotificationPreferenceType[]
+}
+export const getNotificationPreference = async (token: string) : Promise<PreferencesResponse> => {
+  try{
+    const { data } = await portal.get('/notification/preference', headerBearer(token))
+    return data;
+  }catch(e){
+    return handleErrorResultAndResponse(e, {
+      result: false,
+      response: 'Não foi possível obter sua preferência de notificação'
     })
   }
 }
