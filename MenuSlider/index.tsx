@@ -243,6 +243,7 @@ export const MenuSlider = () => {
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
                 onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
+                key={flow._id}
               >
                 {flow.theme === "Cobrança" ? (
                   <img src={homeSale} alt="homeSale icon" className="pt-2" />
@@ -251,7 +252,7 @@ export const MenuSlider = () => {
                 ) : flow.theme === "Comercial" ? (
                   <img src={cart} alt="cart icon" className="pt-2" />
                 ) : <></>}
-                <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
+                <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
               </button>
             ))}
             {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
