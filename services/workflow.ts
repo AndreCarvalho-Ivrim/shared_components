@@ -65,8 +65,6 @@ interface GetFlowAuthsResponse extends ResultAndResponse{
   }
 }
 export const getFlowAuths = async (token: string, flow_id: string, exclude_ids: string[] = [], auth_email?: string) : Promise<GetFlowAuthsResponse> => {
-  const take = 5;
-
   try{
     const cache = getFlowAuthsOnCache(token, flow_id)
     if(cache){
@@ -86,7 +84,7 @@ export const getFlowAuths = async (token: string, flow_id: string, exclude_ids: 
       }
       else{
         const filteredUsers = cache.users.filter((user) => !exclude_ids.includes(user._id))
-        if(exclude_ids.length === 0 || filteredUsers.length >= take){
+        if(exclude_ids.length === 0 || filteredUsers.length >= 10){
           console.log('[cached-flow-auths]')
           return {
             result: true,
@@ -104,7 +102,6 @@ export const getFlowAuths = async (token: string, flow_id: string, exclude_ids: 
     const { data } = await wf.post<GetFlowAuthsResponse>(`/flow-auth/get-users/${flow_id}`, {
       exclude_ids,
       auth_email,
-      take
     }, headerBearer(token))
     console.log('[requested-flow-auths]')
 
