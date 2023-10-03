@@ -25,7 +25,7 @@ import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { getUrls } from "../services/conn/api";
-import { LockIcon, RefreshIcon, UserIcon } from "../utils/icons";
+import { LockIcon, RefreshIcon } from "../utils/icons";
 import { handleRegexUrl, hubRoutes } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 
@@ -251,7 +251,9 @@ export const MenuSlider = () => {
                   <img src={coin} alt="coin icon" className="pt-2" />
                 ) : flow.theme === "Comercial" ? (
                   <img src={cart} alt="cart icon" className="pt-2" />
-                ) : <></>}
+                ) : (
+                  <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0,2)}</span>
+                )}
                 <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
               </button>
             ))}
