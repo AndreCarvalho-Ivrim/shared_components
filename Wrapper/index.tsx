@@ -18,6 +18,7 @@ import {
   UserIcon,
   MyDocsIcon,
   NotificationIcon,
+  LockIcon,
 } from "../utils/icons";
 import {
   AvailableWorkflowThemeType,
@@ -27,7 +28,7 @@ import {
 } from "../../types";
 import { getPublishedFlows } from "../services/workflow";
 import { FooterAsideProps } from "./v3/Aside/FooterAside";
-import { hubRoutes } from "../../shared-types/utils/routes";
+import { handleRegexUrl, hubRoutes, isacRoutes } from "../../shared-types/utils/routes";
 
 interface WrapperProps {
   v?: 3;
@@ -155,42 +156,56 @@ export const getAsideItems = ({
       }
     ];
     
-    if(user?.permitions_slug?.includes(PossiblePermissions.ADMIN)) defaultAsideItems.push(...[
-      {
-        id: "aside-item-admin-users",
-        name: "Admin Empresa",
-        href: hubRoutes.admin_panel.client(),
-        disabled: !canAccessAdminPanel,
-        icon: <CompanyIcon w="22" h="22" />,
-      },
-      {
-        id: "aside-item-admin-users",
-        name: "Admin Usuários",
-        href: hubRoutes.admin_panel.users(),
-        disabled: !canAccessAdminPanel,
-        icon: <UsersIcon w="22" h="22" />,
-      },
-      {
-        id: "aside-item-admin-datas",
-        name: "Admin Dados",
-        icon: <ProjectIcon w="22" h="22" />,
-        disabled: !canAccessAdminPanel,
+    if(user && user.permitions_slug){
+      if(user.permitions_slug.includes(PossiblePermissions.ADMIN)) defaultAsideItems.push(...[
+        {
+          id: "aside-item-admin-users",
+          name: "Admin Empresa",
+          href: hubRoutes.admin_panel.client(),
+          disabled: !canAccessAdminPanel,
+          icon: <CompanyIcon w="22" h="22" />,
+        },
+        {
+          id: "aside-item-admin-users",
+          name: "Admin Usuários",
+          href: hubRoutes.admin_panel.users(),
+          disabled: !canAccessAdminPanel,
+          icon: <UsersIcon w="22" h="22" />,
+        },
+        {
+          id: "aside-item-admin-datas",
+          name: "Admin Dados",
+          icon: <ProjectIcon w="22" h="22" />,
+          disabled: !canAccessAdminPanel,
+          items: [
+            {
+              id: "aside-subitem-projetos",
+              name: "Projetos",
+              href: hubRoutes.admin_panel.projects(),
+              disabled: !canAccessAdminPanel,
+            },
+            {
+              id: "aside-subitem-dashboards",
+              name: "Dashboards",
+              href: hubRoutes.admin_panel.dashboards(),
+              disabled: !canManagement,
+            },
+          ],
+        },
+      ]);
+      if(user.permitions_slug.includes(PossiblePermissions.ADMIN_HUB)) defaultAsideItems.push({
+        id: 'aside-admin-hub',
+        name: 'Admin Hub',
+        icon: <LockIcon w="22" h="22"/>,
         items: [
           {
-            id: "aside-subitem-projetos",
-            name: "Projetos",
-            href: hubRoutes.admin_panel.projects(),
-            disabled: !canAccessAdminPanel,
-          },
-          {
-            id: "aside-subitem-dashboards",
-            name: "Dashboards",
-            href: hubRoutes.admin_panel.dashboards(),
-            disabled: !canManagement,
-          },
-        ],
-      },
-    ]);
+            id: 'aside-subitem-admin-hub-wf',
+            name: 'Workflows',
+            href: handleRegexUrl('@isac:admin_hub.workflows')
+          }
+        ]  
+      })
+    }
   }
   else if (module_name === "System Archictect")
     defaultAsideItems = [
