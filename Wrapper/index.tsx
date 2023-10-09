@@ -13,7 +13,13 @@ import {
   FlowIcon,
   WorkflowIcon,
   FileIcon,
-  ConnexionIcon,
+  ConnectionIcon,
+  CompanyIcon,
+  SquareCheckedIcon,
+  UserIcon,
+  MyDocsIcon,
+  NotificationIcon,
+  LockIcon,
 } from "../utils/icons";
 
 import {
@@ -25,6 +31,7 @@ import {
 
 import { getPublishedFlows } from "../services/workflow";
 import { FooterAsideProps } from "./v3/Aside/FooterAside";
+import { handleRegexUrl, hubRoutes, isacRoutes } from "../../shared-types/utils/routes";
 
 interface WrapperProps {
   v?: 3;
@@ -116,72 +123,111 @@ export const getAsideItems = ({
   );
 
   let defaultAsideItems: AsideItems[] = [];
-  if (isAdmin)
-    defaultAsideItems = [
-      {
-        id: "aside-item-admin-users",
-        name: "Admin Usuários",
-        href: "/painel-adm",
-        disabled: !canAccessAdminPanel,
-        icon: <UsersIcon w="22" h="22" />,
-      },
-      {
-        id: "aside-item-admin-datas",
-        name: "Admin Dados",
-        icon: <ProjectIcon w="22" h="22" />,
-        disabled: !canAccessAdminPanel,
-        items: [
-          {
-            id: "aside-subitem-projetos",
-            name: "Projetos",
-            href: "/painel-adm/projetos",
-            disabled: !canAccessAdminPanel,
-          },
-          {
-            id: "aside-subitem-dashboards",
-            name: "Dashboards",
-            href: "/painel-adm/dashboards",
-            disabled: !canManagement,
-          },
-        ],
-      },
-      {
-        id: "aside-item-admin-integracoes",
-        name: "Admin Integrações",
-        icon: <ConnexionIcon w="18" h="18" />,
-        disabled: !canAccessAdminPanel,
-        items: [
-          {
-            id: "aside-subitem-whatsapp",
-            name: "Whatsapp",
-            href: "/painel-adm/integracao-whatsapp",
-            disabled: !canAccessWhatsapp,
-          },
-        ],
-      },
-    ];
-  else if (module_name === "Configurações")
+
+  if(module_name === "Configurações" || isAdmin){
     defaultAsideItems = [
       {
         id: "aside-item-perfil",
         name: "Perfil",
-        href: "/perfil",
-        icon: <UsersIcon w={22} h={22} />,
+        href: hubRoutes.profile.home(),
+        icon: <UserIcon w={22} h={22} />,
       },
       {
         id: "aside-item-gallery",
         name: "Meus Docs.",
-        href: "/meus-docs",
-        icon: <UploadIcon w={22} h={22} />,
+        href: hubRoutes.gallery.home(),
+        icon: <MyDocsIcon w={22} h={22} />,
       },
       {
-        id: "aside-item-painel-admin",
-        name: "Painel Admin",
-        href: "/painel-adm",
-        icon: <SettingIcon w={22} h={22} />,
-        disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN),
-      },
+        id: 'aside-item-notification',
+        name: 'Notificações',
+        icon: <NotificationIcon w={22} h={22} />,
+        items: [
+          {
+            id: 'aside-subitem-all-notifications',
+            name: 'Todas',
+            href: hubRoutes.notification.all()
+          },{
+            id: 'aside-subitem-preferences',
+            name: 'Preferências',
+            href: hubRoutes.notification.preference()
+          }, ...((
+            user?.permitions_slug?.includes(PossiblePermissions.ADMIN_HUB) ||
+            user?.permitions_slug?.includes(PossiblePermissions.MANAGE_NOTIFICATION)
+          ) ? [{
+            id: 'aside-subitem-create-notifications',
+            name: 'Criar Notificações',
+            href: hubRoutes.notification.create()
+          }]:[])
+        ]
+      }
     ];
+    
+    if(user && user.permitions_slug){
+      if(user.permitions_slug.includes(PossiblePermissions.ADMIN)) defaultAsideItems.push(...[
+        {
+          id: "aside-item-admin-users",
+          name: "Admin Empresa",
+          href: hubRoutes.admin_panel.client(),
+          disabled: !canAccessAdminPanel,
+          icon: <CompanyIcon w="22" h="22" />,
+        },
+        {
+          id: "aside-item-admin-users",
+          name: "Admin Usuários",
+          href: hubRoutes.admin_panel.users(),
+          disabled: !canAccessAdminPanel,
+          icon: <UsersIcon w="22" h="22" />,
+        },
+        {
+          id: "aside-item-admin-datas",
+          name: "Admin Dados",
+          icon: <ProjectIcon w="22" h="22" />,
+          disabled: !canAccessAdminPanel,
+          items: [
+            {
+              id: "aside-subitem-projetos",
+              name: "Projetos",
+              href: hubRoutes.admin_panel.projects(),
+              disabled: !canAccessAdminPanel,
+            },
+            {
+              id: "aside-subitem-dashboards",
+              name: "Dashboards",
+              href: hubRoutes.admin_panel.dashboards(),
+              disabled: !canManagement,
+            },
+          ],
+        },
+        {
+          id: "aside-item-admin-integracoes",
+          name: "Admin Integrações",
+          icon: <ConnectionIcon w="18" h="18" />,
+          disabled: !canAccessAdminPanel,
+          items: [
+            {
+              id: "aside-subitem-whatsapp",
+              name: "Whatsapp",
+              href: "/painel-adm/integracao-whatsapp",
+              disabled: !canAccessWhatsapp,
+            },
+          ],
+        },
+      ]);
+      if(user.permitions_slug.includes(PossiblePermissions.ADMIN_HUB)) defaultAsideItems.push({
+        id: 'aside-admin-hub',
+        name: 'Admin Hub',
+        icon: <LockIcon w="22" h="22"/>,
+        items: [
+          {
+            id: 'aside-subitem-admin-hub-wf',
+            name: 'Workflows',
+            href: handleRegexUrl('@isac:admin_hub.workflows')
+          }
+        ]  
+      })
+    }
+  }
   else if (module_name === "System Archictect")
     defaultAsideItems = [
       {
@@ -227,34 +273,38 @@ export const getAsideItems = ({
   else if (module_name === "Ivrim Conciliation")
     defaultAsideItems = [
       {
-        id: "aside-item-contas-a-receber",
-        icon: <FileIcon w={22} h={22} />,
-        name: "Conciliação",
-        href: "/conciliacao",
-        disabled: !user?.permitions_slug?.includes(
-          PossiblePermissions.FINANCEIRO
-        ),
-      },
-      {
-        id: "aside-item-contas-a-receber",
-        icon: <UploadIcon w={22} h={22} />,
+        id: "aside-item-contas-a-receber-gerenciamento",
+        icon: <UploadIcon w={22} h={22}/>,
         name: "Gerenciamento",
         href: "/conciliacao/gerenciamento",
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.FINANCEIRO
         ),
-      },
+      },{
+        id: "aside-item-contas-a-receber-conciliacao",
+        icon: <FileIcon  w={22} h={22} />,
+        name: "Em Conciliação",
+        href: "/conciliacao",
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.FINANCEIRO
+        ),
+      },{
+        id: "aside-item-contas-a-receber-conciliados",
+        icon: <SquareCheckedIcon  w={22} h={22} />,
+        name: "Conciliados",
+        href: "/conciliacao/conciliados",
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.FINANCEIRO
+        ),
+      }
     ];
 
   return defaultAsideItems;
 };
 export const iconByTheme = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
-    case "Cobrança":
-      return <MoneyIcon w={22} h={22} />;
-    case "Comercial":
-      return <WorkflowIcon w={22} h={22} />;
-    case "Financeiro":
-      return <MoneyIcon w={22} h={22} />;
+    case "Cobrança":   return <MoneyIcon    w={22} h={22}/>;
+    case "Comercial":  return <WorkflowIcon w={22} h={22}/>;
+    case "Financeiro": return <MoneyIcon    w={22} h={22}/>;
   }
 };

@@ -1,4 +1,7 @@
-interface IconProps{ w?: string | number, h?: string | number, className?: string, color?: string }
+import { ReactNode } from "react";
+import { AvailableIcons } from "../../shared-types/icon.type";
+
+export interface IconProps{ w?: string | number, h?: string | number, className?: string, color?: string }
 export const ChevronDownIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -505,7 +508,6 @@ export const WindowsIcon = (props: IconProps) => (
     <path d="M16 7H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zM4 19v-8h12V9l.002 10H4z"></path><path d="M22 5c0-1.103-.897-2-2-2H7c-1.103 0-2 .897-2 2h13.001c1.101 0 1.996.895 1.999 1.994L20.002 15H20v2c1.103 0 2-.897 2-2V8.007L22.001 8V6L22 5.99V5z"></path>
   </svg>
 )
-// MAPED TO HERE
 export const GitIcon = (props: IconProps) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg"
@@ -563,6 +565,17 @@ export const EnvelopeIcon = (props: IconProps) => (
     style={{ fill: props.color ?? 'currentColor' }}
   ><path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386 5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z"></path></svg>
 );
+export const EnvelopeOpenIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={props.className ?? ''}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    viewBox="0 0 24 24"
+  >
+    <path d="m21.555 8.168-9-6a1 1 0 0 0-1.109 0l-9 6A1 1 0 0 0 2 9v11c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V9c0-.334-.167-.646-.445-.832zM12 4.202 19.197 9 12 13.798 4.803 9 12 4.202zM4 20v-9.131l7.445 4.963a1 1 0 0 0 1.11 0L20 10.869 19.997 20H4z"></path>
+  </svg>
+)
 export const SearchIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
@@ -628,6 +641,17 @@ export const UsersIcon = (props: IconProps) => (
   </svg>
   
 );
+export const UserIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}  
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"></path><path d="M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"></path>
+  </svg>
+)
 export const ErrorCircleIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -675,7 +699,9 @@ export const CloudIcon = (props: IconProps) => (
   </svg>
 )
 export const InfoIcon = (props: IconProps) => (
-  <svg width={props.w ?? "24"} height={props.h ?? "24"}
+  <svg
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
   >
@@ -684,8 +710,253 @@ export const InfoIcon = (props: IconProps) => (
         </path>
       </g>
   </svg>
-);
-export const ConnexionIcon = (props: IconProps) => (
+)
+export const CalendarIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+    style={{ fill: props.color ?? 'currentColor' }}
+    viewBox="0 0 24 24"
+  ><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg>
+)
+export const CompanyIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+    style={{ fill: props.color ?? 'currentColor' }}
+    viewBox="0 0 24 24"
+  >
+    <path d="M19 2H9c-1.103 0-2 .897-2 2v6H5c-1.103 0-2 .897-2 2v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4c0-1.103-.897-2-2-2zM5 12h6v8H5v-8zm14 8h-6v-8c0-1.103-.897-2-2-2H9V4h10v16z"></path><path d="M11 6h2v2h-2zm4 0h2v2h-2zm0 4.031h2V12h-2zM15 14h2v2h-2zm-8 .001h2v2H7z"></path>
+  </svg>
+)
+export const PencilIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+    style={{ fill: props.color ?? 'currentColor' }}
+    viewBox="0 0 24 24"
+  >
+    <path d="M7.061 22c1.523 0 2.84-.543 3.91-1.613 1.123-1.123 1.707-2.854 1.551-4.494l8.564-8.564a3.123 3.123 0 0 0-.002-4.414c-1.178-1.18-3.234-1.18-4.412 0l-8.884 8.884c-1.913.169-3.807 1.521-3.807 3.919 0 .303.021.588.042.86.08 1.031.109 1.418-1.471 2.208a1.001 1.001 0 0 0-.122 1.717C2.52 20.563 4.623 22 7.061 22c-.001 0-.001 0 0 0zM18.086 4.328a1.144 1.144 0 0 1 1.586.002 1.12 1.12 0 0 1 0 1.584L12 13.586 10.414 12l7.672-7.672zM6.018 16.423c-.018-.224-.037-.458-.037-.706 0-1.545 1.445-1.953 2.21-1.953.356 0 .699.073.964.206.945.475 1.26 1.293 1.357 1.896.177 1.09-.217 2.368-.956 3.107C8.865 19.664 8.049 20 7.061 20H7.06c-.75 0-1.479-.196-2.074-.427 1.082-.973 1.121-1.989 1.032-3.15z">
+    </path>
+  </svg>
+)
+export const MagicWandIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+    style={{ fill: props.color ?? 'currentColor' }}
+    viewBox="0 0 24 24"
+  >
+    <path d="m11 4-.5-1-.5 1-1 .125.834.708L9.5 6l1-.666 1 .666-.334-1.167.834-.708zm8.334 10.666L18.5 13l-.834 1.666-1.666.209 1.389 1.181L16.834 18l1.666-1.111L20.166 18l-.555-1.944L21 14.875zM6.667 6.333 6 5l-.667 1.333L4 6.5l1.111.944L4.667 9 6 8.111 7.333 9l-.444-1.556L8 6.5zM3.414 17c0 .534.208 1.036.586 1.414L5.586 20c.378.378.88.586 1.414.586s1.036-.208 1.414-.586L20 8.414c.378-.378.586-.88.586-1.414S20.378 5.964 20 5.586L18.414 4c-.756-.756-2.072-.756-2.828 0L4 15.586c-.378.378-.586.88-.586 1.414zM17 5.414 18.586 7 15 10.586 13.414 9 17 5.414z"></path>
+  </svg>
+)
+export const SquareCheckedIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M7 5c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2H7zm0 12V7h10l.002 10H7z"></path><path d="M10.996 12.556 9.7 11.285l-1.4 1.43 2.704 2.647 4.699-4.651-1.406-1.422z"></path>
+  </svg>
+)
+export const PackageIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M22 8a.76.76 0 0 0 0-.21v-.08a.77.77 0 0 0-.07-.16.35.35 0 0 0-.05-.08l-.1-.13-.08-.06-.12-.09-9-5a1 1 0 0 0-1 0l-9 5-.09.07-.11.08a.41.41 0 0 0-.07.11.39.39 0 0 0-.08.1.59.59 0 0 0-.06.14.3.3 0 0 0 0 .1A.76.76 0 0 0 2 8v8a1 1 0 0 0 .52.87l9 5a.75.75 0 0 0 .13.06h.1a1.06 1.06 0 0 0 .5 0h.1l.14-.06 9-5A1 1 0 0 0 22 16V8zm-10 3.87L5.06 8l2.76-1.52 6.83 3.9zm0-7.72L18.94 8 16.7 9.25 9.87 5.34zM4 9.7l7 3.92v5.68l-7-3.89zm9 9.6v-5.68l3-1.68V15l2-1v-3.18l2-1.11v5.7z"></path>
+  </svg>
+)
+export const ReceiptIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M21 11h-3V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v14c0 1.654 1.346 3 3 3h14c1.654 0 3-1.346 3-3v-6a1 1 0 0 0-1-1zM5 19a1 1 0 0 1-1-1V5h12v13c0 .351.061.688.171 1H5zm15-1a1 1 0 0 1-2 0v-5h2v5z"></path>
+    <path d="M6 7h8v2H6zm0 4h8v2H6zm5 4h3v2h-3z"></path>
+  </svg>
+)
+export const MyDocsIcon = (props: IconProps) => (
+  <svg 
+    fill="none"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+    stroke={props.color ?? 'currentColor'}
+  >
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
+    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>
+    <g id="SVGRepo_iconCarrier"> <path d="M16 19C15.6218 17.2883 13.9747 16 12 16C10.0253 16 8.37818 17.2883 8 19M12 12H12.01M12.0627 6.06274L11.9373 5.93726C11.5914 5.59135 11.4184 5.4184 11.2166 5.29472C11.0376 5.18506 10.8425 5.10425 10.6385 5.05526C10.4083 5 10.1637 5 9.67452 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V10.2C21 9.0799 21 8.51984 20.782 8.09202C20.5903 7.71569 20.2843 7.40973 19.908 7.21799C19.4802 7 18.9201 7 17.8 7H14.3255C13.8363 7 13.5917 7 13.3615 6.94474C13.1575 6.89575 12.9624 6.81494 12.7834 6.70528C12.5816 6.5816 12.4086 6.40865 12.0627 6.06274ZM13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z" stroke={props.color ?? 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> </g>
+  </svg>
+)
+export const UserVoiceIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+  >
+    <path d="M8 12c2.28 0 4-1.72 4-4s-1.72-4-4-4-4 1.72-4 4 1.72 4 4 4zm0-6c1.178 0 2 .822 2 2s-.822 2-2 2-2-.822-2-2 .822-2 2-2zm1 7H7c-2.757 0-5 2.243-5 5v1h2v-1c0-1.654 1.346-3 3-3h2c1.654 0 3 1.346 3 3v1h2v-1c0-2.757-2.243-5-5-5zm9.364-10.364L16.95 4.05C18.271 5.373 19 7.131 19 9s-.729 3.627-2.05 4.95l1.414 1.414C20.064 13.663 21 11.403 21 9s-.936-4.663-2.636-6.364z"></path>
+    <path d="M15.535 5.464 14.121 6.88C14.688 7.445 15 8.198 15 9s-.312 1.555-.879 2.12l1.414 1.416C16.479 11.592 17 10.337 17 9s-.521-2.592-1.465-3.536z"></path>
+  </svg>
+
+)
+export const StopWatchIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+  >
+    <path d="M12 5c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm0 14c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"></path>
+    <path d="M11 9h2v5h-2zM9 2h6v2H9zm10.293 5.707-2-2 1.414-1.414 2 2z"></path>
+  </svg>
+)
+export const MentionIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+  >
+    <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10c1.466 0 2.961-.371 4.442-1.104l-.885-1.793C14.353 19.698 13.156 20 12 20c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8v1c0 .692-.313 2-1.5 2-1.396 0-1.494-1.819-1.5-2V8h-2v.025A4.954 4.954 0 0 0 12 7c-2.757 0-5 2.243-5 5s2.243 5 5 5c1.45 0 2.748-.631 3.662-1.621.524.89 1.408 1.621 2.838 1.621 2.273 0 3.5-2.061 3.5-4v-1c0-5.514-4.486-10-10-10zm0 13c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3-1.346 3-3 3z"></path>
+  </svg> 
+)
+export const ArchiveIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+  >
+    <path d="m21.706 5.291-2.999-2.998A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.291A.994.994 0 0 0 2 5.999V19c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5.999a.994.994 0 0 0-.294-.708zM6.414 4h11.172l.999.999H5.415L6.414 4zM4 19V6.999h16L20.002 19H4z"></path>
+    <path d="M15 12H9v-2H7v4h10v-4h-2z"></path>
+  </svg>
+)
+export const DropboxIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24" 
+  >
+    <path d="M7.004 3.5 2 6.689l5.004 3.186 5.002-3.186zm10.005 0-5.003 3.189 5.003 3.186 5.003-3.186zM2 13.062l5.004 3.187 5.002-3.187-5.002-3.187zm15.009-3.187-5.003 3.187 5.003 3.187 5.003-3.187zM7.004 17.311l5.002 3.189 5.003-3.189-5.003-3.186z"></path>
+  </svg>
+)
+export const TrophyIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M21 4h-3V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v1H3a1 1 0 0 0-1 1v3c0 4.31 1.799 6.91 4.819 7.012A6.001 6.001 0 0 0 11 17.91V20H9v2h6v-2h-2v-2.09a6.01 6.01 0 0 0 4.181-2.898C20.201 14.91 22 12.31 22 8V5a1 1 0 0 0-1-1zM4 8V6h2v6.83C4.216 12.078 4 9.299 4 8zm8 8c-2.206 0-4-1.794-4-4V4h8v8c0 2.206-1.794 4-4 4zm6-3.17V6h2v2c0 1.299-.216 4.078-2 4.83z"></path>
+  </svg>
+)
+export const GameIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <circle cx="15" cy="13" r="1"></circle>
+    <circle cx="17" cy="11" r="1"></circle>
+    <path d="M10 9H8v2H6v2h2v2h2v-2h2v-2h-2z"></path>
+    <path d="M15 5H9a7 7 0 0 0-7 7 7 7 0 0 0 7 7h6a7 7 0 0 0 7-7 7 7 0 0 0-7-7zm0 12H9A5 5 0 1 1 9 7h6a5 5 0 1 1 0 10z"></path>
+  </svg>
+)
+export const TriangleUpIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M3 19h18a1.002 1.002 0 0 0 .823-1.569l-9-13c-.373-.539-1.271-.539-1.645 0l-9 13A.999.999 0 0 0 3 19zm9-12.243L19.092 17H4.908L12 6.757z"></path>
+  </svg>
+)
+export const EquilizerIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M13 5h9v2h-9zM2 7h7v2h2V3H9v2H2zm7 10h13v2H9zm10-6h3v2h-3zm-2 4V9.012h-2V11H2v2h13v2zM7 21v-6H5v2H2v2h3v2z"></path>
+  </svg>
+)
+export const TargetLockIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <circle cx="12" cy="12" r="3"></circle>
+    <path d="M13 4.069V2h-2v2.069A8.008 8.008 0 0 0 4.069 11H2v2h2.069A8.007 8.007 0 0 0 11 19.931V22h2v-2.069A8.007 8.007 0 0 0 19.931 13H22v-2h-2.069A8.008 8.008 0 0 0 13 4.069zM12 18c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"></path>
+  </svg>
+)
+export const HourglassIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M15.566 11.021A7.016 7.016 0 0 0 19 5V4h1V2H4v2h1v1a7.016 7.016 0 0 0 3.434 6.021c.354.208.566.545.566.9v.158c0 .354-.212.69-.566.9A7.016 7.016 0 0 0 5 19v1H4v2h16v-2h-1v-1a7.014 7.014 0 0 0-3.433-6.02c-.355-.21-.567-.547-.567-.901v-.158c0-.355.212-.692.566-.9zM17 19v1H7v-1a5.01 5.01 0 0 1 2.45-4.299A3.111 3.111 0 0 0 10.834 13h2.332c.23.691.704 1.3 1.385 1.702A5.008 5.008 0 0 1 17 19z"></path>
+  </svg>
+)
+
+export const CompassIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path>
+    <path d="m8 16 5.991-2L16 8l-6 2z"></path>
+  </svg>
+)
+export const TripIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M14.844 20H6.5C5.121 20 4 18.879 4 17.5S5.121 15 6.5 15h7c1.93 0 3.5-1.57 3.5-3.5S15.43 8 13.5 8H8.639a9.812 9.812 0 0 1-1.354 2H13.5c.827 0 1.5.673 1.5 1.5s-.673 1.5-1.5 1.5h-7C4.019 13 2 15.019 2 17.5S4.019 22 6.5 22h9.593a10.415 10.415 0 0 1-1.249-2zM5 2C3.346 2 2 3.346 2 5c0 3.188 3 5 3 5s3-1.813 3-5c0-1.654-1.346-3-3-3zm0 4.5a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5 6.5z"></path>
+    <path d="M19 14c-1.654 0-3 1.346-3 3 0 3.188 3 5 3 5s3-1.813 3-5c0-1.654-1.346-3-3-3zm0 4.5a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 19 18.5z"></path>
+  </svg>
+)
+export const ConnectionIcon = (props: IconProps) => (
   <svg 
   width={props.w ?? "24"} height={props.h ?? "24"}
   style={{ fill: props.color ?? 'currentColor' }}
@@ -694,56 +965,80 @@ export const ConnexionIcon = (props: IconProps) => (
     <path d="M480.751,31.24c-41.654-41.654-109.199-41.654-150.853,0l-72.384,72.384c-8.331,8.331-8.331,21.839,0,30.17 c8.331,8.331,21.839,8.331,30.17,0l72.384-72.384c24.991-24.992,65.521-24.992,90.513,0c24.991,24.991,24.991,65.5,0,90.491 L317.845,284.638c-24.992,24.992-65.5,24.992-90.491,0c-8.331-8.331-21.839-8.331-30.17,0s-8.331,21.839,0,30.17 c41.654,41.654,109.177,41.654,150.831,0l132.736-132.736C522.405,140.418,522.405,72.894,480.751,31.24z"></path> </g> </g> </g> </g>
   </svg>
 );
-export const listAvailableIcons = [
-  {component: <ChevronDownIcon/>,     title: 'ChevronDownIcon'      },
-  {component: <ChevronUpDownIcon/>,   title: 'ChevronUpDownIcon'    },
-  {component: <ChevronsRightIcon/>,   title: 'ChevronsRightIcon'    },
-  {component: <ArrowRightIcon/>,      title: 'ArrowRightIcon'       },
-  {component: <ArrowDownCircleIcon/>, title: 'ArrowDownCircleIcon'  },
-  {component: <CloseIcon/>,           title: 'CloseIcon'            },
-  {component: <TrashIcon/>,           title: 'TrashIcon'            },
-  {component: <PlusIcon/>,            title: 'PlusIcon'             },
-  {component: <CheckedIcon/>,         title: 'CheckedIcon'          },
-  {component: <FileIcon/>,            title: 'FileIcon'             },
-  {component: <UploadIcon/>,          title: 'UploadIcon'           },
-  {component: <ChatIcon/>,            title: 'ChatIcon'             },
-  {component: <DashboardIcon/>,       title: 'DashboardIcon'        },
-  {component: <MoneyIcon/>,           title: 'MoneyIcon'            },
-  {component: <NotificationIcon/>,    title: 'NotificationIcon'     },
-  {component: <WorkflowIcon/>,        title: 'WorkflowIcon'         },
-  {component: <SettingIcon/>,         title: 'SettingIcon'          },
-  {component: <ArrowBackCircleIcon/>, title: 'ArrowBackCircleIcon'  },
-  {component: <FlowIcon/>,            title: 'FlowIcon'             },
-  {component: <SaveIcon/>,            title: 'SaveIcon'             },
-  {component: <FlowColorful/>,        title: 'FlowColorful'         },
-  {component: <CheckedCircleIcon/>,   title: 'CheckedCircleIcon'    },
-  {component: <EditIcon/>,            title: 'EditIcon'             },
-  {component: <TableIcon/>,           title: 'TableIcon'            },
-  {component: <ListIcon/>,            title: 'ListIcon'             },
-  {component: <DownloadAltIcon/>,     title: 'DownloadAltIcon'      },
-  {component: <ThunderIcon/>,         title: 'ThunderIcon'          },
-  {component: <MoreVerticalIcon/>,    title: 'MoreVerticalIcon'     },
-  {component: <WindowsIcon/>,         title: 'WindowsIcon'          },
-  {component: <GitIcon/>,             title: 'GitIcon'              },
-  {component: <WidgetIcon/>,          title: 'WidgetIcon'           },
-  {component: <FormIcon/>,            title: 'FormIcon'             },
-  {component: <DetalistIcon/>,        title: 'DetalistIcon'         },
-  {component: <EnvelopeIcon/>,        title: 'EnvelopeIcon'         },
-  {component: <SearchIcon/>,          title: 'SearchIcon'           },
-  {component: <MenuIcon/>,            title: 'MenuIcon'             },
-  {component: <MenuCollapsedIcon/>,   title: 'MenuCollapsedIcon'    },
-  {component: <HomeIcon/>,            title: 'HomeIcon'             },
-  {component: <ProjectIcon/>,         title: 'ProjectIcon'          },
-  {component: <UsersIcon/>,           title: 'UsersIcon'            },
-  {component: <ErrorCircleIcon/>,     title: 'ErrorCircleIcon'      },
-  {component: <LockIcon/>,            title: 'LockIcon'             },
-  {component: <RefreshIcon/>,         title: 'RefreshIcon'          },
-  {component: <CloudIcon/>,           title: 'CloudIcon'            },
-  {component: <InfoIcon/>,            title: 'InfoIcon'             },
-  {component: <ConnexionIcon/>,       title: 'ConnexionIcon'        },
+
+export const listAvailableIcons : { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
+  {component: (props?: IconProps) => <ChevronDownIcon {...props}/>,     title: 'ChevronDownIcon'      },
+  {component: (props?: IconProps) => <ChevronUpDownIcon {...props}/>,   title: 'ChevronUpDownIcon'    },
+  {component: (props?: IconProps) => <ChevronsRightIcon {...props}/>,   title: 'ChevronsRightIcon'    },
+  {component: (props?: IconProps) => <ArrowRightIcon {...props}/>,      title: 'ArrowRightIcon'       },
+  {component: (props?: IconProps) => <ArrowDownCircleIcon {...props}/>, title: 'ArrowDownCircleIcon'  },
+  {component: (props?: IconProps) => <CloseIcon {...props}/>,           title: 'CloseIcon'            },
+  {component: (props?: IconProps) => <TrashIcon {...props}/>,           title: 'TrashIcon'            },
+  {component: (props?: IconProps) => <PlusIcon {...props}/>,            title: 'PlusIcon'             },
+  {component: (props?: IconProps) => <CheckedIcon {...props}/>,         title: 'CheckedIcon'          },
+  {component: (props?: IconProps) => <FileIcon {...props}/>,            title: 'FileIcon'             },
+  {component: (props?: IconProps) => <UploadIcon {...props}/>,          title: 'UploadIcon'           },
+  {component: (props?: IconProps) => <ChatIcon {...props}/>,            title: 'ChatIcon'             },
+  {component: (props?: IconProps) => <DashboardIcon {...props}/>,       title: 'DashboardIcon'        },
+  {component: (props?: IconProps) => <MoneyIcon {...props}/>,           title: 'MoneyIcon'            },
+  {component: (props?: IconProps) => <NotificationIcon {...props}/>,    title: 'NotificationIcon'     },
+  {component: (props?: IconProps) => <WorkflowIcon {...props}/>,        title: 'WorkflowIcon'         },
+  {component: (props?: IconProps) => <SettingIcon {...props}/>,         title: 'SettingIcon'          },
+  {component: (props?: IconProps) => <ArrowBackCircleIcon {...props}/>, title: 'ArrowBackCircleIcon'  },
+  {component: (props?: IconProps) => <FlowIcon {...props}/>,            title: 'FlowIcon'             },
+  {component: (props?: IconProps) => <SaveIcon {...props}/>,            title: 'SaveIcon'             },
+  {component: (props?: IconProps) => <FlowColorful {...props}/>,        title: 'FlowColorful'         },
+  {component: (props?: IconProps) => <CheckedCircleIcon {...props}/>,   title: 'CheckedCircleIcon'    },
+  {component: (props?: IconProps) => <EditIcon {...props}/>,            title: 'EditIcon'             },
+  {component: (props?: IconProps) => <TableIcon {...props}/>,           title: 'TableIcon'            },
+  {component: (props?: IconProps) => <ListIcon {...props}/>,            title: 'ListIcon'             },
+  {component: (props?: IconProps) => <DownloadAltIcon {...props}/>,     title: 'DownloadAltIcon'      },
+  {component: (props?: IconProps) => <ThunderIcon {...props}/>,         title: 'ThunderIcon'          },
+  {component: (props?: IconProps) => <MoreVerticalIcon {...props}/>,    title: 'MoreVerticalIcon'     },
+  {component: (props?: IconProps) => <WindowsIcon {...props}/>,         title: 'WindowsIcon'          },
+  {component: (props?: IconProps) => <GitIcon {...props}/>,             title: 'GitIcon'              },
+  {component: (props?: IconProps) => <WidgetIcon {...props}/>,          title: 'WidgetIcon'           },
+  {component: (props?: IconProps) => <FormIcon {...props}/>,            title: 'FormIcon'             },
+  {component: (props?: IconProps) => <DetalistIcon {...props}/>,        title: 'DetalistIcon'         },
+  {component: (props?: IconProps) => <EnvelopeIcon {...props}/>,        title: 'EnvelopeIcon'         },
+  {component: (props?: IconProps) => <EnvelopeOpenIcon {...props}/>,    title: 'EnvelopeOpenIcon'     },
+  {component: (props?: IconProps) => <SearchIcon {...props}/>,          title: 'SearchIcon'           },
+  {component: (props?: IconProps) => <MenuIcon {...props}/>,            title: 'MenuIcon'             },
+  {component: (props?: IconProps) => <MenuCollapsedIcon {...props}/>,   title: 'MenuCollapsedIcon'    },
+  {component: (props?: IconProps) => <HomeIcon {...props}/>,            title: 'HomeIcon'             },
+  {component: (props?: IconProps) => <ProjectIcon {...props}/>,         title: 'ProjectIcon'          },
+  {component: (props?: IconProps) => <UsersIcon {...props}/>,           title: 'UsersIcon'            },
+  {component: (props?: IconProps) => <UserIcon {...props}/>,            title: 'UserIcon'             },
+  {component: (props?: IconProps) => <ErrorCircleIcon {...props}/>,     title: 'ErrorCircleIcon'      },
+  {component: (props?: IconProps) => <LockIcon {...props}/>,            title: 'LockIcon'             },
+  {component: (props?: IconProps) => <RefreshIcon {...props}/>,         title: 'RefreshIcon'          },
+  {component: (props?: IconProps) => <CloudIcon {...props}/>,           title: 'CloudIcon'            },
+  {component: (props?: IconProps) => <InfoIcon {...props}/>,            title: 'InfoIcon'             },
+  {component: (props?: IconProps) => <CalendarIcon {...props}/>,        title: 'CalendarIcon'         },
+  {component: (props?: IconProps) => <CompanyIcon {...props}/>,         title: 'CompanyIcon'          },
+  {component: (props?: IconProps) => <PencilIcon {...props}/>,          title: 'PencilIcon'           },
+  {component: (props?: IconProps) => <MagicWandIcon {...props}/>,       title: 'MagicWandIcon'        },
+  {component: (props?: IconProps) => <SquareCheckedIcon {...props}/>,   title: 'SquareCheckedIcon'    },
+  {component: (props?: IconProps) => <PackageIcon {...props}/>,         title: 'PackageIcon'          },
+  {component: (props?: IconProps) => <ReceiptIcon {...props}/>,         title: 'ReceiptIcon'          },
+  {component: (props?: IconProps) => <MyDocsIcon {...props}/>,          title: 'MyDocsIcon'           },
+  {component: (props?: IconProps) => <UserVoiceIcon {...props}/>,       title: 'UserVoiceIcon'        },
+  {component: (props?: IconProps) => <StopWatchIcon {...props}/>,       title: 'StopWatchIcon'        },
+  {component: (props?: IconProps) => <MentionIcon {...props}/>,         title: 'MentionIcon'          },
+  {component: (props?: IconProps) => <ArchiveIcon {...props}/>,         title: 'ArchiveIcon'          },
+  {component: (props?: IconProps) => <DropboxIcon {...props}/>,         title: 'DropboxIcon'          },
+  {component: (props?: IconProps) => <TrophyIcon {...props}/>,          title: 'TrophyIcon'           },
+  {component: (props?: IconProps) => <GameIcon {...props}/>,            title: 'GameIcon'             },
+  {component: (props?: IconProps) => <TriangleUpIcon {...props}/>,      title: 'TriangleUpIcon'       },
+  {component: (props?: IconProps) => <EquilizerIcon {...props}/>,       title: 'EquilizerIcon'        },
+  {component: (props?: IconProps) => <TargetLockIcon {...props}/>,      title: 'TargetLockIcon'       },
+  {component: (props?: IconProps) => <HourglassIcon {...props}/>,       title: 'HourglassIcon'        },
+  {component: (props?: IconProps) => <CompassIcon {...props}/>,         title: 'CompassIcon'          },
+  {component: (props?: IconProps) => <TripIcon {...props}/>,            title: 'TripIcon'             },
+  {component: (props?: IconProps) => <ConnectionIcon {...props}/>,      title: 'ConnectionIcon'       },
 ];
-export const getIconByName = (title: string) => {
+export const getIconByName = (title: AvailableIcons, props?: IconProps) : ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
-  if(findedIcon) return findedIcon.component;
+  if(findedIcon) return findedIcon.component(props);
   return <></>;
 }

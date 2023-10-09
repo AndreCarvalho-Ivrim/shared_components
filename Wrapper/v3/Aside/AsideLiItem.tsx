@@ -75,9 +75,19 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
       ): ''} ${!isSubItem && 'py-1'}
     `}>
       {to && !disabled ? (
-        <Link {...{className, to }}>
-          {content}
-        </Link>
+        <>
+          {to.slice(0, 4) === 'http' ? (
+            <button
+              type="button"
+              className={className}
+              onClick={() => window.location.href = to}
+            >{content}</button>
+          ):(
+            <Link {...{className, to }}>
+              {content}
+            </Link>
+          )}
+        </>
       ) : items && !disabled ? (
         <>
           <button type="button" className={className} onClick={() => {
@@ -91,6 +101,7 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
               sm:hidden md:block
               group-[.collapsed]:hidden
               group-[.collapsed-desktop-aside]:hidden
+              ml-auto
             "/>
           </button>
           <ul className="
