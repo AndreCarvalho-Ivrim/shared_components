@@ -73,6 +73,7 @@ export const shortclass = {
     normal: button_normal,
     primary:  `${button_normal} text-white focus:ring-primary-500 bg-primary-600 hover:bg-primary-700`,
     secondary:  `${button_normal} text-white focus:ring-gray-300 bg-gray-400 hover:bg-gray-500`,
+    danger:  `${button_normal} text-white focus:ring-red-300 bg-red-700 hover:bg-red-800`,
   },
   input: {
     normal: input_normal,

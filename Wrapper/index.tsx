@@ -13,6 +13,7 @@ import {
   FlowIcon,
   WorkflowIcon,
   FileIcon,
+  ConnectionIcon,
   CompanyIcon,
   SquareCheckedIcon,
   UserIcon,
@@ -20,12 +21,14 @@ import {
   NotificationIcon,
   LockIcon,
 } from "../utils/icons";
+
 import {
   AvailableWorkflowThemeType,
   PossiblePermissions,
   User,
   WorkflowType,
 } from "../../types";
+
 import { getPublishedFlows } from "../services/workflow";
 import { FooterAsideProps } from "./v3/Aside/FooterAside";
 import { handleRegexUrl, hubRoutes, isacRoutes } from "../../shared-types/utils/routes";
@@ -79,11 +82,11 @@ export function Wrapper({
           dynamicAsideItems:
             module_name === "System Archictect"
               ? publishedFlows.map((flow) => ({
-                  id: flow._id,
-                  href: `/modulo/${flow._id}`,
-                  icon: iconByTheme(flow.theme),
-                  name: flow.title,
-                }))
+                id: flow._id,
+                href: `/modulo/${flow._id}`,
+                icon: iconByTheme(flow.theme),
+                name: flow.title,
+              }))
               : [],
           footerItems,
           asideActive,
@@ -113,6 +116,10 @@ export const getAsideItems = ({
   const canManagement = !!(
     user?.permitions_slug &&
     user.permitions_slug.includes(PossiblePermissions.GESTAO)
+  );
+  const canAccessWhatsapp = !!(
+    user?.permitions_slug &&
+    user.permitions_slug.includes(PossiblePermissions.INTEGRATION_WHATSAPP)
   );
 
   let defaultAsideItems: AsideItems[] = [];
@@ -189,6 +196,20 @@ export const getAsideItems = ({
               name: "Dashboards",
               href: hubRoutes.admin_panel.dashboards(),
               disabled: !canManagement,
+            },
+          ],
+        },
+        {
+          id: "aside-item-admin-integracoes",
+          name: "Admin Integrações",
+          icon: <ConnectionIcon w="18" h="18" />,
+          disabled: !canAccessAdminPanel,
+          items: [
+            {
+              id: "aside-subitem-whatsapp",
+              name: "Whatsapp",
+              href: "/painel-adm/integracao-whatsapp",
+              disabled: !canAccessWhatsapp,
             },
           ],
         },

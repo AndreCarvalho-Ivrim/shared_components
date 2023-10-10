@@ -159,7 +159,7 @@ export const MenuSlider = () => {
 
 
   return (
-    <div className="w-screen h-screen bg-background overflow-auto">
+    <div className="w-screen h-screen bg-background overflow-auto flex flex-col">
       <div className={style.header}>
         <div className={style.header__logo}>
           <img src={logo} alt="Ivrim Consulting" />
@@ -280,7 +280,7 @@ export const MenuSlider = () => {
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                onClick={() => redirectToApp({ url: `${frontURL.portal}/compras-e-contas-a-pagar`, disabled: user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)}
+                onClick={() => redirectToApp({ url: `${frontURL.portal}/compras-e-contas-a-pagar`, disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)}
               >
                 <img src={wallet} alt="wallet icon" className="pt-2"/>
                 <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
@@ -373,6 +373,11 @@ export const MenuSlider = () => {
 
         </div>
       </div>
+
+      <footer className="mt-auto d-flex items-center justify-center text-center py-4">
+        <p className="text-gray-600 text-sm">Ivrim 2023 © Todos os direitos reservados</p>
+      </footer>
+
       {/*
         <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
           <ButtonHelp />
