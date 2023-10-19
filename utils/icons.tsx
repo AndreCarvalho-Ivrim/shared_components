@@ -987,6 +987,14 @@ export const CarouselIcon = (props: IconProps) => (
     <path d="M16 3H8c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h8c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM2 7v10c0 1.103.897 2 2 2V5c-1.103 0-2 .897-2 2zm18-2v14c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2z"></path>
   </svg>
 )
+export const TimeIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  ><path d="M12.25 2c-5.514 0-10 4.486-10 10s4.486 10 10 10 10-4.486 10-10-4.486-10-10-10zM18 13h-6.75V6h2v5H18v2z"></path></svg>
+)
 export const listAvailableIcons : { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   {component: (props?: IconProps) => <ChevronDownIcon {...props}/>,     title: 'ChevronDownIcon'      },
   {component: (props?: IconProps) => <ChevronUpDownIcon {...props}/>,   title: 'ChevronUpDownIcon'    },
@@ -1058,6 +1066,7 @@ export const listAvailableIcons : { component: (props?: IconProps) => ReactNode,
   {component: (props?: IconProps) => <TripIcon {...props}/>,            title: 'TripIcon'             },
   {component: (props?: IconProps) => <ConnectionIcon {...props}/>,      title: 'ConnectionIcon'       },
   {component: (props?: IconProps) => <CarouselIcon {...props}/>,        title: 'CarouselIcon'         },
+  {component: (props?: IconProps) => <TimeIcon {...props}/>,            title: 'TimeIcon'         },
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps) : ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
