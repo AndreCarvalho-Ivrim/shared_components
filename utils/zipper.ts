@@ -24,3 +24,7 @@ export const downloadZip = async (files: { url: string, name: string }[], zipNam
     saveAs(content, zipFilename);
   });
 };
+
+export const generateTxtFileToDownload = (content: string) => {
+  return new Blob([content], { type: 'text/plain' });
+}
