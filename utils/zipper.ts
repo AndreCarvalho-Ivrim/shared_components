@@ -1,15 +1,19 @@
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
-export const downloadZip = async (files: { url: string, name: string }[], zipName?: string) => {
+export const downloadZip = async (files: { url: string | Blob, name: string }[], zipName?: string) => {
   const zip = new JSZip();
   const zipFilename = zipName ? `${zipName}.zip` : "download.zip";
 
-  const addFileToZip = async (url: string, filename: string) => {
+  const addFileToZip = async (url: string | Blob, filename: string) => {
     // [ ] add tratamento de erro
     // [ ] add progress control
-    const response = await fetch(url);
-    const blob = await response.blob();
+    let blob : Blob
+    if(url instanceof Blob) blob = url
+    else{
+      const response = await fetch(url);
+      blob = await response.blob();
+    }
 
     const sanitizedFilename = filename.replace(/[^\w\d-_.]/gi, '_');
 
