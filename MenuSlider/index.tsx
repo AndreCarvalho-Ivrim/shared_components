@@ -35,8 +35,8 @@ const frontURL = getUrls("front")!;
 const clientsWithAccessToCAP = {
   "3c2c7801-9b58-417f-9809-7313cbbb287f": "IVRIM",
   "eb5039d9-22ec-4204-b120-d58d6ed9ade8": "LEAD",
-  "e1a862da-0078-41c7-94bb-cd8bef12fbfb": "SEG4",
-  "d92808ac-9848-4f7d-b8f3-4c73765d0035": "VESPER",
+  // "e1a862da-0078-41c7-94bb-cd8bef12fbfb": "SEG4",
+  // "d92808ac-9848-4f7d-b8f3-4c73765d0035": "VESPER",
   "2d6c36ea-f8d5-11ed-be56-0242ac120002": "ZAON",
 };
 // TODO FUNÇÃO OBSOLETA, REMOVER TODAS AS MENÇOES A ELA E DEPOIS REMOVER FUNÇÃO
