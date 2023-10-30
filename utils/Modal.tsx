@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useRef } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 interface ModalType{
@@ -10,6 +10,10 @@ interface ModalType{
 }
 export interface ModalOptionsType{
   title: string,
+  titleProps?: {
+    className?: string,
+    style?: React.CSSProperties
+  },
   type?: 'danger' | 'success' | null,
   size?: string,
   cancelButton?: boolean,
@@ -83,7 +87,11 @@ export const Modal = ({
                 <div className="sm:flex sm:items-start">
                   { options.type && options.type == 'danger' ? <ModalIconDanger/> : <></>}
                   <div className={`mt-3 text-center sm:mt-0 ${ !!options.type ? 'sm:ml-4':'' } sm:text-left flex-1`}>
-                    <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">{ options.title }</Dialog.Title>
+                    <Dialog.Title
+                      as="h3"
+                      className={options.titleProps?.className ? options.titleProps.className : "text-lg font-medium leading-6 text-gray-900"}
+                      style={options.titleProps?.style}
+                    >{ options.title }</Dialog.Title>
                     <div className="mt-2 -z-50">
                       {children}
                     </div>
