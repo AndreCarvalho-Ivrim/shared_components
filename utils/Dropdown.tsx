@@ -134,7 +134,7 @@ export const Dropdown = ({
           leaveTo="transform opacity-0 scale-95"
 
         >
-          <Menu.Items className={'max-h-80 overflow-y-auto' + classNames?.list ?? `
+          <Menu.Items className={'max-h-80 overflow-y-auto ' + classNames?.list ?? `
             ${autoPosition ? 'fixed':'absolute'} ${orientation ? orientation + '-0' : ''} z-10
             mt-2 w-56 origin-top-right
             rounded-md bg-white shadow-lg
