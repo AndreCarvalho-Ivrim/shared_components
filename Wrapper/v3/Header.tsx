@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 
-import { MenuCollapsedIcon, MenuIcon, NotificationIcon } from "../../utils/icons";
-import { useNotify } from "../../../contexts/NotifyContext";
+import { MenuCollapsedIcon, MenuIcon } from "../../utils/icons";
 import { DropdownChooseEnterprise } from "./DropdownChooseEnterprise";
-import { getUrls } from "../../services/conn/api";
 import { HeaderBreadcrumbs } from "./Wrapper";
 import { BellNotification } from "./Notification/BellNotification";
 
@@ -11,9 +9,6 @@ interface HeaderProps{
   breadcrumbs: HeaderBreadcrumbs[],
 }
 export const Header = ({ breadcrumbs } : HeaderProps) => {
-  const { toast } = useNotify();
-  const urls = getUrls('front')!;
-
   return (
     <header className="flex items-start max-sm:items-center justify-between gap-2 mb-10 ">
       <div>
@@ -25,11 +20,7 @@ export const Header = ({ breadcrumbs } : HeaderProps) => {
                 className="group last:font-semibold last:text-primary-800 truncate overflow-clip max-sm:max-w-[6rem]"
               >
                 <span className="group-first:hidden mr-1.5">/</span>
-                {item.href === '/' && !urls.wf ? (
-                  <a href={urls.portal}>{item.name}</a>
-                ) : (
-                  <Link to={item.href}>{item.name}</Link>
-                )}
+                <Link to={item.href}>{item.name}</Link>
               </li>
             ))}
           </ul>

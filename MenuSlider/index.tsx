@@ -28,6 +28,7 @@ import { getUrls } from "../services/conn/api";
 import { LockIcon, RefreshIcon } from "../utils/icons";
 import { handleRegexUrl, hubRoutes } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
+import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 
 
 const frontURL = getUrls("front")!;
@@ -144,25 +145,15 @@ export const MenuSlider = () => {
     })()
   }, [toast, user, user?.token]);
 
-  const [firstItemIndex, setFirstItemIndex] = useState(0);
-
-  const itemsPerPage = 4;
-  const totalItems = workflows.length;
-
-  const handleNextPage = () => {
-    setFirstItemIndex((prevIndex) => Math.min(prevIndex + itemsPerPage, totalItems - itemsPerPage));
-  };
-
-  const handlePreviousPage = () => {
-    setFirstItemIndex((prevIndex) => Math.max(prevIndex - itemsPerPage, 0));
-  };
-
-
   return (
     <div className="w-screen h-screen bg-background overflow-auto flex flex-col">
       <div className={style.header}>
         <div className={style.header__logo}>
-          <img src={logo} alt="Ivrim Consulting" />
+          <img src={
+            logo
+            // [ ] pegar imagem correta do ISAC
+            // !frontURL.wf ? logoISAC : logo
+          } alt="Ivrim Consulting" />
         </div>
         <div className="flex items-center gap-4">
           <BellNotification/>
@@ -183,7 +174,10 @@ export const MenuSlider = () => {
             {[
               {
                 id: 'isac',
-                redirect: { url: `${frontURL.wf}?token=${user?.token}`, disabled: !user?.permitions_slug?.includes(PossiblePermissions.ISAC) },
+                redirect: {
+                  url: handleRegexUrl('@isac:workflow.home', user?.token),
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.ISAC)
+                },
                 icon: <img src={isac} alt="imagem geometrica isac" width={100} height={100} className="mt-10 mx-auto" />,
                 name: <img src={ISAC} alt="logo isac" width={100} height={100} className="h-3 object-contain" />,
               },{
@@ -197,7 +191,7 @@ export const MenuSlider = () => {
               },{
                 id: 'dashboard',
                 redirect: {
-                  url: `${frontURL.portal}/co-pilot-dashboard`,
+                  url: handleRegexUrl('@hub:dashboard.home', user?.token),
                   disabled: !(
                     user &&
                     user.permitions_slug &&
@@ -242,7 +236,9 @@ export const MenuSlider = () => {
             {workflows.map((flow) => (
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                onClick={() => redirectToApp({ url: `${getUrls('front')?.wf}modulo/${flow._id}?token=${user?.token}` }, toast, navigate)}
+                onClick={() => redirectToApp({
+                  url: handleRegexUrl(`@isac:workflow.exec(${flow._id})`, user?.token)
+                }, toast, navigate)}
                 key={flow._id}
               >
                 {flow.theme === "Cobrança" ? (
@@ -261,7 +257,7 @@ export const MenuSlider = () => {
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center relative"
                 onClick={() => redirectToApp({
-                  url: getUrls("front")!.portal + "conciliacao/gerenciamento",
+                  url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
                   disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
                 }, toast, navigate)}
               >
@@ -280,7 +276,10 @@ export const MenuSlider = () => {
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                onClick={() => redirectToApp({ url: `${frontURL.portal}/compras-e-contas-a-pagar`, disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)}
+                onClick={() => redirectToApp({
+                  url: handleRegexUrl('@hub:old_cap.home', user.token),
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)
+                }
               >
                 <img src={wallet} alt="wallet icon" className="pt-2"/>
                 <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
@@ -314,7 +313,7 @@ export const MenuSlider = () => {
               type="button"
               className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60 relative"
               onClick={() => redirectToApp({
-                url: `${frontURL.wf}modelos/?token=${user?.token}`,
+                url: handleRegexUrl('@isac:template', user?.token),
                 disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC))
               }, toast, navigate)}
             >
@@ -331,7 +330,7 @@ export const MenuSlider = () => {
             <button
               type="button"
               className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60"
-              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:gallery.home') }, toast, navigate)}
+              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:gallery.home', user?.token) }, toast, navigate)}
             >
               <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
               <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Meus Documentos</span>
@@ -357,14 +356,14 @@ export const MenuSlider = () => {
 
           <div className="flex xsm:flex-col xsm:mx-auto flex-wrap">
             <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
-             onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client') }, toast, navigate)}
+             onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
             >
               <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
               <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal">Admin Console</span>
             </button>
 
             <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
-            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home') }, toast, navigate)}
+            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
             >
               <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
               <span className="text-xs text-white pt-3 pb-1 pr-10 truncate hover:whitespace-normal">Usuário</span>
@@ -378,11 +377,9 @@ export const MenuSlider = () => {
         <p className="text-gray-600 text-sm">Ivrim 2023 © Todos os direitos reservados</p>
       </footer>
 
-      {/*
-        <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
-          <ButtonHelp />
-        </div>
-      */}
+      <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
+        <ButtonHelp />
+      </div>
     </div>
   );
 };

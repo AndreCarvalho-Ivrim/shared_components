@@ -222,7 +222,7 @@ export const getAsideItems = ({
           {
             id: 'aside-subitem-admin-hub-wf',
             name: 'Workflows',
-            href: handleRegexUrl('@isac:admin_hub.workflows')
+            href: handleRegexUrl('@isac:admin_hub.workflows', user.token)
           }
         ]  
       })
@@ -232,7 +232,7 @@ export const getAsideItems = ({
     defaultAsideItems = [
       {
         id: "aside-item-workflows",
-        href: "/",
+        href: isacRoutes.workflow.home(),
         icon: <FlowIcon w={22} h={22} />,
         name: "Workflows",
       },
