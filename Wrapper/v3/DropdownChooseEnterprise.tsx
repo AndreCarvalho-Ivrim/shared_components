@@ -6,6 +6,8 @@ import logo from '../../../assets/default-client-logo.png';
 import colapse from "../../assets/colapse.svg"
 import { Dropdown } from "../../utils/Dropdown";
 import { useNotify } from "../../../contexts/NotifyContext";
+import { useNavigate } from "react-router-dom";
+import { hubRoutes } from "../../../shared-types/utils/routes";
 
 interface ClientProps extends Client {
   active?: boolean
@@ -15,6 +17,9 @@ interface HeaderProps {
 }
 export const DropdownChooseEnterprise = () => {
   const { toast } = useNotify();
+
+  const navigate = useNavigate();
+  
   const { user, changeClient, signOut } = useAuth();
   const [client, setClient] = useState<ClientProps>();
   const [clients, setClients] = useState<ClientProps[]>([]);
@@ -37,6 +42,21 @@ export const DropdownChooseEnterprise = () => {
 
   async function handleChangeClient(client_id: string, client_name: string) {
     if (!user) return;
+
+    const globalRoutes : string[] = [
+      '/',
+      hubRoutes.profile.home(), hubRoutes.gallery.home(),
+      hubRoutes.notification.all(), hubRoutes.notification.preference(),
+    ];
+
+    const pathname = window.location.hash ? window.location.hash.slice(1) : '/'
+
+    if(!globalRoutes.includes(pathname)){
+      console.log('[redirected-to-home]')
+      navigate('/')
+    }
+
+    console.log('[on-change-client-from:]', { pathname });
     toast.promise(changeClient(client_id, client_name, user.token), {
       'pending': 'Alterando empresa',
       'error': 'Houve um erro ao alterar a empresa',

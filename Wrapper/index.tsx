@@ -7,7 +7,6 @@ import {
   EnvelopeIcon,
   MoneyIcon,
   ProjectIcon,
-  SettingIcon,
   UploadIcon,
   UsersIcon,
   FlowIcon,
