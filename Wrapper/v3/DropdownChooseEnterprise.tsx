@@ -12,9 +12,6 @@ import { hubRoutes } from "../../../shared-types/utils/routes";
 interface ClientProps extends Client {
   active?: boolean
 }
-interface HeaderProps {
-  breadcrumbs: { name: string, href: string }[],
-}
 export const DropdownChooseEnterprise = () => {
   const { toast } = useNotify();
 
