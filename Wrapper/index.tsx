@@ -83,7 +83,7 @@ export function Wrapper({
             module_name === "System Archictect"
               ? publishedFlows.map((flow) => ({
                 id: flow._id,
-                href: `/modulo/${flow._id}`,
+                href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
                 icon: iconByTheme(flow.theme),
                 name: flow.title,
               }))
@@ -129,13 +129,13 @@ export const getAsideItems = ({
       {
         id: "aside-item-perfil",
         name: "Perfil",
-        href: hubRoutes.profile.home(),
+        href: handleRegexUrl('@hub:profile.home', user?.token),
         icon: <UserIcon w={22} h={22} />,
       },
       {
         id: "aside-item-gallery",
         name: "Meus Docs.",
-        href: hubRoutes.gallery.home(),
+        href: handleRegexUrl('@hub:gallery.home', user?.token),
         icon: <MyDocsIcon w={22} h={22} />,
       },
       {
@@ -146,18 +146,18 @@ export const getAsideItems = ({
           {
             id: 'aside-subitem-all-notifications',
             name: 'Todas',
-            href: hubRoutes.notification.all()
+            href: handleRegexUrl('@hub:notification.all', user?.token)
           },{
             id: 'aside-subitem-preferences',
             name: 'Preferências',
-            href: hubRoutes.notification.preference()
+            href: handleRegexUrl('@hub:notification.preference', user?.token)
           }, ...((
             user?.permitions_slug?.includes(PossiblePermissions.ADMIN_HUB) ||
             user?.permitions_slug?.includes(PossiblePermissions.MANAGE_NOTIFICATION)
           ) ? [{
             id: 'aside-subitem-create-notifications',
             name: 'Criar Notificações',
-            href: hubRoutes.notification.create()
+            href: handleRegexUrl('@hub:notification.create', user.token)
           }]:[])
         ]
       }
@@ -168,14 +168,14 @@ export const getAsideItems = ({
         {
           id: "aside-item-admin-users",
           name: "Admin Empresa",
-          href: hubRoutes.admin_panel.client(),
+          href: handleRegexUrl('@hub:admin_panel.client', user.token),
           disabled: !canAccessAdminPanel,
           icon: <CompanyIcon w="22" h="22" />,
         },
         {
           id: "aside-item-admin-users",
           name: "Admin Usuários",
-          href: hubRoutes.admin_panel.users(),
+          href: handleRegexUrl('@hub:admin_panel.users', user.token),
           disabled: !canAccessAdminPanel,
           icon: <UsersIcon w="22" h="22" />,
         },
@@ -188,13 +188,13 @@ export const getAsideItems = ({
             {
               id: "aside-subitem-projetos",
               name: "Projetos",
-              href: hubRoutes.admin_panel.projects(),
+              href: handleRegexUrl('@hub:admin_panel.projects', user.token),
               disabled: !canAccessAdminPanel,
             },
             {
               id: "aside-subitem-dashboards",
               name: "Dashboards",
-              href: hubRoutes.admin_panel.dashboards(),
+              href: handleRegexUrl('@hub:admin_panel.dashboards', user.token),
               disabled: !canManagement,
             },
           ],
@@ -208,7 +208,7 @@ export const getAsideItems = ({
             {
               id: "aside-subitem-whatsapp",
               name: "Whatsapp",
-              href: "/painel-adm/integracao-whatsapp",
+              href: handleRegexUrl('@hub:admin_panel.integrations.whatsapp', user.token),
               disabled: !canAccessWhatsapp,
             },
           ],
@@ -232,13 +232,13 @@ export const getAsideItems = ({
     defaultAsideItems = [
       {
         id: "aside-item-workflows",
-        href: isacRoutes.workflow.home(),
+        href: handleRegexUrl('@isac:workflow.home', user?.token),
         icon: <FlowIcon w={22} h={22} />,
         name: "Workflows",
       },
       {
         id: "aside-item-template",
-        href: "/modelos",
+        href: handleRegexUrl('@isac:template', user?.token),
         icon: <EnvelopeIcon w={22} h={22} />,
         name: "Modelos",
       },
@@ -252,7 +252,7 @@ export const getAsideItems = ({
           {
             id: "aside-subitem-compras-e-contas-a-pagar",
             name: "Contas a Pagar",
-            href: "/compras-e-contas-a-pagar",
+            href: handleRegexUrl('@hub:old_cap.home', user?.token),
             disabled: !user?.permitions_slug?.includes(
               PossiblePermissions.CONTAS_A_PAGAR
             ),
@@ -260,12 +260,12 @@ export const getAsideItems = ({
           {
             id: "aside-subitem-alertas",
             name: "Alertas",
-            href: "/alertas",
+            href: handleRegexUrl('@hub:old_cap.alert', user?.token),
           },
           {
             id: "aside-subitem-modelos-de-documentos",
             name: "Modelos de Documentos",
-            href: "/modelos-de-documentos",
+            href: handleRegexUrl('@hub:old_cap.models', user?.token),
           },
         ],
       },
@@ -276,7 +276,7 @@ export const getAsideItems = ({
         id: "aside-item-contas-a-receber-gerenciamento",
         icon: <UploadIcon w={22} h={22}/>,
         name: "Gerenciamento",
-        href: "/conciliacao/gerenciamento",
+        href: handleRegexUrl('@hub:reconciliation.manage', user?.token),
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.FINANCEIRO
         ),
@@ -284,7 +284,7 @@ export const getAsideItems = ({
         id: "aside-item-contas-a-receber-conciliacao",
         icon: <FileIcon  w={22} h={22} />,
         name: "Em Conciliação",
-        href: "/conciliacao",
+        href: handleRegexUrl('@hub:reconciliation.home', user?.token),
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.FINANCEIRO
         ),
@@ -292,7 +292,7 @@ export const getAsideItems = ({
         id: "aside-item-contas-a-receber-conciliados",
         icon: <SquareCheckedIcon  w={22} h={22} />,
         name: "Conciliados",
-        href: "/conciliacao/conciliados",
+        href: handleRegexUrl('@hub:reconciliation.history', user?.token),
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.FINANCEIRO
         ),

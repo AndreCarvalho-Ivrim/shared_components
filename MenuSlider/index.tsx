@@ -237,7 +237,7 @@ export const MenuSlider = () => {
               <button
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
                 onClick={() => redirectToApp({
-                  url: handleRegexUrl(`@isac:workflow.exec(${flow._id})`, user?.token)
+                  url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
                 }, toast, navigate)}
                 key={flow._id}
               >

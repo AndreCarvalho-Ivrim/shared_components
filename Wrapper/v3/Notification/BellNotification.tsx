@@ -99,7 +99,7 @@ export const BellNotification = () => {
       ...(notification.redirect_to ? {
         actionButton: {
           onClick: () => {
-            const url = handleRegexUrl(notification.redirect_to!, user?.token)
+            const url = handleRegexUrl(notification.redirect_to! as any, user?.token)
             if(url.slice(0,4) === 'http') window.location.href = url
             else navigate(url)
           },
