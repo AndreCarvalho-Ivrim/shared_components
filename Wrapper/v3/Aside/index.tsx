@@ -21,9 +21,10 @@ interface AsideProps {
   footerItems?: FooterAsideProps['footerItems'],
   isCollapsed?: boolean,
   dotColor?: string,
-  module_name?: string
+  module_name?: string,
+  goBack?: string
 }
-export const Aside = ({ active, items, dynamicItems, footerItems, isCollapsed, dotColor, module_name } : AsideProps) => (
+export const Aside = ({ active, items, dynamicItems, footerItems, isCollapsed, dotColor, module_name, goBack } : AsideProps) => (
   <div className="
     w-full h-full max-sm:hidden
     group-[.expanded-aside]:max-sm:bg-gray-700/75
@@ -42,7 +43,7 @@ export const Aside = ({ active, items, dynamicItems, footerItems, isCollapsed, d
       md:mx-0 h-full
       max-sm:w-[200px]
     `}>
-      <HeaderAside {...{ dotColor, isCollapsed, module_name }} />
+      <HeaderAside {...{ dotColor, isCollapsed, module_name, goBack }} />
       <div className="flex flex-col justify-between flex-1 text-white">
         <div className="
           flex flex-col justify-between flex-1

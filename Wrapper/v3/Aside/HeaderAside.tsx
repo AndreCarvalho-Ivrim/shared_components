@@ -6,9 +6,10 @@ import { getUrls } from '../../../services/conn/api';
 interface HeaderAsideProps{
   isCollapsed?: boolean,
   dotColor?: string,
-  module_name?: string
+  module_name?: string,
+  goBack?: string
 }
-export const HeaderAside = ({ isCollapsed, dotColor, module_name } : HeaderAsideProps) => {
+export const HeaderAside = ({ isCollapsed, dotColor, module_name, goBack } : HeaderAsideProps) => {
   const navigate = useNavigate();
   const urls = getUrls('front')!;
 
@@ -25,14 +26,7 @@ export const HeaderAside = ({ isCollapsed, dotColor, module_name } : HeaderAside
           flex-col gap-1 justify-center items-center
           text-center text-gray-200 mx-auto
         `}
-        onClick={() => {
-          if(!isCollapsed) if(!urls.wf){
-            window.location.href = urls.portal;
-            return;
-          }
-
-          navigate('/');
-        }}
+        onClick={() => navigate(goBack ?? '/')}
       >
         {isCollapsed ? (
           <>
@@ -56,13 +50,7 @@ export const HeaderAside = ({ isCollapsed, dotColor, module_name } : HeaderAside
           group-[.collapsed]:hidden group-[.collapsed-desktop-aside]:hidden
           translate-x-1/2 rounded-full
         `}
-        onClick={() => {
-          if(!urls.wf){
-            window.location.href = urls.portal;
-            return;
-          }
-          navigate('/');
-        }}
+        onClick={() => navigate('/')}
       >
         <div className="overflow-clip w-[50%]">
           <div className="bg-background p-1 w-[62px] h-[62px] rounded-full"/>

@@ -23,7 +23,8 @@ interface DropdownType {
   }
   activeClass?: string,
   scrollerRef?: React.RefObject<HTMLElement>,
-  autoPosition?: boolean
+  autoPosition?: boolean,
+  wrapperItems?: (children: ReactNode) => ReactNode
 }
 export const Dropdown = ({
   children,
@@ -34,7 +35,8 @@ export const Dropdown = ({
   styles,
   activeClass,
   scrollerRef,
-  autoPosition = false
+  autoPosition = false,
+  wrapperItems
 }: DropdownType) => {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -132,43 +134,83 @@ export const Dropdown = ({
           leave="transition ease-in duration-75"
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
-
         >
-          <Menu.Items className={classNames?.list ?? `
-            ${autoPosition ? 'fixed':'absolute'} ${orientation ? orientation + '-0' : ''} z-10
-            mt-2 w-56 origin-top-right
-            rounded-md bg-white shadow-lg
-            ring-1 ring-black ring-opacity-5
-            focus:outline-none pb-2
-          `} style={styles?.list ?? {}}>
+          <Menu.Items className={
+            classNames?.list ?? `
+              ${autoPosition ? 'fixed':'absolute'} ${orientation ? orientation + '-0' : ''} z-10
+              mt-2 w-56 origin-top-right
+              rounded-md bg-white shadow-lg
+              ring-1 ring-black ring-opacity-5
+              focus:outline-none pb-2
+            `
+          } style={styles?.list ?? {}}>
             <div className="py-1">
-              {Array.isArray(children) ? children.map((item, i) => {
-                if(!item) return null;
-                return (
-                  <Menu.Item key={i}>
-                    {/* @ts-ignore */}
-                    {({ active }) => (
-                      <div className={`block p-2 pb-0 text-sm ${
-                        active ? 
-                          activeClass ?? 'text-gray-900' :
-                          'text-gray-700'
-                        }`
-                      }>{item}</div>
-                    )}
-                  </Menu.Item>
-                )
-              }) : (
-                <Menu.Item>
-                  {/* @ts-ignore */}
-                  {({ active }) => (
-                    <div className={`block p-2 pb-0 text-sm ${
-                      active ? 
-                        activeClass ?? 'text-gray-900' :
-                        'text-gray-700'
-                      }`
-                    }>{children}</div>
+              {wrapperItems ? (
+                <>
+                  {wrapperItems(
+                    <>
+                      {Array.isArray(children) ? children.map((item, i) => {
+                        if(!item) return null;
+                        return (
+                          <Menu.Item key={i}>
+                            {/* @ts-ignore */}
+                            {({ active }) => (
+                              <div className={`block p-2 pb-0 text-sm ${
+                                active ? 
+                                  activeClass ?? 'text-gray-900' :
+                                  'text-gray-700'
+                                }`
+                              }>{item}</div>
+                            )}
+                          </Menu.Item>
+                        )
+                      }) : (
+                        <Menu.Item>
+                          {/* @ts-ignore */}
+                          {({ active }) => (
+                            <div className={`block p-2 pb-0 text-sm ${
+                              active ? 
+                                activeClass ?? 'text-gray-900' :
+                                'text-gray-700'
+                              }`
+                            }>{children}</div>
+                          )}
+                        </Menu.Item>
+                      )}
+                    </>
                   )}
-                </Menu.Item>
+                </>
+              ):(
+                <>
+                  {Array.isArray(children) ? children.map((item, i) => {
+                    if(!item) return null;
+                    return (
+                      <Menu.Item key={i}>
+                        {/* @ts-ignore */}
+                        {({ active }) => (
+                          <div className={`block p-2 pb-0 text-sm ${
+                            active ? 
+                              activeClass ?? 'text-gray-900' :
+                              'text-gray-700'
+                            }`
+                          }>{item}</div>
+                        )}
+                      </Menu.Item>
+                    )
+                  }) : (
+                    <Menu.Item>
+                      {/* @ts-ignore */}
+                      {({ active }) => (
+                        <div className={`block p-2 pb-0 text-sm ${
+                          active ? 
+                            activeClass ?? 'text-gray-900' :
+                            'text-gray-700'
+                          }`
+                        }>{children}</div>
+                      )}
+                    </Menu.Item>
+                  )}
+                </>
               )}
             </div>
           </Menu.Items>

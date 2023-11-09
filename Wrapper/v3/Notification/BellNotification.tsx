@@ -83,7 +83,7 @@ export const BellNotification = () => {
     if(res.data.total > - 1) setUnviewed(res.data.total)
   }
   function handleGoToAllNotificactions(){
-    const url = handleRegexUrl('@hub:notification.all')
+    const url = handleRegexUrl('@hub:notification.all', user?.token)
     if(url.slice(0,4) === 'http') window.location.href = url
     else navigate(url)
   }
@@ -99,7 +99,7 @@ export const BellNotification = () => {
       ...(notification.redirect_to ? {
         actionButton: {
           onClick: () => {
-            const url = handleRegexUrl(notification.redirect_to!)
+            const url = handleRegexUrl(notification.redirect_to! as any, user?.token)
             if(url.slice(0,4) === 'http') window.location.href = url
             else navigate(url)
           },
