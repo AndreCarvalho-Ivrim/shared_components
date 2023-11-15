@@ -19,7 +19,6 @@ import {
   MyDocsIcon,
   NotificationIcon,
   LockIcon,
-  getIconByName,
   DashboardImageIcon,
   IsacImageIcon,
   ReportImageIcon,
@@ -36,8 +35,8 @@ import {
 
 import { getPublishedFlows } from "../services/workflow";
 import { FooterAsideProps } from "./v3/Aside/FooterAside";
-import { handleRegexUrl, hubRoutes, isacRoutes } from "../../shared-types/utils/routes";
-import { getDashboards } from "../../services/dashboard";
+import { handleRegexUrl } from "../../shared-types/utils/routes";
+import { getDashboards } from "../services/dashboard";
 
 export interface WrapperProps {
   v?: 3;
@@ -68,7 +67,7 @@ export function Wrapper({
   useEffect(() => {
     if (!user) return;
     if (module_name && [
-      "Co-Pilot Dashboard"
+      "Co-Pilot Dashboard", "System Architect"
     ].includes(module_name)){
 
       loadPublishedFlows();
@@ -104,19 +103,19 @@ export function Wrapper({
               user,
               isAdmin,
               module_name,
-              dashboards
+              dashboards,
+              publishedFlows
             }),
             ...(asideItems ? asideItems : []),
           ],
-          dynamicAsideItems:
-            module_name === "System Archictect"
-              ? publishedFlows.map((flow) => ({
-                id: flow._id,
-                href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
-                icon: iconByTheme(flow.theme),
-                name: flow.title,
-              }))
-              : [],
+          dynamicAsideItems: [],
+          // [ ] OS FLUXOS PUBLICADOS FORAM MOVIDOS PARA DENTRO DO ITEM ISAC
+          // module_name === "System Architect" ? publishedFlows.map((flow) => ({
+          //   id: flow._id,
+          //   href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
+          //   icon: iconByTheme(flow.theme),
+          //   name: flow.title,
+          // })) : [],
           footerItems,
           asideActive,
           module_name,
@@ -133,12 +132,14 @@ interface GetAsideItemsType {
   isAdmin?: boolean;
   module_name?: string;
   dashboards?: DashboardType[];
+  publishedFlows?: WorkflowType[]
 }
 export const getAsideItems = ({
   user,
   isAdmin = false,
   module_name,
   dashboards,
+  publishedFlows
 }: GetAsideItemsType) => {
   const canAccessAdminPanel = !!(
     user?.permitions_slug &&
@@ -260,15 +261,32 @@ export const getAsideItems = ({
     }
   }else
   if(module_name){
-    if(['Co-Pilot Dashboard'].includes(module_name)) defaultAsideItems = [
+    if(['Co-Pilot Dashboard', 'System Architect'].includes(module_name)) defaultAsideItems = [
       {
         id: 'aside-item-isac',
-        href: handleRegexUrl('@isac:workflow.home', user?.token),
         name: 'ISAC',
         icon: <IsacImageIcon w={22} h={22}/>,
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.ISAC
         ),
+        items: [...(user?.permitions_slug?.includes(
+          PossiblePermissions.ISAC
+        ) ? [
+          {
+            id: 'aside-subitem-workflows',
+            name: 'Workflows',
+            href: handleRegexUrl('@isac:workflow.home', user?.token),
+          },{
+            id: 'aside-subitem-templates',
+            name: 'Modelos',
+            href: handleRegexUrl('@isac:template', user?.token),
+          }
+        ]:[]), ...(publishedFlows ? publishedFlows.map((flow) => ({
+          id: flow._id,
+          href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
+          icon: iconByTheme(flow.theme),
+          name: flow.title,
+        })): [])]
       },{
         id: 'vision',
         href: '#',
@@ -311,20 +329,6 @@ export const getAsideItems = ({
         ] : undefined,
       },
     ]
-    else if (module_name === "System Archictect") defaultAsideItems = [
-      {
-        id: "aside-item-workflows",
-        href: handleRegexUrl('@isac:workflow.home', user?.token),
-        icon: <FlowIcon w={22} h={22} />,
-        name: "Workflows",
-      },
-      {
-        id: "aside-item-template",
-        href: handleRegexUrl('@isac:template', user?.token),
-        icon: <EnvelopeIcon w={22} h={22} />,
-        name: "Modelos",
-      },
-    ];
     else if (module_name === "Ivrim Flows") defaultAsideItems = [
       {
         id: "aside-item-compras-e-contas-a-pagar",
