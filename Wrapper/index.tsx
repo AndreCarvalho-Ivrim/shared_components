@@ -39,7 +39,7 @@ import { FooterAsideProps } from "./v3/Aside/FooterAside";
 import { handleRegexUrl, hubRoutes, isacRoutes } from "../../shared-types/utils/routes";
 import { getDashboards } from "../../services/dashboard";
 
-interface WrapperProps {
+export interface WrapperProps {
   v?: 3;
   children?: ReactNode;
   module_name?: string;
@@ -308,8 +308,8 @@ export const getAsideItems = ({
             name: dash.title,
             href: handleRegexUrl(`@hub:dashboard.show(${dash.slug})` as any)
           })):[])
-        ] : undefined
-      }
+        ] : undefined,
+      },
     ]
     else if (module_name === "System Archictect") defaultAsideItems = [
       {
