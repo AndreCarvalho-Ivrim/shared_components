@@ -1,5 +1,9 @@
 import { ReactNode } from "react";
 import { AvailableIcons } from "../../shared-types/icon.type";
+import isac from "../assets/IconsGeo_Prancheta 2.svg"
+import vision from "../assets/IconsGeo_Prancheta 3.svg"
+import report from "../assets/IconsGeo_Prancheta 1.svg"
+import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
 
 export interface IconProps{ w?: string | number, h?: string | number, className?: string, color?: string }
 export const ChevronDownIcon = (props: IconProps) => (
@@ -1015,6 +1019,41 @@ export const CodeIcon = (props: IconProps) => (
     <path d="M8.293 6.293 2.586 12l5.707 5.707 1.414-1.414L5.414 12l4.293-4.293zm7.414 11.414L21.414 12l-5.707-5.707-1.414 1.414L18.586 12l-4.293 4.293z"></path>
   </svg>
 )
+
+//#region IMAGEM ICONS
+export const IsacImageIcon = (props: IconProps) => (
+  <img
+    src={isac} 
+    alt="imagem geometrica isac"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+  />
+)
+export const VisionImageIcon = (props: IconProps) => (
+  <img
+    src={vision}
+    alt="imagem geometrica vision"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+  />
+)
+export const ReportImageIcon = (props: IconProps) => (
+  <img
+    src={report}
+    alt="imagem geometrica report"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+  />
+)
+export const DashboardImageIcon = (props: IconProps) => (
+  <img
+    src={dashboard}
+    alt="imagem geometrica dashboard"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    className={props.className}
+  />
+)
+//#endregion IMAGEM ICONS
 export const listAvailableIcons : { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   {component: (props?: IconProps) => <ChevronDownIcon {...props}/>,     title: 'ChevronDownIcon'      },
   {component: (props?: IconProps) => <ChevronUpDownIcon {...props}/>,   title: 'ChevronUpDownIcon'    },
@@ -1089,6 +1128,10 @@ export const listAvailableIcons : { component: (props?: IconProps) => ReactNode,
   {component: (props?: IconProps) => <CarouselIcon {...props}/>,        title: 'CarouselIcon'         },
   {component: (props?: IconProps) => <TimeIcon {...props}/>,            title: 'TimeIcon'             },
   {component: (props?: IconProps) => <CodeIcon {...props}/>,            title: 'CodeIcon'             },
+  {component: (props?: IconProps) => <IsacImageIcon {...props}/>,       title: 'IsacImageIcon'        },
+  {component: (props?: IconProps) => <VisionImageIcon {...props}/>,     title: 'VisionImageIcon'      },
+  {component: (props?: IconProps) => <ReportImageIcon {...props}/>,     title: 'ReportImageIcon'      },
+  {component: (props?: IconProps) => <DashboardImageIcon {...props}/>,  title: 'DashboardImageIcon'   },
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps) : ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);

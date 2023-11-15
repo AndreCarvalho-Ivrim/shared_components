@@ -19,10 +19,16 @@ import {
   MyDocsIcon,
   NotificationIcon,
   LockIcon,
+  getIconByName,
+  DashboardImageIcon,
+  IsacImageIcon,
+  ReportImageIcon,
+  VisionImageIcon,
 } from "../utils/icons";
 
 import {
   AvailableWorkflowThemeType,
+  DashboardType,
   PossiblePermissions,
   User,
   WorkflowType,
@@ -31,8 +37,9 @@ import {
 import { getPublishedFlows } from "../services/workflow";
 import { FooterAsideProps } from "./v3/Aside/FooterAside";
 import { handleRegexUrl, hubRoutes, isacRoutes } from "../../shared-types/utils/routes";
+import { getDashboards } from "../../services/dashboard";
 
-interface WrapperProps {
+export interface WrapperProps {
   v?: 3;
   children?: ReactNode;
   module_name?: string;
@@ -56,10 +63,17 @@ export function Wrapper({
 }: WrapperProps) {
   const { user } = useAuth();
   const [publishedFlows, setPublishedFlows] = useState<WorkflowType[]>([]);
+  const [dashboards, setDashboards] = useState<DashboardType[]>([]);
 
   useEffect(() => {
     if (!user) return;
-    if (module_name === "System Archictect") loadPublishedFlows();
+    if (module_name && [
+      "Co-Pilot Dashboard"
+    ].includes(module_name)){
+
+      loadPublishedFlows();
+      loadDashboards();
+    }
   }, [user]);
 
   async function loadPublishedFlows() {
@@ -69,13 +83,29 @@ export function Wrapper({
     if (res.result && res.data) setPublishedFlows(res.data);
   }
 
+  async function loadDashboards(){
+    if(!user) return;
+  
+    const res = await getDashboards(user.token, true);
+    
+    if(!res.result) return;
+    if(!res.data) return;
+
+    setDashboards(res.data);
+  }
+
   if (v === 3)
     return (
       <WrapperV3
         breadcrumbs={[...[{ name: "Home", href: "/" }], ...(breadcrumbs ?? [])]}
         {...{
           asideItems: [
-            ...getAsideItems({ user, isAdmin, module_name }),
+            ...getAsideItems({
+              user,
+              isAdmin,
+              module_name,
+              dashboards
+            }),
             ...(asideItems ? asideItems : []),
           ],
           dynamicAsideItems:
@@ -102,11 +132,13 @@ interface GetAsideItemsType {
   user?: User;
   isAdmin?: boolean;
   module_name?: string;
+  dashboards?: DashboardType[];
 }
 export const getAsideItems = ({
   user,
   isAdmin = false,
   module_name,
+  dashboards,
 }: GetAsideItemsType) => {
   const canAccessAdminPanel = !!(
     user?.permitions_slug &&
@@ -226,9 +258,60 @@ export const getAsideItems = ({
         ]  
       })
     }
-  }
-  else if (module_name === "System Archictect")
-    defaultAsideItems = [
+  }else
+  if(module_name){
+    if(['Co-Pilot Dashboard'].includes(module_name)) defaultAsideItems = [
+      {
+        id: 'aside-item-isac',
+        href: handleRegexUrl('@isac:workflow.home', user?.token),
+        name: 'ISAC',
+        icon: <IsacImageIcon w={22} h={22}/>,
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.ISAC
+        ),
+      },{
+        id: 'vision',
+        href: '#',
+        name: 'Vision',
+        icon: <VisionImageIcon w={22} h={22}/>,
+        disabled: true
+      },{
+        id: 'report',
+        href: '#',
+        name: 'Report',
+        icon: <ReportImageIcon w={22} h={22}/>,
+        disabled: true,
+      },{
+        id: 'aside-item-dashboard',
+        name: 'Dashboard',
+        icon: <DashboardImageIcon w={22} h={22}/>,
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.DASH
+        ),
+        items: user?.permitions_slug?.includes(
+          PossiblePermissions.DASH
+        ) ? [
+          {
+            id: 'aside-subitem-dashboard-all',
+            name: 'Todas',
+            href: handleRegexUrl('@hub:dashboard.home', user.token),
+          },
+          ...(canManagement ? [
+            {
+            id: 'aside-subitem-dashboard-manage',
+            name: 'Gerenciar',
+            href: handleRegexUrl('@hub:admin_panel.dashboards', user.token)
+            }
+          ]:[]),
+          ...(dashboards ? dashboards.map((dash) => ({
+            id: `aside-subitem-dashboard-${dash.id}`,
+            name: dash.title,
+            href: handleRegexUrl(`@hub:dashboard.show(${dash.slug})` as any)
+          })):[])
+        ] : undefined,
+      },
+    ]
+    else if (module_name === "System Archictect") defaultAsideItems = [
       {
         id: "aside-item-workflows",
         href: handleRegexUrl('@isac:workflow.home', user?.token),
@@ -242,8 +325,7 @@ export const getAsideItems = ({
         name: "Modelos",
       },
     ];
-  else if (module_name === "Ivrim Flows")
-    defaultAsideItems = [
+    else if (module_name === "Ivrim Flows") defaultAsideItems = [
       {
         id: "aside-item-compras-e-contas-a-pagar",
         name: "Contas a Pagar",
@@ -269,8 +351,7 @@ export const getAsideItems = ({
         ],
       },
     ];
-  else if (module_name === "Ivrim Conciliation")
-    defaultAsideItems = [
+    else if (module_name === "Ivrim Conciliation") defaultAsideItems = [
       {
         id: "aside-item-contas-a-receber-gerenciamento",
         icon: <UploadIcon w={22} h={22}/>,
@@ -297,6 +378,7 @@ export const getAsideItems = ({
         ),
       }
     ];
+  }
 
   return defaultAsideItems;
 };
