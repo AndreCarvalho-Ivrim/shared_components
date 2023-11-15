@@ -19,6 +19,11 @@ import {
   MyDocsIcon,
   NotificationIcon,
   LockIcon,
+  getIconByName,
+  DashboardImageIcon,
+  IsacImageIcon,
+  ReportImageIcon,
+  VisionImageIcon,
 } from "../utils/icons";
 
 import {
@@ -226,9 +231,40 @@ export const getAsideItems = ({
         ]  
       })
     }
-  }
-  else if (module_name === "System Archictect")
-    defaultAsideItems = [
+  }else
+  if(module_name){
+    if(['Co-Pilot Dashboard'].includes(module_name)) defaultAsideItems = [
+      {
+        id: 'aside-item-isac',
+        href: handleRegexUrl('@isac:workflow.home', user?.token),
+        name: 'ISAC',
+        icon: <IsacImageIcon w={22} h={22}/>,
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.ISAC
+        ),
+      },{
+        id: 'vision',
+        href: '#',
+        name: 'Vision',
+        icon: <VisionImageIcon w={22} h={22}/>,
+        disabled: true
+      },{
+        id: 'report',
+        href: '#',
+        name: 'Report',
+        icon: <ReportImageIcon w={22} h={22}/>,
+        disabled: true,
+      },{
+        id: 'dashboard',
+        href: handleRegexUrl('@hub:dashboard.home', user?.token),
+        name: 'Dashboard',
+        icon: <DashboardImageIcon w={22} h={22}/>,
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.DASH
+        ),
+      }
+    ]
+    else if (module_name === "System Archictect") defaultAsideItems = [
       {
         id: "aside-item-workflows",
         href: handleRegexUrl('@isac:workflow.home', user?.token),
@@ -242,8 +278,7 @@ export const getAsideItems = ({
         name: "Modelos",
       },
     ];
-  else if (module_name === "Ivrim Flows")
-    defaultAsideItems = [
+    else if (module_name === "Ivrim Flows") defaultAsideItems = [
       {
         id: "aside-item-compras-e-contas-a-pagar",
         name: "Contas a Pagar",
@@ -269,8 +304,7 @@ export const getAsideItems = ({
         ],
       },
     ];
-  else if (module_name === "Ivrim Conciliation")
-    defaultAsideItems = [
+    else if (module_name === "Ivrim Conciliation") defaultAsideItems = [
       {
         id: "aside-item-contas-a-receber-gerenciamento",
         icon: <UploadIcon w={22} h={22}/>,
@@ -297,6 +331,7 @@ export const getAsideItems = ({
         ),
       }
     ];
+  }
 
   return defaultAsideItems;
 };
