@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from '../../../utils/icons';
 import { useRef } from 'react';
 import { AsideItems } from '.';
+import { Tooltip } from 'flowbite-react';
 
 export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, active?: string | string[], depth?: number }) => {
   const liRef = useRef<HTMLLIElement>(null);
@@ -41,12 +42,17 @@ export const AsideLiItem = ({ item, active, depth = 0 }: { item: AsideItems, act
     )}
     <span className="font-semibold">  
       {isSubItem ? (
-        <span className="
-        bg-gray-300 group-[.active]/item w-1.5 h-1.5 rounded-full mx-auto
-          sm:block md:hidden
-          group-[.collapsed]:block
-          group-[.collapsed-desktop-aside]:block
-        "/>
+        <Tooltip
+          trigger="hover"
+          content={item.name}
+        >
+          <span className="
+          bg-gray-300 group-[.active]/item w-1.5 h-1.5 rounded-full mx-auto
+            sm:block md:hidden
+            group-[.collapsed]:block
+            group-[.collapsed-desktop-aside]:block
+          "/>
+        </Tooltip>
       ) : item.icon ?? (
         <div className={`
           flex items-center justify-center
