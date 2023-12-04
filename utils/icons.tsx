@@ -5,7 +5,7 @@ import vision from "../assets/IconsGeo_Prancheta 3.svg"
 import report from "../assets/IconsGeo_Prancheta 1.svg"
 import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
 
-export interface IconProps{ w?: string | number, h?: string | number, className?: string, color?: string }
+export interface IconProps { w?: string | number, h?: string | number, className?: string, color?: string }
 export const ChevronDownIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ export const ChevronUpDownIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     x-description="Heroicon name: mini/chevron-up-down"
-    width={ props.w ?? "20"} height={ props.h ?? "20"}
+    width={props.w ?? "20"} height={props.h ?? "20"}
     className={props.className ?? ''}
     viewBox="0 0 20 20" style={{
       fill: props.color ?? 'currentColor'
@@ -38,7 +38,7 @@ export const ChevronUpDownIcon = (props: IconProps) => (
 export const ChevronsRightIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={ props.w ?? "20"} height={ props.h ?? "20"}
+    width={props.w ?? "20"} height={props.h ?? "20"}
     className={props.className ?? ''}
     viewBox="0 0 24 24"
     style={{
@@ -58,7 +58,7 @@ export const ArrowRightIcon = (props: IconProps) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M5.51133 5.13565C5.82872 4.78408 5.82872 4.21315 5.51133 3.86158L2.26133 0.261584C2.02774 0.00283432 1.67989 -0.073103 1.3752 0.067522C1.07051 0.208147 0.872467 0.534397 0.872467 0.900023L0.875006 8.10002C0.875006 8.46283 1.07305 8.7919 1.37774 8.93252C1.68243 9.07315 2.03028 8.9944 2.26387 8.73846L5.51387 5.13846L5.51133 5.13565Z" fill={props.color ?? "currentColor"}/>
+    <path d="M5.51133 5.13565C5.82872 4.78408 5.82872 4.21315 5.51133 3.86158L2.26133 0.261584C2.02774 0.00283432 1.67989 -0.073103 1.3752 0.067522C1.07051 0.208147 0.872467 0.534397 0.872467 0.900023L0.875006 8.10002C0.875006 8.46283 1.07305 8.7919 1.37774 8.93252C1.68243 9.07315 2.03028 8.9944 2.26387 8.73846L5.51387 5.13846L5.51133 5.13565Z" fill={props.color ?? "currentColor"} />
   </svg>
 );
 export const ArrowDownCircleIcon = (props: IconProps) => (
@@ -72,7 +72,7 @@ export const ArrowDownCircleIcon = (props: IconProps) => (
   ><path d="M12 1.993C6.486 1.994 2 6.48 2 11.994c0 5.513 4.486 9.999 10 10 5.514 0 10-4.486 10-10s-4.485-10-10-10.001zm0 18.001c-4.411-.001-8-3.59-8-8 0-4.411 3.589-8 8-8.001 4.411.001 8 3.59 8 8.001s-3.589 8-8 8z"></path><path d="M13 8h-2v4H7.991l4.005 4.005L16 12h-3z"></path></svg>
 );
 export const CloseIcon = (props: IconProps) => (
-  <svg  
+  <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? '24'}
     height={props.h ?? '24'}
@@ -172,7 +172,7 @@ export const DashboardIcon = (props: IconProps) => (
   >
     <path
       d="M3.25 7.5H4.75C6.25 7.5 7 6.75 7 5.25V3.75C7 2.25 6.25 1.5 4.75 1.5H3.25C1.75 1.5 1 2.25 1 3.75V5.25C1 6.75 1.75 7.5 3.25 7.5ZM12.25 7.5H13.75C15.25 7.5 16 6.75 16 5.25V3.75C16 2.25 15.25 1.5 13.75 1.5H12.25C10.75 1.5 10 2.25 10 3.75V5.25C10 6.75 10.75 7.5 12.25 7.5ZM12.25 16.5H13.75C15.25 16.5 16 15.75 16 14.25V12.75C16 11.25 15.25 10.5 13.75 10.5H12.25C10.75 10.5 10 11.25 10 12.75V14.25C10 15.75 10.75 16.5 12.25 16.5ZM3.25 16.5H4.75C6.25 16.5 7 15.75 7 14.25V12.75C7 11.25 6.25 10.5 4.75 10.5H3.25C1.75 10.5 1 11.25 1 12.75V14.25C1 15.75 1.75 16.5 3.25 16.5Z"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -191,21 +191,21 @@ export const MoneyIcon = (props: IconProps) => (
   >
     <path
       d="M9.5 13.75C9.5 14.72 10.25 15.5 11.17 15.5H13.05C13.85 15.5 14.5 14.82 14.5 13.97C14.5 13.06 14.1 12.73 13.51 12.52L10.5 11.47C9.91 11.26 9.51 10.94 9.51 10.02C9.51 9.18 10.16 8.49 10.96 8.49H12.84C13.76 8.49 14.51 9.27 14.51 10.24M12 7.5V16.5"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M17 3V7M17 7H21M17 7L22 2"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -214,7 +214,7 @@ export const MoneyIcon = (props: IconProps) => (
 );
 export const NotificationIcon = (props: IconProps) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"  
+    xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="none"
     width={props.w ?? '24'}
@@ -223,14 +223,14 @@ export const NotificationIcon = (props: IconProps) => (
   >
     <path
       d="M12.02 2.90997C8.71 2.90997 6.02 5.59997 6.02 8.90997V11.8C6.02 12.41 5.76 13.34 5.45 13.86L4.3 15.77C3.59 16.95 4.08 18.26 5.38 18.7C9.69 20.14 14.34 20.14 18.65 18.7C19.86 18.3 20.39 16.87 19.73 15.77L18.58 13.86C18.28 13.34 18.02 12.41 18.02 11.8V8.90997C18.02 5.60997 15.32 2.90997 12.02 2.90997Z"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeMiterlimit="10"
       strokeLinecap="round"
     />
     <path
       d="M13.87 3.2C12.6607 2.85559 11.3793 2.85559 10.17 3.2C10.46 2.46 11.18 1.94 12.02 1.94C12.86 1.94 13.58 2.46 13.87 3.2Z"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -238,7 +238,7 @@ export const NotificationIcon = (props: IconProps) => (
     />
     <path
       d="M15.02 19.06C15.02 20.71 13.67 22.06 12.02 22.06C11.2 22.06 10.44 21.72 9.9 21.18C9.33816 20.6173 9.0218 19.8552 9.02 19.06"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeMiterlimit="10"
     />
@@ -255,7 +255,7 @@ export const WorkflowIcon = (props: IconProps) => (
   >
     <path
       d="M5 7C5 7.53043 4.78929 8.03914 4.41421 8.41421C4.03914 8.78929 3.53043 9 3 9C2.46957 9 1.96086 8.78929 1.58579 8.41421C1.21071 8.03914 1 7.53043 1 7C1 6.46957 1.21071 5.96086 1.58579 5.58579C1.96086 5.21071 2.46957 5 3 5C3.53043 5 4.03914 5.21071 4.41421 5.58579C4.78929 5.96086 5 6.46957 5 7ZM5 7H9M19 7C19 6.46957 19.2107 5.96086 19.5858 5.58579C19.9609 5.21071 20.4696 5 21 5C21.5304 5 22.0391 5.21071 22.4142 5.58579C22.7893 5.96086 23 6.46957 23 7C23 7.53043 22.7893 8.03914 22.4142 8.41421C22.0391 8.78929 21.5304 9 21 9C20.4696 9 19.9609 8.78929 19.5858 8.41421C19.2107 8.03914 19 7.53043 19 7ZM19 7H15M7.5 16.5V18.5C7.5 19.11 7.13 19.64 6.61 19.86C6.41984 19.9521 6.21129 20 6 20H4C3.17 20 2.5 19.33 2.5 18.5V16.5C2.5 15.67 3.17 15 4 15H6C6.83 15 7.5 15.67 7.5 16.5ZM21.5 16.5V18.5C21.5 19.33 20.83 20 20 20H18C17.7887 20 17.5802 19.9521 17.39 19.86C16.87 19.64 16.5 19.11 16.5 18.5V16.5C16.5 15.67 17.17 15 18 15H20C20.83 15 21.5 15.67 21.5 16.5ZM15 5.5V8.5C15 9.32 14.32 10 13.5 10H10.5C9.68 10 9 9.32 9 8.5V5.5C9 4.68 9.68 4 10.5 4H13.5C14.32 4 15 4.68 15 5.5Z"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -263,7 +263,7 @@ export const WorkflowIcon = (props: IconProps) => (
     />
     <path
       d="M15 7.72998C17.37 8.92998 19 11.51 19 14.5C19 14.67 18.99 14.83 18.97 15M5.03 15C5.01 14.83 5 14.67 5 14.5C5 11.51 6.63 8.92998 9 7.72998"
-      stroke={ props.color ?? 'currentColor' }
+      stroke={props.color ?? 'currentColor'}
       strokeWidth="1.5"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -287,7 +287,7 @@ export const SettingIcon = (props: IconProps) => (
       strokeMiterlimit="10"
       strokeLinecap="round"
       strokeLinejoin="round"
-      />
+    />
     <path
       d="M2 12.88V11.12C2 10.08 2.85 9.22 3.9 9.22C5.71 9.22 6.45 7.94 5.54 6.37C5.02 5.47 5.33 4.3 6.24 3.78L7.97 2.79C8.76 2.32 9.78 2.6 10.25 3.39L10.36 3.58C11.26 5.15 12.74 5.15 13.65 3.58L13.76 3.39C14.23 2.6 15.25 2.32 16.04 2.79L17.77 3.78C18.68 4.3 18.99 5.47 18.47 6.37C17.56 7.94 18.3 9.22 20.11 9.22C21.15 9.22 22.01 10.07 22.01 11.12V12.88C22.01 13.92 21.16 14.78 20.11 14.78C18.3 14.78 17.56 16.06 18.47 17.63C18.99 18.54 18.68 19.7 17.77 20.22L16.04 21.21C15.25 21.68 14.23 21.4 13.76 20.61L13.65 20.42C12.75 18.85 11.27 18.85 10.36 20.42L10.25 20.61C9.78 21.4 8.76 21.68 7.97 21.21L6.24 20.22C5.8041 19.969 5.48558 19.5553 5.35435 19.0698C5.22311 18.5842 5.28988 18.0664 5.54 17.63C6.45 16.06 5.71 14.78 3.9 14.78C2.85 14.78 2 13.92 2 12.88Z"
       stroke={props.color ?? 'currentColor'}
@@ -307,7 +307,7 @@ export const ArrowBackCircleIcon = (props: IconProps) => (
     height={props.h ?? '30'}
     className={props.className ?? ''}
   >
-    <circle cx="14.5" cy="15" r="14" stroke={props.color ?? 'currentColor'}/>
+    <circle cx="14.5" cy="15" r="14" stroke={props.color ?? 'currentColor'} />
     <path
       d="M16.6251 20.61L12.0067 15.9917C11.4613 15.4463 11.4613 14.5538 12.0067 14.0083L16.6251 9.39001"
       stroke={props.color ?? 'currentColor'}
@@ -425,8 +425,8 @@ export const CheckedCircleIcon = (props: IconProps) => (
     height={props.h ?? '20'}
     className={props.className ?? ''}
   >
-    <circle cx="10" cy="10" r="10" fill={props.color ?? "#40FF2F"}/>
-    <path d="M6.45833 10L8.81667 12.3583L13.5417 7.64167" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="10" cy="10" r="10" fill={props.color ?? "#40FF2F"} />
+    <path d="M6.45833 10L8.81667 12.3583L13.5417 7.64167" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 export const EditIcon = (props: IconProps) => (
@@ -436,7 +436,7 @@ export const EditIcon = (props: IconProps) => (
     width={props.w ?? '24'}
     height={props.h ?? '24'}
     className={props.className ?? ''}
-    style={{ fill: props.color ?? "currentColor"}}
+    style={{ fill: props.color ?? "currentColor" }}
   >
     <path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path>
   </svg>
@@ -448,7 +448,7 @@ export const TableIcon = (props: IconProps) => (
     width={props.w ?? '24'}
     height={props.h ?? '24'}
     className={props.className ?? ''}
-    style={{ fill: props.color ?? "currentColor"}}
+    style={{ fill: props.color ?? "currentColor" }}
   >
     <path d="M4 21h15.893c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zm0-2v-5h4v5H4zM14 7v5h-4V7h4zM8 7v5H4V7h4zm2 12v-5h4v5h-4zm6 0v-5h3.894v5H16zm3.893-7H16V7h3.893v5z"></path>
   </svg>
@@ -460,7 +460,7 @@ export const ListIcon = (props: IconProps) => (
     width={props.w ?? '24'}
     height={props.h ?? '24'}
     className={props.className ?? ''}
-    style={{ fill: props.color ?? "currentColor"}}
+    style={{ fill: props.color ?? "currentColor" }}
   ><path d="M4 6h2v2H4zm0 5h2v2H4zm0 5h2v2H4zm16-8V6H8.023v2H18.8zM8 11h12v2H8zm0 5h12v2H8z"></path></svg>
 );
 export const DownloadAltIcon = (props: IconProps) => (
@@ -513,7 +513,7 @@ export const WindowsIcon = (props: IconProps) => (
   </svg>
 )
 export const GitIcon = (props: IconProps) => (
-  <svg 
+  <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     className={props.className ?? ''}
@@ -535,7 +535,7 @@ export const GitCompareIcon = (props: IconProps) => (
   </svg>
 )
 export const WidgetIcon = (props: IconProps) => (
-  <svg 
+  <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? "24"} height={props.h ?? "24"}
     className={props.className ?? ''}
@@ -620,7 +620,7 @@ export const MenuCollapsedIcon = (props: IconProps) => (
     style={{ fill: props.color ?? 'currentColor' }}
   ><path d="M4 11h12v2H4zm0-5h16v2H4zm0 12h7.235v-2H4z"></path></svg>
 );
-export const HomeIcon = (props : IconProps) => (
+export const HomeIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -643,7 +643,7 @@ export const ProjectIcon = (props: IconProps) => (
   </svg>
 );
 export const UsersIcon = (props: IconProps) => (
-  <svg 
+  <svg
     viewBox="0 0 24 24"
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
@@ -653,14 +653,14 @@ export const UsersIcon = (props: IconProps) => (
     <path d="M16.604 11.048a5.67 5.67 0 0 0 .751-3.44c-.179-1.784-1.175-3.361-2.803-4.44l-1.105 1.666c1.119.742 1.8 1.799 1.918 2.974a3.693 3.693 0 0 1-1.072 2.986l-1.192 1.192 1.618.475C18.951 13.701 19 17.957 19 18h2c0-1.789-.956-5.285-4.396-6.952z"></path>
     <path d="M9.5 12c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zm0-6c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2zm1.5 7H8c-3.309 0-6 2.691-6 6v1h2v-1c0-2.206 1.794-4 4-4h3c2.206 0 4 1.794 4 4v1h2v-1c0-3.309-2.691-6-6-6z"></path>
   </svg>
-  
+
 );
 export const UserIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
-    className={props.className}  
+    className={props.className}
     viewBox="0 0 24 24"
   >
     <path d="M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"></path><path d="M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"></path>
@@ -705,10 +705,10 @@ export const CloudIcon = (props: IconProps) => (
     width={props.w ?? "20px"} height={props.h ?? "20px"}
     className={props.className}
   >
-    <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
-    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>
+    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
     <g id="SVGRepo_iconCarrier">
-      <path d="M16.2857 20C19.4416 20 22 17.4717 22 14.3529C22 11.8811 20.393 9.78024 18.1551 9.01498C17.8371 6.19371 15.4159 4 12.4762 4C9.32028 4 6.7619 6.52827 6.7619 9.64706C6.7619 10.3369 6.88706 10.9978 7.11616 11.6089C6.8475 11.5567 6.56983 11.5294 6.28571 11.5294C3.91878 11.5294 2 13.4256 2 15.7647C2 18.1038 3.91878 20 6.28571 20H16.2857Z" fill={props.color ?? 'currentColor'}/>
+      <path d="M16.2857 20C19.4416 20 22 17.4717 22 14.3529C22 11.8811 20.393 9.78024 18.1551 9.01498C17.8371 6.19371 15.4159 4 12.4762 4C9.32028 4 6.7619 6.52827 6.7619 9.64706C6.7619 10.3369 6.88706 10.9978 7.11616 11.6089C6.8475 11.5567 6.56983 11.5294 6.28571 11.5294C3.91878 11.5294 2 13.4256 2 15.7647C2 18.1038 3.91878 20 6.28571 20H16.2857Z" fill={props.color ?? 'currentColor'} />
     </g>
   </svg>
 )
@@ -719,10 +719,10 @@ export const InfoIcon = (props: IconProps) => (
     style={{ fill: props.color ?? 'currentColor' }}
     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
   >
-      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier">
-        <path fillRule="evenodd" clipRule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75ZM12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z">
-        </path>
-      </g>
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier">
+      <path fillRule="evenodd" clipRule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75ZM12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z">
+      </path>
+    </g>
   </svg>
 )
 export const CalendarIcon = (props: IconProps) => (
@@ -803,7 +803,7 @@ export const ReceiptIcon = (props: IconProps) => (
   </svg>
 )
 export const MyDocsIcon = (props: IconProps) => (
-  <svg 
+  <svg
     fill="none"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
@@ -811,9 +811,9 @@ export const MyDocsIcon = (props: IconProps) => (
     className={props.className}
     stroke={props.color ?? 'currentColor'}
   >
-    <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
-    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>
-    <g id="SVGRepo_iconCarrier"> <path d="M16 19C15.6218 17.2883 13.9747 16 12 16C10.0253 16 8.37818 17.2883 8 19M12 12H12.01M12.0627 6.06274L11.9373 5.93726C11.5914 5.59135 11.4184 5.4184 11.2166 5.29472C11.0376 5.18506 10.8425 5.10425 10.6385 5.05526C10.4083 5 10.1637 5 9.67452 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V10.2C21 9.0799 21 8.51984 20.782 8.09202C20.5903 7.71569 20.2843 7.40973 19.908 7.21799C19.4802 7 18.9201 7 17.8 7H14.3255C13.8363 7 13.5917 7 13.3615 6.94474C13.1575 6.89575 12.9624 6.81494 12.7834 6.70528C12.5816 6.5816 12.4086 6.40865 12.0627 6.06274ZM13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z" stroke={props.color ?? 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> </g>
+    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+    <g id="SVGRepo_iconCarrier"> <path d="M16 19C15.6218 17.2883 13.9747 16 12 16C10.0253 16 8.37818 17.2883 8 19M12 12H12.01M12.0627 6.06274L11.9373 5.93726C11.5914 5.59135 11.4184 5.4184 11.2166 5.29472C11.0376 5.18506 10.8425 5.10425 10.6385 5.05526C10.4083 5 10.1637 5 9.67452 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V10.2C21 9.0799 21 8.51984 20.782 8.09202C20.5903 7.71569 20.2843 7.40973 19.908 7.21799C19.4802 7 18.9201 7 17.8 7H14.3255C13.8363 7 13.5917 7 13.3615 6.94474C13.1575 6.89575 12.9624 6.81494 12.7834 6.70528C12.5816 6.5816 12.4086 6.40865 12.0627 6.06274ZM13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z" stroke={props.color ?? 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /> </g>
   </svg>
 )
 export const UserVoiceIcon = (props: IconProps) => (
@@ -850,7 +850,7 @@ export const MentionIcon = (props: IconProps) => (
     className={props.className}
   >
     <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10c1.466 0 2.961-.371 4.442-1.104l-.885-1.793C14.353 19.698 13.156 20 12 20c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8v1c0 .692-.313 2-1.5 2-1.396 0-1.494-1.819-1.5-2V8h-2v.025A4.954 4.954 0 0 0 12 7c-2.757 0-5 2.243-5 5s2.243 5 5 5c1.45 0 2.748-.631 3.662-1.621.524.89 1.408 1.621 2.838 1.621 2.273 0 3.5-2.061 3.5-4v-1c0-5.514-4.486-10-10-10zm0 13c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3-1.346 3-3 3z"></path>
-  </svg> 
+  </svg>
 )
 export const ArchiveIcon = (props: IconProps) => (
   <svg
@@ -870,7 +870,7 @@ export const DropboxIcon = (props: IconProps) => (
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
     className={props.className}
-    viewBox="0 0 24 24" 
+    viewBox="0 0 24 24"
   >
     <path d="M7.004 3.5 2 6.689l5.004 3.186 5.002-3.186zm10.005 0-5.003 3.189 5.003 3.186 5.003-3.186zM2 13.062l5.004 3.187 5.002-3.187-5.002-3.187zm15.009-3.187-5.003 3.187 5.003 3.187 5.003-3.187zM7.004 17.311l5.002 3.189 5.003-3.189-5.003-3.186z"></path>
   </svg>
@@ -971,7 +971,7 @@ export const TripIcon = (props: IconProps) => (
   </svg>
 )
 export const ConnectionIcon = (props: IconProps) => (
-  <svg 
+  <svg
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
     className={props.className}
@@ -984,11 +984,11 @@ export const ConnectionIcon = (props: IconProps) => (
     stroke="#ffffff"
   >
     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-      <g id="SVGRepo_iconCarrier"><g><g><g> 
-        <path d="M212.26,390.24l-60.331,60.331c-25.012,25.012-65.517,25.012-90.508,0.005c-24.996-24.996-24.996-65.505-0.005-90.496 l120.683-120.683c24.991-24.992,65.5-24.992,90.491,0c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17 c-41.654-41.654-109.177-41.654-150.831,0L31.247,329.909c-41.654,41.654-41.654,109.177,0,150.831 c41.649,41.676,109.177,41.676,150.853,0l60.331-60.331c8.331-8.331,8.331-21.839,0-30.17S220.591,381.909,212.26,390.24z"></path> 
-        <path d="M480.751,31.24c-41.654-41.654-109.199-41.654-150.853,0l-72.384,72.384c-8.331,8.331-8.331,21.839,0,30.17 c8.331,8.331,21.839,8.331,30.17,0l72.384-72.384c24.991-24.992,65.521-24.992,90.513,0c24.991,24.991,24.991,65.5,0,90.491 L317.845,284.638c-24.992,24.992-65.5,24.992-90.491,0c-8.331-8.331-21.839-8.331-30.17,0s-8.331,21.839,0,30.17 c41.654,41.654,109.177,41.654,150.831,0l132.736-132.736C522.405,140.418,522.405,72.894,480.751,31.24z"></path>
-      </g></g></g></g>
+    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+    <g id="SVGRepo_iconCarrier"><g><g><g>
+      <path d="M212.26,390.24l-60.331,60.331c-25.012,25.012-65.517,25.012-90.508,0.005c-24.996-24.996-24.996-65.505-0.005-90.496 l120.683-120.683c24.991-24.992,65.5-24.992,90.491,0c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17 c-41.654-41.654-109.177-41.654-150.831,0L31.247,329.909c-41.654,41.654-41.654,109.177,0,150.831 c41.649,41.676,109.177,41.676,150.853,0l60.331-60.331c8.331-8.331,8.331-21.839,0-30.17S220.591,381.909,212.26,390.24z"></path>
+      <path d="M480.751,31.24c-41.654-41.654-109.199-41.654-150.853,0l-72.384,72.384c-8.331,8.331-8.331,21.839,0,30.17 c8.331,8.331,21.839,8.331,30.17,0l72.384-72.384c24.991-24.992,65.521-24.992,90.513,0c24.991,24.991,24.991,65.5,0,90.491 L317.845,284.638c-24.992,24.992-65.5,24.992-90.491,0c-8.331-8.331-21.839-8.331-30.17,0s-8.331,21.839,0,30.17 c41.654,41.654,109.177,41.654,150.831,0l132.736-132.736C522.405,140.418,522.405,72.894,480.751,31.24z"></path>
+    </g></g></g></g>
   </svg>
 );
 export const CarouselIcon = (props: IconProps) => (
@@ -1020,10 +1020,32 @@ export const CodeIcon = (props: IconProps) => (
   </svg>
 )
 
+export const PlusCircleIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M9.172 16.242 12 13.414l2.828 2.828 1.414-1.414L13.414 12l2.828-2.828-1.414-1.414L12 10.586 9.172 7.758 7.758 9.172 10.586 12l-2.828 2.828z"></path><path d="M12 22c5.514 0 10-4.486 10-10S17.514 2 12 2 2 6.486 2 12s4.486 10 10 10zm0-18c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8z"></path>
+  </svg>
+)
+
+export const XCircleIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path>
+  </svg>
+)
+
 //#region IMAGEM ICONS
 export const IsacImageIcon = (props: IconProps) => (
   <img
-    src={isac} 
+    src={isac}
     alt="imagem geometrica isac"
     width={props.w ?? "24"} height={props.h ?? "24"}
     className={props.className}
@@ -1054,87 +1076,89 @@ export const DashboardImageIcon = (props: IconProps) => (
   />
 )
 //#endregion IMAGEM ICONS
-export const listAvailableIcons : { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
-  {component: (props?: IconProps) => <ChevronDownIcon {...props}/>,     title: 'ChevronDownIcon'      },
-  {component: (props?: IconProps) => <ChevronUpDownIcon {...props}/>,   title: 'ChevronUpDownIcon'    },
-  {component: (props?: IconProps) => <ChevronsRightIcon {...props}/>,   title: 'ChevronsRightIcon'    },
-  {component: (props?: IconProps) => <ArrowRightIcon {...props}/>,      title: 'ArrowRightIcon'       },
-  {component: (props?: IconProps) => <ArrowDownCircleIcon {...props}/>, title: 'ArrowDownCircleIcon'  },
-  {component: (props?: IconProps) => <CloseIcon {...props}/>,           title: 'CloseIcon'            },
-  {component: (props?: IconProps) => <TrashIcon {...props}/>,           title: 'TrashIcon'            },
-  {component: (props?: IconProps) => <PlusIcon {...props}/>,            title: 'PlusIcon'             },
-  {component: (props?: IconProps) => <CheckedIcon {...props}/>,         title: 'CheckedIcon'          },
-  {component: (props?: IconProps) => <FileIcon {...props}/>,            title: 'FileIcon'             },
-  {component: (props?: IconProps) => <UploadIcon {...props}/>,          title: 'UploadIcon'           },
-  {component: (props?: IconProps) => <ChatIcon {...props}/>,            title: 'ChatIcon'             },
-  {component: (props?: IconProps) => <DashboardIcon {...props}/>,       title: 'DashboardIcon'        },
-  {component: (props?: IconProps) => <MoneyIcon {...props}/>,           title: 'MoneyIcon'            },
-  {component: (props?: IconProps) => <NotificationIcon {...props}/>,    title: 'NotificationIcon'     },
-  {component: (props?: IconProps) => <WorkflowIcon {...props}/>,        title: 'WorkflowIcon'         },
-  {component: (props?: IconProps) => <SettingIcon {...props}/>,         title: 'SettingIcon'          },
-  {component: (props?: IconProps) => <ArrowBackCircleIcon {...props}/>, title: 'ArrowBackCircleIcon'  },
-  {component: (props?: IconProps) => <FlowIcon {...props}/>,            title: 'FlowIcon'             },
-  {component: (props?: IconProps) => <SaveIcon {...props}/>,            title: 'SaveIcon'             },
-  {component: (props?: IconProps) => <FlowColorful {...props}/>,        title: 'FlowColorful'         },
-  {component: (props?: IconProps) => <CheckedCircleIcon {...props}/>,   title: 'CheckedCircleIcon'    },
-  {component: (props?: IconProps) => <EditIcon {...props}/>,            title: 'EditIcon'             },
-  {component: (props?: IconProps) => <TableIcon {...props}/>,           title: 'TableIcon'            },
-  {component: (props?: IconProps) => <ListIcon {...props}/>,            title: 'ListIcon'             },
-  {component: (props?: IconProps) => <DownloadAltIcon {...props}/>,     title: 'DownloadAltIcon'      },
-  {component: (props?: IconProps) => <ThunderIcon {...props}/>,         title: 'ThunderIcon'          },
-  {component: (props?: IconProps) => <MoreVerticalIcon {...props}/>,    title: 'MoreVerticalIcon'     },
-  {component: (props?: IconProps) => <WindowsIcon {...props}/>,         title: 'WindowsIcon'          },
-  {component: (props?: IconProps) => <GitIcon {...props}/>,             title: 'GitIcon'              },
-  {component: (props?: IconProps) => <GitCompareIcon {...props}/>,      title: 'GitCompareIcon'       },
-  {component: (props?: IconProps) => <WidgetIcon {...props}/>,          title: 'WidgetIcon'           },
-  {component: (props?: IconProps) => <FormIcon {...props}/>,            title: 'FormIcon'             },
-  {component: (props?: IconProps) => <DetalistIcon {...props}/>,        title: 'DetalistIcon'         },
-  {component: (props?: IconProps) => <EnvelopeIcon {...props}/>,        title: 'EnvelopeIcon'         },
-  {component: (props?: IconProps) => <EnvelopeOpenIcon {...props}/>,    title: 'EnvelopeOpenIcon'     },
-  {component: (props?: IconProps) => <SearchIcon {...props}/>,          title: 'SearchIcon'           },
-  {component: (props?: IconProps) => <MenuIcon {...props}/>,            title: 'MenuIcon'             },
-  {component: (props?: IconProps) => <MenuCollapsedIcon {...props}/>,   title: 'MenuCollapsedIcon'    },
-  {component: (props?: IconProps) => <HomeIcon {...props}/>,            title: 'HomeIcon'             },
-  {component: (props?: IconProps) => <ProjectIcon {...props}/>,         title: 'ProjectIcon'          },
-  {component: (props?: IconProps) => <UsersIcon {...props}/>,           title: 'UsersIcon'            },
-  {component: (props?: IconProps) => <UserIcon {...props}/>,            title: 'UserIcon'             },
-  {component: (props?: IconProps) => <ErrorCircleIcon {...props}/>,     title: 'ErrorCircleIcon'      },
-  {component: (props?: IconProps) => <LockIcon {...props}/>,            title: 'LockIcon'             },
-  {component: (props?: IconProps) => <RefreshIcon {...props}/>,         title: 'RefreshIcon'          },
-  {component: (props?: IconProps) => <CloudIcon {...props}/>,           title: 'CloudIcon'            },
-  {component: (props?: IconProps) => <InfoIcon {...props}/>,            title: 'InfoIcon'             },
-  {component: (props?: IconProps) => <CalendarIcon {...props}/>,        title: 'CalendarIcon'         },
-  {component: (props?: IconProps) => <CompanyIcon {...props}/>,         title: 'CompanyIcon'          },
-  {component: (props?: IconProps) => <PencilIcon {...props}/>,          title: 'PencilIcon'           },
-  {component: (props?: IconProps) => <MagicWandIcon {...props}/>,       title: 'MagicWandIcon'        },
-  {component: (props?: IconProps) => <SquareCheckedIcon {...props}/>,   title: 'SquareCheckedIcon'    },
-  {component: (props?: IconProps) => <PackageIcon {...props}/>,         title: 'PackageIcon'          },
-  {component: (props?: IconProps) => <ReceiptIcon {...props}/>,         title: 'ReceiptIcon'          },
-  {component: (props?: IconProps) => <MyDocsIcon {...props}/>,          title: 'MyDocsIcon'           },
-  {component: (props?: IconProps) => <UserVoiceIcon {...props}/>,       title: 'UserVoiceIcon'        },
-  {component: (props?: IconProps) => <StopWatchIcon {...props}/>,       title: 'StopWatchIcon'        },
-  {component: (props?: IconProps) => <MentionIcon {...props}/>,         title: 'MentionIcon'          },
-  {component: (props?: IconProps) => <ArchiveIcon {...props}/>,         title: 'ArchiveIcon'          },
-  {component: (props?: IconProps) => <DropboxIcon {...props}/>,         title: 'DropboxIcon'          },
-  {component: (props?: IconProps) => <TrophyIcon {...props}/>,          title: 'TrophyIcon'           },
-  {component: (props?: IconProps) => <GameIcon {...props}/>,            title: 'GameIcon'             },
-  {component: (props?: IconProps) => <TriangleUpIcon {...props}/>,      title: 'TriangleUpIcon'       },
-  {component: (props?: IconProps) => <EquilizerIcon {...props}/>,       title: 'EquilizerIcon'        },
-  {component: (props?: IconProps) => <TargetLockIcon {...props}/>,      title: 'TargetLockIcon'       },
-  {component: (props?: IconProps) => <HourglassIcon {...props}/>,       title: 'HourglassIcon'        },
-  {component: (props?: IconProps) => <CompassIcon {...props}/>,         title: 'CompassIcon'          },
-  {component: (props?: IconProps) => <TripIcon {...props}/>,            title: 'TripIcon'             },
-  {component: (props?: IconProps) => <ConnectionIcon {...props}/>,      title: 'ConnectionIcon'       },
-  {component: (props?: IconProps) => <CarouselIcon {...props}/>,        title: 'CarouselIcon'         },
-  {component: (props?: IconProps) => <TimeIcon {...props}/>,            title: 'TimeIcon'             },
-  {component: (props?: IconProps) => <CodeIcon {...props}/>,            title: 'CodeIcon'             },
-  {component: (props?: IconProps) => <IsacImageIcon {...props}/>,       title: 'IsacImageIcon'        },
-  {component: (props?: IconProps) => <VisionImageIcon {...props}/>,     title: 'VisionImageIcon'      },
-  {component: (props?: IconProps) => <ReportImageIcon {...props}/>,     title: 'ReportImageIcon'      },
-  {component: (props?: IconProps) => <DashboardImageIcon {...props}/>,  title: 'DashboardImageIcon'   },
+export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
+  { component: (props?: IconProps) => <ChevronDownIcon {...props} />, title: 'ChevronDownIcon' },
+  { component: (props?: IconProps) => <ChevronUpDownIcon {...props} />, title: 'ChevronUpDownIcon' },
+  { component: (props?: IconProps) => <ChevronsRightIcon {...props} />, title: 'ChevronsRightIcon' },
+  { component: (props?: IconProps) => <ArrowRightIcon {...props} />, title: 'ArrowRightIcon' },
+  { component: (props?: IconProps) => <ArrowDownCircleIcon {...props} />, title: 'ArrowDownCircleIcon' },
+  { component: (props?: IconProps) => <CloseIcon {...props} />, title: 'CloseIcon' },
+  { component: (props?: IconProps) => <TrashIcon {...props} />, title: 'TrashIcon' },
+  { component: (props?: IconProps) => <PlusIcon {...props} />, title: 'PlusIcon' },
+  { component: (props?: IconProps) => <CheckedIcon {...props} />, title: 'CheckedIcon' },
+  { component: (props?: IconProps) => <FileIcon {...props} />, title: 'FileIcon' },
+  { component: (props?: IconProps) => <UploadIcon {...props} />, title: 'UploadIcon' },
+  { component: (props?: IconProps) => <ChatIcon {...props} />, title: 'ChatIcon' },
+  { component: (props?: IconProps) => <DashboardIcon {...props} />, title: 'DashboardIcon' },
+  { component: (props?: IconProps) => <MoneyIcon {...props} />, title: 'MoneyIcon' },
+  { component: (props?: IconProps) => <NotificationIcon {...props} />, title: 'NotificationIcon' },
+  { component: (props?: IconProps) => <WorkflowIcon {...props} />, title: 'WorkflowIcon' },
+  { component: (props?: IconProps) => <SettingIcon {...props} />, title: 'SettingIcon' },
+  { component: (props?: IconProps) => <ArrowBackCircleIcon {...props} />, title: 'ArrowBackCircleIcon' },
+  { component: (props?: IconProps) => <FlowIcon {...props} />, title: 'FlowIcon' },
+  { component: (props?: IconProps) => <SaveIcon {...props} />, title: 'SaveIcon' },
+  { component: (props?: IconProps) => <FlowColorful {...props} />, title: 'FlowColorful' },
+  { component: (props?: IconProps) => <CheckedCircleIcon {...props} />, title: 'CheckedCircleIcon' },
+  { component: (props?: IconProps) => <EditIcon {...props} />, title: 'EditIcon' },
+  { component: (props?: IconProps) => <TableIcon {...props} />, title: 'TableIcon' },
+  { component: (props?: IconProps) => <ListIcon {...props} />, title: 'ListIcon' },
+  { component: (props?: IconProps) => <DownloadAltIcon {...props} />, title: 'DownloadAltIcon' },
+  { component: (props?: IconProps) => <ThunderIcon {...props} />, title: 'ThunderIcon' },
+  { component: (props?: IconProps) => <MoreVerticalIcon {...props} />, title: 'MoreVerticalIcon' },
+  { component: (props?: IconProps) => <WindowsIcon {...props} />, title: 'WindowsIcon' },
+  { component: (props?: IconProps) => <GitIcon {...props} />, title: 'GitIcon' },
+  { component: (props?: IconProps) => <GitCompareIcon {...props} />, title: 'GitCompareIcon' },
+  { component: (props?: IconProps) => <WidgetIcon {...props} />, title: 'WidgetIcon' },
+  { component: (props?: IconProps) => <FormIcon {...props} />, title: 'FormIcon' },
+  { component: (props?: IconProps) => <DetalistIcon {...props} />, title: 'DetalistIcon' },
+  { component: (props?: IconProps) => <EnvelopeIcon {...props} />, title: 'EnvelopeIcon' },
+  { component: (props?: IconProps) => <EnvelopeOpenIcon {...props} />, title: 'EnvelopeOpenIcon' },
+  { component: (props?: IconProps) => <SearchIcon {...props} />, title: 'SearchIcon' },
+  { component: (props?: IconProps) => <MenuIcon {...props} />, title: 'MenuIcon' },
+  { component: (props?: IconProps) => <MenuCollapsedIcon {...props} />, title: 'MenuCollapsedIcon' },
+  { component: (props?: IconProps) => <HomeIcon {...props} />, title: 'HomeIcon' },
+  { component: (props?: IconProps) => <ProjectIcon {...props} />, title: 'ProjectIcon' },
+  { component: (props?: IconProps) => <UsersIcon {...props} />, title: 'UsersIcon' },
+  { component: (props?: IconProps) => <UserIcon {...props} />, title: 'UserIcon' },
+  { component: (props?: IconProps) => <ErrorCircleIcon {...props} />, title: 'ErrorCircleIcon' },
+  { component: (props?: IconProps) => <LockIcon {...props} />, title: 'LockIcon' },
+  { component: (props?: IconProps) => <RefreshIcon {...props} />, title: 'RefreshIcon' },
+  { component: (props?: IconProps) => <CloudIcon {...props} />, title: 'CloudIcon' },
+  { component: (props?: IconProps) => <InfoIcon {...props} />, title: 'InfoIcon' },
+  { component: (props?: IconProps) => <CalendarIcon {...props} />, title: 'CalendarIcon' },
+  { component: (props?: IconProps) => <CompanyIcon {...props} />, title: 'CompanyIcon' },
+  { component: (props?: IconProps) => <PencilIcon {...props} />, title: 'PencilIcon' },
+  { component: (props?: IconProps) => <MagicWandIcon {...props} />, title: 'MagicWandIcon' },
+  { component: (props?: IconProps) => <SquareCheckedIcon {...props} />, title: 'SquareCheckedIcon' },
+  { component: (props?: IconProps) => <PackageIcon {...props} />, title: 'PackageIcon' },
+  { component: (props?: IconProps) => <ReceiptIcon {...props} />, title: 'ReceiptIcon' },
+  { component: (props?: IconProps) => <MyDocsIcon {...props} />, title: 'MyDocsIcon' },
+  { component: (props?: IconProps) => <UserVoiceIcon {...props} />, title: 'UserVoiceIcon' },
+  { component: (props?: IconProps) => <StopWatchIcon {...props} />, title: 'StopWatchIcon' },
+  { component: (props?: IconProps) => <MentionIcon {...props} />, title: 'MentionIcon' },
+  { component: (props?: IconProps) => <ArchiveIcon {...props} />, title: 'ArchiveIcon' },
+  { component: (props?: IconProps) => <DropboxIcon {...props} />, title: 'DropboxIcon' },
+  { component: (props?: IconProps) => <TrophyIcon {...props} />, title: 'TrophyIcon' },
+  { component: (props?: IconProps) => <GameIcon {...props} />, title: 'GameIcon' },
+  { component: (props?: IconProps) => <TriangleUpIcon {...props} />, title: 'TriangleUpIcon' },
+  { component: (props?: IconProps) => <EquilizerIcon {...props} />, title: 'EquilizerIcon' },
+  { component: (props?: IconProps) => <TargetLockIcon {...props} />, title: 'TargetLockIcon' },
+  { component: (props?: IconProps) => <HourglassIcon {...props} />, title: 'HourglassIcon' },
+  { component: (props?: IconProps) => <CompassIcon {...props} />, title: 'CompassIcon' },
+  { component: (props?: IconProps) => <TripIcon {...props} />, title: 'TripIcon' },
+  { component: (props?: IconProps) => <ConnectionIcon {...props} />, title: 'ConnectionIcon' },
+  { component: (props?: IconProps) => <CarouselIcon {...props} />, title: 'CarouselIcon' },
+  { component: (props?: IconProps) => <TimeIcon {...props} />, title: 'TimeIcon' },
+  { component: (props?: IconProps) => <CodeIcon {...props} />, title: 'CodeIcon' },
+  { component: (props?: IconProps) => <IsacImageIcon {...props} />, title: 'IsacImageIcon' },
+  { component: (props?: IconProps) => <VisionImageIcon {...props} />, title: 'VisionImageIcon' },
+  { component: (props?: IconProps) => <PlusCircleIcon {...props} />, title: 'PlusCircleIcon' },
+  { component: (props?: IconProps) => <XCircleIcon {...props} />, title: 'XCircleIcon' },
+  { component: (props?: IconProps) => <ReportImageIcon {...props} />, title: 'ReportImageIcon' },
+  { component: (props?: IconProps) => <DashboardImageIcon {...props} />, title: 'DashboardImageIcon' },
 ];
-export const getIconByName = (title: AvailableIcons, props?: IconProps) : ReactNode => {
+export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
-  if(findedIcon) return findedIcon.component(props);
+  if (findedIcon) return findedIcon.component(props);
   return <></>;
 }
