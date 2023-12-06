@@ -67,7 +67,7 @@ export function Wrapper({
   useEffect(() => {
     if (!user) return;
     if (module_name && [
-      "Co-Pilot Dashboard", "System Architect"
+      "Co-Pilot Dashboard", "System Architect", "Report"
     ].includes(module_name)){
 
       loadPublishedFlows();
@@ -261,7 +261,7 @@ export const getAsideItems = ({
     }
   }else
   if(module_name){
-    if(['Co-Pilot Dashboard', 'System Architect'].includes(module_name)) defaultAsideItems = [
+    if(['Co-Pilot Dashboard', 'System Architect', 'Report'].includes(module_name)) defaultAsideItems = [
       {
         id: 'aside-item-isac',
         name: 'ISAC',
@@ -295,10 +295,9 @@ export const getAsideItems = ({
         disabled: true
       },{
         id: 'report',
-        href: '#',
+        href: handleRegexUrl('@isac:report.home', user?.token),
         name: 'Report',
         icon: <ReportImageIcon w={22} h={22}/>,
-        disabled: true,
       },{
         id: 'aside-item-dashboard',
         name: 'Dashboard',

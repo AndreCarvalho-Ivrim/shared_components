@@ -187,7 +187,10 @@ export const MenuSlider = () => {
               },{
                 id: 'report',
                 icon: <img src={report} alt="imagem geometrica report" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={REPORT} alt="logo report" width={100} className="h-3 object-contain" />
+                name: <img src={REPORT} alt="logo report" width={100} className="h-3 object-contain" />,
+                redirect: {
+                  url: handleRegexUrl('@isac:report.home', user?.token)
+                }
               },{
                 id: 'dashboard',
                 redirect: {
