@@ -17,91 +17,24 @@ import vision from "../assets/IconsGeo_Prancheta 3.svg"
 import report from "../assets/IconsGeo_Prancheta 1.svg"
 import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
 
-import { PossiblePermissions, User, WorkflowType } from "../../types";
+import { PossiblePermissions, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
 import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise";
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
-import { getUrls } from "../services/conn/api";
 import { LockIcon, RefreshIcon } from "../utils/icons";
-import { handleRegexUrl, hubRoutes } from "../../shared-types/utils/routes";
+import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
-
-
-const frontURL = getUrls("front")!;
 
 const clientsWithAccessToCAP = {
   "3c2c7801-9b58-417f-9809-7313cbbb287f": "IVRIM",
   "eb5039d9-22ec-4204-b120-d58d6ed9ade8": "LEAD",
-  // "e1a862da-0078-41c7-94bb-cd8bef12fbfb": "SEG4",
-  // "d92808ac-9848-4f7d-b8f3-4c73765d0035": "VESPER",
   "2d6c36ea-f8d5-11ed-be56-0242ac120002": "ZAON",
 };
 // TODO FUNÇÃO OBSOLETA, REMOVER TODAS AS MENÇOES A ELA E DEPOIS REMOVER FUNÇÃO
-export const applicationRedirection = (user: User | undefined) => {
-  let urls = { portal: "", wf: "" };
-
-  try {
-    // @ts-ignore
-    const WORKFLOW_MODULE = process.env.REACT_APP_WORKFLOW_MODULAR;
-    urls.wf = WORKFLOW_MODULE!;
-  } catch (e) {}
-  try {
-    // @ts-ignore
-    const PORTAL = import.meta.env.VITE_PORTAL_URL;
-    urls.portal = PORTAL;
-  } catch (e) {}
-
-  if (!urls.portal && !urls.wf)
-    console.error(
-      "[undeclared-env-variables-<REACT_APP_WORKFLOW_MODULAR|VITE_PORTAL_URL>]"
-    );
-  return [
-    {
-      id: "profile",
-      name: "Perfil",
-      url: `${urls.portal}/perfil`,
-      img: "https://source.unsplash.com/random/?textures-patterns",
-    },
-    {
-      id: "ivrim-flows",
-      name: "Portal de Soluções Ivrim",
-      url: `${urls.portal}/compras-e-contas-a-pagar`,
-      img: "https://source.unsplash.com/random/?city,night",
-      disabled: !user?.permitions_slug?.includes(
-        PossiblePermissions.CONTAS_A_PAGAR
-      ),
-    },
-    {
-      id: "ivrim-automator",
-      name: "Ivrim System Architect",
-      url: `${urls.wf}?token=${user?.token}`,
-      img: "https://source.unsplash.com/random/?business-work",
-    },
-    {
-      id: "ivrim-learn-center",
-      name: "Ivrim Learning Center",
-      url: undefined,
-      img: "https://source.unsplash.com/random/?technology",
-    },
-    {
-      id: "admin-panel",
-      name: "Admin Panel",
-      url: hubRoutes.admin_panel.client(),
-      img: "https://source.unsplash.com/random/?textures-patterns",
-      disabled: !user?.permitions_slug?.includes(PossiblePermissions.ADMIN),
-    },
-    {
-      id: "co-pilot-dashboard",
-      name: "Ivrim Office Intelligence",
-      url: `${urls.portal}/co-pilot-dashboard/financeiro`,
-      img: "https://source.unsplash.com/random/?3d-renders",
-    },
-  ];
-};
 export const redirectToApp = (
   { url, disabled }: { url: string | undefined; disabled?: boolean },
   toast: any,
@@ -189,7 +122,8 @@ export const MenuSlider = () => {
                 icon: <img src={report} alt="imagem geometrica report" width={100} height={100} className="mt-10 mx-auto" />,
                 name: <img src={REPORT} alt="logo report" width={100} className="h-3 object-contain" />,
                 redirect: {
-                  url: handleRegexUrl('@isac:report.home', user?.token)
+                  url: handleRegexUrl('@isac:report.home', user?.token),
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
                 }
               },{
                 id: 'dashboard',

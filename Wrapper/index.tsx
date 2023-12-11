@@ -298,6 +298,7 @@ export const getAsideItems = ({
         href: handleRegexUrl('@isac:report.home', user?.token),
         name: 'Report',
         icon: <ReportImageIcon w={22} h={22}/>,
+        disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
       },{
         id: 'aside-item-dashboard',
         name: 'Dashboard',
