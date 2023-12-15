@@ -1019,11 +1019,11 @@ export const CodeIcon = (props: IconProps) => (
     <path d="M8.293 6.293 2.586 12l5.707 5.707 1.414-1.414L5.414 12l4.293-4.293zm7.414 11.414L21.414 12l-5.707-5.707-1.414 1.414L18.586 12l-4.293 4.293z"></path>
   </svg>
 )
-
 export const PlusCircleIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   >
@@ -1035,13 +1035,67 @@ export const XCircleIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   >
     <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path>
   </svg>
 )
-
+export const StatsIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M20 12a2 2 0 0 0-.703.133l-2.398-1.963c.059-.214.101-.436.101-.67C17 8.114 15.886 7 14.5 7S12 8.114 12 9.5c0 .396.1.765.262 1.097l-2.909 3.438A2.06 2.06 0 0 0 9 14c-.179 0-.348.03-.512.074l-2.563-2.563C5.97 11.348 6 11.179 6 11c0-1.108-.892-2-2-2s-2 .892-2 2 .892 2 2 2c.179 0 .348-.03.512-.074l2.563 2.563A1.906 1.906 0 0 0 7 16c0 1.108.892 2 2 2s2-.892 2-2c0-.237-.048-.46-.123-.671l2.913-3.442c.227.066.462.113.71.113a2.48 2.48 0 0 0 1.133-.281l2.399 1.963A2.077 2.077 0 0 0 18 14c0 1.108.892 2 2 2s2-.892 2-2-.892-2-2-2z"></path>
+  </svg>
+)
+export const HomeSaleIcon = (props: IconProps) => (
+  <svg 
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    viewBox="0 0 54 49" fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="&#240;&#159;&#166;&#134; icon &#34;home sale&#34;">
+      <path id="Vector" d="M2 17.2778L27 2L52 17.2778" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector_2" d="M46.4444 27V44.7778C46.4444 45.6983 45.6983 46.4444 44.7778 46.4444H9.22221C8.30174 46.4444 7.55554 45.6983 7.55554 44.7778V27" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector_3" d="M32.5556 18.2395C29.7778 15.6754 22.3703 14.8207 22.3703 19.9489C22.3703 25.077 32.5556 22.5131 32.5556 27.6412C32.5556 32.7695 24.2222 32.7695 21.4445 29.3506" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector_4" d="M27 31.7281V35.3334" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector_5" d="M27 16.2029V13.1111" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </svg>
+)
+export const CartIcon = (props: IconProps) => (
+  <svg 
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    viewBox="0 0 54 54"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="&#240;&#159;&#166;&#134; icon &#34;cart&#34;">
+      <path id="Vector" d="M45.75 52C47.821 52 49.5 50.321 49.5 48.25C49.5 46.179 47.821 44.5 45.75 44.5C43.679 44.5 42 46.179 42 48.25C42 50.321 43.679 52 45.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector_2" d="M20.75 52C22.821 52 24.5 50.321 24.5 48.25C24.5 46.179 22.821 44.5 20.75 44.5C18.6789 44.5 17 46.179 17 48.25C17 50.321 18.6789 52 20.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector_3" d="M9.5 7H52L47 34.5H14.5L9.5 7ZM9.5 7C9.08333 5.33332 7 2 2 2" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector_4" d="M47 34.5H14.5H10.0769C5.61615 34.5 3.25 36.453 3.25 39.5C3.25 42.547 5.61615 44.5 10.0769 44.5H45.75" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </svg>
+)
+export const PieChartIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M13 2.051V11h8.949c-.47-4.717-4.232-8.479-8.949-8.949zm4.969 17.953c2.189-1.637 3.694-4.14 3.98-7.004h-8.183l4.203 7.004z"></path><path d="M11 12V2.051C5.954 2.555 2 6.824 2 12c0 5.514 4.486 10 10 10a9.93 9.93 0 0 0 4.255-.964s-5.253-8.915-5.254-9.031A.02.02 0 0 0 11 12z"></path>
+  </svg>
+)
 //#region IMAGEM ICONS
 export const IsacImageIcon = (props: IconProps) => (
   <img
@@ -1156,6 +1210,10 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <XCircleIcon {...props} />, title: 'XCircleIcon' },
   { component: (props?: IconProps) => <ReportImageIcon {...props} />, title: 'ReportImageIcon' },
   { component: (props?: IconProps) => <DashboardImageIcon {...props} />, title: 'DashboardImageIcon' },
+  { component: (props?: IconProps) => <StatsIcon {...props}/>, title: 'StatsIcon' },
+  { component: (props?: IconProps) => <HomeSaleIcon {...props}/>, title: 'HomeSaleIcon' },
+  { component: (props?: IconProps) => <CartIcon {...props}/>, title: 'CartIcon' },
+  { component: (props?: IconProps) => <PieChartIcon {...props}/>, title: 'PieChartIcon' }
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);

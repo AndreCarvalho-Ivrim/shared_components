@@ -4,13 +4,10 @@ import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from "./v3/Wrapper";
 import { AsideItems } from "./v3/Aside";
 import { useAuth } from "../../contexts/AuthContext";
 import {
-  EnvelopeIcon,
   MoneyIcon,
   ProjectIcon,
   UploadIcon,
   UsersIcon,
-  FlowIcon,
-  WorkflowIcon,
   FileIcon,
   ConnectionIcon,
   CompanyIcon,
@@ -23,6 +20,13 @@ import {
   IsacImageIcon,
   ReportImageIcon,
   VisionImageIcon,
+  GameIcon,
+  CartIcon,
+  IconProps,
+  FlowIcon,
+  TableIcon,
+  PieChartIcon,
+  CompassIcon,
 } from "../utils/icons";
 
 import {
@@ -265,7 +269,7 @@ export const getAsideItems = ({
       {
         id: 'aside-item-isac',
         name: 'ISAC',
-        icon: <IsacImageIcon w={22} h={22}/>,
+        icon: <FlowIcon w={22} h={22}/>,
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.ISAC
         ),
@@ -284,25 +288,29 @@ export const getAsideItems = ({
         ]:[]), ...(publishedFlows ? publishedFlows.map((flow) => ({
           id: flow._id,
           href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
-          icon: iconByTheme(flow.theme),
+          icon: (
+            <IconByTheme theme={flow.theme}>
+              <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0,2)}</span>
+            </IconByTheme>
+          ),
           name: flow.title,
         })): [])]
       },{
         id: 'vision',
         href: '#',
         name: 'Vision',
-        icon: <VisionImageIcon w={22} h={22}/>,
+        icon: <CompassIcon w={22} h={22}/>,
         disabled: true
       },{
         id: 'report',
         href: handleRegexUrl('@isac:report.home', user?.token),
         name: 'Report',
-        icon: <ReportImageIcon w={22} h={22}/>,
+        icon: <TableIcon w={22} h={22}/>,
         disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
       },{
         id: 'aside-item-dashboard',
         name: 'Dashboard',
-        icon: <DashboardImageIcon w={22} h={22}/>,
+        icon: <PieChartIcon w={22} h={22}/>,
         disabled: !user?.permitions_slug?.includes(
           PossiblePermissions.DASH
         ),
@@ -386,10 +394,16 @@ export const getAsideItems = ({
 
   return defaultAsideItems;
 };
-export const iconByTheme = (theme: AvailableWorkflowThemeType) => {
+export const IconByTheme = ({ theme, props = {}, children } : {
+  theme: AvailableWorkflowThemeType,
+  children: ReactNode,
+  props?: IconProps
+}) => {
   switch (theme) {
-    case "Cobrança":   return <MoneyIcon    w={22} h={22}/>;
-    case "Comercial":  return <WorkflowIcon w={22} h={22}/>;
-    case "Financeiro": return <MoneyIcon    w={22} h={22}/>;
+    case "Cobrança":   return  <MoneyIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Comercial":  return  <CartIcon  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Financeiro": return  <MoneyIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Gamificação": return <GameIcon  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    default: return <>{children}</>;
   }
 };

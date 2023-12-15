@@ -28,6 +28,7 @@ import { LockIcon, RefreshIcon } from "../utils/icons";
 import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
+import { IconByTheme } from "../Wrapper";
 
 const clientsWithAccessToCAP = {
   "3c2c7801-9b58-417f-9809-7313cbbb287f": "IVRIM",
@@ -178,7 +179,12 @@ export const MenuSlider = () => {
                 }, toast, navigate)}
                 key={flow._id}
               >
-                {flow.theme === "Cobrança" ? (
+                <div className="pt-2">
+                  <IconByTheme theme={flow.theme} props={{ color: 'white', w: 36, h: 36 }}>
+                    <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0,2)}</span>
+                  </IconByTheme>
+                </div>
+                {/* {flow.theme === "Cobrança" ? (
                   <img src={homeSale} alt="homeSale icon" className="pt-2" />
                 ) : flow.theme === "Financeiro" ? (
                   <img src={coin} alt="coin icon" className="pt-2" />
@@ -186,7 +192,7 @@ export const MenuSlider = () => {
                   <img src={cart} alt="cart icon" className="pt-2" />
                 ) : (
                   <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0,2)}</span>
-                )}
+                )} */}
                 <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
               </button>
             ))}
