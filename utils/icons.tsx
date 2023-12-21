@@ -816,6 +816,18 @@ export const MyDocsIcon = (props: IconProps) => (
     <g id="SVGRepo_iconCarrier"> <path d="M16 19C15.6218 17.2883 13.9747 16 12 16C10.0253 16 8.37818 17.2883 8 19M12 12H12.01M12.0627 6.06274L11.9373 5.93726C11.5914 5.59135 11.4184 5.4184 11.2166 5.29472C11.0376 5.18506 10.8425 5.10425 10.6385 5.05526C10.4083 5 10.1637 5 9.67452 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V10.2C21 9.0799 21 8.51984 20.782 8.09202C20.5903 7.71569 20.2843 7.40973 19.908 7.21799C19.4802 7 18.9201 7 17.8 7H14.3255C13.8363 7 13.5917 7 13.3615 6.94474C13.1575 6.89575 12.9624 6.81494 12.7834 6.70528C12.5816 6.5816 12.4086 6.40865 12.0627 6.06274ZM13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z" stroke={props.color ?? 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /> </g>
   </svg>
 )
+export const MyFinanceIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 24 24"
+  >
+    <path d="M21 11h-3V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v14c0 1.654 1.346 3 3 3h14c1.654 0 3-1.346 3-3v-6a1 1 0 0 0-1-1zM5 19a1 1 0 0 1-1-1V5h12v13c0 .351.061.688.171 1H5zm15-1a1 1 0 0 1-2 0v-5h2v5z"></path>
+    <path d="M6 7h8v2H6zm0 4h8v2H6zm5 4h3v2h-3z"></path>
+  </svg>
+)
 export const UserVoiceIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1054,23 +1066,23 @@ export const StatsIcon = (props: IconProps) => (
   </svg>
 )
 export const HomeSaleIcon = (props: IconProps) => (
-  <svg 
+  <svg
     className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     viewBox="0 0 54 49" fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="&#240;&#159;&#166;&#134; icon &#34;home sale&#34;">
-      <path id="Vector" d="M2 17.2778L27 2L52 17.2778" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="Vector_2" d="M46.4444 27V44.7778C46.4444 45.6983 45.6983 46.4444 44.7778 46.4444H9.22221C8.30174 46.4444 7.55554 45.6983 7.55554 44.7778V27" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="Vector_3" d="M32.5556 18.2395C29.7778 15.6754 22.3703 14.8207 22.3703 19.9489C22.3703 25.077 32.5556 22.5131 32.5556 27.6412C32.5556 32.7695 24.2222 32.7695 21.4445 29.3506" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="Vector_4" d="M27 31.7281V35.3334" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="Vector_5" d="M27 16.2029V13.1111" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector" d="M2 17.2778L27 2L52 17.2778" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_2" d="M46.4444 27V44.7778C46.4444 45.6983 45.6983 46.4444 44.7778 46.4444H9.22221C8.30174 46.4444 7.55554 45.6983 7.55554 44.7778V27" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_3" d="M32.5556 18.2395C29.7778 15.6754 22.3703 14.8207 22.3703 19.9489C22.3703 25.077 32.5556 22.5131 32.5556 27.6412C32.5556 32.7695 24.2222 32.7695 21.4445 29.3506" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_4" d="M27 31.7281V35.3334" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_5" d="M27 16.2029V13.1111" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
     </g>
   </svg>
 )
 export const CartIcon = (props: IconProps) => (
-  <svg 
+  <svg
     className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     viewBox="0 0 54 54"
@@ -1078,10 +1090,10 @@ export const CartIcon = (props: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="&#240;&#159;&#166;&#134; icon &#34;cart&#34;">
-      <path id="Vector" d="M45.75 52C47.821 52 49.5 50.321 49.5 48.25C49.5 46.179 47.821 44.5 45.75 44.5C43.679 44.5 42 46.179 42 48.25C42 50.321 43.679 52 45.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="Vector_2" d="M20.75 52C22.821 52 24.5 50.321 24.5 48.25C24.5 46.179 22.821 44.5 20.75 44.5C18.6789 44.5 17 46.179 17 48.25C17 50.321 18.6789 52 20.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="Vector_3" d="M9.5 7H52L47 34.5H14.5L9.5 7ZM9.5 7C9.08333 5.33332 7 2 2 2" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="Vector_4" d="M47 34.5H14.5H10.0769C5.61615 34.5 3.25 36.453 3.25 39.5C3.25 42.547 5.61615 44.5 10.0769 44.5H45.75" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Vector" d="M45.75 52C47.821 52 49.5 50.321 49.5 48.25C49.5 46.179 47.821 44.5 45.75 44.5C43.679 44.5 42 46.179 42 48.25C42 50.321 43.679 52 45.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_2" d="M20.75 52C22.821 52 24.5 50.321 24.5 48.25C24.5 46.179 22.821 44.5 20.75 44.5C18.6789 44.5 17 46.179 17 48.25C17 50.321 18.6789 52 20.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_3" d="M9.5 7H52L47 34.5H14.5L9.5 7ZM9.5 7C9.08333 5.33332 7 2 2 2" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_4" d="M47 34.5H14.5H10.0769C5.61615 34.5 3.25 36.453 3.25 39.5C3.25 42.547 5.61615 44.5 10.0769 44.5H45.75" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
     </g>
   </svg>
 )
@@ -1187,6 +1199,7 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <PackageIcon {...props} />, title: 'PackageIcon' },
   { component: (props?: IconProps) => <ReceiptIcon {...props} />, title: 'ReceiptIcon' },
   { component: (props?: IconProps) => <MyDocsIcon {...props} />, title: 'MyDocsIcon' },
+  { component: (props?: IconProps) => <MyFinanceIcon {...props} />, title: 'MyFinanceIcon' },
   { component: (props?: IconProps) => <UserVoiceIcon {...props} />, title: 'UserVoiceIcon' },
   { component: (props?: IconProps) => <StopWatchIcon {...props} />, title: 'StopWatchIcon' },
   { component: (props?: IconProps) => <MentionIcon {...props} />, title: 'MentionIcon' },
@@ -1210,10 +1223,10 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <XCircleIcon {...props} />, title: 'XCircleIcon' },
   { component: (props?: IconProps) => <ReportImageIcon {...props} />, title: 'ReportImageIcon' },
   { component: (props?: IconProps) => <DashboardImageIcon {...props} />, title: 'DashboardImageIcon' },
-  { component: (props?: IconProps) => <StatsIcon {...props}/>, title: 'StatsIcon' },
-  { component: (props?: IconProps) => <HomeSaleIcon {...props}/>, title: 'HomeSaleIcon' },
-  { component: (props?: IconProps) => <CartIcon {...props}/>, title: 'CartIcon' },
-  { component: (props?: IconProps) => <PieChartIcon {...props}/>, title: 'PieChartIcon' }
+  { component: (props?: IconProps) => <StatsIcon {...props} />, title: 'StatsIcon' },
+  { component: (props?: IconProps) => <HomeSaleIcon {...props} />, title: 'HomeSaleIcon' },
+  { component: (props?: IconProps) => <CartIcon {...props} />, title: 'CartIcon' },
+  { component: (props?: IconProps) => <PieChartIcon {...props} />, title: 'PieChartIcon' }
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);

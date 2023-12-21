@@ -27,6 +27,7 @@ import {
   TableIcon,
   PieChartIcon,
   CompassIcon,
+  MyFinanceIcon,
 } from "../utils/icons";
 
 import {
@@ -173,6 +174,12 @@ export const getAsideItems = ({
         name: "Meus Docs.",
         href: handleRegexUrl('@hub:gallery.home', user?.token),
         icon: <MyDocsIcon w={22} h={22} />,
+      },
+      {
+        id: "aside-item-gallery",
+        name: "Fechamentos Finan.",
+        href: handleRegexUrl('@hub:finance_report.home', user?.token),
+        icon: <MyFinanceIcon w={22} h={22} />,
       },
       {
         id: 'aside-item-notification',
