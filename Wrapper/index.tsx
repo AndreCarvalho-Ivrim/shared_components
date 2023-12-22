@@ -178,7 +178,7 @@ export const getAsideItems = ({
       {
         id: "aside-item-gallery",
         name: "Fechamentos Finan.",
-        href: handleRegexUrl('@hub:finance_report.home', user?.token),
+        href: handleRegexUrl('@hub:closing_folder.home', user?.token),
         icon: <MyFinanceIcon w={22} h={22} />,
       },
       {

@@ -295,7 +295,7 @@ export const MenuSlider = () => {
           <button
             type="button"
             className="bg-primary-600 m-1 h-26 rounded-md flex flex-col justify-center items-center flex"
-            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:finance_report.home', user?.token) }, toast, navigate)}
+            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
           >
             <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
             <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Fechamentos Financeiros</span>
