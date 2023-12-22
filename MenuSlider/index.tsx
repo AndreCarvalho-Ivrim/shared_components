@@ -294,7 +294,7 @@ export const MenuSlider = () => {
 
           <button
             type="button"
-            className="bg-primary-600 m-1 h-26 rounded-md flex flex-col justify-center items-center flex"
+            className="bg-primary-600 m-1 h-26 rounded-md flex flex-col justify-center items-center"
             onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
           >
             <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
