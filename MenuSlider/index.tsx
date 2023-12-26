@@ -6,6 +6,7 @@ import REPORT from "../assets/IVRIM-REPORT_PB.png";
 import VISION from "../assets/IVRIM-VISION360_PB.png";
 import wallet from "../assets/wallet-menu.svg";
 import Folder from "../../shared-components/assets/folder-user.svg";
+import FolderFinance from "../../shared-components/assets/finance-folder.svg";
 import Mail from "../../shared-components/assets/mail.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
 import settings from "../assets/icon _settings_.svg";
@@ -297,7 +298,7 @@ export const MenuSlider = () => {
             className="bg-primary-600 m-1 h-26 rounded-md flex flex-col justify-center items-center"
             onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
           >
-            <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
+            <img src={FolderFinance} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
             <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Fechamentos Financeiros</span>
           </button>
         </div>
