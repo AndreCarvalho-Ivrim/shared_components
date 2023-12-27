@@ -20,6 +20,7 @@ import {
   IsacImageIcon,
   ReportImageIcon,
   VisionImageIcon,
+  CobrançaIcon,
   GameIcon,
   CartIcon,
   IconProps,
@@ -28,6 +29,8 @@ import {
   PieChartIcon,
   CompassIcon,
   MyFinanceIcon,
+  GameIconNew,
+  CartIconNew,
 } from "../utils/icons";
 
 import {
@@ -407,10 +410,10 @@ export const IconByTheme = ({ theme, props = {}, children } : {
   props?: IconProps
 }) => {
   switch (theme) {
-    case "Cobrança":   return  <MoneyIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
-    case "Comercial":  return  <CartIcon  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
-    case "Financeiro": return  <MoneyIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
-    case "Gamificação": return <GameIcon  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Cobrança":   return  <CobrançaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Comercial":  return  <CartIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Financeiro": return  <CobrançaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Gamificação": return <GameIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
     default: return <>{children}</>;
   }
 };

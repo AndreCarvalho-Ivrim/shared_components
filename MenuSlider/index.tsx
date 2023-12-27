@@ -5,6 +5,7 @@ import DASHBOARD from "../assets/IVRIM-DASHBOARD_PB.png";
 import REPORT from "../assets/IVRIM-REPORT_PB.png";
 import VISION from "../assets/IVRIM-VISION360_PB.png";
 import wallet from "../assets/wallet-menu.svg";
+import iconPagar from "../assets/contas-a-pagar.svg";
 import Folder from "../../shared-components/assets/folder-user.svg";
 import FolderFinance from "../../shared-components/assets/finance-folder.svg";
 import Mail from "../../shared-components/assets/mail.svg";
@@ -35,6 +36,16 @@ const clientsWithAccessToCAP = {
   "3c2c7801-9b58-417f-9809-7313cbbb287f": "IVRIM",
   "eb5039d9-22ec-4204-b120-d58d6ed9ade8": "LEAD",
   "2d6c36ea-f8d5-11ed-be56-0242ac120002": "ZAON",
+};
+
+const getButtonColorClass = (theme: string) => {
+  switch (theme) {
+    case "Cobrança": return "bg-primary-600 hover:bg-primary-600";
+    case "Comercial": return "bg-primary-600 hover:bg-primary-600";
+    case "Financeiro": return { backgroundColor: "rgb(232, 190, 73)"};
+    case "Gamificação": return { backgroundColor: "rgb(0, 103, 171)", hoverColor: "rgb(0, 83, 141)" };
+    default: return "bg-primary-700 hover:bg-primary-600";
+  }
 };
 // TODO FUNÇÃO OBSOLETA, REMOVER TODAS AS MENÇOES A ELA E DEPOIS REMOVER FUNÇÃO
 export const redirectToApp = (
@@ -173,19 +184,21 @@ export const MenuSlider = () => {
             )} */}
 
             {workflows.map((flow) => (
-              <button
-                className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                onClick={() => redirectToApp({
-                  url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
-                }, toast, navigate)}
-                key={flow._id}
-              >
-                <div className="pt-2">
-                  <IconByTheme theme={flow.theme} props={{ color: 'white', w: 36, h: 36 }}>
-                    <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0, 2)}</span>
-                  </IconByTheme>
-                </div>
-                {/* {flow.theme === "Cobrança" ? (
+              <div className="relative">
+                <div className={style.adjustCards}> </div>
+                <button
+                  className={`m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}`}
+                  onClick={() => redirectToApp({
+                    url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
+                  }, toast, navigate)}
+                  key={flow._id}
+                >
+                  <div className="pt-2">
+                    <IconByTheme theme={flow.theme} props={{ color: 'white', w: 36, h: 36 }}>
+                      <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0, 2)}</span>
+                    </IconByTheme>
+                  </div>
+                  {/* {flow.theme === "Cobrança" ? (
                   <img src={homeSale} alt="homeSale icon" className="pt-2" />
                 ) : flow.theme === "Financeiro" ? (
                   <img src={coin} alt="coin icon" className="pt-2" />
@@ -194,41 +207,58 @@ export const MenuSlider = () => {
                 ) : (
                   <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0,2)}</span>
                 )} */}
-                <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
-              </button>
+                  <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
+                </button>
+              </div>
             ))}
             {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
-              <button
-                className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center relative"
-                onClick={() => redirectToApp({
-                  url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
-                }, toast, navigate)}
-              >
-                <img src={wallet} alt="wallet icon" className="pt-2" />
-                <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">
-                  Contas a Receber
-                </span>
-
-                {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
-                  <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                    <LockIcon w={26} h={26} />
+              <div className="relative">
+                <div className={style.adjustCards}> </div>
+                <button
+                  className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
+                  onClick={() => redirectToApp({
+                    url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
+                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
+                  }, toast, navigate)}
+                >
+                  <img
+                    src={iconPagar}
+                    alt="wallet icon"
+                    className="absolute top-4 right-3 transform -translate-1 -translate-y-2 "
+                  />
+                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">
+                    Contas a Receber
                   </span>
-                )}
-              </button>
+
+                  {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
+                    <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
+                      <LockIcon w={26} h={26} />
+                    </span>
+                  )}
+                </button>
+              </div>
             )}
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
-              <button
-                className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                onClick={() => redirectToApp({
-                  url: handleRegexUrl('@hub:old_cap.home', user.token),
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
-                }, toast, navigate)
-                }
-              >
-                <img src={wallet} alt="wallet icon" className="pt-2" />
-                <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
-              </button>
+              <div className="relative">
+                <div className={style.adjustCards}> </div>
+
+                <button
+                  className="bg-primary-600 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
+                  onClick={() => redirectToApp({
+                    url: handleRegexUrl('@hub:old_cap.home', user.token),
+                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
+                  }, toast, navigate)}
+                >
+                  <img
+                    src={iconPagar}
+                    alt="wallet icon"
+                    className="absolute top-4 right-3 transform -translate-1 -translate-y-2 "
+                  />
+                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
+                </button>
+              </div>
+
+
             ) : !(user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
               <div className="
                 bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
