@@ -6,6 +6,7 @@ import REPORT from "../assets/IVRIM-REPORT_PB.png";
 import VISION from "../assets/IVRIM-VISION360_PB.png";
 import wallet from "../assets/wallet-menu.svg";
 import Folder from "../../shared-components/assets/folder-user.svg";
+import FolderFinance from "../../shared-components/assets/finance-folder.svg";
 import Mail from "../../shared-components/assets/mail.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
 import settings from "../assets/icon _settings_.svg";
@@ -65,7 +66,7 @@ export const MenuSlider = () => {
 
   useEffect(() => {
     if (!user) return;
-    
+
     (async () => {
       const res = await getPublishedFlows(user.token);
       if (!res.result) {
@@ -90,7 +91,7 @@ export const MenuSlider = () => {
           } alt="Ivrim Consulting" />
         </div>
         <div className="flex items-center gap-4">
-          <BellNotification/>
+          <BellNotification />
           <DropdownChooseEnterprise />
         </div>
       </div>
@@ -114,11 +115,11 @@ export const MenuSlider = () => {
                 },
                 icon: <img src={isac} alt="imagem geometrica isac" width={100} height={100} className="mt-10 mx-auto" />,
                 name: <img src={ISAC} alt="logo isac" width={100} height={100} className="h-3 object-contain" />,
-              },{
+              }, {
                 id: 'vision',
                 icon: <img src={vision} alt="imagem geometrica vision" width={100} height={100} className="mt-10 mx-auto" />,
                 name: <img src={VISION} alt="logo vision" width={100} height={100} className="h-3 object-contain" />
-              },{
+              }, {
                 id: 'report',
                 icon: <img src={report} alt="imagem geometrica report" width={100} height={100} className="mt-10 mx-auto" />,
                 name: <img src={REPORT} alt="logo report" width={100} className="h-3 object-contain" />,
@@ -126,7 +127,7 @@ export const MenuSlider = () => {
                   url: handleRegexUrl('@isac:report.home', user?.token),
                   disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
                 }
-              },{
+              }, {
                 id: 'dashboard',
                 redirect: {
                   url: handleRegexUrl('@hub:dashboard.home', user?.token),
@@ -144,7 +145,7 @@ export const MenuSlider = () => {
                 key={item.id}
                 className="bg-primary-500 m-1 w-full xsm:max-w-[calc(50vw-2.2rem)] sm:w-56 h-52 rounded-md flex justify-center items-center relative"
                 onClick={() => {
-                  if(item.redirect) redirectToApp(item.redirect, toast, navigate)
+                  if (item.redirect) redirectToApp(item.redirect, toast, navigate)
                   else toast.warning('Está solução ainda não está disponível');
                 }}
               >
@@ -155,7 +156,7 @@ export const MenuSlider = () => {
 
                 {(!item.redirect || item.redirect.disabled) && (
                   <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                    {item.redirect ? <LockIcon w={26} h={26}/> : <RefreshIcon w={26} h={26}/> }
+                    {item.redirect ? <LockIcon w={26} h={26} /> : <RefreshIcon w={26} h={26} />}
                   </span>
                 )}
               </button>
@@ -181,7 +182,7 @@ export const MenuSlider = () => {
               >
                 <div className="pt-2">
                   <IconByTheme theme={flow.theme} props={{ color: 'white', w: 36, h: 36 }}>
-                    <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0,2)}</span>
+                    <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0, 2)}</span>
                   </IconByTheme>
                 </div>
                 {/* {flow.theme === "Cobrança" ? (
@@ -211,7 +212,7 @@ export const MenuSlider = () => {
 
                 {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
                   <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                    <LockIcon w={26} h={26}/>
+                    <LockIcon w={26} h={26} />
                   </span>
                 )}
               </button>
@@ -221,17 +222,18 @@ export const MenuSlider = () => {
                 className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
                 onClick={() => redirectToApp({
                   url: handleRegexUrl('@hub:old_cap.home', user.token),
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR) }, toast, navigate)
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
+                }, toast, navigate)
                 }
               >
-                <img src={wallet} alt="wallet icon" className="pt-2"/>
+                <img src={wallet} alt="wallet icon" className="pt-2" />
                 <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
               </button>
             ) : !(user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
               <div className="
                 bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
                 text-center text-xs text-gray-500 opacity-75
-              ">Você não<br/>possui nenhum aplicativo<br/>criado</div>
+              ">Você não<br />possui nenhum aplicativo<br />criado</div>
             ) : <></>}
             {/* {(workflows.length + (
               (user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? 1 : 0
@@ -244,18 +246,11 @@ export const MenuSlider = () => {
         </section>
 
 
-        <div className="flex flex-col xsm:flex-row w-full xsm:w-auto">
-          <div className="flex flex-col w-full xsm:w-auto">
-            {/* <button className="bg-primary-600 m-1 w-60 h-26 rounded-md flex flex-col justify-center items-center">
-              <span className="text-lg text-white mr-2 ml-auto">2</span>
-              <img src={wallet} alt="" width={60} height={100} />
-              <span className="text-xs text-white pt-1 pb-1 pl-3 mr-auto">Carteira Contas a Receber</span>
-            </button> */}
-
+        <div className="flex flex-col">
+          <div className="flex">
             <button
               type="button"
-              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60 relative"
-              onClick={() => redirectToApp({
+              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60 relative" onClick={() => redirectToApp({
                 url: handleRegexUrl('@isac:template', user?.token),
                 disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC))
               }, toast, navigate)}
@@ -265,11 +260,22 @@ export const MenuSlider = () => {
 
               {!(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC)) && (
                 <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                  <LockIcon w={26} h={26}/>
+                  <LockIcon w={26} h={26} />
                 </span>
               )}
             </button>
 
+            <button
+              className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
+              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
+            >
+              <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
+              <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal">Admin Console</span>
+            </button>
+
+          </div>
+
+          <div className="flex">
             <button
               type="button"
               className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60"
@@ -278,41 +284,23 @@ export const MenuSlider = () => {
               <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
               <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Meus Documentos</span>
             </button>
-
-            {/* <button
-              className="relative bg-primary-600 m-1 pb-14 w-60 h-24 rounded-md flex flex-col justify-start items-start"
-              style={{
-                backgroundImage: `url(${waves})`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "right center",
-                backgroundSize: "auto 100%",
-              }}
-            >
-              <span className="text-xs text-white pt-2 pl-3 mr-auto text-start">
-                Hoje você tem 34 <br />
-                transações bancárias<br />
-                previstas
-              </span>
-            </button> */}
-
-          </div>
-
-          <div className="flex xsm:flex-col xsm:mx-auto flex-wrap">
-            <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
-             onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
-            >
-              <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal">Admin Console</span>
-            </button>
-
-            <button className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
-            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
+            <button
+              className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
+              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
             >
               <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
               <span className="text-xs text-white pt-3 pb-1 pr-10 truncate hover:whitespace-normal">Usuário</span>
             </button>
           </div>
 
+          <button
+            type="button"
+            className="bg-primary-600 m-1 h-26 rounded-md flex flex-col justify-center items-center"
+            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
+          >
+            <img src={FolderFinance} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
+            <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Fechamentos Financeiros</span>
+          </button>
         </div>
       </div>
 
