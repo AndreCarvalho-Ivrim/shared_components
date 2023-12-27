@@ -173,33 +173,22 @@ export const MenuSlider = () => {
           <div className="flex sm:flex-col overflow-y-auto min-w-[7.2rem] max-h-[calc(6.25rem*4+2.25rem)]">
             {workflows.map((flow, i) => (
               <button
-                className={`relative m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center ${getButtonColorClass([
-                  "Cobrança",
-                  "Comercial",
-                  "Gamificação",
-                  "N"
-                ][i < 3 ? i : 3] as any // flow.theme
-                )}`}
+                className={`relative m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}`}
                 onClick={() => redirectToApp({
                   url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
                 }, toast, navigate)}
                 key={flow._id}
               >
                 <div className={style.adjustCards}>
-                  <IconByTheme theme={[
-                  "Cobrança",
-                  "Comercial",
-                  "Gamificação",
-                  "N"
-                ][i < 3 ? i : 3] as any // flow.theme 
-              } props={{ color: 'black', w: 28, h: 28 }}>
+                  <IconByTheme theme={flow.theme} props={{ color: 'black', w: 28, h: 28 }}>
                     <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(flow.title ?? '').slice(0, 2)}</span>
                   </IconByTheme>
                 </div>
-                {/* <div className="absolute top-4 right-0 transform -translate-1 -translate-y-2">
-                  
-                </div> */}
-                <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
+                <div className="mt-10 h-full flex items-center">
+                  <span className="max-w-[100%] px-1.5 text-white text-xs text-center hover:whitespace-normal">
+                    {flow.title.slice(0, 38)}{flow.title.length > 38 && '...'}
+                  </span>
+                </div>
               </button>
             ))}
             {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
@@ -215,9 +204,9 @@ export const MenuSlider = () => {
                   <img
                     src={iconPagar}
                     alt="wallet icon"
-                    className="absolute top-4 right-3 transform -translate-1 -translate-y-2 "
+                    className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
                   />
-                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">
+                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">
                     Contas a Receber
                   </span>
 
@@ -243,9 +232,9 @@ export const MenuSlider = () => {
                   <img
                     src={iconPagar}
                     alt="wallet icon"
-                    className="absolute top-4 right-3 transform -translate-1 -translate-y-2 "
+                    className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
                   />
-                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-3">Contas a pagar</span>
+                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">Contas a pagar</span>
                 </button>
               </div>
 
