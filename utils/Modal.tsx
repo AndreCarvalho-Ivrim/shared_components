@@ -25,6 +25,11 @@ export interface ModalOptionsType{
     className?: string,
     onClick: () => void,
     autoClose?: boolean
+  },
+  classNames?: {
+    content?: string,
+    dialog?: string,
+    footer?: string
   }
 }
 
@@ -82,8 +87,8 @@ export const Modal = ({
           >
             <Dialog.Panel className={`relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 ${
               options.size ? options.size : 'sm:w-full sm:max-w-lg'
-            }`}>
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            } ${options.classNames?.content ?? ''}`}>
+              <div className={`bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 ${options.classNames?.dialog ?? ''}`}>
                 <div className="sm:flex sm:items-start">
                   { options.type && options.type == 'danger' ? <ModalIconDanger/> : <></>}
                   <div className={`mt-3 text-center sm:mt-0 ${ !!options.type ? 'sm:ml-4':'' } sm:text-left flex-1`}>
@@ -98,7 +103,7 @@ export const Modal = ({
                   </div>
                 </div>
               </div>                              
-              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+              <div className={`bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 ${options.classNames?.footer ?? ''}`}>
                 {options.actionButton && (
                   <button
                     type="button"
