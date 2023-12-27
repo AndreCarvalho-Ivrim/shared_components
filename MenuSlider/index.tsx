@@ -4,22 +4,18 @@ import ISAC from "../assets/ISAC_PB.png";
 import DASHBOARD from "../assets/IVRIM-DASHBOARD_PB.png";
 import REPORT from "../assets/IVRIM-REPORT_PB.png";
 import VISION from "../assets/IVRIM-VISION360_PB.png";
-import wallet from "../assets/wallet-menu.svg";
 import iconPagar from "../assets/contas-a-pagar.svg";
 import Folder from "../../shared-components/assets/folder-user.svg";
 import FolderFinance from "../../shared-components/assets/finance-folder.svg";
 import Mail from "../../shared-components/assets/mail.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
 import settings from "../assets/icon _settings_.svg";
-import homeSale from "../assets/icon _home sale_.svg";
-import coin from "../assets/icon _coin_.svg";
-import cart from "../assets/icon _cart_.svg";
 import isac from "../assets/IconsGeo_Prancheta 2.svg"
 import vision from "../assets/IconsGeo_Prancheta 3.svg"
 import report from "../assets/IconsGeo_Prancheta 1.svg"
 import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
 
-import { PossiblePermissions, WorkflowType } from "../../types";
+import { AvailableWorkflowThemeType, PossiblePermissions, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
@@ -38,12 +34,12 @@ const clientsWithAccessToCAP = {
   "2d6c36ea-f8d5-11ed-be56-0242ac120002": "ZAON",
 };
 
-const getButtonColorClass = (theme: string) => {
+const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
-    case "Cobrança": return "bg-primary-600 hover:bg-primary-600";
-    case "Comercial": return "bg-primary-600 hover:bg-primary-600";
-    case "Financeiro": return { backgroundColor: "rgb(232, 190, 73)"};
-    case "Gamificação": return { backgroundColor: "rgb(0, 103, 171)", hoverColor: "rgb(0, 83, 141)" };
+    case "Cobrança": case "Financeiro": return "bg-[#2A1DBA] hover:brightness-110";
+    case "Comercial": return "bg-[#B89417] hover:brightness-110";
+    case "Gamificação": return "bg-[#006B7F] hover:brightness-110";
+    // case "Compras": return "bg-[#41477D] hover:brightness-110";
     default: return "bg-primary-700 hover:bg-primary-600";
   }
 };
@@ -175,41 +171,36 @@ export const MenuSlider = () => {
           </div>
 
           <div className="flex sm:flex-col overflow-y-auto min-w-[7.2rem] max-h-[calc(6.25rem*4+2.25rem)]">
-            {/* {(workflows.length + (
-              (user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? 1 : 0
-            )) > 4 && (
-              <button className="ml-8" onClick={handlePreviousPage}>
-                <ChevronUpIcon />
+            {workflows.map((flow, i) => (
+              <button
+                className={`relative m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center ${getButtonColorClass([
+                  "Cobrança",
+                  "Comercial",
+                  "Gamificação",
+                  "N"
+                ][i < 3 ? i : 3] as any // flow.theme
+                )}`}
+                onClick={() => redirectToApp({
+                  url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
+                }, toast, navigate)}
+                key={flow._id}
+              >
+                <div className={style.adjustCards}>
+                  <IconByTheme theme={[
+                  "Cobrança",
+                  "Comercial",
+                  "Gamificação",
+                  "N"
+                ][i < 3 ? i : 3] as any // flow.theme 
+              } props={{ color: 'black', w: 28, h: 28 }}>
+                    <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(flow.title ?? '').slice(0, 2)}</span>
+                  </IconByTheme>
+                </div>
+                {/* <div className="absolute top-4 right-0 transform -translate-1 -translate-y-2">
+                  
+                </div> */}
+                <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
               </button>
-            )} */}
-
-            {workflows.map((flow) => (
-              <div className="relative">
-                <div className={style.adjustCards}> </div>
-                <button
-                  className={`m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}`}
-                  onClick={() => redirectToApp({
-                    url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
-                  }, toast, navigate)}
-                  key={flow._id}
-                >
-                  <div className="pt-2">
-                    <IconByTheme theme={flow.theme} props={{ color: 'white', w: 36, h: 36 }}>
-                      <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0, 2)}</span>
-                    </IconByTheme>
-                  </div>
-                  {/* {flow.theme === "Cobrança" ? (
-                  <img src={homeSale} alt="homeSale icon" className="pt-2" />
-                ) : flow.theme === "Financeiro" ? (
-                  <img src={coin} alt="coin icon" className="pt-2" />
-                ) : flow.theme === "Comercial" ? (
-                  <img src={cart} alt="cart icon" className="pt-2" />
-                ) : (
-                  <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0,2)}</span>
-                )} */}
-                  <span className="max-w-[100%] px-1.5 text-white text-xs text-center truncate hover:whitespace-normal mt-3">{flow.title}</span>
-                </button>
-              </div>
             ))}
             {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
               <div className="relative">
