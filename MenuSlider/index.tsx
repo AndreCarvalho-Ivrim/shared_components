@@ -192,53 +192,46 @@ export const MenuSlider = () => {
               </button>
             ))}
             {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
-              <div className="relative">
+              <button
+                className="relative bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
+                onClick={() => redirectToApp({
+                  url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
+                }, toast, navigate)}
+              >
                 <div className={style.adjustCards}> </div>
-                <button
-                  className="bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                  onClick={() => redirectToApp({
-                    url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
-                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
-                  }, toast, navigate)}
-                >
-                  <img
-                    src={iconPagar}
-                    alt="wallet icon"
-                    className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
-                  />
-                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">
-                    Contas a Receber
-                  </span>
+                <img
+                  src={iconPagar}
+                  alt="wallet icon"
+                  className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
+                />
+                <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">
+                  Contas a Receber
+                </span>
 
-                  {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
-                    <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                      <LockIcon w={26} h={26} />
-                    </span>
-                  )}
-                </button>
-              </div>
+                {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
+                  <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
+                    <LockIcon w={26} h={26} />
+                  </span>
+                )}
+              </button>
             )}
             {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
-              <div className="relative">
+              <button
+                className="relative bg-primary-600 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
+                onClick={() => redirectToApp({
+                  url: handleRegexUrl('@hub:old_cap.home', user.token),
+                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
+                }, toast, navigate)}
+              >
                 <div className={style.adjustCards}> </div>
-
-                <button
-                  className="bg-primary-600 hover:bg-primary-600 m-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center"
-                  onClick={() => redirectToApp({
-                    url: handleRegexUrl('@hub:old_cap.home', user.token),
-                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
-                  }, toast, navigate)}
-                >
-                  <img
-                    src={iconPagar}
-                    alt="wallet icon"
-                    className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
-                  />
-                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">Contas a pagar</span>
-                </button>
-              </div>
-
-
+                <img
+                  src={iconPagar}
+                  alt="wallet icon"
+                  className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
+                />
+                <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">Contas a pagar</span>
+              </button>
             ) : !(user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
               <div className="
                 bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
