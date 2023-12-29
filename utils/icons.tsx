@@ -1175,6 +1175,17 @@ export const DashboardImageIcon = (props: IconProps) => (
     className={props.className}
   />
 )
+export const CopyIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
+    viewBox="0 0 24 24"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
+  </svg>
+)
 //#endregion IMAGEM ICONS
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   { component: (props?: IconProps) => <ChevronDownIcon {...props} />, title: 'ChevronDownIcon' },
@@ -1260,7 +1271,8 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <StatsIcon {...props} />, title: 'StatsIcon' },
   { component: (props?: IconProps) => <HomeSaleIcon {...props} />, title: 'HomeSaleIcon' },
   { component: (props?: IconProps) => <CartIcon {...props} />, title: 'CartIcon' },
-  { component: (props?: IconProps) => <PieChartIcon {...props} />, title: 'PieChartIcon' }
+  { component: (props?: IconProps) => <PieChartIcon {...props} />, title: 'PieChartIcon' },
+  { component: (props?: IconProps) => <CopyIcon {...props} />, title: 'CopyIcon' },
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
