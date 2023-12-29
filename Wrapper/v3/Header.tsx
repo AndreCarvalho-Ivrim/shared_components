@@ -19,7 +19,11 @@ export const Header = ({ breadcrumbs } : HeaderProps) => (
               className="group last:font-semibold last:text-primary-800 truncate overflow-clip max-sm:max-w-[6rem]"
             >
               <span className="group-first:hidden mr-1.5">/</span>
-              <Link to={item.href}>{item.name}</Link>
+              {item.href ? (
+                <Link to={item.href}>{item.name}</Link>
+              ):item.onClick ? (
+                <button type="button" onClick={item.onClick}>{item.name}</button>
+              ):item.name}
             </li>
           ))}
         </ul>

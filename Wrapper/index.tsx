@@ -20,6 +20,7 @@ import {
   IsacImageIcon,
   ReportImageIcon,
   VisionImageIcon,
+  CobrancaIcon,
   GameIcon,
   CartIcon,
   IconProps,
@@ -27,6 +28,9 @@ import {
   TableIcon,
   PieChartIcon,
   CompassIcon,
+  MyFinanceIcon,
+  GameIconNew,
+  CartIconNew,
 } from "../utils/icons";
 
 import {
@@ -173,6 +177,12 @@ export const getAsideItems = ({
         name: "Meus Docs.",
         href: handleRegexUrl('@hub:gallery.home', user?.token),
         icon: <MyDocsIcon w={22} h={22} />,
+      },
+      {
+        id: "aside-item-gallery",
+        name: "Fechamentos Finan.",
+        href: handleRegexUrl('@hub:closing_folder.home', user?.token),
+        icon: <MyFinanceIcon w={22} h={22} />,
       },
       {
         id: 'aside-item-notification',
@@ -400,10 +410,11 @@ export const IconByTheme = ({ theme, props = {}, children } : {
   props?: IconProps
 }) => {
   switch (theme) {
-    case "Cobrança":   return  <MoneyIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
-    case "Comercial":  return  <CartIcon  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
-    case "Financeiro": return  <MoneyIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
-    case "Gamificação": return <GameIcon  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Cobrança":   return  <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Comercial":  return  <CartIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Financeiro": return  <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    case "Gamificação": return <GameIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}/>;
+    // case "Compras": return </>;
     default: return <>{children}</>;
   }
 };

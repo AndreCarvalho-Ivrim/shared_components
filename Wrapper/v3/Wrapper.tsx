@@ -6,7 +6,8 @@ import { FooterAsideProps } from "./Aside/FooterAside";
 
 export interface HeaderBreadcrumbs{
   name: string,
-  href: string,
+  href?: string,
+  onClick?: () => void,
   subtitle?: string
 }
 interface WrapperProps{

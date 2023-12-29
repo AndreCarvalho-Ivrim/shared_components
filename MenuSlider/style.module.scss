@@ -102,3 +102,17 @@
   }
  }
 }
+
+.adjustCards {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4.5rem;
+  height: 3.5rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  padding: .5rem .1rem 0 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  border-top-right-radius: 0.35rem;
+}
