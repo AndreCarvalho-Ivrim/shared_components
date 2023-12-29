@@ -75,7 +75,7 @@ export const MenuSlider = () => {
 
       if (!res.data) return;
 
-      setWorkflows(res.data)
+      setWorkflows(res.data.filter(wf => !wf.hidden))
     })()
   }, [toast, user, user?.token]);
 
