@@ -294,7 +294,10 @@ const ModalEnterprise = ({ client, clients, handleChangeClient, modalIsOpen, set
                     h-5 w-5 my-auto text-gray-500
                     rounded-full outline-none focus:ring-gray-100/50 focus:ring-1
                   "
-                  onClick={() => setIsSearching(false)}
+                  onClick={() => {
+                    setIsSearching(false)
+                    setSearch('')
+                  }}
                 ><CloseIcon h={18} w={18}/></button>
               </div>
             )}
