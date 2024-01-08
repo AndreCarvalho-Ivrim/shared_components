@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Client } from "../../../types";
+import { Client, User } from "../../../types";
 
 import logo from '../../../assets/default-client-logo.png';
 import colapse from "../../assets/colapse.svg"
@@ -9,7 +9,7 @@ import { useNotify } from "../../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
 import { hubRoutes } from "../../../shared-types/utils/routes";
 import { Modal } from "../../utils/Modal";
-import { CloseIcon } from "../../utils/icons";
+import { CloseIcon, SearchIcon } from "../../utils/icons";
 
 interface ClientProps extends Client {
   active?: boolean
@@ -36,6 +36,11 @@ export const DropdownChooseEnterprise = () => {
           ...client,
           active: client.id === user.current_client
         }
+      }).sort((a, b) => {
+        const A = a.nome_fantasia.toUpperCase();
+        const B = b.nome_fantasia.toUpperCase();
+
+        return A < B ? -1 : (A > B ? 1 : 0)
       })
     ]);
   }, [user]);
@@ -157,6 +162,28 @@ export const DropdownChooseEnterprise = () => {
     </Dropdown>
   );
 
+  return <ModalEnterprise {...{
+    client,
+    modalIsOpen,
+    setModalIsOpen,
+    user,
+    signOut,
+    clients,
+    handleChangeClient
+  }}/>
+}
+interface ModalEnterpriseProps{
+  client?: ClientProps,
+  modalIsOpen: boolean,
+  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  user?: User,
+  signOut: () => void,
+  clients: ClientProps[],
+  handleChangeClient: (client_id: string, client_name: string) => void
+}
+const ModalEnterprise = ({ client, clients, handleChangeClient, modalIsOpen, setModalIsOpen, signOut, user }: ModalEnterpriseProps) => {
+  const [search, setSearch] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
   return (
     <>
       <button className="flex items-center gap-1" onClick={() => setModalIsOpen(true)}>
@@ -203,8 +230,23 @@ export const DropdownChooseEnterprise = () => {
               <div className="flex items-center gap-4">
                 <img className="h-14 w-14 rounded-full shadow object-cover bg-gray-100" src={user.picture} alt="avatar"/>
                 <div>
-                  <h5 className="mb-0 leading-none font-semibold text-gray-800">{user.name}</h5>
-                  <span className="text-xs block text-gray-600/70 dark:text-gray-400">{user.email}</span>
+                  <div className="flex items-center justify-between gap-4 mb-1">
+                    <div>
+                      <h5 className="mb-0 leading-none font-semibold text-gray-800">{user.name}</h5>
+                      <span className="text-xs block text-gray-600/70 dark:text-gray-400">{user.email}</span>
+                    </div>
+                    {!isSearching && (
+                      <button
+                        type="button"
+                        className="
+                          flex justify-center items-center
+                          h-5 w-5 my-auto text-gray-500
+                          rounded-full outline-none focus:ring-gray-100/50 focus:ring-1
+                        "
+                        onClick={() => setIsSearching(true)}
+                      ><SearchIcon h={18} w={18}/></button>
+                    )}
+                  </div>
 
                   <button
                     type="button"
@@ -226,40 +268,75 @@ export const DropdownChooseEnterprise = () => {
           <button type="button" className="hover:bg-gray-50/10 text-gray-700 rounded-lg p-2 absolute right-1 top-1" onClick={() => setModalIsOpen(false)}>
             <CloseIcon/>
           </button>
-          <div className="
-            flex flex-wrap justify-center items-center
-            w-full max-w-full gap-2 my-4
-          ">
-            {clients.map(c => (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => c.active ? {} : handleChangeClient(c.id, c.nome_fantasia)}
-                className="
-                  w-[10rem] flex rounded-lg gap-2
-                  backdrop-blur-[35px] hover:bg-gray-50/30 shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col
-                  relative overflow-hidden group  cursor-pointer p-4
-                "
-              >
-                <img
-                  alt={c.nome_fantasia}
-                  className="rounded-full object-cover h-16 w-16 mx-auto border"
-                  src={c.picture ?? logo}
-                  onError={(e) => {
-                    let img = e.target as HTMLImageElement;
-                    img.src = logo;
-                  }}
+          <div>
+            {isSearching && (
+              <div className="relative flex items-center py-1">
+                <input
+                  type="text"
+                  id="simple-search"
+                  className="
+                    bg-gray-50/10
+                  border-gray-400/50
+                  text-gray-600 text-sm rounded-lg 
+                    placeholder:text-gray-500
+                  focus:ring-gray-100/20 focus:border-gray-100/20 w-full pr-10 p-2
+                  "
+                  placeholder="Filtrar..."
+                  value={search}
+                  autoFocus
+                  onChange={(e) => setSearch(e.target.value)}
                 />
-                <strong className="font-bold tracking-tight text-gray-800 break-words w-full text-center">
-                  <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-16 block">{c.nome_fantasia}</span>
-                  {c.active && (
-                    <span
-                      className="rounded border border-gray-200 px-1 py-0 text-[9px] uppercase font-medium"
-                    >Selecionado</span>
-                  )}
-                </strong>
-              </button>
-            ))}
+                <button
+                  type="button"
+                  className="
+                    absolute inset-y-0 right-2
+                    flex justify-center items-center
+                    h-5 w-5 my-auto text-gray-500
+                    rounded-full outline-none focus:ring-gray-100/50 focus:ring-1
+                  "
+                  onClick={() => setIsSearching(false)}
+                ><CloseIcon h={18} w={18}/></button>
+              </div>
+            )}
+            <div className="
+              flex flex-wrap justify-center items-center
+              w-full max-w-full gap-2 my-4
+            ">
+              {clients.filter((cli) => !!(search.length === 0 || (
+                cli.nome_fantasia.toLowerCase().includes(
+                  search.toLowerCase()
+                )
+              ))).map(c => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => c.active ? {} : handleChangeClient(c.id, c.nome_fantasia)}
+                  className="
+                    w-[10rem] flex rounded-lg gap-2
+                    backdrop-blur-[35px] hover:bg-gray-50/30 shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col
+                    relative overflow-hidden group  cursor-pointer p-4
+                  "
+                >
+                  <img
+                    alt={c.nome_fantasia}
+                    className="rounded-full object-cover h-16 w-16 mx-auto border"
+                    src={c.picture ?? logo}
+                    onError={(e) => {
+                      let img = e.target as HTMLImageElement;
+                      img.src = logo;
+                    }}
+                  />
+                  <strong className="font-bold tracking-tight text-gray-800 break-words w-full text-center">
+                    <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-16 block">{c.nome_fantasia}</span>
+                    {c.active && (
+                      <span
+                        className="rounded border border-gray-200 px-1 py-0 text-[9px] uppercase font-medium"
+                      >Selecionado</span>
+                    )}
+                  </strong>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </Modal>
