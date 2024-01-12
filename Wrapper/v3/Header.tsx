@@ -63,7 +63,7 @@ export const Header = ({ breadcrumbs } : HeaderProps) => (
       
       <h1 className="text-primary-500 text-4xl font-bold mt-4 max-sm:hidden">{breadcrumbs[breadcrumbs.length - 1].name}</h1>
       {breadcrumbs[breadcrumbs.length - 1].subtitle && (
-        <span className="text-gray-400 text-lg italic -mt-0.5 block">{breadcrumbs[breadcrumbs.length - 1].subtitle}</span>
+        <span className="text-gray-400 text-lg italic -mt-0.5 block max-sm:hidden">{breadcrumbs[breadcrumbs.length - 1].subtitle}</span>
       )}
     </div>
     <div className="flex items-center gap-4">

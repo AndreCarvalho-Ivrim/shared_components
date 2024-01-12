@@ -147,7 +147,7 @@ export const BellNotification = () => {
       }}
       trigger={
         <div className="relative mt-0.5 -mb-0.5">
-          <NotificationIcon className="text-primary-800 max-sm:hidden"/>
+          <NotificationIcon className="text-primary-800"/>
           {unvieweds > 0 && (
             <span className="
               absolute top-1 right-1 bg-primary-800 text-white text-[10px] rounded-full
