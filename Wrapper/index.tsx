@@ -272,7 +272,7 @@ export const getAsideItems = ({
           },
           {
             id: "aside-subitem-admin-hub-companies",
-            name: "Companies",
+            name: "Empresas",
             href: handleRegexUrl('@hub:admin_panel.companies', user.token),
           },
         ]
