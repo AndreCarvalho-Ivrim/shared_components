@@ -1,5 +1,4 @@
-import { ResultAndResponse } from "../../types";
-import { GalleryItemType, GalleryType } from "../../types/gallery.type";
+import { GalleryItemType, GalleryType, ResultAndResponse } from "../../types";
 import { getUrls, handleErrorResultAndResponse, headerBearer, portal } from "./conn/api";
 
 
@@ -51,9 +50,9 @@ export const getGalleries = async (token: string): Promise<GetGalleriesResponse>
     }
   }
 
-  export const getGalleryItems = async (token: string, gallery_id: string): Promise<GetGalleryItemsResponse> => {
+  export const getGalleryItems = async (token: string, gallery_id: string, is_external_id?: boolean): Promise<GetGalleryItemsResponse> => {
     try {
-      const { data } = await portal.get<GetGalleryItemsResponse>(`/gallery/${gallery_id}`, headerBearer(token));
+      const { data } = await portal.get<GetGalleryItemsResponse>(`/gallery/${gallery_id}${is_external_id?'/true':''}`, headerBearer(token));
   
       if (!data.result) throw new Error(
         data.response
