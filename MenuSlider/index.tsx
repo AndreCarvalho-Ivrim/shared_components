@@ -28,16 +28,12 @@ import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 import { IconByTheme } from "../Wrapper";
 
-const clientsWithAccessToCAP = {
-  "3c2c7801-9b58-417f-9809-7313cbbb287f": "IVRIM",
-  "eb5039d9-22ec-4204-b120-d58d6ed9ade8": "LEAD",
-  "2d6c36ea-f8d5-11ed-be56-0242ac120002": "ZAON",
-};
+const clientsWithAccessToCAP = { };
 
 const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
     case "Cobrança": case "Financeiro": return "bg-[#4B92FF] hover:brightness-110";
-    case "Comercial": return "bg-[#E0CFA3] hover:brightness-110";
+    case "Comercial": return "bg-[#CBBC5A] hover:brightness-110";
     case "Gamificação": return "bg-[#006B7F] hover:brightness-110";
     case "Supply": return "bg-[#78A799] hover:brightness-110";
     default: return "bg-primary-700 hover:bg-primary-600";
@@ -185,7 +181,7 @@ export const MenuSlider = () => {
                   </IconByTheme>
                 </div>
                 <div className="mt-10 h-full flex items-center">
-                <span className={`max-w-[100%] px-1.5 text-xs text-center hover:whitespace-normal ${flow.theme === 'Comercial' ? 'text-gray-700 font-semibold' : 'text-white'}`}>
+                <span className={`max-w-[100%] px-1.5 text-xs text-center hover:whitespace-normal font-semibold text-white`}>
                     {flow.title.slice(0, 38)}{flow.title.length > 38 && '...'}
                   </span>
                 </div>
@@ -259,7 +255,7 @@ export const MenuSlider = () => {
               }, toast, navigate)}
             >
               <img src={Mail} alt="Icone de carta" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Modelo de Carta</span>
+              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal font-semibold">Modelo de Carta</span>
 
               {!(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC)) && (
                 <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
@@ -273,7 +269,7 @@ export const MenuSlider = () => {
               onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
             >
               <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal">Admin Console</span>
+              <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal font-semibold">Admin Console</span>
             </button>
 
           </div>
@@ -285,14 +281,14 @@ export const MenuSlider = () => {
               onClick={() => redirectToApp({ url: handleRegexUrl('@hub:gallery.home', user?.token) }, toast, navigate)}
             >
               <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Meus Documentos</span>
+              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal font-semibold">Meus Documentos</span>
             </button>
             <button
               className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
               onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
             >
               <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1 pr-10 truncate hover:whitespace-normal">Usuário</span>
+              <span className="text-xs text-white pt-3 pb-1 pr-10 truncate hover:whitespace-normal font-semibold">Usuário</span>
             </button>
           </div>
 
@@ -302,7 +298,7 @@ export const MenuSlider = () => {
             onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
           >
             <img src={FolderFinance} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
-            <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal">Fechamentos Financeiros</span>
+            <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal font-semibold">Fechamentos Financeiros</span>
           </button>
         </div>
       </div>
