@@ -1144,12 +1144,23 @@ export const SupplyIconNew = (props: IconProps) => (
 export const PieChartIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={props.className}
     viewBox="0 0 24 24"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   >
     <path d="M13 2.051V11h8.949c-.47-4.717-4.232-8.479-8.949-8.949zm4.969 17.953c2.189-1.637 3.694-4.14 3.98-7.004h-8.183l4.203 7.004z"></path><path d="M11 12V2.051C5.954 2.555 2 6.824 2 12c0 5.514 4.486 10 10 10a9.93 9.93 0 0 0 4.255-.964s-5.253-8.915-5.254-9.031A.02.02 0 0 0 11 12z"></path>
+  </svg>
+)
+export const CloudRainIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M18.944 10.112C18.507 6.67 15.56 4 12 4 9.244 4 6.85 5.611 5.757 8.15 3.609 8.792 2 10.82 2 13c0 2.757 2.243 5 5 5h1v3h2v-3h4v3h2v-3h2c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888z"></path><path d="M11 19h2v3h-2z"></path>
   </svg>
 )
 //#region IMAGEM ICONS
@@ -1283,6 +1294,8 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <CartIcon {...props} />, title: 'CartIcon' },
   { component: (props?: IconProps) => <PieChartIcon {...props} />, title: 'PieChartIcon' },
   { component: (props?: IconProps) => <CopyIcon {...props} />, title: 'CopyIcon' },
+  { component: (props?: IconProps) => <CloudRainIcon {...props} />, title: 'CloudRainIcon' },
+  
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
