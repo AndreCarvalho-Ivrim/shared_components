@@ -36,10 +36,10 @@ const clientsWithAccessToCAP = {
 
 const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
-    case "Cobrança": case "Financeiro": return "bg-[#2A1DBA] hover:brightness-110";
-    case "Comercial": return "bg-[#B89417] hover:brightness-110";
+    case "Cobrança": case "Financeiro": return "bg-[#4B92FF] hover:brightness-110";
+    case "Comercial": return "bg-[#E0CFA3] hover:brightness-110";
     case "Gamificação": return "bg-[#006B7F] hover:brightness-110";
-    // case "Compras": return "bg-[#41477D] hover:brightness-110";
+    case "Supply": return "bg-[#78A799] hover:brightness-110";
     default: return "bg-primary-700 hover:bg-primary-600";
   }
 };
@@ -185,7 +185,7 @@ export const MenuSlider = () => {
                   </IconByTheme>
                 </div>
                 <div className="mt-10 h-full flex items-center">
-                  <span className="max-w-[100%] px-1.5 text-white text-xs text-center hover:whitespace-normal">
+                <span className={`max-w-[100%] px-1.5 text-xs text-center hover:whitespace-normal ${flow.theme === 'Comercial' ? 'text-gray-700 font-semibold' : 'text-white'}`}>
                     {flow.title.slice(0, 38)}{flow.title.length > 38 && '...'}
                   </span>
                 </div>

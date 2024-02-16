@@ -31,6 +31,7 @@ import {
   MyFinanceIcon,
   GameIconNew,
   CartIconNew,
+  SupplyIconNew,
 } from "../utils/icons";
 
 import {
@@ -415,11 +416,10 @@ export const IconByTheme = ({ theme, props = {}, children }: {
   props?: IconProps
 }) => {
   switch (theme) {
-    case "Cobrança": return <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
+    case "Cobrança": case "Financeiro": return <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
     case "Comercial": return <CartIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
-    case "Financeiro": return <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
     case "Gamificação": return <GameIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
-    // case "Compras": return </>;
+    case "Supply": return <SupplyIconNew {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}  />;
     default: return <>{children}</>;
   }
 };
