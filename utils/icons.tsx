@@ -1163,38 +1163,46 @@ export const CloudRainIcon = (props: IconProps) => (
     <path d="M18.944 10.112C18.507 6.67 15.56 4 12 4 9.244 4 6.85 5.611 5.757 8.15 3.609 8.792 2 10.82 2 13c0 2.757 2.243 5 5 5h1v3h2v-3h4v3h2v-3h2c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888z"></path><path d="M11 19h2v3h-2z"></path>
   </svg>
 )
-//#region IMAGEM ICONS
-export const IsacImageIcon = (props: IconProps) => (
-  <img
-    src={isac}
-    alt="imagem geometrica isac"
-    width={props.w ?? "24"} height={props.h ?? "24"}
+export const PaperClipIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
     className={props.className}
-  />
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M17.004 5H9c-1.838 0-3.586.737-4.924 2.076C2.737 8.415 2 10.163 2 12c0 1.838.737 3.586 2.076 4.924C5.414 18.263 7.162 19 9 19h8v-2H9c-1.303 0-2.55-.529-3.51-1.49C4.529 14.55 4 13.303 4 12c0-1.302.529-2.549 1.49-3.51C6.45 7.529 7.697 7 9 7h8V6l.001 1h.003c.79 0 1.539.314 2.109.886.571.571.886 1.322.887 2.116a2.966 2.966 0 0 1-.884 2.11A2.988 2.988 0 0 1 17 13H9a.99.99 0 0 1-.698-.3A.991.991 0 0 1 8 12c0-.252.11-.507.301-.698A.987.987 0 0 1 9 11h8V9H9c-.79 0-1.541.315-2.114.889C6.314 10.461 6 11.211 6 12s.314 1.54.888 2.114A2.974 2.974 0 0 0 9 15h8.001a4.97 4.97 0 0 0 3.528-1.473 4.967 4.967 0 0 0-.001-7.055A4.95 4.95 0 0 0 17.004 5z"></path>
+  </svg>
 )
-export const VisionImageIcon = (props: IconProps) => (
-  <img
-    src={vision}
-    alt="imagem geometrica vision"
-    width={props.w ?? "24"} height={props.h ?? "24"}
+export const LikeIcon = (props: IconProps & { isFilled?: boolean }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
     className={props.className}
-  />
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    {props.isFilled ? (
+      <path d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z"></path>
+    ):(
+      <path d="M20 8h-5.612l1.123-3.367c.202-.608.1-1.282-.275-1.802S14.253 2 13.612 2H12c-.297 0-.578.132-.769.36L6.531 8H4c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h13.307a2.01 2.01 0 0 0 1.873-1.298l2.757-7.351A1 1 0 0 0 22 12v-2c0-1.103-.897-2-2-2zM4 10h2v9H4v-9zm16 1.819L17.307 19H8V9.362L12.468 4h1.146l-1.562 4.683A.998.998 0 0 0 13 10h7v1.819z"></path>
+    )}
+  </svg>
 )
-export const ReportImageIcon = (props: IconProps) => (
-  <img
-    src={report}
-    alt="imagem geometrica report"
-    width={props.w ?? "24"} height={props.h ?? "24"}
+export const UnlikeIcon = (props: IconProps & { isFilled?: boolean }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
     className={props.className}
-  />
-)
-export const DashboardImageIcon = (props: IconProps) => (
-  <img
-    src={dashboard}
-    alt="imagem geometrica dashboard"
     width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className}
-  />
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    {props.isFilled ? (
+      <path d="M20 3h-1v13h1a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM4 16h7l-1.122 3.368A2 2 0 0 0 11.775 22H12l5-5.438V3H6l-3.937 8.649-.063.293V14a2 2 0 0 0 2 2z"></path>
+    ):(
+      <path d="M20 3H6.693A2.01 2.01 0 0 0 4.82 4.298l-2.757 7.351A1 1 0 0 0 2 12v2c0 1.103.897 2 2 2h5.612L8.49 19.367a2.004 2.004 0 0 0 .274 1.802c.376.52.982.831 1.624.831H12c.297 0 .578-.132.769-.36l4.7-5.64H20c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm-8.469 17h-1.145l1.562-4.684A1 1 0 0 0 11 14H4v-1.819L6.693 5H16v9.638L11.531 20zM18 14V5h2l.001 9H18z"></path>
+    )}
+  </svg>
 )
 export const CopyIcon = (props: IconProps) => (
   <svg
@@ -1207,7 +1215,6 @@ export const CopyIcon = (props: IconProps) => (
     <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
   </svg>
 )
-//#endregion IMAGEM ICONS
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   { component: (props?: IconProps) => <ChevronDownIcon {...props} />, title: 'ChevronDownIcon' },
   { component: (props?: IconProps) => <ChevronUpDownIcon {...props} />, title: 'ChevronUpDownIcon' },
@@ -1283,19 +1290,19 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <CarouselIcon {...props} />, title: 'CarouselIcon' },
   { component: (props?: IconProps) => <TimeIcon {...props} />, title: 'TimeIcon' },
   { component: (props?: IconProps) => <CodeIcon {...props} />, title: 'CodeIcon' },
-  { component: (props?: IconProps) => <IsacImageIcon {...props} />, title: 'IsacImageIcon' },
-  { component: (props?: IconProps) => <VisionImageIcon {...props} />, title: 'VisionImageIcon' },
   { component: (props?: IconProps) => <PlusCircleIcon {...props} />, title: 'PlusCircleIcon' },
   { component: (props?: IconProps) => <XCircleIcon {...props} />, title: 'XCircleIcon' },
-  { component: (props?: IconProps) => <ReportImageIcon {...props} />, title: 'ReportImageIcon' },
-  { component: (props?: IconProps) => <DashboardImageIcon {...props} />, title: 'DashboardImageIcon' },
   { component: (props?: IconProps) => <StatsIcon {...props} />, title: 'StatsIcon' },
   { component: (props?: IconProps) => <HomeSaleIcon {...props} />, title: 'HomeSaleIcon' },
   { component: (props?: IconProps) => <CartIcon {...props} />, title: 'CartIcon' },
   { component: (props?: IconProps) => <PieChartIcon {...props} />, title: 'PieChartIcon' },
   { component: (props?: IconProps) => <CopyIcon {...props} />, title: 'CopyIcon' },
   { component: (props?: IconProps) => <CloudRainIcon {...props} />, title: 'CloudRainIcon' },
-  
+  { component: (props?: IconProps) => <PaperClipIcon {...props} />, title: 'PaperClipIcon' },
+  { component: (props?: IconProps) => <LikeIcon {...props} />, title: 'LikeIcon' },
+  { component: (props?: IconProps) => <LikeIcon {...props} isFilled/>, title: 'LikeIcon (isFilled)' as any },
+  { component: (props?: IconProps) => <UnlikeIcon {...props} />, title: 'UnlikeIcon' },
+  { component: (props?: IconProps) => <UnlikeIcon {...props} isFilled/>, title: 'UnlikeIcon (isFilled)' as any },
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);

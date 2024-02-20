@@ -4,7 +4,6 @@ import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from "./v3/Wrapper";
 import { AsideItems } from "./v3/Aside";
 import { useAuth } from "../../contexts/AuthContext";
 import {
-  MoneyIcon,
   ProjectIcon,
   UploadIcon,
   UsersIcon,
@@ -16,13 +15,7 @@ import {
   MyDocsIcon,
   NotificationIcon,
   LockIcon,
-  DashboardImageIcon,
-  IsacImageIcon,
-  ReportImageIcon,
-  VisionImageIcon,
   CobrancaIcon,
-  GameIcon,
-  CartIcon,
   IconProps,
   FlowIcon,
   TableIcon,
