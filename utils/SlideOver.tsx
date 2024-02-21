@@ -1,9 +1,11 @@
 import { Fragment, ReactNode } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { CloseIcon } from './icons'
+import { ChatIcon, CloseIcon } from './icons'
 
 interface SlideOverProps{
   title?: string,
+  /** Válido apenas se !!title */
+  subtitle?: ReactNode,
   header?: {
     content: ReactNode,
     mode: 'append' | 'prepend' | 'overwrite'
@@ -12,7 +14,7 @@ interface SlideOverProps{
   isOpen: boolean,
   onClose: () => void
 }
-export const SlideOver = ({ title, children, header, isOpen, onClose }: SlideOverProps) => (
+export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose }: SlideOverProps) => (
   <Transition.Root show={isOpen} as={Fragment}>
     <Dialog as="div" className="relative z-10" onClose={onClose}>
       <Transition.Child
@@ -69,6 +71,11 @@ export const SlideOver = ({ title, children, header, isOpen, onClose }: SlideOve
                           {title && (
                             <div className="px-4 sm:px-6">
                               <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
+                              {subtitle && (
+                                <span className='flex items-center gap-1 text-xs text-gray-500 -mt-0.5'>
+                                  {subtitle}
+                                </span>
+                              )}
                             </div>
                           )}
                           {header.mode === 'append' && header.content}
