@@ -1099,11 +1099,11 @@ export const HomeSaleIcon = (props: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="&#240;&#159;&#166;&#134; icon &#34;home sale&#34;">
-      <path id="Vector" d="M2 17.2778L27 2L52 17.2778" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_2" d="M46.4444 27V44.7778C46.4444 45.6983 45.6983 46.4444 44.7778 46.4444H9.22221C8.30174 46.4444 7.55554 45.6983 7.55554 44.7778V27" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_3" d="M32.5556 18.2395C29.7778 15.6754 22.3703 14.8207 22.3703 19.9489C22.3703 25.077 32.5556 22.5131 32.5556 27.6412C32.5556 32.7695 24.2222 32.7695 21.4445 29.3506" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_4" d="M27 31.7281V35.3334" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_5" d="M27 16.2029V13.1111" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector" d="M2 17.2778L27 2L52 17.2778" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_2" d="M46.4444 27V44.7778C46.4444 45.6983 45.6983 46.4444 44.7778 46.4444H9.22221C8.30174 46.4444 7.55554 45.6983 7.55554 44.7778V27" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_3" d="M32.5556 18.2395C29.7778 15.6754 22.3703 14.8207 22.3703 19.9489C22.3703 25.077 32.5556 22.5131 32.5556 27.6412C32.5556 32.7695 24.2222 32.7695 21.4445 29.3506" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_4" d="M27 31.7281V35.3334" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_5" d="M27 16.2029V13.1111" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
     </g>
   </svg>
 )
@@ -1116,10 +1116,10 @@ export const CartIcon = (props: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="&#240;&#159;&#166;&#134; icon &#34;cart&#34;">
-      <path id="Vector" d="M45.75 52C47.821 52 49.5 50.321 49.5 48.25C49.5 46.179 47.821 44.5 45.75 44.5C43.679 44.5 42 46.179 42 48.25C42 50.321 43.679 52 45.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_2" d="M20.75 52C22.821 52 24.5 50.321 24.5 48.25C24.5 46.179 22.821 44.5 20.75 44.5C18.6789 44.5 17 46.179 17 48.25C17 50.321 18.6789 52 20.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_3" d="M9.5 7H52L47 34.5H14.5L9.5 7ZM9.5 7C9.08333 5.33332 7 2 2 2" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_4" d="M47 34.5H14.5H10.0769C5.61615 34.5 3.25 36.453 3.25 39.5C3.25 42.547 5.61615 44.5 10.0769 44.5H45.75" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector" d="M45.75 52C47.821 52 49.5 50.321 49.5 48.25C49.5 46.179 47.821 44.5 45.75 44.5C43.679 44.5 42 46.179 42 48.25C42 50.321 43.679 52 45.75 52Z" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_2" d="M20.75 52C22.821 52 24.5 50.321 24.5 48.25C24.5 46.179 22.821 44.5 20.75 44.5C18.6789 44.5 17 46.179 17 48.25C17 50.321 18.6789 52 20.75 52Z" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_3" d="M9.5 7H52L47 34.5H14.5L9.5 7ZM9.5 7C9.08333 5.33332 7 2 2 2" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_4" d="M47 34.5H14.5H10.0769C5.61615 34.5 3.25 36.453 3.25 39.5C3.25 42.547 5.61615 44.5 10.0769 44.5H45.75" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
     </g>
   </svg>
 )
