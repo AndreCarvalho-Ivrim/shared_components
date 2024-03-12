@@ -1,9 +1,5 @@
 import { ReactNode } from "react";
 import { AvailableIcons } from "../../shared-types/icon.type";
-import isac from "../assets/IconsGeo_Prancheta 2.svg"
-import vision from "../assets/IconsGeo_Prancheta 3.svg"
-import report from "../assets/IconsGeo_Prancheta 1.svg"
-import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
 
 export interface IconProps { w?: string | number, h?: string | number, className?: string, color?: string }
 export const ChevronDownIcon = (props: IconProps) => (
@@ -1237,6 +1233,21 @@ export const CollapseIcon = (props: IconProps) => (
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   ><path d="M2 15h7v7h2v-9H2v2zM15 2h-2v9h9V9h-7V2z"></path></svg>
+);
+export const FilterIcon = (props: IconProps & { isFilled?: boolean }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    {props.isFilled ? (
+      <path d="M13 20v-4.586L20.414 8c.375-.375.586-.884.586-1.415V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2.585c0 .531.211 1.04.586 1.415L11 15.414V22l2-2z"></path>
+    ):(
+      <path d="M21 3H5a1 1 0 0 0-1 1v2.59c0 .523.213 1.037.583 1.407L10 13.414V21a1.001 1.001 0 0 0 1.447.895l4-2c.339-.17.553-.516.553-.895v-5.586l5.417-5.417c.37-.37.583-.884.583-1.407V4a1 1 0 0 0-1-1zm-6.707 9.293A.996.996 0 0 0 14 13v5.382l-2 1V13a.996.996 0 0 0-.293-.707L6 6.59V5h14.001l.002 1.583-5.71 5.71z"></path>
+    )}
+  </svg>
 )
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   { component: (props?: IconProps) => <ChevronDownIcon {...props} />, title: 'ChevronDownIcon' },
@@ -1323,11 +1334,13 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <CloudRainIcon {...props} />, title: 'CloudRainIcon' },
   { component: (props?: IconProps) => <PaperClipIcon {...props} />, title: 'PaperClipIcon' },
   { component: (props?: IconProps) => <LikeIcon {...props} />, title: 'LikeIcon' },
-  { component: (props?: IconProps) => <LikeIcon {...props} isFilled/>, title: 'LikeIcon (isFilled)' as any },
+  { component: (props?: IconProps) => <LikeIcon {...props} isFilled/>, title: 'LikeIcon (isFilled)' as AvailableIcons },
   { component: (props?: IconProps) => <UnlikeIcon {...props} />, title: 'UnlikeIcon' },
-  { component: (props?: IconProps) => <UnlikeIcon {...props} isFilled/>, title: 'UnlikeIcon (isFilled)' as any },
+  { component: (props?: IconProps) => <UnlikeIcon {...props} isFilled/>, title: 'UnlikeIcon (isFilled)' as AvailableIcons },
   { component: (props?: IconProps) => <MobileIcon {...props}/>, title: 'MobileIcon' },
   { component: (props?: IconProps) => <CollapseIcon {...props}/>, title: 'CollapseIcon' },
+  { component: (props?: IconProps) => <FilterIcon {...props}/>, title: 'FilterIcon' },
+  { component: (props?: IconProps) => <FilterIcon {...props} isFilled/>, title: 'FilterIcon (isFilled)' as AvailableIcons },
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
