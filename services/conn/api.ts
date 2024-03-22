@@ -40,7 +40,7 @@ export const getUrls = (environment: 'front' | 'back' ) => {
     return urls
   }
 }
-
+export const ivrimID = '3c2c7801-9b58-417f-9809-7313cbbb287f';
 const baseURL = getUrls('back')!;
 
 export const wf = axios.create({

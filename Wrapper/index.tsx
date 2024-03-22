@@ -4,7 +4,6 @@ import { HeaderBreadcrumbs, Wrapper as WrapperV3 } from "./v3/Wrapper";
 import { AsideItems } from "./v3/Aside";
 import { useAuth } from "../../contexts/AuthContext";
 import {
-  MoneyIcon,
   ProjectIcon,
   UploadIcon,
   UsersIcon,
@@ -16,13 +15,7 @@ import {
   MyDocsIcon,
   NotificationIcon,
   LockIcon,
-  DashboardImageIcon,
-  IsacImageIcon,
-  ReportImageIcon,
-  VisionImageIcon,
   CobrancaIcon,
-  GameIcon,
-  CartIcon,
   IconProps,
   FlowIcon,
   TableIcon,
@@ -46,6 +39,7 @@ import { getPublishedFlows } from "../services/workflow";
 import { FooterAsideProps } from "./v3/Aside/FooterAside";
 import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { getDashboards } from "../services/dashboard";
+import { ivrimID } from "../services/conn/api";
 
 export interface WrapperProps {
   v?: 3;
@@ -270,12 +264,13 @@ export const getAsideItems = ({
             id: 'aside-subitem-admin-hub-wf',
             name: 'Workflows',
             href: handleRegexUrl('@isac:admin_hub.workflows', user.token)
-          },
-          {
-            id: "aside-subitem-admin-hub-companies",
-            name: "Empresas",
-            href: handleRegexUrl('@hub:admin_panel.companies', user.token),
-          },
+          }, ...(user.current_client === ivrimID ? [
+            {
+              id: "aside-subitem-admin-hub-companies",
+              name: "Empresas",
+              href: handleRegexUrl('@hub:admin_panel.companies', user.token),
+            },
+          ]:[])
         ]
       })
     }
