@@ -44,7 +44,7 @@ export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, 
 
         {children}
         {!omit.includes('button-help') && (
-          <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
+          <div className="absolute bottom-8 right-4 flex flex-col justify-between z-10">
             <ButtonHelp/>
           </div>
         )}

@@ -1,9 +1,5 @@
 import { ReactNode } from "react";
 import { AvailableIcons } from "../../shared-types/icon.type";
-import isac from "../assets/IconsGeo_Prancheta 2.svg"
-import vision from "../assets/IconsGeo_Prancheta 3.svg"
-import report from "../assets/IconsGeo_Prancheta 1.svg"
-import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
 
 export interface IconProps { w?: string | number, h?: string | number, className?: string, color?: string }
 export const ChevronDownIcon = (props: IconProps) => (
@@ -1030,6 +1026,7 @@ export const CarouselIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   >
@@ -1040,6 +1037,7 @@ export const TimeIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   ><path d="M12.25 2c-5.514 0-10 4.486-10 10s4.486 10 10 10 10-4.486 10-10-4.486-10-10-10zM18 13h-6.75V6h2v5H18v2z"></path></svg>
@@ -1048,6 +1046,7 @@ export const CodeIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   >
@@ -1096,11 +1095,11 @@ export const HomeSaleIcon = (props: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="&#240;&#159;&#166;&#134; icon &#34;home sale&#34;">
-      <path id="Vector" d="M2 17.2778L27 2L52 17.2778" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_2" d="M46.4444 27V44.7778C46.4444 45.6983 45.6983 46.4444 44.7778 46.4444H9.22221C8.30174 46.4444 7.55554 45.6983 7.55554 44.7778V27" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_3" d="M32.5556 18.2395C29.7778 15.6754 22.3703 14.8207 22.3703 19.9489C22.3703 25.077 32.5556 22.5131 32.5556 27.6412C32.5556 32.7695 24.2222 32.7695 21.4445 29.3506" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_4" d="M27 31.7281V35.3334" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_5" d="M27 16.2029V13.1111" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector" d="M2 17.2778L27 2L52 17.2778" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_2" d="M46.4444 27V44.7778C46.4444 45.6983 45.6983 46.4444 44.7778 46.4444H9.22221C8.30174 46.4444 7.55554 45.6983 7.55554 44.7778V27" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_3" d="M32.5556 18.2395C29.7778 15.6754 22.3703 14.8207 22.3703 19.9489C22.3703 25.077 32.5556 22.5131 32.5556 27.6412C32.5556 32.7695 24.2222 32.7695 21.4445 29.3506" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_4" d="M27 31.7281V35.3334" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_5" d="M27 16.2029V13.1111" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
     </g>
   </svg>
 )
@@ -1113,10 +1112,10 @@ export const CartIcon = (props: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="&#240;&#159;&#166;&#134; icon &#34;cart&#34;">
-      <path id="Vector" d="M45.75 52C47.821 52 49.5 50.321 49.5 48.25C49.5 46.179 47.821 44.5 45.75 44.5C43.679 44.5 42 46.179 42 48.25C42 50.321 43.679 52 45.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_2" d="M20.75 52C22.821 52 24.5 50.321 24.5 48.25C24.5 46.179 22.821 44.5 20.75 44.5C18.6789 44.5 17 46.179 17 48.25C17 50.321 18.6789 52 20.75 52Z" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_3" d="M9.5 7H52L47 34.5H14.5L9.5 7ZM9.5 7C9.08333 5.33332 7 2 2 2" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      <path id="Vector_4" d="M47 34.5H14.5H10.0769C5.61615 34.5 3.25 36.453 3.25 39.5C3.25 42.547 5.61615 44.5 10.0769 44.5H45.75" stroke={props.color ?? 'currentColor'} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector" d="M45.75 52C47.821 52 49.5 50.321 49.5 48.25C49.5 46.179 47.821 44.5 45.75 44.5C43.679 44.5 42 46.179 42 48.25C42 50.321 43.679 52 45.75 52Z" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_2" d="M20.75 52C22.821 52 24.5 50.321 24.5 48.25C24.5 46.179 22.821 44.5 20.75 44.5C18.6789 44.5 17 46.179 17 48.25C17 50.321 18.6789 52 20.75 52Z" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_3" d="M9.5 7H52L47 34.5H14.5L9.5 7ZM9.5 7C9.08333 5.33332 7 2 2 2" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path id="Vector_4" d="M47 34.5H14.5H10.0769C5.61615 34.5 3.25 36.453 3.25 39.5C3.25 42.547 5.61615 44.5 10.0769 44.5H45.75" stroke={props.color ?? 'currentColor'} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
     </g>
   </svg>
 )
@@ -1152,6 +1151,17 @@ export const PieChartIcon = (props: IconProps) => (
     <path d="M13 2.051V11h8.949c-.47-4.717-4.232-8.479-8.949-8.949zm4.969 17.953c2.189-1.637 3.694-4.14 3.98-7.004h-8.183l4.203 7.004z"></path><path d="M11 12V2.051C5.954 2.555 2 6.824 2 12c0 5.514 4.486 10 10 10a9.93 9.93 0 0 0 4.255-.964s-5.253-8.915-5.254-9.031A.02.02 0 0 0 11 12z"></path>
   </svg>
 )
+export const CopyIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
+  </svg>
+)
 export const CloudRainIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1163,51 +1173,82 @@ export const CloudRainIcon = (props: IconProps) => (
     <path d="M18.944 10.112C18.507 6.67 15.56 4 12 4 9.244 4 6.85 5.611 5.757 8.15 3.609 8.792 2 10.82 2 13c0 2.757 2.243 5 5 5h1v3h2v-3h4v3h2v-3h2c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888z"></path><path d="M11 19h2v3h-2z"></path>
   </svg>
 )
-//#region IMAGEM ICONS
-export const IsacImageIcon = (props: IconProps) => (
-  <img
-    src={isac}
-    alt="imagem geometrica isac"
-    width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className}
-  />
-)
-export const VisionImageIcon = (props: IconProps) => (
-  <img
-    src={vision}
-    alt="imagem geometrica vision"
-    width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className}
-  />
-)
-export const ReportImageIcon = (props: IconProps) => (
-  <img
-    src={report}
-    alt="imagem geometrica report"
-    width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className}
-  />
-)
-export const DashboardImageIcon = (props: IconProps) => (
-  <img
-    src={dashboard}
-    alt="imagem geometrica dashboard"
-    width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className}
-  />
-)
-export const CopyIcon = (props: IconProps) => (
+export const PaperClipIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={props.className}
     viewBox="0 0 24 24"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     style={{ fill: props.color ?? 'currentColor' }}
   >
-    <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
+    <path d="M17.004 5H9c-1.838 0-3.586.737-4.924 2.076C2.737 8.415 2 10.163 2 12c0 1.838.737 3.586 2.076 4.924C5.414 18.263 7.162 19 9 19h8v-2H9c-1.303 0-2.55-.529-3.51-1.49C4.529 14.55 4 13.303 4 12c0-1.302.529-2.549 1.49-3.51C6.45 7.529 7.697 7 9 7h8V6l.001 1h.003c.79 0 1.539.314 2.109.886.571.571.886 1.322.887 2.116a2.966 2.966 0 0 1-.884 2.11A2.988 2.988 0 0 1 17 13H9a.99.99 0 0 1-.698-.3A.991.991 0 0 1 8 12c0-.252.11-.507.301-.698A.987.987 0 0 1 9 11h8V9H9c-.79 0-1.541.315-2.114.889C6.314 10.461 6 11.211 6 12s.314 1.54.888 2.114A2.974 2.974 0 0 0 9 15h8.001a4.97 4.97 0 0 0 3.528-1.473 4.967 4.967 0 0 0-.001-7.055A4.95 4.95 0 0 0 17.004 5z"></path>
   </svg>
 )
-//#endregion IMAGEM ICONS
+export const LikeIcon = (props: IconProps & { isFilled?: boolean }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    {props.isFilled ? (
+      <path d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z"></path>
+    ):(
+      <path d="M20 8h-5.612l1.123-3.367c.202-.608.1-1.282-.275-1.802S14.253 2 13.612 2H12c-.297 0-.578.132-.769.36L6.531 8H4c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h13.307a2.01 2.01 0 0 0 1.873-1.298l2.757-7.351A1 1 0 0 0 22 12v-2c0-1.103-.897-2-2-2zM4 10h2v9H4v-9zm16 1.819L17.307 19H8V9.362L12.468 4h1.146l-1.562 4.683A.998.998 0 0 0 13 10h7v1.819z"></path>
+    )}
+  </svg>
+)
+export const UnlikeIcon = (props: IconProps & { isFilled?: boolean }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    {props.isFilled ? (
+      <path d="M20 3h-1v13h1a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM4 16h7l-1.122 3.368A2 2 0 0 0 11.775 22H12l5-5.438V3H6l-3.937 8.649-.063.293V14a2 2 0 0 0 2 2z"></path>
+    ):(
+      <path d="M20 3H6.693A2.01 2.01 0 0 0 4.82 4.298l-2.757 7.351A1 1 0 0 0 2 12v2c0 1.103.897 2 2 2h5.612L8.49 19.367a2.004 2.004 0 0 0 .274 1.802c.376.52.982.831 1.624.831H12c.297 0 .578-.132.769-.36l4.7-5.64H20c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm-8.469 17h-1.145l1.562-4.684A1 1 0 0 0 11 14H4v-1.819L6.693 5H16v9.638L11.531 20zM18 14V5h2l.001 9H18z"></path>
+    )}
+  </svg>
+)
+export const MobileIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    <path d="M18 22c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2H8c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h10zm-5-5a1 1 0 1 1 0 2 1 1 0 1 1 0-2z"></path>
+  </svg>
+)
+export const CollapseIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  ><path d="M2 15h7v7h2v-9H2v2zM15 2h-2v9h9V9h-7V2z"></path></svg>
+);
+export const FilterIcon = (props: IconProps & { isFilled?: boolean }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  >
+    {props.isFilled ? (
+      <path d="M13 20v-4.586L20.414 8c.375-.375.586-.884.586-1.415V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2.585c0 .531.211 1.04.586 1.415L11 15.414V22l2-2z"></path>
+    ):(
+      <path d="M21 3H5a1 1 0 0 0-1 1v2.59c0 .523.213 1.037.583 1.407L10 13.414V21a1.001 1.001 0 0 0 1.447.895l4-2c.339-.17.553-.516.553-.895v-5.586l5.417-5.417c.37-.37.583-.884.583-1.407V4a1 1 0 0 0-1-1zm-6.707 9.293A.996.996 0 0 0 14 13v5.382l-2 1V13a.996.996 0 0 0-.293-.707L6 6.59V5h14.001l.002 1.583-5.71 5.71z"></path>
+    )}
+  </svg>
+)
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   { component: (props?: IconProps) => <ChevronDownIcon {...props} />, title: 'ChevronDownIcon' },
   { component: (props?: IconProps) => <ChevronUpDownIcon {...props} />, title: 'ChevronUpDownIcon' },
@@ -1283,19 +1324,23 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <CarouselIcon {...props} />, title: 'CarouselIcon' },
   { component: (props?: IconProps) => <TimeIcon {...props} />, title: 'TimeIcon' },
   { component: (props?: IconProps) => <CodeIcon {...props} />, title: 'CodeIcon' },
-  { component: (props?: IconProps) => <IsacImageIcon {...props} />, title: 'IsacImageIcon' },
-  { component: (props?: IconProps) => <VisionImageIcon {...props} />, title: 'VisionImageIcon' },
   { component: (props?: IconProps) => <PlusCircleIcon {...props} />, title: 'PlusCircleIcon' },
   { component: (props?: IconProps) => <XCircleIcon {...props} />, title: 'XCircleIcon' },
-  { component: (props?: IconProps) => <ReportImageIcon {...props} />, title: 'ReportImageIcon' },
-  { component: (props?: IconProps) => <DashboardImageIcon {...props} />, title: 'DashboardImageIcon' },
   { component: (props?: IconProps) => <StatsIcon {...props} />, title: 'StatsIcon' },
   { component: (props?: IconProps) => <HomeSaleIcon {...props} />, title: 'HomeSaleIcon' },
   { component: (props?: IconProps) => <CartIcon {...props} />, title: 'CartIcon' },
   { component: (props?: IconProps) => <PieChartIcon {...props} />, title: 'PieChartIcon' },
   { component: (props?: IconProps) => <CopyIcon {...props} />, title: 'CopyIcon' },
   { component: (props?: IconProps) => <CloudRainIcon {...props} />, title: 'CloudRainIcon' },
-  
+  { component: (props?: IconProps) => <PaperClipIcon {...props} />, title: 'PaperClipIcon' },
+  { component: (props?: IconProps) => <LikeIcon {...props} />, title: 'LikeIcon' },
+  { component: (props?: IconProps) => <LikeIcon {...props} isFilled/>, title: 'LikeIcon (isFilled)' as AvailableIcons },
+  { component: (props?: IconProps) => <UnlikeIcon {...props} />, title: 'UnlikeIcon' },
+  { component: (props?: IconProps) => <UnlikeIcon {...props} isFilled/>, title: 'UnlikeIcon (isFilled)' as AvailableIcons },
+  { component: (props?: IconProps) => <MobileIcon {...props}/>, title: 'MobileIcon' },
+  { component: (props?: IconProps) => <CollapseIcon {...props}/>, title: 'CollapseIcon' },
+  { component: (props?: IconProps) => <FilterIcon {...props}/>, title: 'FilterIcon' },
+  { component: (props?: IconProps) => <FilterIcon {...props} isFilled/>, title: 'FilterIcon (isFilled)' as AvailableIcons },
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
