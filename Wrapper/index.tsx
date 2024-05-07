@@ -25,6 +25,7 @@ import {
   GameIconNew,
   CartIconNew,
   SupplyIconNew,
+  EnvelopeIcon,
 } from "../utils/icons";
 
 import {
@@ -276,11 +277,11 @@ export const getAsideItems = ({
     }
   } else
     if (module_name) {
-      if (['Co-Pilot Dashboard', 'System Architect', 'Report'].includes(module_name)) defaultAsideItems = [
+      if(module_name === 'System Architect') defaultAsideItems = [
         {
           id: 'aside-item-isac',
           name: 'ISAC',
-          icon: <FlowIcon w={22} h={22} />,
+          icon: <FlowIcon w={22} h={22}/>,
           disabled: !user?.permitions_slug?.includes(
             PossiblePermissions.ISAC
           ),
@@ -291,11 +292,7 @@ export const getAsideItems = ({
               id: 'aside-subitem-workflows',
               name: 'Workflows',
               href: handleRegexUrl('@isac:workflow.home', user?.token),
-            }, {
-              id: 'aside-subitem-templates',
-              name: 'Modelos',
-              href: handleRegexUrl('@isac:template', user?.token),
-            }
+            }, 
           ] : []), ...(publishedFlows ? publishedFlows.map((flow) => ({
             id: flow._id,
             href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
@@ -307,18 +304,29 @@ export const getAsideItems = ({
             name: flow.title,
           })) : [])]
         }, {
+          id: 'aside-templates',
+          name: 'Modelos',
+          icon: <EnvelopeIcon w={22} h={22}/>,
+          href: handleRegexUrl('@isac:template', user?.token),
+          disabled: !user?.permitions_slug?.includes(
+            PossiblePermissions.ISAC
+          ),
+        }
+      ];
+      else if (['Co-Pilot Dashboard', 'Report'].includes(module_name)) defaultAsideItems = [
+        {    // VISIO
           id: 'vision',
           href: '#',
           name: 'Vision',
           icon: <CompassIcon w={22} h={22} />,
           disabled: true
-        }, {
+        }, { // REPORT
           id: 'report',
           href: handleRegexUrl('@isac:report.home', user?.token),
           name: 'Report',
           icon: <TableIcon w={22} h={22} />,
           disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
-        }, {
+        }, { // DASHBOARD
           id: 'aside-item-dashboard',
           name: 'Dashboard',
           icon: <PieChartIcon w={22} h={22} />,
