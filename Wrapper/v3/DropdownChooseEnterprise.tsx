@@ -55,12 +55,8 @@ export const DropdownChooseEnterprise = () => {
 
     const pathname = window.location.hash ? window.location.hash.slice(1) : '/'
 
-    if(!globalRoutes.includes(pathname)){
-      console.log('[redirected-to-home]')
-      navigate('/')
-    }
+    if(!globalRoutes.includes(pathname)) navigate('/')
 
-    console.log('[on-change-client-from:]', { pathname });
     toast.promise(changeClient(client_id, client_name, user.token), {
       'pending': 'Alterando empresa',
       'error': 'Houve um erro ao alterar a empresa',

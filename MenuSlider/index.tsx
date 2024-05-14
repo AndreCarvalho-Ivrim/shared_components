@@ -123,7 +123,6 @@ export const MenuSlider = () => {
       if (!res.data) return;
   
       const fixeds = getStorageFixeds();
-      console.log({ fixeds })
   
       const availableFlows = res.data.filter(wf => !wf.hidden);
       setWorkflows(fixeds.length > 0 ? availableFlows.sort((a,b) => {
