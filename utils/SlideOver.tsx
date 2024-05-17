@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CloseIcon } from './icons'
 
 interface SlideOverProps{
+  refContainer?: React.RefObject<HTMLDivElement>,
   full?: boolean,
   title?: string,
   /** Válido apenas se !!title */
@@ -15,7 +16,7 @@ interface SlideOverProps{
   isOpen: boolean,
   onClose: () => void
 }
-export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full }: SlideOverProps) => (
+export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer }: SlideOverProps) => (
   <Transition.Root show={isOpen} as={Fragment}>
     <Dialog as="div" className="relative z-10" onClose={onClose}>
       <Transition.Child
@@ -63,7 +64,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl" ref={refContainer}>
                   {header ? (
                     <>
                       {header.mode === 'overwrite' ? header.content : (
