@@ -14,9 +14,13 @@ interface SlideOverProps{
   },
   children: ReactNode,
   isOpen: boolean,
-  onClose: () => void
+  onClose: () => void,
+  classNames?:{
+    wrapper?: string,
+    container?: string
+  }
 }
-export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer }: SlideOverProps) => (
+export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer, classNames }: SlideOverProps) => (
   <Transition.Root show={isOpen} as={Fragment}>
     <Dialog as="div" className="relative z-10" onClose={onClose}>
       <Transition.Child
@@ -43,7 +47,11 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <Dialog.Panel className={`pointer-events-auto relative w-screen ${full ? 'w-full':'max-w-md'}`}>
+              <Dialog.Panel className={`pointer-events-auto relative w-screen ${
+                classNames?.wrapper ?? (
+                  full ? 'w-full':'max-w-md'
+                )
+              }`}>
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-500"
@@ -93,7 +101,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                       )}
                     </>
                   )}
-                  <div className="relative mt-4 flex-1 px-4 sm:px-6">
+                  <div className={classNames?.container ?? "relative mt-4 flex-1 px-4 sm:px-6"}>
                     { children }
                   </div>
                 </div>
