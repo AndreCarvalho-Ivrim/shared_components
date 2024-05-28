@@ -20,4 +20,3 @@
       VITE_BASE_URL                # URL DO WF BACKEND
       VITE_AUTH_URL                # URL DO PORTAL BACKEND
     ```
-### TEST DE COMMIT
