@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Client } from "../../../types";
 
-import logo from '../../../assets/default-client-logo.png';
+import logo from '../../assets/default-client.jpg';
 import colapse from "../../assets/colapse.svg"
 import { Dropdown } from "../../utils/Dropdown";
 import { useNotify } from "../../../contexts/NotifyContext";
