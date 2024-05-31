@@ -1,6 +1,6 @@
 import { DashboardType, ResultAndResponse } from "../../shared-types";
 
-import { headerBearer, handleErrorResultAndResponse, portal } from "./conn/api";
+import { headerBearer, handleErrorResultAndResponse, portal, wf } from "./conn/api";
 
 let cacheDashboards : { token: string, onlyActive: boolean, data: DashboardsResponse }[] = []
 export const clearCacheDashboards = () => cacheDashboards = [];
@@ -22,11 +22,14 @@ export const getDashboards = async (token: string, onlyActive: boolean = false) 
 
   try{
     console.log('[requested-get-dashboards]');
-    const { data } = await portal.get(`/dashboard${onlyActive ? `/?onlyActive=true`:''}`, headerBearer(token));
+    const { data } = await portal.get<DashboardsResponse>(`/dashboard${onlyActive ? `/?onlyActive=true`:''}`, headerBearer(token));
     
-    if(!data.result) throw new Error(
-      data.response
-    );
+    if(!data.result) throw new Error(data.response);
+    if(!data.data) data.data = [];
+
+    const { data: isacRes } = await wf.get<DashboardsResponse>('/flows/dashboards', headerBearer(token));
+    if(!isacRes.result) throw new Error(isacRes.response)
+    if(isacRes.data) data.data.push(...isacRes.data);
 
     cacheDashboards.push({ token, onlyActive, data })
     

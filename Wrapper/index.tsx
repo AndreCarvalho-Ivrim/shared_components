@@ -351,7 +351,9 @@ export const getAsideItems = ({
             ...(dashboards ? dashboards.map((dash) => ({
               id: `aside-subitem-dashboard-${dash.id}`,
               name: dash.title,
-              href: handleRegexUrl(`@hub:dashboard.show(${dash.slug})` as any)
+              href: dash.link.includes('@isac:workflow.exec') ? handleRegexUrl(dash.link as any, user.token) : handleRegexUrl(
+                `@hub:dashboard.show(${dash.slug})` as any, user.token
+              )
             })) : [])
           ] : undefined,
         },
@@ -365,9 +367,7 @@ export const getAsideItems = ({
               id: "aside-subitem-compras-e-contas-a-pagar",
               name: "Contas a Pagar",
               href: handleRegexUrl('@hub:old_cap.home', user?.token),
-              disabled: !user?.permitions_slug?.includes(
-                PossiblePermissions.CONTAS_A_PAGAR
-              ),
+              disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR),
             },
             {
               id: "aside-subitem-alertas",
