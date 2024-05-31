@@ -1,8 +1,10 @@
 import { Fragment, ReactNode } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ChatIcon, CloseIcon } from './icons'
+import { CloseIcon } from './icons'
 
 interface SlideOverProps{
+  refContainer?: React.RefObject<HTMLDivElement>,
+  full?: boolean,
   title?: string,
   /** Válido apenas se !!title */
   subtitle?: ReactNode,
@@ -12,9 +14,13 @@ interface SlideOverProps{
   },
   children: ReactNode,
   isOpen: boolean,
-  onClose: () => void
+  onClose: () => void,
+  classNames?:{
+    wrapper?: string,
+    container?: string
+  }
 }
-export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose }: SlideOverProps) => (
+export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer, classNames }: SlideOverProps) => (
   <Transition.Root show={isOpen} as={Fragment}>
     <Dialog as="div" className="relative z-10" onClose={onClose}>
       <Transition.Child
@@ -31,7 +37,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose }
 
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+          <div className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10`}>
             <Transition.Child
               as={Fragment}
               enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -41,7 +47,11 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose }
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <Dialog.Panel className="pointer-events-auto relative w-screen max-w-md">
+              <Dialog.Panel className={`pointer-events-auto relative w-screen ${
+                classNames?.wrapper ?? (
+                  full ? 'w-full':'max-w-md'
+                )
+              }`}>
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-500"
@@ -62,7 +72,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose }
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl" ref={refContainer}>
                   {header ? (
                     <>
                       {header.mode === 'overwrite' ? header.content : (
@@ -91,7 +101,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose }
                       )}
                     </>
                   )}
-                  <div className="relative mt-4 flex-1 px-4 sm:px-6">
+                  <div className={classNames?.container ?? "relative mt-4 flex-1 px-4 sm:px-6"}>
                     { children }
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import { Client, User } from "../../../shared-types";
 import { SearchIcon, CloseIcon } from "../../utils/icons";
 import { Modal } from "../../utils/Modal";
 import colapse from "../../assets/colapse.svg"
-import logo from '../../../assets/default-client-logo.png';
+import logo from '../../assets/default-client.jpg';
 
 interface ClientProps extends Client { active?: boolean, type?: undefined }
 interface EconomicGroup{
