@@ -35,7 +35,21 @@ export const ModalCalendar = ({ calendarConfig, onClose }: ModalCalendarProps) =
       nextDate.getMonth() as MonthIndex
     ])
   },[]);
+  useEffect(() => {
+    if(!calendarConfig?.defaultValue) return;
 
+    if(typeof calendarConfig.defaultValue !== 'object' || 
+      !calendarConfig.defaultValue.startDate || 
+      !calendarConfig.defaultValue.endDate
+    ) return;
+
+    setSelectedDate(calendarConfig.defaultValue);
+    
+    let [leftY, leftM] = calendarConfig.defaultValue.startDate.split('-');
+    let [rightY, rightM] = calendarConfig.defaultValue.endDate.split('-');
+    if(leftY && leftM) setLeftYearAndMonth([Number(leftY), (Number(leftM) - 1) as MonthIndex])
+    if(rightY && rightM) setRightYearAndMonth([Number(rightY), (Number(rightM) - 1) as MonthIndex])
+  },[calendarConfig])
   return (
     <Modal
       zIndex="z-50"
@@ -49,7 +63,10 @@ export const ModalCalendar = ({ calendarConfig, onClose }: ModalCalendarProps) =
         },
         ...(calendarConfig?.defaultValue ? {
           cancelButtonText: 'Limpar Seleção',
-          cancelButtonFn: calendarConfig.onRemove
+          cancelButtonFn: () => {
+            calendarConfig.onRemove();
+            onClose();
+          }
         }:{}),
         actionButton: calendarConfig && selectedDate?.startDate && selectedDate.endDate ? {
           onClick: () => {

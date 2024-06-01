@@ -92,7 +92,6 @@ export const MonthCalendar = ({ yearAndMonth, selectedDate, setSelectedDate }:Mo
       else if(day.type === 'prev-month') dateStr = parseDateString(...prevYearAndMonth, day.day);
       else if(day.type === 'next-month') dateStr = parseDateString(...nextYearAndMonth, day.day);
 
-      console.log({ selectedDate, dateStr });
       if(selectedDate?.startDate && dateStr){
         if(selectedDate.startDate === dateStr){
           if(selectedDate.endDate === dateStr) return {
@@ -133,9 +132,8 @@ export const MonthCalendar = ({ yearAndMonth, selectedDate, setSelectedDate }:Mo
     else if(day.type === 'prev-month') dateStr = parseDateString(...prevYearAndMonth, day.day);
     else if(day.type === 'next-month') dateStr = parseDateString(...nextYearAndMonth, day.day);
 
-    if(!dateStr) return;
-
     setSelectedDate((prevState) => {
+      if(!dateStr) return prevState;
       if(prevState?.startDate && !prevState.endDate){
         if(dateStr < prevState.startDate) return {
           startDate: dateStr, endDate: prevState.startDate
