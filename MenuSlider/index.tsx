@@ -1,5 +1,5 @@
 import style from "./style.module.scss";
-import logo from "../assets/logo-hub.png";
+import logo from "../assets/ISAC.png";
 import ISAC from "../assets/ISAC_PB.png";
 import DASHBOARD from "../assets/IVRIM-DASHBOARD_PB.png";
 import REPORT from "../assets/IVRIM-REPORT_PB.png";
@@ -27,6 +27,7 @@ import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 import { IconByTheme } from "../Wrapper";
+import { ActivityPanel } from "../ActivityPanel";
 
 const clientsWithAccessToCAP = { };
 
@@ -156,7 +157,7 @@ export const MenuSlider = () => {
         w-full sm:max-w-[616px] lg:max-w-[95%] xl:max-w-[1580px] 
         mx-auto gap-2
       ">
-        <section className="flex flex-col sm:flex-row w-full sm:w-auto">
+        <section className="flex flex-col sm:flex-row w-full sm:w-auto items-start">
           <div className="grid grid-cols-1 xsm:grid-cols-2 w-full">
             {[
               {
@@ -310,17 +311,17 @@ export const MenuSlider = () => {
           </div>
         </section>
 
-        <div className="flex flex-col">
-          <div className="flex">
+        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+          <div className="grid xsm:grid-cols-3">
             <button
               type="button"
-              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60 relative" onClick={() => redirectToApp({
+              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center relative" onClick={() => redirectToApp({
                 url: handleRegexUrl('@isac:template', user?.token),
                 disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC))
               }, toast, navigate)}
             >
               <img src={Mail} alt="Icone de carta" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal font-semibold">Modelo de Carta</span>
+              <span className="text-xs text-white pb-1 w-full truncate hover:whitespace-normal font-semibold">Modelos</span>
 
               {!(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC)) && (
                 <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
@@ -328,43 +329,42 @@ export const MenuSlider = () => {
                 </span>
               )}
             </button>
-
             <button
-              className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
+              type="button"
+              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center"
+              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:gallery.home', user?.token) }, toast, navigate)}
+            >
+              <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
+              <span className="text-xs text-white pb-1 w-full truncate hover:whitespace-normal font-semibold">Documentos</span>
+            </button>
+            <button
+              className="bg-primary-100/90 m-1 h-24 rounded-md flex flex-col justify-center items-center"
+              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
+            >
+              <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
+              <span className="text-xs text-white pt-3 pb-1 truncate hover:whitespace-normal font-semibold">Usuário</span>
+            </button>
+          </div>
+
+          <div className="grid xsm:grid-cols-3">
+            <button
+              type="button"
+              className="bg-primary-600 xsm:col-span-2 m-1 h-26 rounded-md flex flex-col justify-center items-center"
+              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
+            >
+              <img src={FolderFinance} alt="Icone de arquivos" width={50} height={100} className="mt-3" />
+              <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Fechamentos Financeiros</span>
+            </button>  
+            <button
+              className="bg-primary-100/90 m-1 h-26 rounded-md flex flex-col justify-center items-center"
               onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
             >
               <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
               <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal font-semibold">Admin Console</span>
             </button>
-
           </div>
 
-          <div className="flex">
-            <button
-              type="button"
-              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center w-full xsm:w-[14rem] lg:w-60"
-              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:gallery.home', user?.token) }, toast, navigate)}
-            >
-              <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal font-semibold">Meus Documentos</span>
-            </button>
-            <button
-              className="bg-primary-100/90 m-1 w-24 h-26 rounded-md flex flex-col justify-center items-center"
-              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
-            >
-              <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1 pr-10 truncate hover:whitespace-normal font-semibold">Usuário</span>
-            </button>
-          </div>
-
-          <button
-            type="button"
-            className="bg-primary-600 m-1 h-26 rounded-md flex flex-col justify-center items-center"
-            onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
-          >
-            <img src={FolderFinance} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
-            <span className="text-xs text-white pb-1 pl-3 text-start w-full truncate hover:whitespace-normal font-semibold">Fechamentos Financeiros</span>
-          </button>
+          <ActivityPanel/>
         </div>
       </div>
 
