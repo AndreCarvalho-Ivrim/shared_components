@@ -66,7 +66,7 @@ export async function logout() : Promise<ResultAndResponse>{
     });
   });
 }
-interface ChangeCurrentClientResponseType extends ResultAndResponse{
+export interface ChangeCurrentClientResponseType extends ResultAndResponse{
   data?: {
     token: string,
     permitions: Permition[],
