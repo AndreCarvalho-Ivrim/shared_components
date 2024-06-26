@@ -5,7 +5,7 @@ import { CloseIcon } from './icons'
 interface SlideOverProps{
   refContainer?: React.RefObject<HTMLDivElement>,
   full?: boolean,
-  title?: string,
+  title?: string | ReactNode,
   /** Válido apenas se !!title */
   subtitle?: ReactNode,
   header?: {
