@@ -1,4 +1,5 @@
 import defaultUser from '../assets/default-user.png';
+import { classNames } from './shortclass';
 
 interface AvatarProps{
   picture?: string,
@@ -6,19 +7,30 @@ interface AvatarProps{
   email?: string,
   className?: string,
   style?: React.CSSProperties
+  size?: 'md' | 'lg'
 }
-export const Avatar = ({ picture, name, email, className, style }:AvatarProps) => (
+export const Avatar = ({ picture, name, email, className, style, size = 'md' }:AvatarProps) => (
   <div className={className} style={style}>
     {picture ? (
       <img
         alt={name ?? email ?? "Avatar"}
-        className="rounded-full object-cover w-7 h-7"
+        className={classNames({
+          'rounded-full object-cover': true,
+          'w-7 h-7': size === 'md',
+          'w-14 h-14': size === 'lg'
+        })}
         src={picture}
         onError={(e) => {
           let img = e.target as HTMLImageElement;
           img.src = defaultUser;
         }}
       />
-    ):(<div className="w-7 h-7 rounded-full bg-gray-300/50"/>)}
+    ):(
+      <div className={classNames({
+        'rounded-full bg-gray-300/50': true,
+        'w-7 h-7': size === 'md',
+        'w-14 h-14': size === 'lg'
+      })}/>
+    )}
   </div>
 )
