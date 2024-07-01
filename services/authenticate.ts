@@ -75,7 +75,7 @@ export interface ChangeCurrentClientResponseType extends ResultAndResponse{
 }
 export async function changeCurrentClient(client_id: string, token: string) : Promise<ChangeCurrentClientResponseType>{
   try{
-    const { data } = await portal.get(`/token/${client_id}`, headerBearer(token));
+    const { data } = await portal.get(`/auth/token/${client_id}`, headerBearer(token));
 
     let permitions_slug = handleFormatPermitionsSlug(data.permitions);
 
