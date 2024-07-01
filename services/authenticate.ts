@@ -2,48 +2,42 @@ import { storageKeys } from "../../contexts/AuthContext";
 import { ResultAndResponse, User, PossiblePermissions, Permition, UserCategory } from "../../shared-types";
 import { headerBearer, handleErrorResultAndResponse, portal } from "./conn/api";
 
+export const cachedUser = new (class CachedUser {
+  protected _val: User | undefined;
+  get(){ return this._val }
+  set(user: User | undefined){ this._val = user; }
+})()
+
 export interface ResponseMeAuth extends ResultAndResponse{
   data?: User
 }
 export async function me(token: string) : Promise<ResponseMeAuth>{
+  const user = cachedUser.get();
+
+  if(user){
+    console.log('[cached-user]');
+    return {
+      result: true,
+      response: 'Dados do usuário carregado',
+      data: user
+    }
+  }
+
   console.log('[request-refresh-user]');
   try{
-    const { data } = await portal.get<User>('/me', headerBearer(token));
-    let current_client : string | null = data.current_client ? data.current_client : (
-      // @ts-ignore
-      data.currentClientId ?? null
-    );
+    const { data } = await portal.get<User>('/auth/me', headerBearer(token));
     
-    let permitions : PossiblePermissions[] = [];
-    if(data.userCategories && Array.isArray(data.userCategories)){
-      data.userCategories.forEach((userCat: any) => {
-        const userCategory : UserCategory = userCat.userCategory;
-
-        if(userCategory.clientId !== current_client) return;
-        
-        if(userCategory.permitions && Array.isArray(userCategory.permitions) && userCategory.permitions.length > 0){
-          userCategory.permitions.forEach((perm: any) => {
-            if(!perm.permition) return;
-            if(perm.permition.slug) permitions.push(perm.permition.slug as PossiblePermissions)
-          })
-        }
-      });
-    }
-
-    handleFormatPermitionsSlug(data.permitions);
+    let permitions = handleFormatPermitionsSlug(data.permitions) as PossiblePermissions[];
+    
+    data.permitions_slug = permitions;
+    data.token = token;
+    
+    cachedUser.set(data);
 
     return {
       result: true,
       response: 'Dados do usuário carregado',
-      data: {
-        ...data,
-        ...(current_client ? { current_client }:{} ),
-        client_name: ( data.client_name ? data.client_name : (
-          current_client ? data.clients?.find(c => c.id === current_client)?.nome_fantasia : ''
-        )),
-        token,
-        permitions_slug: permitions
-      }
+      data
     };
   }
   catch(e: any){
@@ -54,10 +48,10 @@ export async function me(token: string) : Promise<ResponseMeAuth>{
   }
 }
 export async function logout() : Promise<ResultAndResponse>{
-  sessionStorage.removeItem(storageKeys.user);
   sessionStorage.removeItem(storageKeys.token);
-  localStorage.removeItem(storageKeys.user);
   localStorage.removeItem(storageKeys.token);
+
+  cachedUser.set(undefined)
 
   return new Promise((resolve) => {
     resolve({
@@ -75,17 +69,17 @@ export interface ChangeCurrentClientResponseType extends ResultAndResponse{
 }
 export async function changeCurrentClient(client_id: string, token: string) : Promise<ChangeCurrentClientResponseType>{
   try{
-    const { data } = await portal.get(`/token/${client_id}`, headerBearer(token));
+    const { data } = await portal.get(`/auth/token/${client_id}`, headerBearer(token));
 
     let permitions_slug = handleFormatPermitionsSlug(data.permitions);
+
+    const user = { ...data, permitions_slug }
+    cachedUser.set(user);
 
     return {
       result: true,
       response: 'Empresa alterada com sucesso',
-      data: {
-        ...data,
-        permitions_slug
-      }
+      data: user
     };
   }catch(e){
     console.error(e);
