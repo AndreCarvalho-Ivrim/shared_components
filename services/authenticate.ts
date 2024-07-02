@@ -1,5 +1,5 @@
 import { storageKeys } from "../../contexts/AuthContext";
-import { ResultAndResponse, User, PossiblePermissions, Permition, UserCategory } from "../../shared-types";
+import { ResultAndResponse, User, PossiblePermissions, Permition } from "../../shared-types";
 import { headerBearer, handleErrorResultAndResponse, portal } from "./conn/api";
 
 export const cachedUser = new (class CachedUser {
