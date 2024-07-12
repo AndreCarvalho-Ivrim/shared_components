@@ -59,6 +59,19 @@ export const invalidTokenJWT = () => {
   window.location.reload();
 }
 
+export const removeTokenJWT = () => {
+  sessionStorage.removeItem(authStorageKeys.user);
+  sessionStorage.removeItem(authStorageKeys.token);
+  localStorage.removeItem(authStorageKeys.user);
+  localStorage.removeItem(authStorageKeys.token);
+
+  window.location.reload();
+}
+
+export const anotherSession = () => {
+  window.location.href = '/#/session';
+}
+
 export const headerBearer = (token: string) => ({
   headers: {
     "Authorization": `Bearer ${token}`,
@@ -67,6 +80,8 @@ export const headerBearer = (token: string) => ({
 
 export const handleErrorResultAndResponse = (e: any, defaultReturn?: ResultAndResponse) : ResultAndResponse => {
   if(e.response && e.response.data){
+    if(e.response.data && e.response.data === 'There is already another session') anotherSession();
+
     if(typeof e.response.data === 'string') return {
       result: false,
       response: e.response.data
