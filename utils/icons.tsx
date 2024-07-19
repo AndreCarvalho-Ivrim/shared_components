@@ -598,6 +598,61 @@ export const EnvelopeOpenIcon = (props: IconProps) => (
     <path d="m21.555 8.168-9-6a1 1 0 0 0-1.109 0l-9 6A1 1 0 0 0 2 9v11c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V9c0-.334-.167-.646-.445-.832zM12 4.202 19.197 9 12 13.798 4.803 9 12 4.202zM4 20v-9.131l7.445 4.963a1 1 0 0 0 1.11 0L20 10.869 19.997 20H4z"></path>
   </svg>
 )
+export const DesktopIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    className={props.className ?? ''}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }} 
+    viewBox="0 0 576 512"
+  >
+    <path d="M64 0C28.7 0 0 28.7 0 64L0 352c0 35.3 28.7 64 64 64l176 0-10.7 32L160 448c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-69.3 0L336 416l176 0c35.3 0 64-28.7 64-64l0-288c0-35.3-28.7-64-64-64L64 0zM512 64l0 224L64 288 64 64l448 0z"/>
+  </svg>
+);
+export const CellPhoneIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    className={props.className ?? ''}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }} 
+    viewBox="0 0 384 512"
+  >
+    <path d="M16 64C16 28.7 44.7 0 80 0L304 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L80 512c-35.3 0-64-28.7-64-64L16 64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64L80 64l0 320 224 0 0-320z"/>
+  </svg>
+);
+export const TabletIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    className={props.className ?? ''}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }} 
+    viewBox="0 0 448 512"
+  >
+    <path d="M0 64C0 28.7 28.7 0 64 0L384 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zM256 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM384 64L64 64l0 320 320 0 0-320z"/>
+  </svg>
+);
+export const TvIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    className={props.className ?? ''}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}  
+    viewBox="0 0 640 512"
+  >
+    <path d="M64 64l0 288 512 0 0-288L64 64zM0 64C0 28.7 28.7 0 64 0L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 416c-35.3 0-64-28.7-64-64L0 64zM128 448l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-384 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/>
+  </svg>
+);
+export const WearableIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    className={props.className ?? ''}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}  
+    viewBox="0 0 512 512"
+  >
+    <path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
+  </svg>
+);
 export const SearchIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
