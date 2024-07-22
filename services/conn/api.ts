@@ -70,7 +70,9 @@ export const removeTokenJWT = () => {
 }
 
 export const anotherSession = () => {
-  window.location.href = handleRegexUrl('@hub:session.home');
+  let url = handleRegexUrl('@hub:session.home');
+  if(url.slice(0, 4) !== 'http') url = `/#${url}`;
+  window.location.href = url
 }
 
 export const headerBearer = (token: string) => ({
