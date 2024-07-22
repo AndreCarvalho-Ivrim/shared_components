@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ResultAndResponse } from "../../../types";
 import { authStorageKeys } from "../cache";
+import { handleRegexUrl } from "../../../shared-types/utils/routes";
 
 export const getUrls = (environment: 'front' | 'back' ) => {
   if(environment === 'front'){
@@ -69,7 +70,7 @@ export const removeTokenJWT = () => {
 }
 
 export const anotherSession = () => {
-  window.location.href = '/#/session';
+  window.location.href = handleRegexUrl('@hub:session.home');
 }
 
 export const headerBearer = (token: string) => ({
