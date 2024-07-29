@@ -17,6 +17,7 @@ export interface ModalOptionsType{
   type?: 'danger' | 'success' | null,
   size?: string,
   cancelButton?: boolean,
+  /** Cancelar (default) */
   cancelButtonText?: string,
   cancelButtonFn?: () => void,
   actionButton?: {
