@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ResultAndResponse } from "../../../types";
 import { authStorageKeys } from "../cache";
+import { handleRegexUrl } from "../../../shared-types/utils/routes";
 
 export const getUrls = (environment: 'front' | 'back' ) => {
   if(environment === 'front'){
@@ -59,6 +60,21 @@ export const invalidTokenJWT = () => {
   window.location.reload();
 }
 
+export const removeTokenJWT = () => {
+  sessionStorage.removeItem(authStorageKeys.user);
+  sessionStorage.removeItem(authStorageKeys.token);
+  localStorage.removeItem(authStorageKeys.user);
+  localStorage.removeItem(authStorageKeys.token);
+
+  window.location.reload();
+}
+
+export const anotherSession = () => {
+  let url = handleRegexUrl('@hub:session.home');
+  if(url.slice(0, 4) !== 'http') url = `/#${url}`;
+  window.location.href = url
+}
+
 export const headerBearer = (token: string) => ({
   headers: {
     "Authorization": `Bearer ${token}`,
@@ -67,6 +83,8 @@ export const headerBearer = (token: string) => ({
 
 export const handleErrorResultAndResponse = (e: any, defaultReturn?: ResultAndResponse) : ResultAndResponse => {
   if(e.response && e.response.data){
+    if(e.response.data && e.response.data === 'There is already another session') anotherSession();
+
     if(typeof e.response.data === 'string') return {
       result: false,
       response: e.response.data
