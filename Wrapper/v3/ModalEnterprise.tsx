@@ -93,7 +93,7 @@ export const ModalEnterprise = ({ client, clients, handleChangeClient, modalIsOp
                   src={client.picture}
                   onError={(e) => {
                     let img = e.target as HTMLImageElement;
-                    img.src = logo;
+                    if(img.src !== logo) img.src = logo;
                   }}
                 />
               ) : client.nome_fantasia.substr(0, 2)} 
@@ -300,7 +300,7 @@ const ImageClient = ({ client, className }:{ client: ClientProps, className?: st
     src={client.picture ?? logo}
     onError={(e) => {
       let img = e.target as HTMLImageElement;
-      img.src = logo;
+      if(img.src !== logo) img.src = logo;
     }}
   />
 )
