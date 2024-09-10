@@ -179,6 +179,7 @@ export const getAsideItems = ({
         name: "Fechamentos Finan.",
         href: handleRegexUrl('@hub:closing_folder.home', user?.token),
         icon: <MyFinanceIcon w={22} h={22} />,
+        disabled: !user?.permitions_slug || !user.permitions_slug.some((permission) => permission === PossiblePermissions.FINANCIAL_CLOSINGS) ,
       },
       {
         id: 'aside-item-notification',
