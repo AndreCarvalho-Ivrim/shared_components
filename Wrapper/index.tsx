@@ -161,50 +161,52 @@ export const getAsideItems = ({
 
   let defaultAsideItems: AsideItems[] = [];
 
-  if (module_name === "Configurações") defaultAsideItems = [
-    {
-      id: "aside-item-perfil",
-      name: "Perfil",
-      href: handleRegexUrl('@hub:profile.home', user?.token),
-      icon: <UserIcon w={22} h={22} />,
-    },
-    {
-      id: "aside-item-gallery",
-      name: "Meus Docs.",
-      href: handleRegexUrl('@hub:gallery.home', user?.token),
-      icon: <MyDocsIcon w={22} h={22} />,
-    },
-    {
-      id: "aside-item-gallery",
-      name: "Fechamentos Finan.",
-      href: handleRegexUrl('@hub:closing_folder.home', user?.token),
-      icon: <MyFinanceIcon w={22} h={22} />,
-    },
-    {
-      id: 'aside-item-notification',
-      name: 'Notificações',
-      icon: <NotificationIcon w={22} h={22} />,
-      items: [
-        {
-          id: 'aside-subitem-all-notifications',
-          name: 'Todas',
-          href: handleRegexUrl('@hub:notification.all', user?.token)
-        }, {
-          id: 'aside-subitem-preferences',
-          name: 'Preferências',
-          href: handleRegexUrl('@hub:notification.preference', user?.token)
-        }, ...((
-          user?.permitions_slug?.includes(PossiblePermissions.ADMIN_HUB) ||
-          user?.permitions_slug?.includes(PossiblePermissions.MANAGE_NOTIFICATION)
-        ) ? [{
-          id: 'aside-subitem-create-notifications',
-          name: 'Criar Notificações',
-          href: handleRegexUrl('@hub:notification.create', user.token)
-        }] : [])
-      ]
-    }
-  ];
-  else if(isAdmin) {
+  if (module_name === "Configurações" || isAdmin) {
+    defaultAsideItems = [
+      {
+        id: "aside-item-perfil",
+        name: "Perfil",
+        href: handleRegexUrl('@hub:profile.home', user?.token),
+        icon: <UserIcon w={22} h={22} />,
+      },
+      {
+        id: "aside-item-gallery",
+        name: "Meus Docs.",
+        href: handleRegexUrl('@hub:gallery.home', user?.token),
+        icon: <MyDocsIcon w={22} h={22} />,
+      },
+      {
+        id: "aside-item-gallery",
+        name: "Fechamentos Finan.",
+        href: handleRegexUrl('@hub:closing_folder.home', user?.token),
+        icon: <MyFinanceIcon w={22} h={22} />,
+        disabled: !user?.permitions_slug || !user.permitions_slug.some((permission) => permission === PossiblePermissions.FINANCIAL_CLOSINGS) ,
+      },
+      {
+        id: 'aside-item-notification',
+        name: 'Notificações',
+        icon: <NotificationIcon w={22} h={22} />,
+        items: [
+          {
+            id: 'aside-subitem-all-notifications',
+            name: 'Todas',
+            href: handleRegexUrl('@hub:notification.all', user?.token)
+          }, {
+            id: 'aside-subitem-preferences',
+            name: 'Preferências',
+            href: handleRegexUrl('@hub:notification.preference', user?.token)
+          }, ...((
+            user?.permitions_slug?.includes(PossiblePermissions.ADMIN_HUB) ||
+            user?.permitions_slug?.includes(PossiblePermissions.MANAGE_NOTIFICATION)
+          ) ? [{
+            id: 'aside-subitem-create-notifications',
+            name: 'Criar Notificações',
+            href: handleRegexUrl('@hub:notification.create', user.token)
+          }] : [])
+        ]
+      }
+    ];
+
     if (user && user.permitions_slug) {
       if (user.permitions_slug.includes(PossiblePermissions.ADMIN)) defaultAsideItems.push(...[
         {

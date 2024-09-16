@@ -22,7 +22,7 @@ export const Avatar = ({ picture, name, email, className, style, size = 'md' }:A
         src={picture}
         onError={(e) => {
           let img = e.target as HTMLImageElement;
-          img.src = defaultUser;
+          if(img.src !== defaultUser) img.src = defaultUser;
         }}
       />
     ):(

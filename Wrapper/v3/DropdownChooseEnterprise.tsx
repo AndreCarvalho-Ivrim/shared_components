@@ -93,7 +93,7 @@ export const DropdownChooseEnterprise = () => {
                     src={client.picture}
                     onError={(e) => {
                       let img = e.target as HTMLImageElement;
-                      img.src = logo;
+                      if(img.src !== logo) img.src = logo;
                     }}
                   />
                 ) : client.nome_fantasia.substr(0, 2)} 
@@ -124,7 +124,7 @@ export const DropdownChooseEnterprise = () => {
                 src={c.picture ?? logo}
                 onError={(e) => {
                   let img = e.target as HTMLImageElement;
-                  img.src = logo;
+                  if(img.src !== logo) img.src = logo;
                 }}
               />
               <span className="ml-3 flex-1 text-ellipsis overflow-hidden whitespace-nowrap block">

@@ -120,7 +120,6 @@ export const ActivityItem = ({ activity }:ActivityItemProps) => {
       if(data?.token){
         token = data.token;
         await new Promise((resolve) => setTimeout(() => resolve(true), 500))
-        console.log('novo token', { token })
       }
     }
 

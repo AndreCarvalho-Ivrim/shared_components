@@ -349,11 +349,20 @@ export const MenuSlider = () => {
           <div className="grid xsm:grid-cols-3">
             <button
               type="button"
-              className="bg-primary-600 xsm:col-span-2 m-1 h-26 rounded-md flex flex-col justify-center items-center"
-              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:closing_folder.home', user?.token) }, toast, navigate)}
+              className="bg-primary-600 xsm:col-span-2 m-1 h-26 rounded-md flex flex-col justify-center items-center relative"
+              onClick={() => redirectToApp({
+                url: handleRegexUrl('@hub:closing_folder.home', user?.token),
+                disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.FINANCIAL_CLOSINGS))
+              }, toast, navigate)}
             >
               <img src={FolderFinance} alt="Icone de arquivos" width={50} height={100} className="mt-3" />
               <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Fechamentos Financeiros</span>
+
+              {!(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.FINANCIAL_CLOSINGS)) && (
+                <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
+                  <LockIcon w={26} h={26} />
+                </span>
+              )}
             </button>  
             <button
               className="bg-primary-100/90 m-1 h-26 rounded-md flex flex-col justify-center items-center"
