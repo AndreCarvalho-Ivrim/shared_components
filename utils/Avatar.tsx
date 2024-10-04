@@ -7,7 +7,7 @@ interface AvatarProps{
   email?: string,
   className?: string,
   style?: React.CSSProperties
-  size?: 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg'
 }
 export const Avatar = ({ picture, name, email, className, style, size = 'md' }:AvatarProps) => (
   <div className={className} style={style}>
@@ -16,6 +16,7 @@ export const Avatar = ({ picture, name, email, className, style, size = 'md' }:A
         alt={name ?? email ?? "Avatar"}
         className={classNames({
           'rounded-full object-cover': true,
+          'w-6 h-6': size === 'sm',
           'w-7 h-7': size === 'md',
           'w-14 h-14': size === 'lg'
         })}
@@ -28,6 +29,7 @@ export const Avatar = ({ picture, name, email, className, style, size = 'md' }:A
     ):(
       <div className={classNames({
         'rounded-full bg-gray-300/50': true,
+        'w-6 h-6': size === 'sm',
         'w-7 h-7': size === 'md',
         'w-14 h-14': size === 'lg'
       })}/>
