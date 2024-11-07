@@ -1315,6 +1315,36 @@ export const PinIcon = (props: IconProps) => (
     <path d="m12 22 1-2v-3h5a1 1 0 0 0 1-1v-1.586c0-.526-.214-1.042-.586-1.414L17 11.586V8a1 1 0 0 0 1-1V4c0-1.103-.897-2-2-2H8c-1.103 0-2 .897-2 2v3a1 1 0 0 0 1 1v3.586L5.586 13A2.01 2.01 0 0 0 5 14.414V16a1 1 0 0 0 1 1h5v3l1 2zM8 4h8v2H8V4zM7 14.414l1.707-1.707A.996.996 0 0 0 9 12V8h6v4c0 .266.105.52.293.707L17 14.414V15H7v-.586z"></path>
   </svg>
 )
+export const WorldIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    viewBox="0 0 24 24"
+    style={{ fill: 'currentColor' }}
+  >
+    <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM4 12c0-.899.156-1.762.431-2.569L6 11l2 2v2l2 2 1 1v1.931C7.061 19.436 4 16.072 4 12zm14.33 4.873C17.677 16.347 16.687 16 16 16v-1a2 2 0 0 0-2-2h-4v-3a2 2 0 0 0 2-2V7h1a2 2 0 0 0 2-2v-.411C17.928 5.778 20 8.65 20 12a7.947 7.947 0 0 1-1.67 4.873z"></path>
+  </svg>
+)
+export const BullseyeIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    viewBox="0 0 24 24"
+    style={{ fill: 'currentColor' }}
+  >
+    <path d="M12 6c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 18c-4.337 0-8-3.663-8-8s3.663-8 8-8 8 3.663 8 8-3.663 8-8 8z"></path><path d="M12 10c-1.081 0-2 .919-2 2s.919 2 2 2 2-.919 2-2-.919-2-2-2z"></path>
+  </svg>
+)
+export const BinocularsIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    viewBox="0 0 24 24"
+    style={{ fill: 'currentColor' }}
+  >
+    <path d="M19.447 5.345A3.27 3.27 0 0 0 16.29 3a3.293 3.293 0 0 0-3.277 3h-2.025a3.297 3.297 0 0 0-3.284-3 3.268 3.268 0 0 0-3.151 2.345l-2.511 8.368A1.027 1.027 0 0 0 2 14v1a5.006 5.006 0 0 0 5.001 5 5.003 5.003 0 0 0 4.576-3h.846a5.003 5.003 0 0 0 4.576 3A5.006 5.006 0 0 0 22 14.999V14c0-.098-.015-.194-.042-.287l-2.511-8.368zM7.001 18A3.005 3.005 0 0 1 4 15c0-.076.017-.147.022-.222A2.995 2.995 0 0 1 7 12a3 3 0 0 1 3 3v.009A3.004 3.004 0 0 1 7.001 18zm9.998 0A3.004 3.004 0 0 1 14 15.009V15a3 3 0 0 1 6-.001A3.005 3.005 0 0 1 16.999 18z"></path>
+  </svg>
+)
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   { component: (props?: IconProps) => <ChevronDownIcon {...props} />, title: 'ChevronDownIcon' },
   { component: (props?: IconProps) => <ChevronUpDownIcon {...props} />, title: 'ChevronUpDownIcon' },
@@ -1407,6 +1437,9 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <CollapseIcon {...props}/>, title: 'CollapseIcon' },
   { component: (props?: IconProps) => <FilterIcon {...props}/>, title: 'FilterIcon' },
   { component: (props?: IconProps) => <FilterIcon {...props} isFilled/>, title: 'FilterIcon (isFilled)' as AvailableIcons },
+  { component: (props?: IconProps) => <WorldIcon {...props}/>, title: 'WorldIcon' },
+  { component: (props?: IconProps) => <BullseyeIcon {...props}/>, title: 'BullseyeIcon' },
+  { component: (props?: IconProps) => <BinocularsIcon {...props}/>, title: 'BinocularsIcon' }
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
