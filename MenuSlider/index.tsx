@@ -33,11 +33,13 @@ const clientsWithAccessToCAP = { };
 
 const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
-    case "Cobrança": case "Financeiro": return "bg-[#4B92FF] hover:brightness-110";
-    case "Comercial": return "bg-[#CBBC5A] hover:brightness-110";
-    case "Gamificação": return "bg-[#006B7F] hover:brightness-110";
-    case "Supply": return "bg-[#78A799] hover:brightness-110";
-    default: return "bg-primary-700 hover:bg-primary-600";
+    case "Cobrança": case "Financeiro": return "bg-[#4B92FF] border-[#5CA3FF] hover:brightness-110";
+    case "Comercial": return "bg-[#CBBC5A] border-[#DCCD6B] hover:brightness-110";
+    case "Gamificação": return "bg-[#006B7F] border-[#117C90] hover:brightness-110";
+    case "Supply": return "bg-[#78A799] border-[#89B8aa] hover:brightness-110";
+    case "Field Management": return "bg-[#FEC67C] border-[#FFD78D] hover:brightness-110 text-gray-800";
+    case "Gestão": return "bg-[#E0CFA3] border-[#F1E0B4] hover:brightness-110";
+    default: return "bg-primary-700 border-primary-800 hover:bg-primary-600";
   }
 };
 // TODO FUNÇÃO OBSOLETA, REMOVER TODAS AS MENÇOES A ELA E DEPOIS REMOVER FUNÇÃO
@@ -234,6 +236,7 @@ export const MenuSlider = () => {
                       rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}
                       ${inFixation && !isFixed ? 'opacity-70 hover:opacity-80':''}
                     `}
+                    style={{  borderStyle: 'solid', borderWidth: '3px' }}
                     onClick={() => {
                       if(inFixation) handleToggleFixed(flow._id);
                       else redirectToApp({
@@ -248,7 +251,9 @@ export const MenuSlider = () => {
                       </IconByTheme>
                     </div>
                     <div className="mt-10 h-full flex items-center">
-                    <span className={`max-w-[100%] px-1.5 text-xs text-center hover:whitespace-normal font-semibold text-white`}>
+                    <span className={`max-w-[100%] px-1.5 text-xs text-center hover:whitespace-normal font-semibold ${
+                      ['Gestão', 'Field Management'].includes(flow.theme) ? 'text-gray-800':'text-white'
+                    }`}>
                         {flow.title.slice(0, 38)}{flow.title.length > 38 && '...'}
                       </span>
                     </div>

@@ -28,6 +28,9 @@ import {
   EnvelopeIcon,
 } from "../utils/icons";
 
+import managedServiceIcon from '../assets/managed_service.png';
+import adminThemeIcon from '../assets/adminThemeIcon.png'
+
 import {
   AvailableWorkflowThemeType,
   DashboardType,
@@ -425,9 +428,19 @@ export const IconByTheme = ({ theme, props = {}, children }: {
 }) => {
   switch (theme) {
     case "Cobrança": case "Financeiro": return <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
-    case "Comercial": return <CartIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
+    case "Comercial": return <CartIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className="-mt-0.5"/>;
     case "Gamificação": return <GameIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
-    case "Supply": return <SupplyIconNew {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }}  />;
+    case "Supply": return <SupplyIconNew {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className="-mt-0.5" />;
+    case "Field Management": return <img src={managedServiceIcon} style={{
+      marginTop: '-2px',
+      height: '27px',
+      width: '28px',
+    }}/>;
+    case "Gestão": return <img src={adminThemeIcon} style={{ 
+      marginTop: '-1px',
+      height: '24px',
+      width: '26px',
+    }}/>
     default: return <>{children}</>;
   }
 };
