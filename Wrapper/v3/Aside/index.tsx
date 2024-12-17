@@ -47,7 +47,7 @@ export const Aside = ({ active, items, dynamicItems, footerItems, isCollapsed, d
       <div className="flex flex-col justify-between flex-1 text-white">
         <div className="
           flex flex-col justify-between flex-1
-          max-h-[calc(100vh-12rem)] overflow-y-auto
+          max-h-[calc(100vh-14rem)] overflow-y-auto
         ">
           <ul className="
             p-4 md:p-5 mb-8
