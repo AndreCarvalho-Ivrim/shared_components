@@ -55,8 +55,10 @@ export async function me(token: string) : Promise<ResponseMeAuth>{
           //@ts-ignore
           try{ return import.meta.env.VITE_RELATIVE_URL; }catch(e){}
           return undefined;
-        })
+        })()
 
+        console.log({ original_url })
+        
         if(original_url && typeof original_url === 'string') redirect(original_url, token);
       }
     }
