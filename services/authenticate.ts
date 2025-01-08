@@ -109,6 +109,9 @@ export async function changeCurrentClient(client_id: string, token: string) : Pr
     let permitions_slug = handleFormatPermitionsSlug(data.permitions);
 
     const user = { ...data, permitions_slug }
+
+    handleRedirectToDedicatedServer(data, data.token)
+    
     cachedUser.set(user);
 
     return {
