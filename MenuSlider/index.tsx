@@ -12,8 +12,9 @@ import profileCircle from "../assets/icon _profile circled_.svg";
 import settings from "../assets/icon _settings_.svg";
 import isac from "../assets/IconsGeo_Prancheta 2.svg"
 import vision from "../assets/IconsGeo_Prancheta 3.svg"
-import report from "../assets/IconsGeo_Prancheta 1.svg"
-import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
+import report from "../assets/icon_article.png"
+import dashbord from "../assets/icon_bar_chart.png"
+import { ConteinerIAS, ConteinerICI, ConteinerFlows, ConteinerIFM } from "./MenuConteiner";
 
 import { AvailableWorkflowThemeType, PossiblePermissions, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
@@ -28,6 +29,7 @@ import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 import { IconByTheme } from "../Wrapper";
 import { ActivityPanel } from "../ActivityPanel";
+import { NotificationPanel } from "../NotificationPanel";
 
 const clientsWithAccessToCAP = { };
 
@@ -63,7 +65,242 @@ export const redirectToApp = (
   if (url.substring(0, 4) === "http") window.location.href = url;
   else navigate(url);
 };
+
+
+
+export const Menu = () =>{
+  const { toast } = useNotify();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const [inFixation, setInFixation] = useState(false);
+  const [isFixeds, setIsFixeds] = useState<string[]>([]);
+  const [workflows, setWorkflows] = useState<WorkflowType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => { loadWorkflows () }, [user, user?.token]);
+  useEffect(() => {
+    if(isLoading || workflows.length === 0 || isFixeds.length === 0) return;
+
+    setWorkflows(isFixeds.length > 0 ? workflows.sort((a,b) => {
+      const aIndex = isFixeds.indexOf(a._id.toString());
+      const bIndex = isFixeds.indexOf(b._id.toString());
+  
+      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+      else if (aIndex !== -1) return -1;
+      else if (bIndex !== -1) return 1;
+      else return 0;
+    }) : workflows)
+  },[isFixeds])
+
+  
+  function handleToggleFixed(flow_id: string){
+    setIsFixeds((prevState) => {
+      const newState = prevState.includes(flow_id) ? prevState.filter(
+        (state) => state !== flow_id
+      ):[...prevState, flow_id]
+
+      if(user?.current_client) localStorage.setItem(
+        `isac@fixed:${user.current_client}`, newState.join(',')
+      );
+
+      return newState;
+    })
+  }
+  function getStorageFixeds(){
+    if(!user?.current_client) return [];
+
+    const storaged = localStorage.getItem(`isac@fixed:${user.current_client}`);
+    const fixeds = typeof storaged === 'string' ? storaged.split(',').filter(
+      (st) => !!st
+    ): [];
+
+    setIsFixeds(fixeds);
+    return fixeds;
+  }
+  async function loadWorkflows(){
+    if (!user || isLoading) return;
+
+    setIsLoading(true);
+    await (async () => {
+      const res = await getPublishedFlows(user.token);
+      if (!res.result) {
+        toast.error(res.response);
+        return;
+      }
+  
+      if (!res.data) return;
+  
+      const fixeds = getStorageFixeds();
+  
+      const availableFlows = res.data.filter(wf => !wf.hidden);
+      setWorkflows(fixeds.length > 0 ? availableFlows.sort((a,b) => {
+        const aIndex = fixeds.indexOf(a._id.toString());
+        const bIndex = fixeds.indexOf(b._id.toString());
+    
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+        else if (aIndex !== -1) return -1;
+        else if (bIndex !== -1) return 1;
+        else return 0;
+      }) : availableFlows)
+    })();
+    setIsLoading(false);
+  }
+  
+  return (
+
+    <div className="w-screen h-screen bg-background overflow-auto flex flex-col"> 
+      <div className={style.header}>
+        <div className={style.header__logo}> 
+          <img src={logo} alt="Ivrim Consulting"/> 
+        </div>
+        <div className="flex items-center gap-4"> 
+          <BellNotification />
+          <DropdownChooseEnterprise />
+        </div> 
+      </div>
+
+      <div className="
+        flex-row flex-wrap flex justify-start
+        lg:justify-evenly px-6
+        w-full sm:max-w-[900px] lg:max-w-[95%] xl:max-w-[1580px] 
+        mx-auto gap-2
+      ">
+        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+          <div className="grid xsm:grid-cols-3">
+           
+          </div>
+
+          <div className="grid xsm:grid-cols-3">
+            
+          </div>
+           
+          <ConteinerFlows
+            title="IFI - Ivrim Financial Inteligence"
+            handleToggleFixed={handleToggleFixed}
+            inFixation={inFixation}
+            isFixeds={isFixeds}
+            workflows={workflows.filter(workflow => ['Cobrança', "Financeiro"].includes(workflow.theme))}
+          />
+           <ConteinerFlows
+            title="ISI - Ivrim Supply Inteligence"
+            handleToggleFixed={handleToggleFixed}
+            inFixation={inFixation}
+            isFixeds={isFixeds}
+            workflows={workflows.filter(workflow => workflow.theme === 'Supply')}
+          />
+          <ConteinerIFM/>
+        </div>
+
+        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+          <div className="grid xsm:grid-cols-3">
+ 
+            
+           
+          </div>
+
+          <div className="grid xsm:grid-cols-3">
+            
+          </div>
+           
+           <ConteinerIAS/>
+          <ConteinerICI/>
+          <ConteinerICI/>
+          
+        </div>
+
+      <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+         
+
+          
+           
+         
+           <NotificationPanel/>
+
+          <ActivityPanel/>
+    
+        </div>
+
+      <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem]">
+          <div className="grid xsm:grid-cols-3">
+ 
+            
+           
+          </div>
+
+          
+           
+           
+
+          <SideMenu/>
+    
+        </div>
+
+      </div>
+
+      <footer className="mt-auto d-flex items-center justify-center text-center py-4">
+        <p className="text-gray-600 text-sm">Ivrim {new Date().getUTCFullYear()} © Todos os direitos reservados</p>
+      </footer>
+
+</div>
+
+     
+  );
+};
+
+export const SideMenu = () =>{
+  const { user } = useAuth();
+  const { toast } = useNotify();
+  const navigate = useNavigate();
+ 
+
+  return(
+
+      <div className=" rounded-lg border border-gray-300 bg-[#4B92FF] backdrop-blur-[10px] min-h-[50rem]">
+      
+       <button
+                className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+                onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
+              >
+                <img src={profileCircle} alt="Icone de usuário" width={50} height={50} className="pt-2 object-center" />
+              
+              </button>
+
+
+  <button 
+                className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+                onClick={() => redirectToApp({ url: handleRegexUrl('@hub:dashboard.home', user?.token) }, toast, navigate)}
+                >
+                
+                <img src= {dashbord} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
+                <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
+
+
+                </button>
+
+  <button 
+                className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+                onClick={() => redirectToApp({ url: handleRegexUrl('@isac:report.home', user?.token) }, toast, navigate)}
+                >
+                
+                <img src= {report} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
+                <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
+
+
+                </button>              
+
+
+
+  </div>
+
+  );
+};
+
+
 export const MenuSlider = () => {
+
+
+
   const { toast } = useNotify();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -142,81 +379,36 @@ export const MenuSlider = () => {
   }
 
   return (
-    <div className="w-screen h-screen bg-background overflow-auto flex flex-col">
+    <div className="w-screen h-screen bg-background overflow-auto flex flex-col"> 
       <div className={style.header}>
-        <div className={style.header__logo}>
-          <img src={logo} alt="Ivrim Consulting"/>
+        <div className={style.header__logo}> 
+          <img src={logo} alt="Ivrim Consulting"/> 
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4"> 
           <BellNotification />
           <DropdownChooseEnterprise />
-        </div>
+        </div> 
       </div>
 
       <div className="
         flex-row flex-wrap flex justify-start
         lg:justify-evenly px-6
-        w-full sm:max-w-[616px] lg:max-w-[95%] xl:max-w-[1580px] 
+        w-full sm:max-w-[900px] lg:max-w-[95%] xl:max-w-[1580px] 
         mx-auto gap-2
       ">
+        <div className= "flex flex-col flex-1 lg:flex-none lg:min-w-[5rem]">
         <section className="flex flex-col sm:flex-row w-full sm:w-auto items-start">
-          <div className="grid grid-cols-1 xsm:grid-cols-2 w-full">
-            {[
-              {
-                id: 'isac',
-                redirect: {
-                  url: handleRegexUrl('@isac:workflow.home', user?.token),
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.ISAC)
-                },
-                icon: <img src={isac} alt="imagem geometrica isac" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={ISAC} alt="logo isac" width={100} height={100} className="h-3 object-contain" />,
-              }, {
-                id: 'vision',
-                icon: <img src={vision} alt="imagem geometrica vision" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={VISION} alt="logo vision" width={100} height={100} className="h-3 object-contain" />
-              }, {
-                id: 'report',
-                icon: <img src={report} alt="imagem geometrica report" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={REPORT} alt="logo report" width={100} className="h-3 object-contain" />,
-                redirect: {
-                  url: handleRegexUrl('@isac:report.home', user?.token),
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
-                }
-              }, {
-                id: 'dashboard',
-                redirect: {
-                  url: handleRegexUrl('@hub:dashboard.home', user?.token),
-                  disabled: !(
-                    user &&
-                    user.permitions_slug &&
-                    user.permitions_slug.includes(PossiblePermissions.DASH)
-                  ),
-                },
-                icon: <img src={dashboard} alt="imagem geometrica dashboard" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={DASHBOARD} alt="logo dashboard" height={100} className="h-3 object-contain" />
-              }
-            ].map((item) => (
-              <button
-                key={item.id}
-                className="bg-primary-500 m-1 w-full xsm:max-w-[calc(50vw-2.2rem)] sm:w-56 h-52 rounded-md flex justify-center items-center relative"
-                onClick={() => {
-                  if (item.redirect) redirectToApp(item.redirect, toast, navigate)
-                  else toast.warning('Está solução ainda não está disponível');
-                }}
-              >
-                <div className="flex flex-col items-start justify-between mb-3 w-full h-full px-4 py-2">
-                  {item.icon}
-                  {item.name}
-                </div>
+         
 
-                {(!item.redirect || item.redirect.disabled) && (
-                  <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                    {item.redirect ? <LockIcon w={26} h={26} /> : <RefreshIcon w={26} h={26} />}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
+
+
+      
+
+      
+
+
+
+
 
           <div className="relative">
             {workflows.length > 4 && (
@@ -315,71 +507,15 @@ export const MenuSlider = () => {
             </div>
           </div>
         </section>
-
-        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
-          <div className="grid xsm:grid-cols-3">
-            <button
-              type="button"
-              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center relative" onClick={() => redirectToApp({
-                url: handleRegexUrl('@isac:template', user?.token),
-                disabled: !(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC))
-              }, toast, navigate)}
-            >
-              <img src={Mail} alt="Icone de carta" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pb-1 w-full truncate hover:whitespace-normal font-semibold">Modelos</span>
-
-              {!(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.ISAC)) && (
-                <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                  <LockIcon w={26} h={26} />
-                </span>
-              )}
-            </button>
-            <button
-              type="button"
-              className="bg-primary-600 m-1 h-24 rounded-md flex flex-col justify-center items-center"
-              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:gallery.home', user?.token) }, toast, navigate)}
-            >
-              <img src={Folder} alt="Icone de arquivos" width={65} height={100} className="mt-3" />
-              <span className="text-xs text-white pb-1 w-full truncate hover:whitespace-normal font-semibold">Documentos</span>
-            </button>
-            <button
-              className="bg-primary-100/90 m-1 h-24 rounded-md flex flex-col justify-center items-center"
-              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
-            >
-              <img src={profileCircle} alt="Icone de usuário" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1 truncate hover:whitespace-normal font-semibold">Usuário</span>
-            </button>
-          </div>
-
-          <div className="grid xsm:grid-cols-3">
-            <button
-              type="button"
-              className="bg-primary-600 xsm:col-span-2 m-1 h-26 rounded-md flex flex-col justify-center items-center relative"
-              onClick={() => redirectToApp({
-                url: handleRegexUrl('@hub:closing_folder.home', user?.token),
-                disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.FINANCIAL_CLOSINGS))
-              }, toast, navigate)}
-            >
-              <img src={FolderFinance} alt="Icone de arquivos" width={50} height={100} className="mt-3" />
-              <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Fechamentos Financeiros</span>
-
-              {!(user && user.permitions_slug && user.permitions_slug.includes(PossiblePermissions.FINANCIAL_CLOSINGS)) && (
-                <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                  <LockIcon w={26} h={26} />
-                </span>
-              )}
-            </button>  
-            <button
-              className="bg-primary-100/90 m-1 h-26 rounded-md flex flex-col justify-center items-center"
-              onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
-            >
-              <img src={settings} alt="Icone de configurações" width={50} height={100} className="pt-3" />
-              <span className="text-xs text-white pt-3 pb-1.5 truncate hover:whitespace-normal font-semibold">Admin Console</span>
-            </button>
-          </div>
-
-          <ActivityPanel/>
         </div>
+
+       
+        
+
+      
+
+        
+
       </div>
 
       <footer className="mt-auto d-flex items-center justify-center text-center py-4">
