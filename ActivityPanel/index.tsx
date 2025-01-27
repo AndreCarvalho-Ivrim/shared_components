@@ -71,11 +71,11 @@ export const ActivityPanel = () => {
   return (
     <div className={`h-full flex flex-col justify-between p-1`}>
       <div>
-        <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[10rem]">
+        <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[25rem]">
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs  text-primary-800 uppercase bg-primary-500/5">
               <tr>
-                <th className="px-3 py-2 font-bold">Painel de Notificações</th>
+                <th className="px-3 py-2 font-bold">Painel de Atividade</th>
                 <th></th>
               </tr>
             </thead>
@@ -89,7 +89,7 @@ export const ActivityPanel = () => {
                     colSpan={2}
                     className="px-3 py-10 text-center text-sm text-gray-500 bg-gray-300/50 opacity-70"
                   >
-                    <div className="min-h-[10rem] flex items-center justify-center">
+                    <div className="min-h-[25rem] flex items-center justify-center">
                       Não há notificações <br/>
                       no momento
                     </div>

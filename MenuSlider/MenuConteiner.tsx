@@ -84,11 +84,12 @@ export const ConteinerFlows = ({
   const { user } = useAuth();
   const { toast } = useNotify();
   const navigate = useNavigate();
+  const isFinancial = title === "IFI - Ivrim Financial Inteligence"
 
   return (
-    <div className={`h-full flex flex-col justify-between p-1`}>
+    <div className={`h-full flex flex-col justify-between p-1 `}>
       <div>
-        <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-gray-300/50 opacity-70">
+        <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-[#E0E4E8] opacity-80 shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]" >
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs  text-black uppercase "> 
               <tr>
@@ -96,15 +97,21 @@ export const ConteinerFlows = ({
               </tr>
             </thead> 
           </table>
-          <section className="flex flex-col sm:flex-row w-full sm:w-auto items-start">
-            <div className="relative">
-              <div className="flex sm:flex-col overflow-y-auto min-w-[7.2rem] max-h-[calc(6.25rem*4+2.25rem)]">
+          <section className="flex sm:flex-col sm:flex-row w-full sm:w-auto items-start  ">
+            
+            
+            <div className="relative  ">
+           
+              <div className="flex sm:flex-wrap w-[15rem] h-[10rem]  min-w-[8rem] max-h-[calc(6.25rem*4+2.25rem)]">
                 {workflows.map((flow) => {
                   const isFixed = isFixeds.includes(flow._id);
                   return (
+
+              <div className="w-[48%] ">            
+        
                     <button
                       className={`
-                        relative m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.25rem] h-[6.25rem]
+                        relative m-6 min-w-[6.15rem] w-[6.15rem] min-h-[6.25rem] h-[6.25rem]
                         rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}
                         ${inFixation && !isFixed ? 'opacity-70 hover:opacity-80':''}
                       `}
@@ -135,9 +142,14 @@ export const ConteinerFlows = ({
                         </div>
                       )}
                     </button>
+
+                    </div>
+                  
+
                   );
                 })}
-                {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
+
+                {(isFinancial &&  user?.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" )&&(
                   <button
                     className="relative bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
                     onClick={() => redirectToApp({
@@ -162,7 +174,7 @@ export const ConteinerFlows = ({
                     )}
                   </button>
                 )}
-                {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
+                {( isFinancial && user?.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
                   <button
                     className="relative bg-primary-600 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
                     onClick={() => redirectToApp({
@@ -178,10 +190,10 @@ export const ConteinerFlows = ({
                     />
                     <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">Contas a pagar</span>
                   </button>
-                ) : !(user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
+                ) : !(   isFinancial && user?.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
                   <div className="
-                    bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
-                    text-center text-xs text-gray-500 opacity-75
+                    bg-gray-300 hover:bg-gray-300 m-5 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
+                    text-center text-xs text-gray-500 opacity-75 
                   ">Você não<br />possui nenhum aplicativo<br />criado</div>
                 ) : <></>}
               </div>
@@ -192,176 +204,3 @@ export const ConteinerFlows = ({
     </div>
   )
 }
-
-export const ConteinerIAS = () =>{
-
- const { toast } = useNotify();
-    const { user } = useAuth();
-    const navigate = useNavigate();
-  
-    const [inFixation, setInFixation] = useState(false);
-    const [isFixeds, setIsFixeds] = useState<string[]>([]);
-    const [workflows, setWorkflows] = useState<WorkflowType[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-  
-    useEffect(() => { loadWorkflows() }, [user, user?.token]);
-    useEffect(() => {
-      if(isLoading || workflows.length === 0 || isFixeds.length === 0) return;
-  
-      setWorkflows(isFixeds.length > 0 ? workflows.sort((a,b) => {
-        const aIndex = isFixeds.indexOf(a._id.toString());
-        const bIndex = isFixeds.indexOf(b._id.toString());
-    
-        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-        else if (aIndex !== -1) return -1;
-        else if (bIndex !== -1) return 1;
-        else return 0;
-      }) : workflows)
-    },[isFixeds])
-  
-    function handleToggleFixed(flow_id: string){
-      setIsFixeds((prevState) => {
-        const newState = prevState.includes(flow_id) ? prevState.filter(
-          (state) => state !== flow_id
-        ):[...prevState, flow_id]
-  
-        if(user?.current_client) localStorage.setItem(
-          `isac@fixed:${user.current_client}`, newState.join(',')
-        );
-  
-        return newState;
-      })
-    }
-    function getStorageFixeds(){
-      if(!user?.current_client) return [];
-  
-      const storaged = localStorage.getItem(`isac@fixed:${user.current_client}`);
-      const fixeds = typeof storaged === 'string' ? storaged.split(',').filter(
-        (st) => !!st
-      ): [];
-  
-      setIsFixeds(fixeds);
-      return fixeds;
-    }
-    async function loadWorkflows(){
-      if (!user || isLoading) return;
-  
-      setIsLoading(true);
-      await (async () => {
-        const res = await getPublishedFlows(user.token);
-        if (!res.result) {
-          toast.error(res.response);
-          return;
-        }
-    
-        if (!res.data) return;
-    
-        const fixeds = getStorageFixeds();
-    
-        const availableFlows = res.data.filter(wf => !wf.hidden);
-        setWorkflows(fixeds.length > 0 ? availableFlows.sort((a,b) => {
-          const aIndex = fixeds.indexOf(a._id.toString());
-          const bIndex = fixeds.indexOf(b._id.toString());
-      
-          if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-          else if (aIndex !== -1) return -1;
-          else if (bIndex !== -1) return 1;
-          else return 0;
-        }) : availableFlows)
-      })();
-      setIsLoading(false);
-    }
-
-    return (
-
-
-
-        <div className={`h-full flex flex-col justify-between p-1`}>
-        <div>
-          <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-gray-300/50 opacity-70">
-            <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs  text-black uppercase "> 
-                <tr>
-                  <th className="px-3 py-2 font-bold">IAS - Ivrim Adm. Solutios</th>
-                  
-                  </tr>
-              </thead> 
-              </table>
-
-              </div>
-              </div>
-              </div>
-
-    )
-    
-    }
-
-
-export const ConteinerICI = () =>{
-
-    return (
-
-
-
-        <div className={`h-full flex flex-col justify-between p-1`}>
-        <div>
-          <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-gray-300/50 opacity-70">
-            <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs  text-black uppercase "> 
-                <tr>
-                  <th className="px-3 py-2 font-bold">ICI - Ivrim Commercial Inteligence</th>
-                  
-                  </tr>
-              </thead> 
-              </table>
-
-              </div>
-              </div>
-              </div>
-
-    )
-     
-            
-            }
-
-
-export const ConteinerIFM = () =>{
-
-    return (
-
-
-
-        <div className={`h-full flex flex-col justify-between p-1`}>
-        <div>
-          <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-gray-300/50 opacity-70">
-            <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs  text-black uppercase "> 
-                <tr>
-                  <th className="px-3 py-2 font-bold">IFM - Ivrim Field management</th>
-                  
-                  </tr>
-              </thead> 
-              </table>
-
-              </div>
-              </div>
-              </div>
-
-    )
-           
-                
-                
-                };
-
-
-
-
-
-
-
-
-
-
-
-
-

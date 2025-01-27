@@ -9,12 +9,12 @@ import Folder from "../../shared-components/assets/folder-user.svg";
 import FolderFinance from "../../shared-components/assets/finance-folder.svg";
 import Mail from "../../shared-components/assets/mail.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
-import settings from "../assets/icon _settings_.svg";
 import isac from "../assets/IconsGeo_Prancheta 2.svg"
 import vision from "../assets/IconsGeo_Prancheta 3.svg"
 import report from "../assets/icon_article.png"
 import dashbord from "../assets/icon_bar_chart.png"
-import { ConteinerIAS, ConteinerICI, ConteinerFlows, ConteinerIFM } from "./MenuConteiner";
+import settings from "../assets/settings.png"
+import { ConteinerFlows} from "./MenuConteiner";
 
 import { AvailableWorkflowThemeType, PossiblePermissions, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
@@ -30,6 +30,7 @@ import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 import { IconByTheme } from "../Wrapper";
 import { ActivityPanel } from "../ActivityPanel";
 import { NotificationPanel } from "../NotificationPanel";
+import { flow } from "lodash";
 
 const clientsWithAccessToCAP = { };
 
@@ -69,6 +70,7 @@ export const redirectToApp = (
 
 
 export const Menu = () =>{
+  
   const { toast } = useNotify();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -146,7 +148,7 @@ export const Menu = () =>{
     })();
     setIsLoading(false);
   }
-  
+
   return (
 
     <div className="w-screen h-screen bg-background overflow-auto flex flex-col"> 
@@ -174,25 +176,33 @@ export const Menu = () =>{
           <div className="grid xsm:grid-cols-3">
             
           </div>
+
            
           <ConteinerFlows
             title="IFI - Ivrim Financial Inteligence"
             handleToggleFixed={handleToggleFixed}
             inFixation={inFixation}
             isFixeds={isFixeds}
-            workflows={workflows.filter(workflow => ['Cobrança', "Financeiro"].includes(workflow.theme))}
+            workflows={workflows.filter(workflows => ['Cobrança', "Financeiro"].includes(workflows.theme))}
           />
            <ConteinerFlows
             title="ISI - Ivrim Supply Inteligence"
             handleToggleFixed={handleToggleFixed}
             inFixation={inFixation}
             isFixeds={isFixeds}
-            workflows={workflows.filter(workflow => workflow.theme === 'Supply')}
+            workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
+                     
           />
-          <ConteinerIFM/>
+          <ConteinerFlows
+            title="IFM - Ivrim Fiel Management"
+            handleToggleFixed={handleToggleFixed}
+            inFixation={inFixation}
+            isFixeds={isFixeds}
+            workflows={workflows.filter(workflows => workflows.theme === 'Field Management')}
+          />
         </div>
 
-        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem] h-[34rem]">
           <div className="grid xsm:grid-cols-3">
  
             
@@ -203,22 +213,31 @@ export const Menu = () =>{
             
           </div>
            
-           <ConteinerIAS/>
-          <ConteinerICI/>
-          <ConteinerICI/>
+          <ConteinerFlows
+            title="IAS - Ivrim ADM. Solutios"
+            handleToggleFixed={handleToggleFixed}
+            inFixation={inFixation}
+            isFixeds={isFixeds}
+            workflows={workflows.filter(workflows => workflows.theme == 'Gestão')}
+          />
+          <ConteinerFlows
+            title="ICI - Ivrim Commercial Inteligence"
+            handleToggleFixed={handleToggleFixed}
+            inFixation={inFixation}
+            isFixeds={isFixeds}
+            workflows={workflows.filter(workflows => workflows.theme === 'Field Management')}
+          />
+        
           
         </div>
 
       <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
-         
-
-          
-           
-         
-           <NotificationPanel/>
+        
 
           <ActivityPanel/>
-    
+
+          <NotificationPanel/>
+
         </div>
 
       <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem]">
@@ -256,42 +275,43 @@ export const SideMenu = () =>{
 
   return(
 
-      <div className=" rounded-lg border border-gray-300 bg-[#4B92FF] backdrop-blur-[10px] min-h-[50rem]">
+      <div className=" rounded-lg border border-gray-300 bg-[#4B92FF] backdrop-blur-[10px] min-h-[50rem] ">
       
-       <button
-                className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
-                onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
-              >
-                <img src={profileCircle} alt="Icone de usuário" width={50} height={50} className="pt-2 object-center" />
-              
-              </button>
+        <button
+          className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
+        >
+          <img src={profileCircle} alt="Icone de usuário" width={50} height={50} className="pt-2 object-center" />
+        </button>
 
+        <button 
+          className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@hub:dashboard.home', user?.token) }, toast, navigate)}
+        >
+          <img src= {dashbord} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
+        </button>
 
-  <button 
-                className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
-                onClick={() => redirectToApp({ url: handleRegexUrl('@hub:dashboard.home', user?.token) }, toast, navigate)}
-                >
-                
-                <img src= {dashbord} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
-                <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
+        <button 
+          className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@isac:report.home', user?.token) }, toast, navigate)}
+        >
+          
+          <img src= {report} alt="Icone do Report" width={50} height={50} className="pt-2 object-center"  />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Report</span>
+        </button>   
 
+        <button 
+          className=" m-5 h-50 rounded-md flex flex-col  absolute bottom-0"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
+        >
+          
+          <img src= {settings} alt="Icone de Settings" width={50} height={50} className="pt-2 object-bottom"  />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Settings</span>
+        </button> 
 
-                </button>
+        </div>
 
-  <button 
-                className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
-                onClick={() => redirectToApp({ url: handleRegexUrl('@isac:report.home', user?.token) }, toast, navigate)}
-                >
-                
-                <img src= {report} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
-                <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
-
-
-                </button>              
-
-
-
-  </div>
 
   );
 };
