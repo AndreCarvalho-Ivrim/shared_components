@@ -1373,6 +1373,17 @@ export const PhoneOffIcon = (props: IconProps) => (
     <path d="M10.09 12.5a8.92 8.92 0 0 1-1-2.2l1.59-1.59a1 1 0 0 0 0-1.42l-4-4a1 1 0 0 0-1.41 0L2.59 6A2 2 0 0 0 2 7.44 15.44 15.44 0 0 0 5.62 17L2.3 20.29l1.41 1.42 18-18-1.41-1.42zM7 15.55a13.36 13.36 0 0 1-3-8.13l2-2L8.59 8 7.3 9.29a1 1 0 0 0-.27.92 11 11 0 0 0 1.62 3.73zm9.71-2.26a1 1 0 0 0-1.41 0l-1.6 1.6-.34-.12-1.56 1.55a12.06 12.06 0 0 0 2 .66 1 1 0 0 0 .91-.27l1.3-1.3L18.59 18l-2 2A13.61 13.61 0 0 1 10 18.1l-1.43 1.45a15.63 15.63 0 0 0 8 2.45 2 2 0 0 0 1.43-.58l2.71-2.71a1 1 0 0 0 0-1.42z"></path>
   </svg>
 ) 
+export const WarningIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: 'currentColor' }}
+  >
+    <path d="M11.001 10h2v5h-2zM11 16h2v2h-2z"></path><path d="M13.768 4.2C13.42 3.545 12.742 3.138 12 3.138s-1.42.407-1.768 1.063L2.894 18.064a1.986 1.986 0 0 0 .054 1.968A1.984 1.984 0 0 0 4.661 21h14.678c.708 0 1.349-.362 1.714-.968a1.989 1.989 0 0 0 .054-1.968L13.768 4.2zM4.661 19 12 5.137 19.344 19H4.661z"></path>
+  </svg>
+
+)
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   { component: (props?: IconProps) => <ChevronDownIcon {...props} />, title: 'ChevronDownIcon' },
   { component: (props?: IconProps) => <ChevronUpDownIcon {...props} />, title: 'ChevronUpDownIcon' },
@@ -1470,7 +1481,8 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <BinocularsIcon {...props}/>, title: 'BinocularsIcon' },
   { component: (props?: IconProps) => <SortIcon {...props}/>, title: 'SortIcon' },
   { component: (props?: IconProps) => <WhatsappIcon {...props}/>, title: 'WhatsappIcon' },
-  { component: (props?: IconProps) => <PhoneOffIcon {...props}/>, title: 'PhoneOffIcon' }
+  { component: (props?: IconProps) => <PhoneOffIcon {...props}/>, title: 'PhoneOffIcon' },
+  { component: (props?: IconProps) => <WarningIcon {...props}/>, title: 'WarningIcon' }
 ];
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
