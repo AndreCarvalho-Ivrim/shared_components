@@ -88,8 +88,8 @@ export const ConteinerFlows = ({
 
   return (
     <div className={`h-full flex flex-col justify-between p-1 `}>
-      <div>
-        <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-[#E0E4E8] opacity-80 shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]" >
+      <div className=" px-2 rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-[#E0E4E8] opacity-80 shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]">
+        <div className="overflow-x-auto h-full  " >
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs  text-black uppercase "> 
               <tr>
