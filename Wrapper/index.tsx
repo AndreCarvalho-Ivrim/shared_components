@@ -436,7 +436,7 @@ export const IconByTheme = ({ theme, props = {}, children }: {
       height: '27px',
       width: '28px',
     }}/>;
-    case "Gestão": return <img src={adminThemeIcon} style={{ 
+    case "Gestão": case "Administrativo": return <img src={adminThemeIcon} style={{ 
       marginTop: '-1px',
       height: '24px',
       width: '26px',
