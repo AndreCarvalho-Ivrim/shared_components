@@ -39,6 +39,7 @@ const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
     case "Supply": return "bg-[#78A799] border-[#89B8aa] hover:brightness-110";
     case "Field Management": return "bg-[#FEC67C] border-[#FFD78D] hover:brightness-110 text-gray-800";
     case "Gestão": return "bg-[#E0CFA3] border-[#F1E0B4] hover:brightness-110";
+    case "Administrativo": return "bg-[#E0CFA3] border-[#F1E0B4] hover:brightness-110";
     default: return "bg-primary-700 border-primary-800 hover:bg-primary-600";
   }
 };
