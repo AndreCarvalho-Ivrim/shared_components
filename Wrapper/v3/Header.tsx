@@ -9,10 +9,10 @@ interface HeaderProps{
   breadcrumbs: HeaderBreadcrumbs[],
 }
 export const Header = ({ breadcrumbs } : HeaderProps) => (
-  <header className="flex items-start max-sm:items-center justify-between gap-2 mb-10 ">
+  <header className="flex items-start max-sm:items-center justify-between gap-4 mb-10">
     <div>
       <div className="flex items-center gap-4 max-sm:scale-105 max-sm:ml-[2.5%]">
-        <ul className="flex gap-1.5 text-primary-400 text-sm">
+        <ul className="flex gap-1.5 text-primary-400 text-sm max-w-[calc(100vw-15rem)] overflow-x-auto py-1">
           {breadcrumbs.map((item) => (
             <li
               key={item.name}
@@ -34,7 +34,7 @@ export const Header = ({ breadcrumbs } : HeaderProps) => (
           text-primary-800/70 rounded-lg
             focus:ring-gray-50/50 focus:outline-none 
             focus:ring-2 focus:ring-offset-2
-            sm:max-md:hidden
+            sm:max-md:hidden my-1
           "
           onClick={() => {
             let body = document.body;
