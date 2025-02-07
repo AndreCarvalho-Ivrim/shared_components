@@ -282,6 +282,7 @@ export const SideMenu = () =>{
           onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
         >
           <img src={profileCircle} alt="Icone de usuário" width={50} height={50} className="pt-2 object-center" />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Usuário</span>
         </button>
 
         <button 
