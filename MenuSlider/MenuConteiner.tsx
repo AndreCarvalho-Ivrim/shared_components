@@ -88,30 +88,34 @@ export const ConteinerFlows = ({
 
   return (
     <div className={`h-full flex flex-col justify-between p-1 `}>
-      <div className=" px-2 rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem] bg-[#E0E4E8] opacity-80 shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]">
-        <div className="overflow-x-auto h-full  " >
-          <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs  text-black uppercase "> 
+    
+      <div className="  px-2 rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[10rem] bg-[#E0E4E8] opacity-80 shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]">
+      <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs  text-black uppercase sticky top-0 z-10 "> 
               <tr>
-                <th className="px-3 py-2 font-bold">{title}</th>
+                <th className="px-3 py-2 font-bold sticky top-0 z-10 ">{title}</th>
               </tr>
             </thead> 
           </table>
+        <div className=" overflow-x-auto  " >
+        
+
           <section className="flex sm:flex-col sm:flex-row w-full sm:w-auto items-start  ">
-            
+         
             
             <div className="relative  ">
            
-              <div className="flex sm:flex-wrap w-[15rem] h-[10rem]  min-w-[8rem] max-h-[calc(6.25rem*4+2.25rem)]">
+              <div className="flex sm:flex-wrap w-[15rem] h-[8rem]  min-w-[8rem] max-h-[calc(6.25rem*4+2.25rem)]">
+              
                 {workflows.map((flow) => {
                   const isFixed = isFixeds.includes(flow._id);
                   return (
 
-              <div className="w-[48%] ">            
+              <div className=" ">            
         
                     <button
                       className={`
-                        relative m-6 min-w-[6.15rem] w-[6.15rem] min-h-[6.25rem] h-[6.25rem]
+                        relative ml-5 mb-2 mt-2  min-w-[5.15rem] w-[5.15rem] min-h-[5.25rem] h-[5.25rem]
                         rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}
                         ${inFixation && !isFixed ? 'opacity-70 hover:opacity-80':''}
                       `}
@@ -153,7 +157,7 @@ export const ConteinerFlows = ({
                  
                  <div className="w-[48%] "> 
                  <button
-                    className="relative bg-primary-700 hover:bg-primary-600 m-6 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
+                    className="relative bg-primary-700 hover:bg-primary-600 m-2 min-w-[5.15rem] w-[5.15rem] min-h-[5.15rem] h-[5.15rem] rounded-md flex flex-col items-center justify-center"
                     onClick={() => redirectToApp({
                       url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
                       disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
@@ -180,7 +184,7 @@ export const ConteinerFlows = ({
                 {( isFinancial && user?.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
                  <div className="w-[48%] "> 
                  <button
-                    className="relative  bg-primary-600 hover:bg-primary-600 m-6 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
+                    className="relative  bg-primary-600 hover:bg-primary-600 m-2 min-w-[5.15rem] w-[5.15rem] min-h-[5.15rem] h-[5.15rem] rounded-md flex flex-col items-center justify-center"
                     onClick={() => redirectToApp({
                       url: handleRegexUrl('@hub:old_cap.home', user.token),
                       disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)

@@ -152,31 +152,34 @@ export const Menu = () =>{
 
   return (
 
-    <div className="w-screen h-screen bg-background overflow-auto flex flex-col"> 
-      <div className={style.header}>
-        <div className={style.header__logo}> 
-          <img src={logo} alt="Ivrim Consulting"/> 
-        </div>
-        <div className="flex items-center gap-4"> 
-          <BellNotification />
-          <DropdownChooseEnterprise />
-        </div> 
-      </div>
+    <div className="w-screen h-screen bg-background overflow-hidden flex flex-col"> 
+      
 
       <div className="
         flex-row flex-wrap flex justify-start
-        lg:justify-evenly px-6
+        lg:justify-evenly px-6 pb-2
         w-full sm:max-w-[900px] lg:max-w-[95%] xl:max-w-[1580px] 
-        mx-auto gap-2
+        h-full 
+        mx-auto gap-2 
+        overflow-x
       ">
-        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+
+<div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden">
           <div className="grid xsm:grid-cols-3">
+ 
+        
            
           </div>
+          <SideMenu/>
+          
+           
+           
 
-          <div className="grid xsm:grid-cols-3">
-            
-          </div>
+         
+    
+        </div>
+
+        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
 
            
           <ConteinerFlows
@@ -195,15 +198,17 @@ export const Menu = () =>{
                      
           />
           <ConteinerFlows
-            title="IFM - Ivrim Fiel Management"
+            title="ISI - Ivrim Supply Inteligence"
             handleToggleFixed={handleToggleFixed}
             inFixation={inFixation}
             isFixeds={isFixeds}
-            workflows={workflows.filter(workflows => workflows.theme === 'Field Management')}
+            workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
+                     
           />
+          
         </div>
 
-        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem] h-[34rem]">
+        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
           <div className="grid xsm:grid-cols-3">
  
             
@@ -228,7 +233,14 @@ export const Menu = () =>{
             isFixeds={isFixeds}
             workflows={workflows.filter(workflows => workflows.theme === 'Field Management')}
           />
-        
+        <ConteinerFlows
+            title="ISI - Ivrim Supply Inteligence"
+            handleToggleFixed={handleToggleFixed}
+            inFixation={inFixation}
+            isFixeds={isFixeds}
+            workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
+                     
+          />
           
         </div>
 
@@ -241,24 +253,11 @@ export const Menu = () =>{
 
         </div>
 
-      <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem]">
-          <div className="grid xsm:grid-cols-3">
- 
-            
-           
-          </div>
-
-          
-           
-           
-
-          <SideMenu/>
-    
-        </div>
+      
 
       </div>
 
-      <footer className="mt-auto d-flex items-center justify-center text-center py-4">
+      <footer className="mt-auto d-flex items-center justify-center text-center py-4 ">
         <p className="text-gray-600 text-sm">Ivrim {new Date().getUTCFullYear()} © Todos os direitos reservados</p>
       </footer>
 
@@ -276,7 +275,7 @@ export const SideMenu = () =>{
 
   return(
 
-      <div className=" rounded-lg border border-gray-300 bg-[#4B92FF] backdrop-blur-[10px] min-h-[50rem] ">
+      <div className=" rounded-lg border border-gray-300 bg-[#4B92FF] backdrop-blur-[10px] h-full ">
       
         <button
           className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
