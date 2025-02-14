@@ -7,8 +7,9 @@ import { BellNotification } from "./Notification/BellNotification";
 
 interface HeaderProps{
   breadcrumbs: HeaderBreadcrumbs[],
+  show_header_title: boolean
 }
-export const Header = ({ breadcrumbs } : HeaderProps) => (
+export const Header = ({ breadcrumbs, show_header_title } : HeaderProps) => (
   <header className="flex items-start max-sm:items-center justify-between gap-4 mb-10">
     <div>
       <div className="flex items-center gap-4 max-sm:scale-105 max-sm:ml-[2.5%]">
@@ -61,9 +62,13 @@ export const Header = ({ breadcrumbs } : HeaderProps) => (
 
       </div>
       
-      <h1 className="text-primary-500 text-4xl font-bold mt-4 max-sm:hidden">{breadcrumbs[breadcrumbs.length - 1].name}</h1>
-      {breadcrumbs[breadcrumbs.length - 1].subtitle && (
-        <span className="text-gray-400 text-lg italic -mt-0.5 block max-sm:hidden">{breadcrumbs[breadcrumbs.length - 1].subtitle}</span>
+      {show_header_title && (
+        <>
+          <h1 className="text-primary-500 text-4xl font-bold mt-4 max-sm:hidden">{breadcrumbs[breadcrumbs.length - 1].name}</h1>
+          {breadcrumbs[breadcrumbs.length - 1].subtitle && (
+            <span className="text-gray-400 text-lg italic -mt-0.5 block max-sm:hidden">{breadcrumbs[breadcrumbs.length - 1].subtitle}</span>
+          )}
+        </>
       )}
     </div>
     <div className="flex items-center gap-4">

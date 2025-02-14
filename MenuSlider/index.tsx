@@ -23,11 +23,11 @@ import { useNavigate } from "react-router-dom";
 import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise";
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
-import { CloseIcon, LockIcon, PinIcon, RefreshIcon } from "../utils/icons";
+import { CloseIcon, LockIcon, PinIcon, RefreshIcon, UserIcon } from "../utils/icons";
 import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
-import { IconByTheme } from "../Wrapper";
+import { IconByTheme, Wrapper } from "../Wrapper";
 import { ActivityPanel } from "../ActivityPanel";
 import { NotificationPanel } from "../NotificationPanel";
 import { flow } from "lodash";
@@ -151,119 +151,138 @@ export const Menu = () =>{
   }
 
   return (
+    <Wrapper
+      asideItems={[
+        {
+          id: 'user',
+          name: 'Usuário',
+          href: handleRegexUrl('@hub:profile.home', user?.token),
+          icon: (
+            <UserIcon w={22} h={22}/>
+          )
+        }, {
+          id: 'dashboard',
+          name: 'Dashboard',
+          href: handleRegexUrl('@hub:dashboard.home', user?.token),
+          icon: (
+            <img
+              src={dashbord}
+              alt="Icone de Dashbord"
+              width={22}
+              height={22}
+              className="pt-2 object-center"
+            />
+          ),
+          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
+        }
 
-    <div className="w-screen h-screen bg-background overflow-hidden flex flex-col"> 
-      
+        // <button 
+        //   className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+        //   onClick={() => redirectToApp({ url: handleRegexUrl('@hub:dashboard.home', user?.token) }, toast, navigate)}
+        // >
+        //   <img src= {dashbord} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
+        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
+        // </button>
 
-      <div className="
-        flex-row flex-wrap flex justify-start
-        lg:justify-evenly px-6 pb-2
-        w-full sm:max-w-[900px] lg:max-w-[95%] xl:max-w-[1580px] 
-        h-full 
-        mx-auto gap-2 
-        overflow-x
-      ">
+        // <button 
+        //   className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+        //   onClick={() => redirectToApp({ url: handleRegexUrl('@isac:report.home', user?.token) }, toast, navigate)}
+        // >
+          
+        //   <img src= {report} alt="Icone do Report" width={50} height={50} className="pt-2 object-center"  />
+        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Report</span>
+        // </button>   
 
-<div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden">
-          <div className="grid xsm:grid-cols-3">
- 
-        
-           
+        // <button 
+        //   className=" m-5 h-50 rounded-md flex flex-col  absolute bottom-0"
+        //   onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
+        // >
+          
+        //   <img src= {settings} alt="Icone de Settings" width={50} height={50} className="pt-2 object-bottom"  />
+        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Settings</span>
+        // </button> 
+      ]}
+      omit={['header-title']}
+    >
+      <div className="flex flex-col">
+        <div className="
+          flex-row flex-wrap flex justify-start
+          lg:justify-evenly pb-2
+          w-full sm:max-w-[900px] lg:max-w-[95%] xl:max-w-[1580px] 
+          h-full 
+          mx-auto gap-2 
+          overflow-x
+        ">
+          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
+            <ConteinerFlows
+              title="IFI - Ivrim Financial Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflows => ['Cobrança', "Financeiro"].includes(workflows.theme))}
+            />
+            <ConteinerFlows
+              title="ISI - Ivrim Supply Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflows => workflows.theme === 'Supply')}   
+            />
+            <ConteinerFlows
+              title="ISI - Ivrim Supply Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
+            />
           </div>
-          <SideMenu/>
-          
-           
-           
 
-         
-    
-        </div>
-
-        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
-
-           
-          <ConteinerFlows
-            title="IFI - Ivrim Financial Inteligence"
-            handleToggleFixed={handleToggleFixed}
-            inFixation={inFixation}
-            isFixeds={isFixeds}
-            workflows={workflows.filter(workflows => ['Cobrança', "Financeiro"].includes(workflows.theme))}
-          />
-           <ConteinerFlows
-            title="ISI - Ivrim Supply Inteligence"
-            handleToggleFixed={handleToggleFixed}
-            inFixation={inFixation}
-            isFixeds={isFixeds}
-            workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
-                     
-          />
-          <ConteinerFlows
-            title="ISI - Ivrim Supply Inteligence"
-            handleToggleFixed={handleToggleFixed}
-            inFixation={inFixation}
-            isFixeds={isFixeds}
-            workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
-                     
-          />
-          
-        </div>
-
-        <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
-          <div className="grid xsm:grid-cols-3">
- 
+          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
+            <div className="grid xsm:grid-cols-3">
+  
+              
             
-           
-          </div>
+            </div>
 
-          <div className="grid xsm:grid-cols-3">
+            <div className="grid xsm:grid-cols-3">
+              
+            </div>
+            
+            <ConteinerFlows
+              title="IAS - Ivrim ADM. Solutios"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflows => workflows.theme == 'Gestão')}
+            />
+            <ConteinerFlows
+              title="ICI - Ivrim Commercial Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflows => workflows.theme === 'Field Management')}
+            />
+          <ConteinerFlows
+              title="ISI - Ivrim Supply Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
+                      
+            />
             
           </div>
-           
-          <ConteinerFlows
-            title="IAS - Ivrim ADM. Solutios"
-            handleToggleFixed={handleToggleFixed}
-            inFixation={inFixation}
-            isFixeds={isFixeds}
-            workflows={workflows.filter(workflows => workflows.theme == 'Gestão')}
-          />
-          <ConteinerFlows
-            title="ICI - Ivrim Commercial Inteligence"
-            handleToggleFixed={handleToggleFixed}
-            inFixation={inFixation}
-            isFixeds={isFixeds}
-            workflows={workflows.filter(workflows => workflows.theme === 'Field Management')}
-          />
-        <ConteinerFlows
-            title="ISI - Ivrim Supply Inteligence"
-            handleToggleFixed={handleToggleFixed}
-            inFixation={inFixation}
-            isFixeds={isFixeds}
-            workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
-                     
-          />
-          
+
+          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+            <ActivityPanel/>
+            <NotificationPanel/>
+          </div>
         </div>
-
-      <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
-        
-
-          <ActivityPanel/>
-
-          <NotificationPanel/>
-
-        </div>
-
-      
-
+        <footer className="mt-auto d-flex items-center justify-center text-center py-4 ">
+          <p className="text-gray-600 text-sm">Ivrim {new Date().getUTCFullYear()} © Todos os direitos reservados</p>
+        </footer>
       </div>
-
-      <footer className="mt-auto d-flex items-center justify-center text-center py-4 ">
-        <p className="text-gray-600 text-sm">Ivrim {new Date().getUTCFullYear()} © Todos os direitos reservados</p>
-      </footer>
-
-</div>
-
-     
+    </Wrapper>
   );
 };
 

@@ -45,6 +45,7 @@ import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { getDashboards } from "../services/dashboard";
 import { ivrimID } from "../services/conn/api";
 
+export type OmitWrapperType = 'button-help' | 'header' | 'aside' | 'header-title';
 export interface WrapperProps {
   v?: 3;
   children?: ReactNode;
@@ -54,7 +55,7 @@ export interface WrapperProps {
   asideItems?: AsideItems[];
   footerItems?: FooterAsideProps["footerItems"];
   breadcrumbs?: HeaderBreadcrumbs[];
-  omit?: ("button-help" | "header" | "aside")[];
+  omit?: OmitWrapperType[];
 }
 export function Wrapper({
   module_name,

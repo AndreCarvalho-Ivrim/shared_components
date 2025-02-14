@@ -3,6 +3,7 @@ import { Header } from "./Header";
 import { Aside, AsideItems } from "./Aside";
 import { ButtonHelp } from "./ButtonHelp";
 import { FooterAsideProps } from "./Aside/FooterAside";
+import { OmitWrapperType } from "..";
 
 export interface HeaderBreadcrumbs{
   name: string,
@@ -18,7 +19,7 @@ interface WrapperProps{
   footerItems: FooterAsideProps['footerItems'],
   children: ReactNode,
   module_name?: string,
-  omit: ('button-help' | 'header' | 'aside')[],
+  omit: OmitWrapperType[],
   goBack?: string
 }
 export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, footerItems, asideActive, module_name, omit, goBack }: WrapperProps) => (
@@ -39,7 +40,7 @@ export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, 
       />
       <div className="pr-8 py-8 pl-8 sm:pl-12 max-h-screen -my-4 overflow-y-auto" id="wrapper-content">
         {!omit.includes('header') && (
-          <Header breadcrumbs={breadcrumbs}/>
+          <Header breadcrumbs={breadcrumbs} show_header_title={!omit.includes('header-title')}/>
         )}
 
         {children}
