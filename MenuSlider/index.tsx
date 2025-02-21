@@ -165,15 +165,46 @@ export const Menu = () =>{
           name: 'Dashboard',
           href: handleRegexUrl('@hub:dashboard.home', user?.token),
           icon: (
+            
             <img
               src={dashbord}
               alt="Icone de Dashbord"
+              width={22}
+              height={22}
+              className="pt-2 object-top"
+            />
+          ),
+          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
+        }, {
+          id: 'report',
+          name: 'Report',
+          href: handleRegexUrl('@isac:report.home', user?.token),
+          icon: (
+            <img
+              src={report}
+              alt="Icone de Report"
               width={22}
               height={22}
               className="pt-2 object-center"
             />
           ),
           disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
+
+        }, {
+          id: 'folder',
+          name: 'GED',
+          href: handleRegexUrl('@hub:profile.home', user?.token),
+          icon: (
+            <img
+              src={Folder}
+              alt="Icone de arquivo"
+              width={22}
+              height={22}
+              className="pt-2 object-center"
+            />
+          ),
+          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
+
         }
 
         // <button 
@@ -206,14 +237,14 @@ export const Menu = () =>{
     >
       <div className="flex flex-col">
         <div className="
-          flex-row flex-wrap flex justify-start
-          lg:justify-evenly pb-2
-          w-full sm:max-w-[900px] lg:max-w-[95%] xl:max-w-[1580px] 
+          flex-col md:flex-row flex-wrap flex justify-start
+          lg:justify-evenly pb-5
+          w-full sm:max-w-[616px] lg:max-w-[95%] xl:max-w-[1580px] 
           h-full 
-          mx-auto gap-2 
+          mx-auto gap-5
           overflow-x
         ">
-          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
+          <div className="flex flex-col flex-1 lg:flex-none  sm:max-w-[22rem]  h-full overflow-x">
             <ConteinerFlows
               title="IFI - Ivrim Financial Inteligence"
               handleToggleFixed={handleToggleFixed}
@@ -278,7 +309,8 @@ export const Menu = () =>{
             <NotificationPanel/>
           </div>
         </div>
-        <footer className="mt-auto d-flex items-center justify-center text-center py-4 ">
+
+        <footer className="mt-auto d-flex items-center justify-center text-center py-4  ">
           <p className="text-gray-600 text-sm">Ivrim {new Date().getUTCFullYear()} © Todos os direitos reservados</p>
         </footer>
       </div>
