@@ -119,6 +119,18 @@ export const CheckedIcon = (props: IconProps) => (
     />
   </svg>
 );
+export const DoubleCheckedIcon = (props: IconProps) => (
+  <svg 
+    width={props.w ?? '25'} 
+    height={props.h ?? '19'}
+    viewBox="0 0 24 24"
+    fill={props.color ?? 'none'} 
+    xmlns="http://www.w3.org/2000/svg" 
+    className={props.className ?? ''}
+  >
+    <path d="m2.394 13.742 4.743 3.62 7.616-8.704-1.506-1.316-6.384 7.296-3.257-2.486zm19.359-5.084-1.506-1.316-6.369 7.279-.753-.602-1.25 1.562 2.247 1.798z"></path>
+  </svg>
+);
 export const FileIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1422,6 +1434,7 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <TrashIcon {...props} />, title: 'TrashIcon' },
   { component: (props?: IconProps) => <PlusIcon {...props} />, title: 'PlusIcon' },
   { component: (props?: IconProps) => <CheckedIcon {...props} />, title: 'CheckedIcon' },
+  { component: (props?: IconProps) => <DoubleCheckedIcon {...props} />, title: 'DoubleCheckedIcon' },
   { component: (props?: IconProps) => <FileIcon {...props} />, title: 'FileIcon' },
   { component: (props?: IconProps) => <UploadIcon {...props} />, title: 'UploadIcon' },
   { component: (props?: IconProps) => <ChatIcon {...props} />, title: 'ChatIcon' },
