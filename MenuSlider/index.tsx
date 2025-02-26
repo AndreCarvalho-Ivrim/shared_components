@@ -23,7 +23,7 @@ import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise
 import { useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
 import { CloseIcon, LockIcon, PinIcon, RefreshIcon } from "../utils/icons";
-import { handleRegexUrl } from "../../shared-types/utils/routes";
+import { getDomain, handleRegexUrl } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 import { IconByTheme } from "../Wrapper";
@@ -66,7 +66,7 @@ export const redirectToApp = (
 };
 export const MenuSlider = () => {
   const { toast } = useNotify();
-  const { user } = useAuth();
+  const { user, client } = useAuth();
   const navigate = useNavigate();
 
   const [inFixation, setInFixation] = useState(false);
@@ -141,6 +141,109 @@ export const MenuSlider = () => {
     })();
     setIsLoading(false);
   }
+
+  const [redirectToDedicatedUrl, setRedirectToDedicatedUrl] = useState<string>();
+  const [redirectToIvrimServer, setRedirectToIvrimServer] = useState<string>();
+  
+  useEffect(() => {
+    if(!client) return;
+
+    let dedicatedUrl = undefined;
+    let ivrimUrl = undefined;
+
+    if(client?.dedicated_server){
+      const isHub = getDomain('hub') === '';
+      /**
+       * Para funcionar como esperado a url registrada deve ser a URL do HUB dedicado, e a url \
+       * deve ser igual do isac, adicionando hub. no começo, exemplo:
+       * 
+       * https://hub.url_dedicada.com.br (hub) -- salva no client.dedicated_server
+       * https://url_dedicada.com.br (isac)
+       */
+      let url = isHub ? client.dedicated_server : client.dedicated_server.replace('://hub.','://');
+      if(window.location.origin !== url && !sessionStorage.getItem('isac@ignore-redirect-dedicated-server')){
+        dedicatedUrl = url;
+      }
+    }
+    else{
+      const original_url = (() : string | undefined => {
+        //@ts-ignore
+        try{ return process.env.REACT_APP_RELATIVE_URL; }catch(e){}
+        //@ts-ignore
+        try{ return import.meta.env.VITE_RELATIVE_URL; }catch(e){}
+        return undefined;
+      })()
+      
+      ivrimUrl = original_url;  
+    }
+    
+    setRedirectToDedicatedUrl(dedicatedUrl);
+    setRedirectToIvrimServer(ivrimUrl);
+  },[client])
+
+  if(redirectToDedicatedUrl) return (
+    <div className="page_error bg-gradient-light">
+      <div className="page_error__content">
+        <>
+          <img
+            src={logo}
+            alt="Ivrim Consulting"
+            className="max-w-[90%] w-72 mx-auto mb-2"
+          />
+          <h2 className="text-lg uppercase font-semibold text-primary-700 mb-3">
+            {client?.nome_fantasia}
+          </h2>
+          <p className="text-primary-400/80">
+            Sua empresa possui um servidor dedicado,<br/>
+            para aumento de performance. Clique no botão abaixo <br/>
+            para ser redirecionado para ele.
+          </p>
+        </>
+        <div>
+          <a href={redirectToDedicatedUrl} className={`
+            text-primary-700 font-semibold bg-gradient-light flex gap-2 items-center
+            hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-gray-400
+            rounded-lg text-sm border-2
+            px-4 pt-2 pb-2 text-center mb-2 mt-4 w-fit mx-auto uppercase 
+          `}>
+            Redirecionar para Servidor Dedicado
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+
+  if(redirectToIvrimServer) return (
+    <div className="page_error bg-gradient-light">
+      <div className="page_error__content">
+        <>
+          <img
+            src={logo}
+            alt="Ivrim Consulting"
+            className="max-w-[90%] w-72 mx-auto mb-2"
+          />
+          <h2 className="text-lg uppercase font-semibold text-primary-700 mb-3">
+            {client?.nome_fantasia}
+          </h2>
+          <p className="text-primary-400/80">
+            Essa empresa não tem acesso a este servidor,<br/>
+            clique no botão abaixo para retornar ao<br/>
+            servidor correto.
+          </p>
+        </>
+        <div>
+          <a href={redirectToIvrimServer} className={`
+            text-primary-700 font-semibold bg-gradient-light flex gap-2 items-center
+            hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-gray-400
+            rounded-lg text-sm border-2
+            px-4 pt-2 pb-2 text-center mb-2 mt-4 w-fit mx-auto uppercase 
+          `}>
+            Retornar
+          </a>
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <div className="w-screen h-screen bg-background overflow-auto flex flex-col">
