@@ -168,9 +168,9 @@ export const MenuSlider = () => {
     else{
       const original_url = (() : string | undefined => {
         //@ts-ignore
-        try{ return process.env.REACT_APP_RELATIVE_URL; }catch(e){}
-        //@ts-ignore
         try{ return import.meta.env.VITE_RELATIVE_URL; }catch(e){}
+        //@ts-ignore
+        try{ return process.env.REACT_APP_RELATIVE_URL; }catch(e){}
         return undefined;
       })()
       
