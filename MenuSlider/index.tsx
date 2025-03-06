@@ -171,58 +171,46 @@ export const Menu = () =>{
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
               isFixeds={isFixeds}
-              workflows={workflows.filter(workflows => ['Cobrança', "Financeiro"].includes(workflows.theme))}
+              workflows={workflows.filter(workflow => ['Cobrança', "Financeiro"].includes(workflow.theme))}
             />
             <ConteinerFlows
               title="ISI - Ivrim Supply Inteligence"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
               isFixeds={isFixeds}
-              workflows={workflows.filter(workflows => workflows.theme === 'Supply')}   
+              workflows={workflows.filter(workflow => workflow.theme === 'Supply')}   
             />
             <ConteinerFlows
-              title="ISI - Ivrim Supply Inteligence"
+              title="IFM - Ivrim Field Management"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
               isFixeds={isFixeds}
-              workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
+              workflows={workflows.filter(workflow => workflow.theme === 'Field Management' && workflow.template !== 'IFM Agendamento')}
             />
           </div>
 
-          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full  ">
-            <div className="grid xsm:grid-cols-3">
-  
-              
-            
-            </div>
-
-            <div className="grid xsm:grid-cols-3">
-              
-            </div>
-            
+          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full">            
             <ConteinerFlows
               title="IAS - Ivrim ADM. Solutios"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
               isFixeds={isFixeds}
-              workflows={workflows.filter(workflows => workflows.theme == 'Gestão')}
+              workflows={workflows.filter(workflow => workflow.theme == 'Gestão')}
             />
             <ConteinerFlows
               title="ICI - Ivrim Commercial Inteligence"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
               isFixeds={isFixeds}
-              workflows={workflows.filter(workflows => workflows.theme === 'Field Management')}
+              workflows={workflows.filter(workflow => workflow.theme === 'Comercial')}
             />
-          <ConteinerFlows
-              title="ISI - Ivrim Supply Inteligence"
+            <ConteinerFlows
+              title="IM - Ivrim Messaging"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
               isFixeds={isFixeds}
-              workflows={workflows.filter(workflows => workflows.theme === 'Supply')}
-                      
+              workflows={workflows.filter(workflow => workflow.template === 'IFM Agendamento')}          
             />
-            
           </div>
 
           <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">

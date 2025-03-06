@@ -219,7 +219,7 @@ defaultAsideItems = [
 
         }, {
           id: 'folder',
-          name: 'GED',
+          name: 'Meus Docs.',
           href: handleRegexUrl('@hub:gallery.home', user?.token),
           icon: (
            <MyDocsIcon  w={22} h={22} />
