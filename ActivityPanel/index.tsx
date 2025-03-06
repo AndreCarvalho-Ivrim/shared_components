@@ -89,7 +89,7 @@ export const ActivityPanel = () => {
                     colSpan={2}
                     className="px-3 py-10 text-center text-sm text-gray-500 bg-gray-300/50 opacity-70"
                   >
-                    <div className="min-h-[10rem] flex items-center justify-center">
+                    <div className=" h-[14rem] 2xl:h-[24rem] flex items-center justify-center">
                       Não há notificações <br/>
                       no momento
                     </div>

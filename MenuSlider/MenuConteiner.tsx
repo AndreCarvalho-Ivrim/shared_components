@@ -105,7 +105,7 @@ export const ConteinerFlows = ({
             
             <div className="relative  ">
            
-              <div className="flex sm:flex-wrap w-[15rem] h-[8rem]  min-w-[8rem] max-h-[calc(6.25rem*4+2.25rem)]">
+              <div className="flex sm:flex-wrap w-[15rem] 2xl:w-[20rem] h-[8rem] 2xl:h-[13rem]   ]">
               
                 {workflows.map((flow) => {
                   const isFixed = isFixeds.includes(flow._id);
@@ -115,7 +115,7 @@ export const ConteinerFlows = ({
         
                     <button
                       className={`
-                        relative ml-5 mb-2 mt-2  min-w-[5.15rem] w-[5.15rem] min-h-[5.25rem] h-[5.25rem]
+                        relative ml-5 mb-2 mt-2  w-[5.25rem] 2xl:w-[6.25rem] h-[5.25rem] 2xl:h-[6.25rem]
                         rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}
                         ${inFixation && !isFixed ? 'opacity-70 hover:opacity-80':''}
                       `}
@@ -157,7 +157,7 @@ export const ConteinerFlows = ({
                  
                  <div className="w-[48%] "> 
                  <button
-                    className="relative bg-primary-700 hover:bg-primary-600 m-2 min-w-[5.15rem] w-[5.15rem] min-h-[5.15rem] h-[5.15rem] rounded-md flex flex-col items-center justify-center"
+                    className="relative bg-primary-700 hover:bg-primary-600 m-2 w-[5.25rem] 2xl:w-[6.25rem] h-[5.25rem] 2xl:h-[6.25rem] rounded-md flex flex-col items-center justify-center"
                     onClick={() => redirectToApp({
                       url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
                       disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
@@ -184,7 +184,7 @@ export const ConteinerFlows = ({
                 {( isFinancial && user?.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
                  <div className="w-[48%] "> 
                  <button
-                    className="relative  bg-primary-600 hover:bg-primary-600 m-2 min-w-[5.15rem] w-[5.15rem] min-h-[5.15rem] h-[5.15rem] rounded-md flex flex-col items-center justify-center"
+                    className="relative  bg-primary-600 hover:bg-primary-600 m-2 w-[5.25rem] 2xl:w-[6.25rem] h-[5.25rem] 2xl:h-[6.25rem] rounded-md flex flex-col items-center justify-center"
                     onClick={() => redirectToApp({
                       url: handleRegexUrl('@hub:old_cap.home', user.token),
                       disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
@@ -204,7 +204,7 @@ export const ConteinerFlows = ({
 
                 ) : !(   isFinancial && user?.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
                   <div className="
-                    bg-gray-300 hover:bg-gray-300 m-5 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
+                    bg-gray-300 hover:bg-gray-300 m-5 p-1  w-[5.25rem] 2xl:w-[6.25rem] h-[5.25rem] 2xl:h-[6.25rem] rounded-md flex flex-col items-center justify-center
                     text-center text-xs text-gray-500 opacity-75 
                   ">Você não<br />possui nenhum aplicativo<br />criado</div>
                 ) : <></>}

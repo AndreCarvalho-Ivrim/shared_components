@@ -152,87 +152,9 @@ export const Menu = () =>{
 
   return (
     <Wrapper
-      asideItems={[
-        {
-          id: 'user',
-          name: 'Usuário',
-          href: handleRegexUrl('@hub:profile.home', user?.token),
-          icon: (
-            <UserIcon w={22} h={22}/>
-          )
-        }, {
-          id: 'dashboard',
-          name: 'Dashboard',
-          href: handleRegexUrl('@hub:dashboard.home', user?.token),
-          icon: (
-            
-            <img
-              src={dashbord}
-              alt="Icone de Dashbord"
-              width={22}
-              height={22}
-              className="pt-2 object-top"
-            />
-          ),
-          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
-        }, {
-          id: 'report',
-          name: 'Report',
-          href: handleRegexUrl('@isac:report.home', user?.token),
-          icon: (
-            <img
-              src={report}
-              alt="Icone de Report"
-              width={22}
-              height={22}
-              className="pt-2 object-center"
-            />
-          ),
-          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
 
-        }, {
-          id: 'folder',
-          name: 'GED',
-          href: handleRegexUrl('@hub:profile.home', user?.token),
-          icon: (
-            <img
-              src={Folder}
-              alt="Icone de arquivo"
-              width={22}
-              height={22}
-              className="pt-2 object-center"
-            />
-          ),
-          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
-
-        }
-
-        // <button 
-        //   className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
-        //   onClick={() => redirectToApp({ url: handleRegexUrl('@hub:dashboard.home', user?.token) }, toast, navigate)}
-        // >
-        //   <img src= {dashbord} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
-        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
-        // </button>
-
-        // <button 
-        //   className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
-        //   onClick={() => redirectToApp({ url: handleRegexUrl('@isac:report.home', user?.token) }, toast, navigate)}
-        // >
-          
-        //   <img src= {report} alt="Icone do Report" width={50} height={50} className="pt-2 object-center"  />
-        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Report</span>
-        // </button>   
-
-        // <button 
-        //   className=" m-5 h-50 rounded-md flex flex-col  absolute bottom-0"
-        //   onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
-        // >
-          
-        //   <img src= {settings} alt="Icone de Settings" width={50} height={50} className="pt-2 object-bottom"  />
-        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Settings</span>
-        // </button> 
-      ]}
+    module_name="ISAC 3.0"
+     
       omit={['header-title']}
     >
       <div className="flex flex-col">
@@ -241,10 +163,10 @@ export const Menu = () =>{
           lg:justify-evenly pb-5
           w-full sm:max-w-[616px] lg:max-w-[95%] xl:max-w-[1580px] 
           h-full 
-          mx-auto gap-5
+          mx-auto gap-15
           overflow-x
         ">
-          <div className="flex flex-col flex-1 lg:flex-none  sm:max-w-[22rem]  h-full overflow-x">
+          <div className="flex flex-col flex-1 lg:flex-none  sm:max-w-[22rem]  h-full">
             <ConteinerFlows
               title="IFI - Ivrim Financial Inteligence"
               handleToggleFixed={handleToggleFixed}
@@ -268,7 +190,7 @@ export const Menu = () =>{
             />
           </div>
 
-          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full overflow-hidden ">
+          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full  ">
             <div className="grid xsm:grid-cols-3">
   
               

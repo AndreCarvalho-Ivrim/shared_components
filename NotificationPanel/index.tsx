@@ -105,7 +105,7 @@ return (
                     colSpan={2}
                     className="px-3 py-10 text-center text-sm text-gray-500 bg-[#E0E4E8] opacity-80 "
                   >
-                    <div className="min-h-[7rem] flex items-center justify-center">
+                    <div className="  h-[3rem] 2xl:h-[8rem] flex items-center justify-center">
                       Não há notificações <br/>
                       no momento
                     </div>
