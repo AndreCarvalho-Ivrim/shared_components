@@ -152,9 +152,8 @@ export const Menu = () =>{
 
   return (
     <Wrapper
-
-    module_name="ISAC 3.0"
-     
+      asideActive={['Home']}
+      module_name="ISAC 3.0"
       omit={['header-title']}
     >
       <div className="flex flex-col">
