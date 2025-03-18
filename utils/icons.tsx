@@ -135,7 +135,7 @@ export const DoubleCheckedIcon = (props: IconProps) => (
     width={props.w ?? '25'} 
     height={props.h ?? '19'}
     viewBox="0 0 24 24"
-    fill={props.color ?? 'none'} 
+    fill={props.color ?? 'currentColor'} 
     xmlns="http://www.w3.org/2000/svg" 
     className={props.className ?? ''}
   >
