@@ -13,11 +13,20 @@ import { Dropdown } from "../../utils/Dropdown";
 import { TableFooter } from "../../TableFooter";
 import { ArrowRightIcon, EnvelopeIcon, EnvelopeOpenIcon, DropboxIcon, ArchiveIcon } from "../../utils/icons";
 import moment from "moment";
-import { getDomain } from "../../../shared-types/utils/routes";
+import { getDomain, getSupportKeys } from "../../../shared-types/utils/routes";
 import { CreatePublicPostDataBody, requestPublicPost } from "../../services/publicRoutes";
 
+const supportKeys = getSupportKeys();
 const hardcodeSupport = {
-  flow_id: '67da18e81687e38b5d50a55b',
+  flow_id: supportKeys.flow_id || '67da4442d458ede945918d10',
+  steps: {
+    "open-request-called": supportKeys.steps["open-request-called"] || "67da4442d458ede945918d11",
+    "internal-approval":   supportKeys.steps["internal-approval"]   || "67da4442d458ede945918d12",
+    "in-progress":         supportKeys.steps["in-progress"]         || "67da4442d458ede945918d13",
+    "internal-test":       supportKeys.steps["internal-test"]       || "67da4442d458ede945918d14",
+    "approval-test":       supportKeys.steps["approval-test"]       || "67da4442d458ede945918d15",
+    "called-closed":       supportKeys.steps["called-closed"]       || "67da4442d458ede945918d16"
+  }
 }
 
 interface FileListType{
@@ -444,211 +453,211 @@ const ListCallsContent = ({ isLoading, filter, setFilter, showingNotifications, 
 
   return (
     <div className="mb-6">
-        <div className="bg-gradient-light backdrop-blur-[25px] rounded-lg flex justify-between gap-2 mt-4 mb-4 px-4 text-primary-700 relative z-10">
-          <div className="md:hidden max-sm:w-full">
-            <Dropdown
-              classNames={{ list: `
-                absolute right-0 z-10
-                -mt-1 w-56 origin-top-right rounded-md
-                bg-gray-100/40 backdrop-blur-[25px] shadow-lg
-                ring-1 ring-black ring-opacity-5
-                focus:outline-none pb-2
-              `, button: 'max-sm:w-full', wrapper: 'relative inline-block text-left group max-sm:w-full' }}
-              trigger={
-                <div
-                  className="my-3 w-40 max-sm:w-full h-10 border border-gray-50/10 flex items-center justify-between p-4 rounded-md bg-gray-100/5 text-sm backdrop-blur-[25px] font-semibold"
-                >
-                  
-                  {callStatus[filter.status] ?? 'Status de Notificação'}
-                  <ArrowRightIcon className="rotate-90 group-data-[headlessui-state=open]:-rotate-90"/>
-                </div>
-              }
-            >
-              {Object.entries(callStatus).map(([status, name]) => (
-                <button
-                  className="text-gray-700 font-semibold text-sm rounded-lg backdrop-blur-[25px] w-full text-start p-2 hover:bg-gray-50/30"
-                  onClick={() => setFilter((prevState) => ({
-                    ...prevState,
-                    status: status as CallStatusType
-                  }))}
-                  key={status}
-                >{name}</button>
-              ))}
-            </Dropdown>
-          </div>
-          <ul className="hidden md:flex gap-4 text-sm h-16 text-primary-700">
+      <div className="bg-gradient-light backdrop-blur-[25px] rounded-lg flex justify-between gap-2 mt-4 mb-4 px-4 text-primary-700 relative z-10">
+        <div className="md:hidden max-sm:w-full">
+          <Dropdown
+            classNames={{ list: `
+              absolute right-0 z-10
+              -mt-1 w-56 origin-top-right rounded-md
+              bg-gray-100/40 backdrop-blur-[25px] shadow-lg
+              ring-1 ring-black ring-opacity-5
+              focus:outline-none pb-2
+            `, button: 'max-sm:w-full', wrapper: 'relative inline-block text-left group max-sm:w-full' }}
+            trigger={
+              <div
+                className="my-3 w-40 max-sm:w-full h-10 border border-gray-50/10 flex items-center justify-between p-4 rounded-md bg-gray-100/5 text-sm backdrop-blur-[25px] font-semibold"
+              >
+                
+                {callStatus[filter.status] ?? 'Status de Notificação'}
+                <ArrowRightIcon className="rotate-90 group-data-[headlessui-state=open]:-rotate-90"/>
+              </div>
+            }
+          >
             {Object.entries(callStatus).map(([status, name]) => (
-              <li className={`group ${filter.status === status ? 'active':''}`} key={status}>
-                <button
-                  type="button"
-                  className={`
-                    relative h-full px-2 text-center font-semibold
-                    
-                    after:w-full after:h-1
-                    after:-bottom-0.5 after:left-0
-                    after:rounded-lg
-
-                    group-[.active]:after:content['']
-                    group-[.active]:after:absolute 
-                    group-[.active]:after:block 
-                    group-[.active]:after:bg-[#6DBFFF] group-[.active]:after:shadow-[0_1px_20px_#6DBFFF]
-
-                    hover:after:content['']
-                    hover:after:absolute 
-                    hover:after:block 
-                    hover:after:bg-[#6DBFFF30]
-                    hover:text-primary-500/80
-                  `}
-                  onClick={() => setFilter((prevState) => ({
-                    ...prevState,
-                    status: status as CallStatusType
-                  }))}
-                >{name}</button>
-              </li>
+              <button
+                className="text-gray-700 font-semibold text-sm rounded-lg backdrop-blur-[25px] w-full text-start p-2 hover:bg-gray-50/30"
+                onClick={() => setFilter((prevState) => ({
+                  ...prevState,
+                  status: status as CallStatusType
+                }))}
+                key={status}
+              >{name}</button>
             ))}
-          </ul>
+          </Dropdown>
         </div>
-        <div className={`
-          h-full min-h-[calc(20rem-3rem)]
-          flex flex-col justify-between
-        `}>
-          <div>
-            <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px]">
-              <table className="w-full text-sm text-left text-gray-500">
-                <thead className="text-xs  text-primary-800 uppercase bg-primary-500/5">
-                  <tr>
-                    <th className="px-3 py-2 font-bold">Chamados {callStatus[filter.status]}</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {showingNotifications.slice(
-                    pageIndex * perPage,
-                    (pageIndex + 1) * perPage
-                  ).map(notification => (
-                    <tr className="hover:bg-gray-200/80 border-b last:border-none" key={notification.id}>
-                      <td className="px-3 py-4 w-5">
-                        <input
-                          type="checkbox"
-                          id={`check-row-home-table-${notification.id}`}
-                          className={`check-row-home-table bg-transparent border-2`}
-                          data-name={notification.title}
-                          value={notification.id}
-                          onClick={(e) => {
-                            let hasAtLeast1Checked = document.querySelectorAll(`.check-row-home-table:checked`).length > 0;
-                            let checkAll = document.getElementById(`check-row-home-table`) as HTMLInputElement;
+        <ul className="hidden md:flex gap-4 text-sm h-16 text-primary-700">
+          {Object.entries(callStatus).map(([status, name]) => (
+            <li className={`group ${filter.status === status ? 'active':''}`} key={status}>
+              <button
+                type="button"
+                className={`
+                  relative h-full px-2 text-center font-semibold
+                  
+                  after:w-full after:h-1
+                  after:-bottom-0.5 after:left-0
+                  after:rounded-lg
 
-                            if(hasAtLeast1Checked){
-                              setHasSelected(true);
+                  group-[.active]:after:content['']
+                  group-[.active]:after:absolute 
+                  group-[.active]:after:block 
+                  group-[.active]:after:bg-[#6DBFFF] group-[.active]:after:shadow-[0_1px_20px_#6DBFFF]
 
-                              checkAll.checked = document.querySelectorAll(
-                                `.check-row-home-table:not(:checked)`
-                              ).length === 0;
-                            }
-                            else{
-                              setHasSelected(false);
-                              checkAll.checked = false;
-                            }
-                          }}
-                        />
-                      </td>                            
-
-                      <td
-                        className="px-3 py-4 cursor-pointer"
-                        onClick={() => {}}
-                      >
-
-                        <div className="flex items-center gap-2 max-w-full">
-                          <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{notification.title}</strong>
-                        </div>
-                        <div className="flex flex-col gap-2 mt-0.5">
-                          <span className="text-gray-500 text-xs font-normal">
-                            {notification.description.slice(0, 80) + (notification.description.length > 80 ? '...':'')}
-                          </span>
-                          <span className="text-gray-400 text-xs">{moment(notification.schedule).format('DD/MM/YYYY H:mm')}</span>
-                        </div>
-                      </td>
-                      <td className="px-3 py-4 cursor-pointer text-end">
-                        <div className="flex items-center gap-2 justify-end">
-                          <button
-                            type="button"
-                            className="
-                              rounded-lg border leading-none
-                              shadow-sm hover:bg-gray-200
-                              text-gray-500 font-semibold
-                              focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2
-                            "
-                            onClick={() => {}}
-                          >
-                            {notification.viewed ? (
-                              <EnvelopeIcon w={20} h={20}/>
-                            ):(
-                              <EnvelopeOpenIcon w={20} h={20}/>
-                            )}
-                          </button>
-                          <button
-                            type="button"
-                            className="
-                              rounded-lg border leading-none
-                              shadow-sm hover:bg-gray-200
-                              text-gray-500 font-semibold
-                              focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2
-                            "
-                            onClick={() => {}}
-                          >
-                            {notification.is_archived ? (
-                              <DropboxIcon w={20} h={20}/>
-                            ):(
-                              <ArchiveIcon w={20} h={20}/>
-                            )}
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {showingNotifications.length === 0 && (
-                    <tr>
-                      <td
-                        colSpan={3}
-                        className="px-3 py-10 text-center"
-                      >
-                        {isFiltering ? (
-                          'Não há notificações com esse filtro'
-                        ):(
-                          filter.status === 'open' ? 'Todas as notificações já foram visualizadas' :
-                          filter.status === 'in_progress' ? 'Não há notificações visualizadas' :
-                          filter.status === 'finished' ? 'Não há notificações arquivadas':'...'
-                        )}
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <TableFooter
-            perPage={perPage}
-            pageIndex={pageIndex}
-            totalPages={isFiltering ? Math.ceil(showingNotifications.length / perPage) : totalPages}
-            total={isFiltering ? showingNotifications.length : total[filter.status] ?? 0}
-
-            canPreviousPage={canPreviousPage}
-            canNextPage={canNextPage}
-
-            goToPage={() => {}}
-            previousPage={() => {}}
-            nextPage={() => {}}
-
-            isFiltering={isFiltering}
-          />
-          {isLoading && (
-            <div className="absolute inset-0 z-50 bg-gray-50/75">
-              <Spinner
-                aria-label="Carregando"
-              />
-            </div>
-          )}
-        </div>
+                  hover:after:content['']
+                  hover:after:absolute 
+                  hover:after:block 
+                  hover:after:bg-[#6DBFFF30]
+                  hover:text-primary-500/80
+                `}
+                onClick={() => setFilter((prevState) => ({
+                  ...prevState,
+                  status: status as CallStatusType
+                }))}
+              >{name}</button>
+            </li>
+          ))}
+        </ul>
       </div>
+      <div className={`
+        h-full min-h-[calc(20rem-3rem)]
+        flex flex-col justify-between
+      `}>
+        <div>
+          <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px]">
+            <table className="w-full text-sm text-left text-gray-500">
+              <thead className="text-xs  text-primary-800 uppercase bg-primary-500/5">
+                <tr>
+                  <th className="px-3 py-2 font-bold">Chamados {callStatus[filter.status]}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {showingNotifications.slice(
+                  pageIndex * perPage,
+                  (pageIndex + 1) * perPage
+                ).map(notification => (
+                  <tr className="hover:bg-gray-200/80 border-b last:border-none" key={notification.id}>
+                    <td className="px-3 py-4 w-5">
+                      <input
+                        type="checkbox"
+                        id={`check-row-home-table-${notification.id}`}
+                        className={`check-row-home-table bg-transparent border-2`}
+                        data-name={notification.title}
+                        value={notification.id}
+                        onClick={(e) => {
+                          let hasAtLeast1Checked = document.querySelectorAll(`.check-row-home-table:checked`).length > 0;
+                          let checkAll = document.getElementById(`check-row-home-table`) as HTMLInputElement;
+
+                          if(hasAtLeast1Checked){
+                            setHasSelected(true);
+
+                            checkAll.checked = document.querySelectorAll(
+                              `.check-row-home-table:not(:checked)`
+                            ).length === 0;
+                          }
+                          else{
+                            setHasSelected(false);
+                            checkAll.checked = false;
+                          }
+                        }}
+                      />
+                    </td>                            
+
+                    <td
+                      className="px-3 py-4 cursor-pointer"
+                      onClick={() => {}}
+                    >
+
+                      <div className="flex items-center gap-2 max-w-full">
+                        <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{notification.title}</strong>
+                      </div>
+                      <div className="flex flex-col gap-2 mt-0.5">
+                        <span className="text-gray-500 text-xs font-normal">
+                          {notification.description.slice(0, 80) + (notification.description.length > 80 ? '...':'')}
+                        </span>
+                        <span className="text-gray-400 text-xs">{moment(notification.schedule).format('DD/MM/YYYY H:mm')}</span>
+                      </div>
+                    </td>
+                    <td className="px-3 py-4 cursor-pointer text-end">
+                      <div className="flex items-center gap-2 justify-end">
+                        <button
+                          type="button"
+                          className="
+                            rounded-lg border leading-none
+                            shadow-sm hover:bg-gray-200
+                            text-gray-500 font-semibold
+                            focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2
+                          "
+                          onClick={() => {}}
+                        >
+                          {notification.viewed ? (
+                            <EnvelopeIcon w={20} h={20}/>
+                          ):(
+                            <EnvelopeOpenIcon w={20} h={20}/>
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          className="
+                            rounded-lg border leading-none
+                            shadow-sm hover:bg-gray-200
+                            text-gray-500 font-semibold
+                            focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2
+                          "
+                          onClick={() => {}}
+                        >
+                          {notification.is_archived ? (
+                            <DropboxIcon w={20} h={20}/>
+                          ):(
+                            <ArchiveIcon w={20} h={20}/>
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                {showingNotifications.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={3}
+                      className="px-3 py-10 text-center"
+                    >
+                      {isFiltering ? (
+                        'Não há notificações com esse filtro'
+                      ):(
+                        filter.status === 'open' ? 'Todas as notificações já foram visualizadas' :
+                        filter.status === 'in_progress' ? 'Não há notificações visualizadas' :
+                        filter.status === 'finished' ? 'Não há notificações arquivadas':'...'
+                      )}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <TableFooter
+          perPage={perPage}
+          pageIndex={pageIndex}
+          totalPages={isFiltering ? Math.ceil(showingNotifications.length / perPage) : totalPages}
+          total={isFiltering ? showingNotifications.length : total[filter.status] ?? 0}
+
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+
+          goToPage={() => {}}
+          previousPage={() => {}}
+          nextPage={() => {}}
+
+          isFiltering={isFiltering}
+        />
+        {isLoading && (
+          <div className="absolute inset-0 z-50 bg-gray-50/75">
+            <Spinner
+              aria-label="Carregando"
+            />
+          </div>
+        )}
+      </div>
+    </div>
   )
 }
