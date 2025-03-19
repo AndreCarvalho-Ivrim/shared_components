@@ -16,6 +16,10 @@ import moment from "moment";
 import { getDomain } from "../../../shared-types/utils/routes";
 import { CreatePublicPostDataBody, requestPublicPost } from "../../services/publicRoutes";
 
+const hardcodeSupport = {
+  flow_id: '67da18e81687e38b5d50a55b',
+}
+
 interface FileListType{
   file: File | null,
   id: string,
@@ -67,7 +71,7 @@ export const ButtonHelp = () => {
   const perPage = 10;
 
   const { toast } = useNotify();
-  const { user } = useAuth();
+  const { user, client } = useAuth();
 
   useEffect(() => { onLoad() },[user])
   useEffect(() => {
@@ -101,7 +105,7 @@ export const ButtonHelp = () => {
         filters.query?.push({ ref: '@step_id', type: 'select', value: ['67cee063f760d12bf7379d12'] })
       }
 
-      const res: any = await wf.post(`/flow-data/get/${'67cb372297f9c94d7e7e73bd'}`, filters, { ...(headerBearer(user!.token)) });
+      const res: any = await wf.post(`/flow-data/get/${hardcodeSupport.flow_id}`, filters, { ...(headerBearer(user!.token)) });
       console.log('RES', res);
       
       if(!res.result){
@@ -130,32 +134,43 @@ export const ButtonHelp = () => {
   }
   async function handleSubmit() {
     let el = document.getElementById('modal-help-textarea') as HTMLTextAreaElement;
+    let description = el?.value;
+    if(!description){
+      toast.error('É obrigatório preecher a descrição do chamado');
+      return;
+    }
+
     let body: CreatePublicPostDataBody = {
       data: {
+        description,
+        created_call_url: window.location.href,
+        user: {
+          id: user?.id,
+          name: user?.name,
+          email: user?.email
+        },
+        client: {
+          id: client?.id,
+          name: client?.nome_fantasia
+        },
         attachments: files.map((f) => ({
           url: f.url,
           id: f.id,
           name: f.name
-        })),
-        created_call_url: window.location.href
+        }))
       }
     }
-    if (el?.value) {
-      body.data['description'] = el.value;
-    }
-
+    
     try {
       await requestPublicPost({
-        flow_id: '67cb372297f9c94d7e7e73bd',
+        flow_id: hardcodeSupport.flow_id,
         variation: 'registration',
         fields: body
       });
       toast.success("Chamado enviado com sucesso");
-      setIsOpen(false);
     } catch (e) {
       toast.error("Não foi possível enviar o chamado");
     }
-
     
     setIsOpen(false);
   }
@@ -238,8 +253,8 @@ export const ButtonHelp = () => {
                   bg-white hover:bg-gray-100 shadow-sm transition-all duration-200
                 `}
               >
-                <strong className="text-base text-gray-800 mb-1">Abrir Chamado</strong>
-                <span className="text-sm text-gray-600 leading-snug">
+                <strong className="text-sm text-gray-800 mb-1">Abrir Chamado</strong>
+                <span className="text-xs text-gray-600 leading-snug">
                   Utilize esta opção para abrir um<br />
                   novo chamado para reportar uma solicitação ou problema.
                 </span>
@@ -254,8 +269,8 @@ export const ButtonHelp = () => {
                   bg-white hover:bg-gray-100 shadow-sm transition-all duration-200
                 `}
               >
-                <strong className="text-base text-gray-800 mb-1">Chamados em Aberto</strong>
-                <span className="text-sm text-gray-600 leading-snug">
+                <strong className="text-sm text-gray-800 mb-1">Chamados em Aberto</strong>
+                <span className="text-xs text-gray-600 leading-snug">
                   Visualize seus chamados em aberto, acompanhe o status e acesse os detalhes de cada solicitação.
                 </span>
               </button>
@@ -298,14 +313,16 @@ const CreateCallFormContent = ({
     
     uploadedFiles.forEach(processUpload);
   }
-
+  function handleDelete(id: string) {
+    setFiles(prevState => prevState.filter(f => f.id !== id))
+  }
   async function processUpload(uploadedFile: FileListType) {
     if (!uploadedFile.file) return;
 
     const data = new FormData();
 
     data.append('file', uploadedFile.file, 'public-' + uploadedFile.name);
-    data.append('external_id', '67cb372297f9c94d7e7e73bd');
+    data.append('external_id', hardcodeSupport.flow_id);
     data.append('name', 'IAS Chamados');
     data.append('type', 'called');
     data.append('description', `public upload`);
@@ -333,7 +350,7 @@ const CreateCallFormContent = ({
         ...file,
         uploaded: true,
         id: response.data.id,
-        url: `${getDomain('hub_back')}/${response.data.src}`,
+        url: `${getDomain('hub_back')}${response.data.src}`,
       } : file));
     } catch (err) {
       const error = handleErrorResultAndResponse(err, {
@@ -350,32 +367,26 @@ const CreateCallFormContent = ({
     }
   }
 
-  function handleDelete(id: string) {
-    // TODO EXCLUIR NA GALERIA DE ARQUIVOS
-    setFiles(prevState => prevState.filter(f => f.id !== id))
-  }
-
   return (
-    <div>
-      <p className="text-sm text-gray-600 mb-3">
-        Abrir Chamado
+    <div>  
+      <p className="text-xs text-gray-600 mb-4">
+        Para nos ajudar a resolver:
+        <br />- descreva de forma simples e objetiva o problema encontrado
+        <br />- caso seja necessário adicione anexo(s) abaixo
       </p>
-  
+
       <label htmlFor="modal-help-textarea" className="text-sm font-medium text-gray-700 block mb-1">
         Descrição do problema
       </label>
       <Textarea
         placeholder="Digite sua mensagem"
         required={true}
-        className="mb-4"
+        className="mb-4 text-sm"
         rows={4}
         id="modal-help-textarea"
       />
   
-      <p className="text-sm text-gray-600 mb-4">
-        Para nos ajudar a resolver:
-        <br />- descreva de forma simples e objetiva o problema encontrado
-      </p>
+      
   
       <label htmlFor="file-upload" className="text-sm font-medium text-gray-700 block mb-1">
         Anexar arquivos (opcional)
