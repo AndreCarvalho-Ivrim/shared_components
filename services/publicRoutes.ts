@@ -20,3 +20,22 @@ export const requestPublicPost = async ({ flow_id, variation, fields }:{
     })
   }
 }
+
+export const requestPublicGet = async ({ flow_id, params, variation }:{
+  flow_id: string,
+  variation: string,
+  params: Record<string, any>
+}) : Promise<ResultAndResponse & { data?: any[]}> => {
+  try{
+    const { data } = await wf.get(`/flow-data/datas/${flow_id}/${variation}?${
+      Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&')
+    }`)
+
+    return data;
+  }catch(e){
+    return handleErrorResultAndResponse(e, {
+      result: false,
+      response: 'Houve um erro ao tentar processar essa solicitação'
+    })
+  }
+}

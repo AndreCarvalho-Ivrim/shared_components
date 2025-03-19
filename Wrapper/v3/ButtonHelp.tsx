@@ -9,11 +9,13 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { FileList } from "./FileList";
 import { User, WorkflowConfigFilterRefType, WorkflowConfigFilterType } from "../../../shared-types";
 import { Modal } from "../../utils/Modal";
-import { EnvelopeIcon, EnvelopeOpenIcon, DropboxIcon, ArchiveIcon, ChevronDownIcon } from "../../utils/icons";
+import { ChevronDownIcon } from "../../utils/icons";
 import moment from "moment";
-import { getDomain, getSupportKeys } from "../../../shared-types/utils/routes";
-import { CreatePublicPostDataBody, requestPublicPost } from "../../services/publicRoutes";
+import { AvailableRegexUrls, getDomain, getSupportKeys, handleRegexUrl } from "../../../shared-types/utils/routes";
+import { CreatePublicPostDataBody, requestPublicGet, requestPublicPost } from "../../services/publicRoutes";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import theme from "flowbite-react/lib/esm/theme/default";
 
 const supportKeys = getSupportKeys();
 const hardcodeSupport = {
@@ -30,17 +32,16 @@ const hardcodeSupport = {
 
 export interface CalledType{
   _id: string,
+  _user_id?: string,
   current_step_id: string,
   created_at: string,
   updated_at: string,
-  data: {
-    user: { id: string, name: string, email: string },
-    client: { id: string, name: string },
-    description: string,
-    attachments?: { id: string, name: string, url: string }[],
-    internal_review_description?: string,
-    created_call_url: string,
-  }
+  user: { id: string, name: string, email: string },
+  client: { id: string, name: string },
+  description: string,
+  attachments?: { id: string, name: string, url: string }[],
+  internal_review_description?: string,
+  created_call_url: string,
 }
 
 interface FileListType{
@@ -75,6 +76,7 @@ export const ButtonHelp = () => {
 
   const { toast } = useNotify();
   const { user, client } = useAuth();
+  const navigate = useNavigate();
 
   async function handleSubmit() {
     let el = document.getElementById('modal-help-textarea') as HTMLTextAreaElement;
@@ -118,7 +120,16 @@ export const ButtonHelp = () => {
     
     setIsOpen(false);
   }
-  
+  function handleAccessCalled(_id?: string){
+    let url : AvailableRegexUrls = '' as any;
+    if(_id) url = `@hub:support.details(${_id})` as any;
+    else url = '@hub:support.home';
+    
+    url = handleRegexUrl(url, user?.token) as any;
+    if(url.slice(0,4) === 'http') window.location.href = url
+    else navigate(url)
+  }
+
   return (
     <>
       <button
@@ -149,7 +160,11 @@ export const ButtonHelp = () => {
             text: 'Abrir Chamado',
             onClick: handleSubmit,
             autoClose: false,
-          } : undefined
+          } : viewMode === 'list' ? ({
+            theme: 'primary',
+            text: 'Ver Todos',
+            onClick: () => handleAccessCalled()
+          }):undefined
         }}
       >
         {viewMode === 'create' ? (
@@ -160,7 +175,7 @@ export const ButtonHelp = () => {
             user={user}
           />
         ): viewMode === 'list' ? (
-          <ListCallsContent />
+          <ListCallsContent onAccess={handleAccessCalled}/>
         ):(
           <div className="flex justify-center items-center mt-6 mb-2">
             <div className="flex gap-6 flex-wrap justify-center">
@@ -339,7 +354,7 @@ const CreateCallFormContent = ({
   )
 }
 
-const ListCallsContent = () => {
+const ListCallsContent = ({ onAccess }:{ onAccess: (_id: string) => void }) => {
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [calleds, setCalleds] = useState<CalledType[]>([]);
@@ -351,16 +366,11 @@ const ListCallsContent = () => {
 
     setIsLoading(true);
     await (async () => {
-      const filters: FlowDataRequestFilter = {
-        excludeIds: [],
-        query: [
-          { ref: 'user.id', type: 'select', value: user.id },
-          { ref: 'client.id', type: 'select', value: user.current_client },
-          { ref: '@step_id', type: 'not', value: hardcodeSupport.steps['called-closed'] }
-        ]
-      };
-
-      const res: any = await wf.post(`/flow-data/get/${hardcodeSupport.flow_id}`, filters, { ...(headerBearer(user!.token)) });
+      const res = await requestPublicGet({
+        flow_id: hardcodeSupport.flow_id,
+        variation: 'open-calls',
+        params: { user_id: user.id, client_id: user.current_client }
+      })
       
       if(!res.result){
         toast.error(res.response)
@@ -375,47 +385,45 @@ const ListCallsContent = () => {
     setIsLoading(false)
   }
 
-  function handleAccessCalled(_id: string){
-
-  }
-
   return (
-    <div className="mb-6">
+    <div className="mt-4 mb-6">
       <div className={`
         h-full min-h-[calc(20rem-3rem)]
         flex flex-col justify-between
       `}>
         {calleds.map(called => (
-          <div className="hover:bg-gray-200/80 border-b last:border-none" key={called._id}>
-            <div className="px-3 py-4 cursor-pointer">
+          <div className="
+            focus:ring-2 focus:ring-gray-300      
+            border border-gray-300 rounded-2xl shadow-sm transition-all duration-200
+          hover:bg-gray-100 flex
+          " key={called._id}>
+            <div className="px-3 py-4 flex-1">
               <div className="flex items-center gap-2 max-w-full">
                 <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{'Em Aberto'}</strong>
               </div>
               <div className="flex flex-col gap-2 mt-0.5">
                 <span className="text-gray-500 text-xs font-normal">
-                  {called.data.description.slice(0, 80) + (called.data.description.length > 80 ? '...':'')}
+                  {called.description.slice(0, 80) + (called.description.length > 80 ? '...':'')}
                 </span>
                 <span className="text-gray-400 text-xs">{moment(called.updated_at).format('DD/MM/YYYY H:mm')}</span>
               </div>
             </div>
-            <div className="px-3 py-4 cursor-pointer text-end">
-              <div className="flex items-center gap-2 justify-end">
-                <button
-                  type="button"
-                  className="
-                    rounded-lg border leading-none
-                    shadow-sm hover:bg-gray-200
-                    text-gray-500 font-semibold
-                    focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2
-                  "
-                  onClick={() => handleAccessCalled(called._id)}
-                ><ChevronDownIcon className="-rotate-90"/></button>
-              </div>
+            <div className="px-3 py-4 text-end flex items-center gap-2 justify-end">
+              <button
+                type="button"
+                className="
+                  rounded-lg border leading-none
+                  shadow-sm hover:bg-gray-200
+                  text-gray-500 font-semibold
+                  focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2
+                "
+                onClick={() => onAccess(called._id)}
+              ><ChevronDownIcon className="-rotate-90"/></button>
             </div>
           </div>
         ))}
         {calleds.length === 0 && (
-          <div className="px-3 py-16 text-center bg-gray-100 rounded-lg text-gray-500 text-sm">
+          <div className="px-3 py-16 text-center bg-gray-100 rounded-2xl text-gray-500 text-sm">
             Não há nenhum chamado em aberto
           </div>
         )}  
