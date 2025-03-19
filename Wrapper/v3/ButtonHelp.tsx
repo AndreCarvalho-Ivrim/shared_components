@@ -15,10 +15,9 @@ import { AvailableRegexUrls, getDomain, getSupportKeys, handleRegexUrl } from ".
 import { CreatePublicPostDataBody, requestPublicGet, requestPublicPost } from "../../services/publicRoutes";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import theme from "flowbite-react/lib/esm/theme/default";
 
 const supportKeys = getSupportKeys();
-const hardcodeSupport = {
+export const hardcodeSupport = {
   flow_id: supportKeys.flow_id || '67da4442d458ede945918d10',
   steps: {
     "open-request-called": supportKeys.steps["open-request-called"] || "67da4442d458ede945918d11",
@@ -30,9 +29,17 @@ const hardcodeSupport = {
   }
 }
 
+export type CallStatusType = 'open' | 'in_progress' | 'finished'
+export const translateCallStatus : Record<CallStatusType, string> = {
+  open: 'Em Aberto',
+  in_progress: 'Em Andamento',
+  finished: 'Finalizados',
+}
 export interface CalledType{
   _id: string,
   _user_id?: string,
+  status: CallStatusType,
+  process_number: string,
   current_step_id: string,
   created_at: string,
   updated_at: string,
@@ -380,7 +387,10 @@ const ListCallsContent = ({ onAccess }:{ onAccess: (_id: string) => void }) => {
       if(!res.data) return;
       const { data } = res;
 
-      setCalleds(data);
+      setCalleds(data.map((item) => ({
+        ...item,
+        status: hardcodeSupport.steps["open-request-called"] === item.current_step_id ? 'open': hardcodeSupport.steps['called-closed'] === item.current_step_id ? 'finished' : 'in_progress'
+      })));
     })()
     setIsLoading(false)
   }
@@ -399,7 +409,16 @@ const ListCallsContent = ({ onAccess }:{ onAccess: (_id: string) => void }) => {
           " key={called._id}>
             <div className="px-3 py-4 flex-1">
               <div className="flex items-center gap-2 max-w-full">
-                <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{'Em Aberto'}</strong>
+                <strong className="text-sm max-w-[calc(100%-2rem)] truncate flex items-center flex-wrap gap-2">
+                  {called.process_number}
+                  <span className={`font-semibold block text-[10px] leading-none uppercase py-0.5 px-2 rounded-lg text-gray-100 ${
+                    called.status === 'open' ? 'text-gray-500 bg-gray-300' : 
+                    called.status === 'in_progress' ? 'text-gray-100 bg-primary-500' :
+                    called.status === 'finished' ? 'bg-green-500' : 'bg-gray-100'
+                  }`}>
+                    {translateCallStatus[called.status]}
+                  </span>
+                </strong>
               </div>
               <div className="flex flex-col gap-2 mt-0.5">
                 <span className="text-gray-500 text-xs font-normal">

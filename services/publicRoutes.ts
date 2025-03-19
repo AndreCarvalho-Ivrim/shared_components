@@ -39,3 +39,28 @@ export const requestPublicGet = async ({ flow_id, params, variation }:{
     })
   }
 }
+
+let requestCache : Record<string, {
+  payload: string,
+  response: any
+}[]>= {}
+
+export const requestCacher = async ({ key, payload, callback }:{
+  key: string,
+  payload: string,
+  callback: () => Promise<any>
+}) => {
+  if(requestCache[key]){
+    const findedCache = requestCache[key].find((req) => req.payload === payload)
+    if(findedCache){
+      console.log(`[${key}:cached]`)
+      return findedCache.response;
+    }
+  }
+  else requestCache[key] = [];
+
+  console.log(`[${key}:requested]`);
+  const res = await callback();
+  if(res.result) requestCache[key].push({ payload, response: res });
+  return res;
+}
