@@ -128,23 +128,6 @@ export const ButtonHelp = () => {
     })()
     setIsLoading(false)
   }
-
-  function handleFilter() : any[] {
-    let targetNotifications : any[] = filter.status === 'open' ? openCalls :
-      filter.status === 'in_progress' ? callsInProgress :
-      filter.status === 'finished' ? completedCalls : []
-
-    if(targetNotifications.length < perPage){
-      if(total[filter.status] === undefined || total[filter.status]! >= perPage){
-        console.log('[handle-filter:on-load-called]')
-        onLoad()
-      }
-    }
-    console.log('targetNotifications', targetNotifications);
-    
-    return targetNotifications;
-  }
-
   async function handleSubmit() {
     let el = document.getElementById('modal-help-textarea') as HTMLTextAreaElement;
     let body: CreatePublicPostDataBody = {
@@ -176,67 +159,21 @@ export const ButtonHelp = () => {
     
     setIsOpen(false);
   }
+  function handleFilter() : any[] {
+    let targetNotifications : any[] = filter.status === 'open' ? openCalls :
+      filter.status === 'in_progress' ? callsInProgress :
+      filter.status === 'finished' ? completedCalls : []
 
-  const renderContent = () => {
-    switch (viewMode) {
-      case 'create':
-        return <CreateCallFormContent
-          files={files}
-          setFiles={setFiles}
-          toast={toast}
-          user={user}
-        />;
-      case 'list':
-        return <ListCallsContent
-          isLoading={isLoading}
-          filter={filter}
-          setFilter={setFilter}
-          showingNotifications={showingCalled}
-          pageIndex={pageIndex}
-          perPage={perPage}
-          total={total}
-          totalPages={totalPages}
-        />;
-      default:
-        return (
-          <div className="flex justify-center items-center">
-            <div className="flex gap-6 flex-wrap justify-center">
-              <button
-                onClick={() => setViewMode('create')}
-                className={`
-                  focus:ring-2 focus:ring-gray-300
-                  flex flex-col w-64 text-left
-                  border border-gray-300 rounded-2xl p-4
-                  bg-white hover:bg-gray-100 shadow-sm transition-all duration-200
-                `}
-              >
-                <strong className="text-base text-gray-800 mb-1">Criar Chamado</strong>
-                <span className="text-sm text-gray-600 leading-snug">
-                  Utilize esta opção para abrir um<br />
-                  novo chamado para reportar uma solicitação ou problema.
-                </span>
-              </button>
-          
-              <button
-                onClick={() => setViewMode('list')}
-                className={`
-                  focus:ring-2 focus:ring-gray-300
-                  flex flex-col w-64 text-left
-                  border border-gray-300 rounded-2xl p-4
-                  bg-white hover:bg-gray-100 shadow-sm transition-all duration-200
-                `}
-              >
-                <strong className="text-base text-gray-800 mb-1">Listar Chamados</strong>
-                <span className="text-sm text-gray-600 leading-snug">
-                  Visualize todos os chamados
-                  criados, acompanhe o status e acesse os detalhes de cada solicitação.
-                </span>
-              </button>
-            </div>
-          </div>        
-        );
+    if(targetNotifications.length < perPage){
+      if(total[filter.status] === undefined || total[filter.status]! >= perPage){
+        console.log('[handle-filter:on-load-called]')
+        onLoad()
+      }
     }
-  };
+    console.log('targetNotifications', targetNotifications);
+    
+    return targetNotifications;
+  }
   
   return (
     <>
@@ -255,7 +192,7 @@ export const ButtonHelp = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         options={{
-          title: viewMode === 'inital' ? 'Selecione uma opção' : viewMode === 'create' ? 'Criar Chamado' : 'Listar Chamados',
+          title: viewMode === 'inital' ? 'Suporte' : viewMode === 'create' ? 'Abrir Chamado' : 'Chamados em Aberto',
           size: 'sm:w-full sm:max-w-3xl',
           cancelButton: true,
           cancelButtonText: "Cancelar",
@@ -265,13 +202,66 @@ export const ButtonHelp = () => {
           },
           actionButton: viewMode === 'create' ? {
             theme: "primary",
-            text: 'Criar Chamado',
+            text: 'Abrir Chamado',
             onClick: handleSubmit,
             autoClose: false,
           } : undefined
         }}
       >
-        {renderContent()}
+        {viewMode === 'create' ? (
+          <CreateCallFormContent
+            files={files}
+            setFiles={setFiles}
+            toast={toast}
+            user={user}
+          />
+        ): viewMode === 'list' ? (
+          <ListCallsContent
+            isLoading={isLoading}
+            filter={filter}
+            setFilter={setFilter}
+            showingNotifications={showingCalled}
+            pageIndex={pageIndex}
+            perPage={perPage}
+            total={total}
+            totalPages={totalPages}
+          />
+        ):(
+          <div className="flex justify-center items-center mt-6 mb-2">
+            <div className="flex gap-6 flex-wrap justify-center">
+              <button
+                onClick={() => setViewMode('create')}
+                className={`
+                  focus:ring-2 focus:ring-gray-300
+                  flex flex-col flex-1 text-left
+                  border border-gray-300 rounded-2xl p-4
+                  bg-white hover:bg-gray-100 shadow-sm transition-all duration-200
+                `}
+              >
+                <strong className="text-base text-gray-800 mb-1">Abrir Chamado</strong>
+                <span className="text-sm text-gray-600 leading-snug">
+                  Utilize esta opção para abrir um<br />
+                  novo chamado para reportar uma solicitação ou problema.
+                </span>
+              </button>
+          
+              <button
+                onClick={() => setViewMode('list')}
+                className={`
+                  focus:ring-2 focus:ring-gray-300
+                  flex flex-col flex-1 text-left
+                  border border-gray-300 rounded-2xl p-4
+                  bg-white hover:bg-gray-100 shadow-sm transition-all duration-200
+                `}
+              >
+                <strong className="text-base text-gray-800 mb-1">Chamados em Aberto</strong>
+                <span className="text-sm text-gray-600 leading-snug">
+                  Visualize seus chamados em aberto, acompanhe o status e acesse os detalhes de cada solicitação.
+                </span>
+              </button>
+            </div>
+          </div>        
+        )}
       </Modal>
     </>
   );
@@ -368,7 +358,7 @@ const CreateCallFormContent = ({
   return (
     <div>
       <p className="text-sm text-gray-600 mb-3">
-        Criar Chamado
+        Abrir Chamado
       </p>
   
       <label htmlFor="modal-help-textarea" className="text-sm font-medium text-gray-700 block mb-1">
