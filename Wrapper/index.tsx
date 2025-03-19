@@ -26,6 +26,7 @@ import {
   CartIconNew,
   SupplyIconNew,
   EnvelopeIcon,
+  SupportIcon,
 } from "../utils/icons";
 
 import managedServiceIcon from '../assets/managed_service.png';
@@ -178,7 +179,7 @@ export const getAsideItems = ({
         icon: <MyDocsIcon w={22} h={22} />,
       },
       {
-        id: "aside-item-gallery",
+        id: "aside-item-closing-folder",
         name: "Fechamentos Finan.",
         href: handleRegexUrl('@hub:closing_folder.home', user?.token),
         icon: <MyFinanceIcon w={22} h={22} />,
@@ -206,7 +207,13 @@ export const getAsideItems = ({
             href: handleRegexUrl('@hub:notification.create', user.token)
           }] : [])
         ]
-      }
+      },
+      {
+        id: "aside-item-support",
+        name: "Suporte",
+        href: handleRegexUrl('@hub:support.home', user?.token),
+        icon: <SupportIcon w={22} h={22} />
+      },
     ];
 
     if (user && user.permitions_slug) {
