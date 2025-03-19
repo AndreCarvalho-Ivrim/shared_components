@@ -5,9 +5,10 @@ import { Loading } from "../../components/Loading";
 import { ActivityPanelType } from "../../shared-types/activity_panel.type";
 import { Avatar } from "../utils/Avatar";
 import { useAuth } from "../../contexts/AuthContext";
-import { getActivityPanel } from "../services/activity_panel";
+import { getActivePanel, getActivityPanel } from "../services/activity_panel";
 import { useNotify } from "../../contexts/NotifyContext";
 import { ActivityItem } from "./ActivityItem";
+import { ActiveItem } from "./ActiveItem";
 
 const perPage = 5;
 export const ActivityPanel = () => {
@@ -58,14 +59,33 @@ export const ActivityPanel = () => {
 
     setIsLoading(true);
     const res = await getActivityPanel(user.token);
+    const res_active = await getActivePanel(user.token);
     setIsLoading(false);
     
     if(!res.result){
       toast.error(res.response)
       return
     }
-
-    setActivities(res.data ? res.data : [])
+    if(!res_active.result){
+      toast.error(res_active.response)
+      return
+    }
+    
+    const active_panel: any[] = res_active.data?.map((data: any) => ({
+      description: data.description,
+      title: data.wf,
+      mode: 'active',
+      avatar: data.avatar,
+      icon: data.icon,
+      redirect_to: data.redirect_to,
+      theme: data.theme,
+      id: crypto.randomUUID()
+    })) ?? [];
+    
+    setActivities([
+      ...(res.data ?? []),
+      ...(active_panel ?? []),
+    ]);
   }
   
   return (
@@ -80,9 +100,10 @@ export const ActivityPanel = () => {
               </tr>
             </thead>
             <tbody className="">
-              {activities.slice(pageIndex * perPage, (pageIndex + 1) * perPage).map(activity => (
-                <ActivityItem activity={activity} key={activity.id}/>
-              ))}
+              {activities.slice(pageIndex * perPage, (pageIndex + 1) * perPage).map(activity => {
+                if (activity.mode && activity.mode === 'active') return <ActiveItem activity={activity} key={activity.id}/>
+                else return <ActivityItem activity={activity} key={activity.id}/>
+              })}
               {activities.length === 0 && (
                 <tr>
                   <td
