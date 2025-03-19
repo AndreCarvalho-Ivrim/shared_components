@@ -14,6 +14,7 @@ import { Dropdown } from "../../utils/Dropdown";
 import { TableFooter } from "../../TableFooter";
 import { ArrowRightIcon, EnvelopeIcon, EnvelopeOpenIcon, DropboxIcon, ArchiveIcon } from "../../utils/icons";
 import moment from "moment";
+import { getDomain } from "../../../shared-types/utils/routes";
 
 interface FileListType{
   file: File | null,
@@ -76,7 +77,7 @@ export const ButtonHelp = () => {
   async function onLoad(){
     if(!user || isLoading) return;
 
-    let targetNotifications : FlowData[] = filter.status === 'open' ? openCalls :
+    let targetNotifications : any[] = filter.status === 'open' ? openCalls :
       filter.status === 'in_progress' ? callsInProgress :
       filter.status === 'finished' ? completedCalls : []
     const dispatcher = filter.status === 'open' ? setOpenCalls :
@@ -129,7 +130,7 @@ export const ButtonHelp = () => {
   }
 
   function handleFilter() : any[] {
-    let targetNotifications : FlowData[] = filter.status === 'open' ? openCalls :
+    let targetNotifications : any[] = filter.status === 'open' ? openCalls :
       filter.status === 'in_progress' ? callsInProgress :
       filter.status === 'finished' ? completedCalls : []
 
@@ -342,7 +343,7 @@ const CreateCallFormContent = ({
         ...file,
         uploaded: true,
         id: response.data.id,
-        url: `${import.meta.env.VITE_AUTH_URL}${response.data.src}`,
+        url: `${getDomain('hub_back')}/${response.data.src}`,
       } : file));
     } catch (err) {
       const error = handleErrorResultAndResponse(err, {
