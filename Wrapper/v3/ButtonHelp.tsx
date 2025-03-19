@@ -9,12 +9,12 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { FileList } from "./FileList";
 import { User, WorkflowConfigFilterRefType, WorkflowConfigFilterType } from "../../../shared-types";
 import { Modal } from "../../utils/Modal";
-import { CreatePublicPostDataBody, requestPublicPost } from "../../../services/publicRoutes";
 import { Dropdown } from "../../utils/Dropdown";
 import { TableFooter } from "../../TableFooter";
 import { ArrowRightIcon, EnvelopeIcon, EnvelopeOpenIcon, DropboxIcon, ArchiveIcon } from "../../utils/icons";
 import moment from "moment";
 import { getDomain } from "../../../shared-types/utils/routes";
+import { CreatePublicPostDataBody, requestPublicPost } from "../../services/publicRoutes";
 
 interface FileListType{
   file: File | null,
