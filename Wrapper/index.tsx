@@ -26,7 +26,7 @@ import {
   CartIconNew,
   SupplyIconNew,
   EnvelopeIcon,
-  WhatsappIcon,
+  ChatIcon,
 } from "../utils/icons";
 
 import managedServiceIcon from '../assets/managed_service.png';
@@ -323,7 +323,7 @@ export const getAsideItems = ({
         },{
           id: 'aside-chatbot',
           name: 'Chatbot',
-          icon: <WhatsappIcon w={22} h={22}/>,
+          icon: <ChatIcon w={22} h={22}/>,
           href: handleRegexUrl('@isac:chatbot.home', user?.token),
           disabled: !user?.permitions_slug?.includes(
             PossiblePermissions.ISAC
