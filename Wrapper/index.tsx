@@ -26,6 +26,7 @@ import {
   CartIconNew,
   SupplyIconNew,
   EnvelopeIcon,
+  ChatIcon,
   SupportIcon,
 } from "../utils/icons";
 
@@ -323,6 +324,14 @@ export const getAsideItems = ({
           name: 'Modelos',
           icon: <EnvelopeIcon w={22} h={22}/>,
           href: handleRegexUrl('@isac:template', user?.token),
+          disabled: !user?.permitions_slug?.includes(
+            PossiblePermissions.ISAC
+          ),
+        },{
+          id: 'aside-chatbot',
+          name: 'Chatbot',
+          icon: <ChatIcon w={22} h={22}/>,
+          href: handleRegexUrl('@isac:chatbot.home', user?.token),
           disabled: !user?.permitions_slug?.includes(
             PossiblePermissions.ISAC
           ),
