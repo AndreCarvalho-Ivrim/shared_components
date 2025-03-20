@@ -154,7 +154,9 @@ export const Menu = () =>{
     <Wrapper
       asideActive={['Home']}
       module_name="ISAC 3.0"
-      omit={['header-title']}
+      omit={['breadcrumbs']}
+      breadcrumbs={[{name: "ISAC 3.0", href:'#',subtitle:"Ivrim System Architect"}]}
+      
     >
       <div className="flex flex-col">
         <div className="
@@ -165,7 +167,11 @@ export const Menu = () =>{
           mx-auto gap-15
           overflow-x
         ">
+          
+          
           <div className="flex flex-col flex-1 lg:flex-none  sm:max-w-[22rem]  h-full">
+
+            
             <ConteinerFlows
               title="IFI - Ivrim Financial Inteligence"
               handleToggleFixed={handleToggleFixed}

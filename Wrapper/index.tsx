@@ -28,6 +28,9 @@ import {
   EnvelopeIcon,
   HomeIcon,
   DetalistIcon,
+  CastEducationIcon,
+  EducationIcon,
+  HelpIcon,
 } from "../utils/icons";
 
 import managedServiceIcon from '../assets/managed_service.png';
@@ -47,7 +50,7 @@ import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { getDashboards } from "../services/dashboard";
 import { ivrimID } from "../services/conn/api";
 
-export type OmitWrapperType = 'button-help' | 'header' | 'aside' | 'header-title';
+export type OmitWrapperType = 'button-help' | 'header' | 'aside' | 'header-title' | 'breadcrumbs';
 export interface WrapperProps {
   v?: 3;
   children?: ReactNode;
@@ -106,7 +109,7 @@ export function Wrapper({
   if (v === 3)
     return (
       <WrapperV3
-        breadcrumbs={[...[{ name: "Home", href: "/" }], ...(breadcrumbs ?? [])]}
+        breadcrumbs={[{ name: "Home", href: "/" }, ...(breadcrumbs ?? [])]}
         {...{
           asideItems: [
             ...getAsideItems({
@@ -226,6 +229,20 @@ defaultAsideItems = [
           ),
           disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
 
+        },{
+          id: 'training center',
+          name: 'Treinamentos',
+          href: handleRegexUrl('@hub:gallery.home', user?.token),
+          icon: (
+           <EducationIcon  w={22} h={22} />
+          ),
+        },{
+          id: 'Tech support',
+          name: 'Suporte',
+          href: handleRegexUrl('@hub:gallery.home', user?.token),
+          icon: (
+           <HelpIcon  w={22} h={22} />
+          ),
         }
 
         // <button 

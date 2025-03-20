@@ -89,9 +89,9 @@ export const ConteinerFlows = ({
   return (
     <div className={`h-full flex flex-col justify-between p-1 `}>
     
-      <div className="  px-2 rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[10rem] bg-[#E0E4E8] opacity-80 shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]">
+      <div className="  px-2 rounded-lg bg-gray-1000/100  backdrop-blur-[25px] shadow-lg ring-1 ring-black ring-opacity-5   ">
       <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs  text-black uppercase sticky top-0 z-10 "> 
+            <thead className="text-xs  text-primary-800 uppercase"> 
               <tr>
                 <th className="px-3 py-2 font-bold sticky top-0 z-10 ">{title}</th>
               </tr>
@@ -146,7 +146,7 @@ export const ConteinerFlows = ({
                         </div>
                       )}
                     </button>
-
+ 
                     </div>
                   
 

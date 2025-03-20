@@ -9,7 +9,7 @@ export interface HeaderBreadcrumbs{
   name: string,
   href?: string,
   onClick?: () => void,
-  subtitle?: string
+  subtitle?: string,
 }
 interface WrapperProps{
   breadcrumbs: HeaderBreadcrumbs[],
@@ -40,7 +40,11 @@ export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, 
       />
       <div className="pr-8 py-8 pl-8 sm:pl-12 max-h-screen -my-4 overflow-y-auto" id="wrapper-content">
         {!omit.includes('header') && (
-          <Header breadcrumbs={breadcrumbs} show_header_title={!omit.includes('header-title')}/>
+          <Header
+            breadcrumbs={breadcrumbs}
+            show_header_title={!omit.includes('header-title')}
+            show_breadcrumbs={!omit.includes('breadcrumbs')}
+          />
         )}
 
         {children}

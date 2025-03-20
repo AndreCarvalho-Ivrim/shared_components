@@ -7,27 +7,30 @@ import { BellNotification } from "./Notification/BellNotification";
 
 interface HeaderProps{
   breadcrumbs: HeaderBreadcrumbs[],
-  show_header_title: boolean
+  show_header_title: boolean,
+  show_breadcrumbs: boolean
 }
-export const Header = ({ breadcrumbs, show_header_title } : HeaderProps) => (
+export const Header = ({ breadcrumbs, show_header_title, show_breadcrumbs } : HeaderProps) => (
   <header className="flex items-start max-sm:items-center justify-between gap-4 mb-10">
     <div>
       <div className="flex items-center gap-4 max-sm:scale-105 max-sm:ml-[2.5%]">
-        <ul className="flex gap-1.5 text-primary-400 text-sm max-w-[calc(100vw-15rem)] overflow-x-auto py-1">
-          {breadcrumbs.map((item) => (
-            <li
-              key={item.name}
-              className="group last:font-semibold last:text-primary-800 truncate overflow-clip max-sm:max-w-[6rem]"
-            >
-              <span className="group-first:hidden mr-1.5">/</span>
-              {item.href ? (
-                <Link to={item.href}>{item.name}</Link>
-              ):item.onClick ? (
-                <button type="button" onClick={item.onClick}>{item.name}</button>
-              ):item.name}
-            </li>
-          ))}
-        </ul>
+        {show_breadcrumbs && (
+          <ul className="flex gap-1.5 text-primary-400 text-sm max-w-[calc(100vw-15rem)] overflow-x-auto py-1">
+            {breadcrumbs.map((item) => (
+              <li
+                key={item.name}
+                className="group last:font-semibold last:text-primary-800 truncate overflow-clip max-sm:max-w-[6rem]"
+              >
+                <span className="group-first:hidden mr-1.5">/</span>
+                {item.href ? (
+                  <Link to={item.href}>{item.name}</Link>
+                ):item.onClick ? (
+                  <button type="button" onClick={item.onClick}>{item.name}</button>
+                ):item.name}
+              </li>
+            ))}
+          </ul>
+        )}
 
         <button
           type="button"
