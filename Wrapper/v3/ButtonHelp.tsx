@@ -114,18 +114,26 @@ export const ButtonHelp = () => {
       }
     }
     
+    let successfully = false;
     try {
-      await requestPublicPost({
+      const res = await requestPublicPost({
         flow_id: hardcodeSupport.flow_id,
         variation: 'registration',
         fields: body
       });
-      toast.success("Chamado enviado com sucesso");
+
+      successfully = res.result
+      if(successfully){
+        toast.success("Chamado enviado com sucesso");
+        setFiles([]);
+      }
+      else toast.error(res.response);
+
     } catch (e) {
       toast.error("Não foi possível enviar o chamado");
     }
     
-    setIsOpen(false);
+    if(successfully) setIsOpen(false);
   }
   function handleAccessCalled(_id?: string){
     let url : AvailableRegexUrls = '' as any;
