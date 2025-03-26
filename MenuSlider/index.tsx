@@ -31,7 +31,7 @@ import { ActivityPanel } from "../ActivityPanel";
 
 const clientsWithAccessToCAP = { };
 
-const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
+export const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
     case "Cobrança": case "Financeiro": return "bg-[#4B92FF] border-[#5CA3FF] hover:brightness-110";
     case "Comercial": return "bg-[#CBBC5A] border-[#DCCD6B] hover:brightness-110";
