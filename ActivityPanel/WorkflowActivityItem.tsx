@@ -2,9 +2,7 @@ import { useState } from "react"
 import { ActivityPanelType } from "../../shared-types/activity_panel.type"
 import { Avatar } from "../utils/Avatar"
 import { getIconByName, DetalistIcon, ArrowRightIcon } from "../utils/icons"
-import { Loading } from "../../components/Loading"
 import { handleRegexUrl } from "../../shared-types/utils/routes"
-import { useNotify } from "../../contexts/NotifyContext"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 import { IconByTheme } from "../Wrapper"
@@ -17,7 +15,7 @@ interface ActivityItemProps{
   activity: ActivePanelType
 }
 
-export const ActiveItem = ({ activity }:ActivityItemProps) => {
+export const WorkflowActivityItem = ({ activity }:ActivityItemProps) => {
   const navigate = useNavigate();
   
   const { user, changeClient } = useAuth();

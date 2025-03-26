@@ -34,24 +34,10 @@ export const getActivityPanel = async (token: string) : Promise<GetActivityPanel
   }
 }
 
-export const getActivePanel = async (token: string) : Promise<{ data?: any[], result: boolean, response?: string }> => {
+export const getFlowActivityPanel = async (token: string) : Promise<ResultAndResponse & { data?: ActivityPanelType[] }> => {
   try{
-    // if(cacheActivityPanel[token]){
-    //   console.log('[cached-activity-panel]');
-    //   return {
-    //     result: true,
-    //     response: 'Painel carregado com sucesso',
-    //     data: cacheActivityPanel[token]
-    //   }
-    // }
-    
-  }catch(e){}
-
-  try{
-    console.log('[requested-active-panel]');
-    const { data } = await wf.get('/flows/active-panel', headerBearer(token));
-
-    // if(data.result && data.data) cacheActivityPanel[token] = data.data;
+    console.log('[requested-flow-activity-panel]');
+    const { data } = await wf.get('/flows/activity-panel', headerBearer(token));
     
     return data;
   }catch(e){
