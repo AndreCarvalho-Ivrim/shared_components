@@ -421,25 +421,28 @@ export const getAsideItems = ({
 
   return defaultAsideItems;
 };
-export const IconByTheme = ({ theme, props = {}, children }: {
+export const IconByTheme = ({ theme, props = {}, children, self_adjustment = true }: {
   theme: AvailableWorkflowThemeType,
   children: ReactNode,
-  props?: IconProps
+  props?: IconProps,
+  self_adjustment?: boolean
 }) => {
   switch (theme) {
-    case "Cobrança": case "Financeiro": return <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
-    case "Comercial": return <CartIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className="-mt-0.5"/>;
+    case "Cobrança": case "Financeiro": return <CobrancaIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className={self_adjustment ?"-mt-1 mr-0.5" : undefined}/>;
+    case "Comercial": return <CartIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className={self_adjustment ? "-mt-1": undefined}/>;
     case "Gamificação": return <GameIconNew  {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} />;
-    case "Supply": return <SupplyIconNew {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className="-mt-0.5" />;
+    case "Supply": return <SupplyIconNew {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className={self_adjustment ? "-mt-1": undefined}/>;
     case "Field Management": return <img src={managedServiceIcon} style={{
+      filter: props.color === 'white' ? 'invert(1)':'',
       marginTop: '-2px',
-      height: '27px',
-      width: '28px',
+      height: props.h ?? '27px',
+      width: props.w ?? '28px',
     }}/>;
     case "Gestão": case "Administrativo": return <img src={adminThemeIcon} style={{ 
+      filter: props.color === 'white' ? 'invert(1)':'',
       marginTop: '-1px',
-      height: '24px',
-      width: '26px',
+      height: props.h ?? '24px',
+      width: props.w ?? '26px',
     }}/>
     default: return <>{children}</>;
   }

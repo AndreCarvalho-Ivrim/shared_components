@@ -88,7 +88,7 @@ export const ActivityPanel = () => {
   }
   
   return (
-    <div className={`h-full flex flex-col justify-between p-1`}>
+    <div className={`h-full flex flex-col justify-between p-1 lg:max-w-sm`}>
       <div>
         <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem]">
           <table className="w-full text-sm text-left text-gray-500">

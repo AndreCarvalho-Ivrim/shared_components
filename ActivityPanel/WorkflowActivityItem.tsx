@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 import { IconByTheme } from "../Wrapper"
 import { AvailableWorkflowThemeType } from "../../shared-types"
+import { getButtonColorClass } from "../MenuSlider"
 
 interface ActivePanelType extends ActivityPanelType {
   theme?: AvailableWorkflowThemeType
@@ -37,15 +38,17 @@ export const WorkflowActivityItem = ({ activity }:ActivityItemProps) => {
       <td className="px-3 py-4 cursor-pointer">
         <div className="flex items-center gap-2 max-w-full">
           {activity.theme ? (
-            <IconByTheme theme={activity.theme} props={{ color: 'black', w: 28, h: 28 }}>
-              <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(activity.title ?? '').slice(0, 2)}</span>
-            </IconByTheme>
+            <div className={`p-1 rounded-lg ${getButtonColorClass(activity.theme)} text-white flex items-center justify-center`}>
+              <IconByTheme theme={activity.theme} props={{ w: 22, h: 22, color: 'white' }} self_adjustment={false}>
+                <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(activity.title ?? '').slice(0, 2)}</span>
+              </IconByTheme>
+            </div>
           ) : activity.avatar ? (
             <Avatar picture={activity.avatar}/>
           ) : activity.icon ? getIconByName(activity.icon, { w: 18, h: 18 }) : (
             <DetalistIcon {...{ w: 18, h: 18 }}/>
           )}
-          <div className="flex flex-col">
+          <div className="flex flex-col flex-1">
             <div className="flex gap-1">
               <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{activity.title}</strong>
               {(dynamicBadge && dynamicBadge.value > 0) && (
