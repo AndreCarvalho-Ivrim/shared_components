@@ -20,16 +20,26 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNotify } from "../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
 import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
-import { CloseIcon, LockIcon, PinIcon, RefreshIcon } from "../utils/icons";
+import { CloseIcon, FilterIcon, LockIcon, PinIcon, RefreshIcon } from "../utils/icons";
 import { getDomain, handleRegexUrl } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 import { IconByTheme } from "../Wrapper";
 import { ActivityPanel } from "../ActivityPanel";
+import { Tooltip } from "flowbite-react";
 
 const clientsWithAccessToCAP = { };
+
+const availableThemesToList : AvailableWorkflowThemeType[] = [
+  "Financeiro",
+  "Comercial",
+  "Gamificação",
+  "Supply",
+  "Field Management",
+  "Administrativo"
+]
 
 export const getButtonColorClass = (theme: AvailableWorkflowThemeType) => {
   switch (theme) {
@@ -71,6 +81,9 @@ export const MenuSlider = () => {
 
   const [inFixation, setInFixation] = useState(false);
   const [isFixeds, setIsFixeds] = useState<string[]>([]);
+  const [inFilterByTheme, setInFilterByTheme] = useState(false);
+  const [filterByTheme, setFilterByTheme] = useState(availableThemesToList);
+
   const [workflows, setWorkflows] = useState<WorkflowType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -263,162 +276,215 @@ export const MenuSlider = () => {
         w-full sm:max-w-[616px] lg:max-w-[95%] xl:max-w-[1580px] 
         mx-auto gap-2
       ">
-        <section className="flex flex-col sm:flex-row w-full sm:w-auto items-start">
-          <div className="grid grid-cols-1 xsm:grid-cols-2 w-full">
-            {[
-              {
-                id: 'isac',
-                redirect: {
-                  url: handleRegexUrl('@isac:workflow.home', user?.token),
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.ISAC)
-                },
-                icon: <img src={isac} alt="imagem geometrica isac" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={ISAC} alt="logo isac" width={100} height={100} className="h-3 object-contain" />,
-              }, {
-                id: 'vision',
-                icon: <img src={vision} alt="imagem geometrica vision" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={VISION} alt="logo vision" width={100} height={100} className="h-3 object-contain" />
-              }, {
-                id: 'report',
-                icon: <img src={report} alt="imagem geometrica report" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={REPORT} alt="logo report" width={100} className="h-3 object-contain" />,
-                redirect: {
-                  url: handleRegexUrl('@isac:report.home', user?.token),
-                  disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
-                }
-              }, {
-                id: 'dashboard',
-                redirect: {
-                  url: handleRegexUrl('@hub:dashboard.home', user?.token),
-                  disabled: !(
-                    user &&
-                    user.permitions_slug &&
-                    user.permitions_slug.includes(PossiblePermissions.DASH)
-                  ),
-                },
-                icon: <img src={dashboard} alt="imagem geometrica dashboard" width={100} height={100} className="mt-10 mx-auto" />,
-                name: <img src={DASHBOARD} alt="logo dashboard" height={100} className="h-3 object-contain" />
-              }
-            ].map((item) => (
-              <button
-                key={item.id}
-                className="bg-primary-500 m-1 w-full xsm:max-w-[calc(50vw-2.2rem)] sm:w-56 h-52 rounded-md flex justify-center items-center relative"
-                onClick={() => {
-                  if (item.redirect) redirectToApp(item.redirect, toast, navigate)
-                  else toast.warning('Está solução ainda não está disponível');
-                }}
-              >
-                <div className="flex flex-col items-start justify-between mb-3 w-full h-full px-4 py-2">
-                  {item.icon}
-                  {item.name}
-                </div>
-
-                {(!item.redirect || item.redirect.disabled) && (
-                  <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                    {item.redirect ? <LockIcon w={26} h={26} /> : <RefreshIcon w={26} h={26} />}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-
-          <div className="relative">
-            {workflows.length > 4 && (
-              <button
-                type="button"
-                className="absolute top-1 -right-6 text-gray-500 py-1 px-0.5 bg-gray-300/50 rounded-lg opacity-75 hover:opacity-100"
-                onClick={() => setInFixation(!inFixation)}
-              >{inFixation ? (<CloseIcon w={18} h={18}/>):(<PinIcon w={18} h={18}/>)}</button>
-            )}
-            <div className="flex sm:flex-col overflow-y-auto min-w-[7.2rem] max-h-[calc(6.25rem*4+2.25rem)]">
-              {workflows.map((flow) => {
-                const isFixed = isFixeds.includes(flow._id);
+        <div>
+          {inFilterByTheme && (
+            <div className="grid gap-1 grid-cols-6 pl-1 pr-3 mb-1">
+              {availableThemesToList.map((theme) => {
+                const total = workflows.filter(({ theme: t }) => (
+                  theme === 'Financeiro' ? ['Financeiro', 'Cobrança'].includes(t) : (
+                    theme === 'Administrativo' ? ['Administrativo', 'Gestão'].includes(t) : t === theme
+                  )
+                )).length
                 return (
                   <button
+                    type="button"
+                    onClick={() => setFilterByTheme((prevState) => prevState.includes(theme) ? prevState.filter(
+                      (state) => state !== theme
+                    ):[...prevState, theme])}
                     className={`
-                      relative m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.25rem] h-[6.25rem]
-                      rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}
-                      ${inFixation && !isFixed ? 'opacity-70 hover:opacity-80':''}
+                      px-1 py-0.5 rounded-lg border-2
+                      ${getButtonColorClass(theme)}
+                      ${!filterByTheme.includes(theme) ? '!bg-transparent': 'text-white'}
+                      flex items-center justify-center
                     `}
-                    style={{  borderStyle: 'solid', borderWidth: '3px' }}
-                    onClick={() => {
-                      if(inFixation) handleToggleFixed(flow._id);
-                      else redirectToApp({
-                        url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
-                      }, toast, navigate)
-                    }}
-                    key={flow._id}
+                    key={theme}
                   >
-                    <div className={style.adjustCards}>
-                      <IconByTheme theme={flow.theme} props={{ color: 'black', w: 28, h: 28 }}>
-                        <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(flow.title ?? '').slice(0, 2)}</span>
-                      </IconByTheme>
-                    </div>
-                    <div className="mt-10 h-full flex items-center">
-                    <span className={`max-w-[100%] px-1.5 text-xs text-center hover:whitespace-normal font-semibold ${
-                      ['Gestão', 'Field Management'].includes(flow.theme) ? 'text-gray-800':'text-white'
-                    }`}>
-                        {flow.title.slice(0, 38)}{flow.title.length > 38 && '...'}
+                    <Tooltip content={theme}>
+                      <span className="flex gap-1 items-center">
+                        <IconByTheme
+                          theme={theme}
+                          props={{ w: 16, h: 16, color: filterByTheme.includes(theme) ? 'white' : undefined }}
+                          self_adjustment={false}
+                        >
+                          <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(theme ?? '').slice(0, 2)}</span>
+                        </IconByTheme>
+                        <span className="text-[10px]">{total}</span>
                       </span>
-                    </div>
-                    {isFixed && (
-                      <div className="w-full rounded-b-md flex justify-center bg-gray-50/40 py-0.5 text-gray-600">
-                        <PinIcon w={12} h={12}/>
-                      </div>
-                    )}
+                    </Tooltip>
                   </button>
-                );
+                )
               })}
-              {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
+            </div>
+          )}
+          <section className="flex flex-col sm:flex-row w-full sm:w-auto items-start">
+            <div className="grid grid-cols-1 xsm:grid-cols-2 w-full">
+              {[
+                {
+                  id: 'isac',
+                  redirect: {
+                    url: handleRegexUrl('@isac:workflow.home', user?.token),
+                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.ISAC)
+                  },
+                  icon: <img src={isac} alt="imagem geometrica isac" width={100} height={100} className="mt-10 mx-auto" />,
+                  name: <img src={ISAC} alt="logo isac" width={100} height={100} className="h-3 object-contain" />,
+                }, {
+                  id: 'vision',
+                  icon: <img src={vision} alt="imagem geometrica vision" width={100} height={100} className="mt-10 mx-auto" />,
+                  name: <img src={VISION} alt="logo vision" width={100} height={100} className="h-3 object-contain" />
+                }, {
+                  id: 'report',
+                  icon: <img src={report} alt="imagem geometrica report" width={100} height={100} className="mt-10 mx-auto" />,
+                  name: <img src={REPORT} alt="logo report" width={100} className="h-3 object-contain" />,
+                  redirect: {
+                    url: handleRegexUrl('@isac:report.home', user?.token),
+                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
+                  }
+                }, {
+                  id: 'dashboard',
+                  redirect: {
+                    url: handleRegexUrl('@hub:dashboard.home', user?.token),
+                    disabled: !(
+                      user &&
+                      user.permitions_slug &&
+                      user.permitions_slug.includes(PossiblePermissions.DASH)
+                    ),
+                  },
+                  icon: <img src={dashboard} alt="imagem geometrica dashboard" width={100} height={100} className="mt-10 mx-auto" />,
+                  name: <img src={DASHBOARD} alt="logo dashboard" height={100} className="h-3 object-contain" />
+                }
+              ].map((item) => (
                 <button
-                  className="relative bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
-                  onClick={() => redirectToApp({
-                    url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
-                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
-                  }, toast, navigate)}
+                  key={item.id}
+                  className="bg-primary-500 m-1 w-full xsm:max-w-[calc(50vw-2.2rem)] sm:w-56 h-52 rounded-md flex justify-center items-center relative"
+                  onClick={() => {
+                    if (item.redirect) redirectToApp(item.redirect, toast, navigate)
+                    else toast.warning('Está solução ainda não está disponível');
+                  }}
                 >
-                  <div className={style.adjustCards}> </div>
-                  <img
-                    src={iconPagar}
-                    alt="wallet icon"
-                    className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
-                  />
-                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">
-                    Contas a Receber
-                  </span>
+                  <div className="flex flex-col items-start justify-between mb-3 w-full h-full px-4 py-2">
+                    {item.icon}
+                    {item.name}
+                  </div>
 
-                  {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
+                  {(!item.redirect || item.redirect.disabled) && (
                     <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
-                      <LockIcon w={26} h={26} />
+                      {item.redirect ? <LockIcon w={26} h={26} /> : <RefreshIcon w={26} h={26} />}
                     </span>
                   )}
                 </button>
-              )}
-              {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
-                <button
-                  className="relative bg-primary-600 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
-                  onClick={() => redirectToApp({
-                    url: handleRegexUrl('@hub:old_cap.home', user.token),
-                    disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
-                  }, toast, navigate)}
-                >
-                  <div className={style.adjustCards}> </div>
-                  <img
-                    src={iconPagar}
-                    alt="wallet icon"
-                    className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
-                  />
-                  <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">Contas a pagar</span>
-                </button>
-              ) : !(user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
-                <div className="
-                  bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
-                  text-center text-xs text-gray-500 opacity-75
-                ">Você não<br />possui nenhum aplicativo<br />criado</div>
-              ) : <></>}
+              ))}
             </div>
-          </div>
-        </section>
+
+            <div className="relative">
+              <button
+                type="button"
+                className="absolute top-1 -right-6 text-gray-500 py-1 px-0.5 bg-gray-300/50 rounded-lg opacity-75 hover:opacity-100"
+                onClick={() => setInFilterByTheme(!inFilterByTheme)}
+              >{inFilterByTheme ? (<CloseIcon w={18} h={18}/>):(<FilterIcon w={18} h={18}/>)}</button>
+              {workflows.length > 3 && (
+                <button
+                  type="button"
+                  className="absolute top-9 -right-6 text-gray-500 py-1 px-0.5 bg-gray-300/50 rounded-lg opacity-75 hover:opacity-100"
+                  onClick={() => setInFixation(!inFixation)}
+                >{inFixation ? (<CloseIcon w={18} h={18}/>):(<PinIcon w={18} h={18}/>)}</button>
+              )}
+              <div className="flex sm:flex-col overflow-y-auto min-w-[7.2rem] max-h-[calc(6.25rem*4+2.25rem)]">
+                {workflows.map((flow) => {
+                  const isFixed = isFixeds.includes(flow._id);
+
+                  if(inFilterByTheme && !filterByTheme.includes(
+                    flow.theme === 'Cobrança' ? 'Financeiro' : (
+                      flow.theme === 'Gestão' ? 'Administrativo': flow.theme
+                    )
+                  )) return <Fragment key={flow._id}></Fragment>
+                
+                  return (
+                    <button
+                      className={`
+                        relative m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.25rem] h-[6.25rem]
+                        rounded-md flex flex-col items-center justify-center ${getButtonColorClass(flow.theme)}
+                        ${inFixation && !isFixed ? 'opacity-70 hover:opacity-80':''}
+                      `}
+                      style={{  borderStyle: 'solid', borderWidth: '3px' }}
+                      onClick={() => {
+                        if(inFixation) handleToggleFixed(flow._id);
+                        else redirectToApp({
+                          url: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token)
+                        }, toast, navigate)
+                      }}
+                      key={flow._id}
+                    >
+                      <div className={style.adjustCards}>
+                        <IconByTheme theme={flow.theme} props={{ color: 'black', w: 28, h: 28 }}>
+                          <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(flow.title ?? '').slice(0, 2)}</span>
+                        </IconByTheme>
+                      </div>
+                      <div className="mt-10 h-full flex items-center">
+                      <span className={`max-w-[100%] px-1.5 text-xs text-center hover:whitespace-normal font-semibold ${
+                        ['Gestão', 'Field Management'].includes(flow.theme) ? 'text-gray-800':'text-white'
+                      }`}>
+                          {flow.title.slice(0, 38)}{flow.title.length > 38 && '...'}
+                        </span>
+                      </div>
+                      {isFixed && (
+                        <div className="w-full rounded-b-md flex justify-center bg-gray-50/40 py-0.5 text-gray-600">
+                          <PinIcon w={12} h={12}/>
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+                {user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1" && (
+                  <button
+                    className="relative bg-primary-700 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
+                    onClick={() => redirectToApp({
+                      url: handleRegexUrl(`@hub:reconciliation.manage`, user.token),
+                      disabled: !user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO),
+                    }, toast, navigate)}
+                  >
+                    <div className={style.adjustCards}> </div>
+                    <img
+                      src={iconPagar}
+                      alt="wallet icon"
+                      className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
+                    />
+                    <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">
+                      Contas a Receber
+                    </span>
+
+                    {!user?.permitions_slug?.includes(PossiblePermissions.FINANCEIRO) && (
+                      <span className="bg-gray-800/30 absolute inset-0 flex items-center justify-center text-white rounded-md">
+                        <LockIcon w={26} h={26} />
+                      </span>
+                    )}
+                  </button>
+                )}
+                {(user && user.current_client && Object.keys(clientsWithAccessToCAP).includes(user.current_client)) ? (
+                  <button
+                    className="relative bg-primary-600 hover:bg-primary-600 m-1 min-w-[6.15rem] w-[6.15rem] min-h-[6.15rem] h-[6.15rem] rounded-md flex flex-col items-center justify-center"
+                    onClick={() => redirectToApp({
+                      url: handleRegexUrl('@hub:old_cap.home', user.token),
+                      disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR)
+                    }, toast, navigate)}
+                  >
+                    <div className={style.adjustCards}> </div>
+                    <img
+                      src={iconPagar}
+                      alt="wallet icon"
+                      className="absolute top-4 right-2 transform -translate-1 -translate-y-2 "
+                    />
+                    <span className="text-white text-xs text-center truncate hover:whitespace-normal mt-7">Contas a pagar</span>
+                  </button>
+                ) : !(user && user.current_client && user.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
+                  <div className="
+                    bg-gray-300 hover:bg-gray-300 m-1 p-1 min-w-[6.25rem] w-[6.25rem] min-h-[6.25rem] h-[6.25rem] rounded-md flex flex-col items-center justify-center
+                    text-center text-xs text-gray-500 opacity-75
+                  ">Você não<br />possui nenhum aplicativo<br />criado</div>
+                ) : <></>}
+              </div>
+            </div>
+          </section>
+        </div>
 
         <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
           <div className="grid xsm:grid-cols-3">
