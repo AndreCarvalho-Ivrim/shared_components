@@ -381,7 +381,7 @@ export const MenuSlider = () => {
                 className="absolute top-1 -right-6 text-gray-500 py-1 px-0.5 bg-gray-300/50 rounded-lg opacity-75 hover:opacity-100"
                 onClick={() => setInFilterByTheme(!inFilterByTheme)}
               >{inFilterByTheme ? (<CloseIcon w={18} h={18}/>):(<FilterIcon w={18} h={18}/>)}</button>
-              {workflows.length > 3 && (
+              {workflows.length > 4 && (
                 <button
                   type="button"
                   className="absolute top-9 -right-6 text-gray-500 py-1 px-0.5 bg-gray-300/50 rounded-lg opacity-75 hover:opacity-100"
