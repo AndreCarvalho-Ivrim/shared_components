@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { TableFooter } from "../TableFooter";
-import { ArrowRightIcon, DetalistIcon, getIconByName } from "../utils/icons";
 import { Loading } from "../../components/Loading";
 import { ActivityPanelType } from "../../shared-types/activity_panel.type";
-import { Avatar } from "../utils/Avatar";
 import { useAuth } from "../../contexts/AuthContext";
-import { getActivityPanel } from "../services/activity_panel";
+import { getFlowActivityPanel, getActivityPanel } from "../services/activity_panel";
 import { useNotify } from "../../contexts/NotifyContext";
 import { ActivityItem } from "./ActivityItem";
+import { WorkflowActivityItem } from "./WorkflowActivityItem";
 
 const perPage = 5;
 export const ActivityPanel = () => {
@@ -58,18 +56,39 @@ export const ActivityPanel = () => {
 
     setIsLoading(true);
     const res = await getActivityPanel(user.token);
+    const res_flow_activity = await getFlowActivityPanel(user.token);
     setIsLoading(false);
     
     if(!res.result){
       toast.error(res.response)
       return
     }
-
-    setActivities(res.data ? res.data : [])
+    if(!res_flow_activity.result){
+      toast.error(res_flow_activity.response)
+      return
+    }
+    
+    const flow_activities = res_flow_activity.data?.map((data: any) => ({
+      description: data.description,
+      title: data.wf,
+      mode: 'workflow-activity',
+      avatar: data.avatar,
+      icon: data.icon,
+      redirect_to: data.redirect_to,
+      theme: data.theme,
+      id: crypto.randomUUID(),
+      active: true,
+      client_id: user.current_client
+    } as ActivityPanelType)) ?? [];
+    
+    setActivities([
+      ...(res.data ?? []),
+      ...(flow_activities ?? []),
+    ]);
   }
   
   return (
-    <div className={`h-full flex flex-col justify-between p-1`}>
+    <div className={`h-full flex flex-col justify-between p-1 lg:max-w-sm`}>
       <div>
         <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem]">
           <table className="w-full text-sm text-left text-gray-500">
@@ -80,9 +99,10 @@ export const ActivityPanel = () => {
               </tr>
             </thead>
             <tbody className="">
-              {activities.slice(pageIndex * perPage, (pageIndex + 1) * perPage).map(activity => (
-                <ActivityItem activity={activity} key={activity.id}/>
-              ))}
+              {activities.slice(pageIndex * perPage, (pageIndex + 1) * perPage).map(activity => {
+                if (activity.mode === 'workflow-activity') return <WorkflowActivityItem activity={activity} key={activity.id}/>
+                else return <ActivityItem activity={activity} key={activity.id}/>
+              })}
               {activities.length === 0 && (
                 <tr>
                   <td
