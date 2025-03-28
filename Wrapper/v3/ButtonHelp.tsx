@@ -35,6 +35,13 @@ export const translateCallStatus : Record<CallStatusType, string> = {
   in_progress: 'Em Andamento',
   finished: 'Finalizados',
 }
+export interface ChatMessage {
+  message: string;
+  date: string;
+  username: string;
+  is_support: boolean;
+  id: string;  
+}
 export interface CalledType{
   _id: string,
   _user_id?: string,
@@ -49,6 +56,7 @@ export interface CalledType{
   attachments?: { id: string, name: string, url: string }[],
   internal_review_description?: string,
   created_call_url: string,
+  conversations?: ChatMessage[]
 }
 
 interface FileListType{
