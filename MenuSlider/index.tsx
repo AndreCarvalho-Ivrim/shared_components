@@ -173,6 +173,7 @@ export const Menu = () =>{
 
             
             <ConteinerFlows
+              theme="Financeiro"
               title="IFI - Ivrim Financial Inteligence"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
@@ -180,6 +181,7 @@ export const Menu = () =>{
               workflows={workflows.filter(workflow => ['Cobrança', "Financeiro"].includes(workflow.theme))}
             />
             <ConteinerFlows
+              theme="Supply"
               title="ISI - Ivrim Supply Inteligence"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
@@ -187,6 +189,7 @@ export const Menu = () =>{
               workflows={workflows.filter(workflow => workflow.theme === 'Supply')}   
             />
             <ConteinerFlows
+              theme="Field Management"
               title="IFM - Ivrim Field Management"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
@@ -197,6 +200,7 @@ export const Menu = () =>{
 
           <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full">            
             <ConteinerFlows
+              theme="Administrativo"
               title="IAS - Ivrim ADM. Solutios"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
@@ -204,6 +208,7 @@ export const Menu = () =>{
               workflows={workflows.filter(workflow => workflow.theme == 'Gestão')}
             />
             <ConteinerFlows
+              theme="Comercial"
               title="ICI - Ivrim Commercial Inteligence"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}
@@ -211,6 +216,7 @@ export const Menu = () =>{
               workflows={workflows.filter(workflow => workflow.theme === 'Comercial')}
             />
             <ConteinerFlows
+              theme="Administrativo"
               title="IM - Ivrim Messaging"
               handleToggleFixed={handleToggleFixed}
               inFixation={inFixation}

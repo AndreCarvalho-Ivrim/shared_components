@@ -69,6 +69,7 @@ export const redirectToApp = (
 
 interface ContainerProps{
   title: string,
+  theme: AvailableWorkflowThemeType,
   workflows: WorkflowType[],
   inFixation: boolean,
   handleToggleFixed: (flow_id: string) => void,
@@ -76,6 +77,7 @@ interface ContainerProps{
 }
 export const ConteinerFlows = ({
   title,
+  theme,
   workflows,
   inFixation,
   handleToggleFixed,
@@ -89,7 +91,7 @@ export const ConteinerFlows = ({
   return (
     <div className={`h-full flex flex-col justify-between p-1 `}>
     
-      <div className="  px-2 rounded-lg bg-gray-1000/100  backdrop-blur-[25px] shadow-lg ring-1 ring-black ring-opacity-5   ">
+      <div className="  px-2 rounded-lg  bg-gray-50/80 backdrop-blur-[25px] shadow-lg ">
       <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs  text-primary-800 uppercase"> 
               <tr>
@@ -105,7 +107,7 @@ export const ConteinerFlows = ({
             
             <div className="relative  ">
            
-              <div className="flex sm:flex-wrap w-[15rem] 2xl:w-[20rem] h-[8rem] 2xl:h-[13rem]   ]">
+              <div className="flex sm:flex-wrap  w-[15rem] 2xl:w-[20rem]   md:h-[9rem]    sm:h-[13rem] 2xl:h-[13rem]  ">
               
                 {workflows.map((flow) => {
                   const isFixed = isFixeds.includes(flow._id);
@@ -200,13 +202,16 @@ export const ConteinerFlows = ({
                   </button>
 
                   </div>
+                  
 
 
                 ) : !(   isFinancial && user?.current_client === "c8682884-0928-4664-a609-7c9a984c71c1") && workflows.length === 0 ? (
-                  <div className="
-                    bg-gray-300 hover:bg-gray-300 m-5 p-1  w-[5.25rem] 2xl:w-[6.25rem] h-[5.25rem] 2xl:h-[6.25rem] rounded-md flex flex-col items-center justify-center
+                  <div className={`
+                    ${getButtonColorClass(theme)}
+                    m-5 p-1  w-[5.25rem] 2xl:w-[6.25rem] h-[5.25rem] 2xl:h-[6.25rem] rounded-md flex flex-col items-center justify-center
                     text-center text-xs text-gray-500 opacity-75 
-                  ">Você não<br />possui nenhum aplicativo<br />criado</div>
+                  `}>Você não<br />possui nenhum aplicativo<br />criado</div>
+
                 ) : <></>}
                 
               </div>
