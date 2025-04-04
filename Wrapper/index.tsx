@@ -232,10 +232,11 @@ defaultAsideItems = [
         },{
           id: 'training center',
           name: 'Treinamentos',
-          href: handleRegexUrl('@hub:gallery.home', user?.token),
+          href: handleRegexUrl('@hub:training.home', user?.token),
           icon: (
            <EducationIcon  w={22} h={22} />
           ),
+          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
         },{
           id: 'Tech support',
           name: 'Suporte',
