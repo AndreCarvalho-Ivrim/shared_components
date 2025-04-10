@@ -53,7 +53,7 @@ export interface CalledType{
   created_call_url: string,
 }
 
-interface FileListType{
+export interface FileListType{
   file: File | null,
   id: string,
   name: string,
