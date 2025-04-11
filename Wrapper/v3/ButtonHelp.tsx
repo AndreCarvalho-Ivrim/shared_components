@@ -30,6 +30,7 @@ export const hardcodeSupport = {
 }
 
 export type CallStatusType = 'open' | 'in_progress' | 'finished'
+export type TypeOfCallType = 'Dúvida' | 'Melhoria' | 'Problema'
 export const translateCallStatus : Record<CallStatusType, string> = {
   open: 'Em Aberto',
   in_progress: 'Em Andamento',
@@ -54,6 +55,7 @@ export interface CalledType{
   client: { id: string, name: string },
   type_of_call: 'Melhoria' | 'Dúvida' | 'Problema',
   description: string,
+  type_of_call: TypeOfCallType,
   attachments?: { id: string, name: string, url: string }[],
   internal_review_description?: string,
   created_call_url: string,
@@ -85,6 +87,11 @@ interface FlowDataRequestFilter{
   pagination?: any
 }
 
+interface OptionType{
+  value: string,
+  label: string,
+}
+
 export const ButtonHelp = () => {
   const [files, setFiles] = useState<FileListType[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -102,8 +109,17 @@ export const ButtonHelp = () => {
       return;
     }
 
+    let element = document.getElementById("modal-help-select") as HTMLSelectElement;
+    let type_of_call = element?.value;
+
+    if (!type_of_call) {
+      toast.error("É obrigatório selecionar uma opção em tipo de chamado");
+      return;
+    }
+
     let body: CreatePublicPostDataBody = {
       data: {
+        type_of_call,
         description,
         created_call_url: window.location.href,
         user: {
@@ -245,13 +261,16 @@ const CreateCallFormContent = ({
   files,
   setFiles,
   user,
-  toast,
+  toast
 }: {
   files: FileListType[],
   setFiles: React.Dispatch<React.SetStateAction<FileListType[]>>,
   user: User | undefined,
   toast: any
-}) => {    
+}) => {
+  const options: OptionType[] = [
+    { value: 'Dúvida', label: 'Dúvida' }, { value: 'Melhoria', label: 'Melhoria' }, { value: 'Problema', label: 'Problema' }
+  ];
   function handleUpload(selectedFiles: File[]) {
   
     const uploadedFiles: FileListType[] = selectedFiles.map<FileListType>(file => ({
@@ -333,6 +352,24 @@ const CreateCallFormContent = ({
         <br />- descreva de forma simples e objetiva o problema encontrado
         <br />- caso seja necessário adicione anexo(s) abaixo
       </p>
+
+      <label htmlFor="modal-help-textarea" className="text-sm font-medium text-gray-700 block mb-1">
+        Tipo de chamado
+      </label>
+      <select
+        id="modal-help-select"
+        className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none mb-4 text-sm font-medium text-gray-700"
+        required={true}
+      >
+        <option className="text-sm font-medium text-gray-700" value="" disabled>
+          Selecione uma opção
+        </option>
+        {options.map((option) => (
+          <option key={option.value} className="text-sm font-medium text-gray-700" value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
 
       <label htmlFor="modal-help-textarea" className="text-sm font-medium text-gray-700 block mb-1">
         Descrição do problema
@@ -434,6 +471,13 @@ const ListCallsContent = ({ onAccess }:{ onAccess: (_id: string) => void }) => {
                     called.status === 'finished' ? 'bg-green-500' : 'bg-gray-100'
                   }`}>
                     {translateCallStatus[called.status]}
+                  </span>
+                  <span className={`font-semibold block text-[10px] leading-none uppercase py-0.5 px-2 rounded-lg text-gray-100 ${
+                    called.type_of_call === 'Melhoria' ? 'text-gray-100 bg-green-600' : 
+                    called.type_of_call === 'Dúvida' ? 'text-gray-100 bg-primary-600' :
+                    called.type_of_call === 'Problema' ? 'bg-red-500' : 'bg-gray-100'
+                  }`}>
+                    {called.type_of_call}
                   </span>
                 </strong>
               </div>
