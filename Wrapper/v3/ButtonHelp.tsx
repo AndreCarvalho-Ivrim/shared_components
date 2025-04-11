@@ -37,11 +37,16 @@ export const translateCallStatus : Record<CallStatusType, string> = {
   finished: 'Finalizados',
 }
 export interface ChatMessage {
-  message: string;
-  date: string;
-  username: string;
-  is_support: boolean;
-  id: string;  
+  message: string,
+  files?: {
+    url: string,
+    id: string,
+    name: string
+  }[], 
+  date: string,
+  username: string,
+  is_support: boolean,
+  id: string,  
 }
 export interface CalledType{
   _id: string,
