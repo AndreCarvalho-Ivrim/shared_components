@@ -52,6 +52,7 @@ export interface CalledType{
   updated_at: string,
   user: { id: string, name: string, email: string },
   client: { id: string, name: string },
+  type_of_call: 'Melhoria' | 'Dúvida' | 'Problema',
   description: string,
   attachments?: { id: string, name: string, url: string }[],
   internal_review_description?: string,
