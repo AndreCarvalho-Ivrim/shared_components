@@ -66,7 +66,7 @@ export interface CalledType{
   conversations?: ChatMessage[]
 }
 
-interface FileListType{
+export interface FileListType{
   file: File | null,
   id: string,
   name: string,
