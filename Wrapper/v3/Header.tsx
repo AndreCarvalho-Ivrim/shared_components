@@ -20,10 +20,18 @@ export const Header = ({ breadcrumbs } : HeaderProps) => (
             >
               <span className="group-first:hidden mr-1.5">/</span>
               {item.href ? (
-                <Link to={item.href}>{item.name}</Link>
+                <Link to={item.href}>
+                  {item.name.slice(0,25)}{item.name.length > 25 ? '...':''}
+                </Link>
               ):item.onClick ? (
-                <button type="button" onClick={item.onClick}>{item.name}</button>
-              ):item.name}
+                <button type="button" onClick={item.onClick}>
+                  {item.name.slice(0,25)}{item.name.length > 25 ? '...':''}
+                </button>
+              ):(
+                <>
+                  {item.name.slice(0,25)}{item.name.length > 25 ? '...':''}
+                </>
+              )}
             </li>
           ))}
         </ul>
