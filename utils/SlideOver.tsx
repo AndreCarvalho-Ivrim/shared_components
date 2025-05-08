@@ -105,6 +105,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                     { children }
                   </div>
                 </div>
+                <div className='hidden max-sm:flex-wrap sm:overflow-x-auto'/>
               </Dialog.Panel>
             </Transition.Child>
           </div>
