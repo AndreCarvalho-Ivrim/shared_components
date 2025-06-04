@@ -425,7 +425,7 @@ export const SaveIcon = (props: IconProps) => (
 export const SendIcon = (props: IconProps) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    fill="none" 
+    fill={props.color ?? "currentColor"}
     viewBox="0 0 256 256"
     width={props.w ?? '29'}
     height={props.h ?? '31'}
