@@ -27,6 +27,13 @@ export interface ModalOptionsType{
     onClick: () => void,
     autoClose?: boolean
   },
+  additionalActionButton?: {
+    theme: string,
+    text?: string,
+    className?: string,
+    onClick: () => void,
+    autoClose?: boolean
+  },
   classNames?: {
     content?: string,
     dialog?: string,
@@ -123,6 +130,24 @@ export const Modal = ({
                       if(options.actionButton?.autoClose !== false) setIsOpen(false);
                     }}
                   >{options.actionButton.text ?? 'Finalizar'}</button>
+                )}
+                {options.additionalActionButton && (
+                  <button
+                    type="button"
+                    className={ options.additionalActionButton.className ?? `
+                      px-4 py-2
+                      inline-flex justify-center
+                      w-full sm:ml-3 sm:w-auto sm:text-sm
+                      rounded-md border border-transparent 
+                      bg-${options.additionalActionButton.theme}-600 shadow-sm hover:bg-${options.additionalActionButton.theme}-700
+                      
+                      text-base font-medium text-white
+                      focus:outline-none focus:ring-2 focus:ring-${options.additionalActionButton.theme}-500 focus:ring-offset-2
+                    `} onClick={() => {
+                      if(options.additionalActionButton?.onClick) options.additionalActionButton.onClick();
+                      if(options.additionalActionButton?.autoClose !== false) setIsOpen(false);
+                    }}
+                  >{options.additionalActionButton.text ?? 'Finalizar'}</button>
                 )}
                 {options.cancelButton !== false && (
                   <button
