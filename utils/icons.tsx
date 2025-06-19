@@ -58,6 +58,18 @@ export const ArrowRightIcon = (props: IconProps) => (
     <path d="M5.51133 5.13565C5.82872 4.78408 5.82872 4.21315 5.51133 3.86158L2.26133 0.261584C2.02774 0.00283432 1.67989 -0.073103 1.3752 0.067522C1.07051 0.208147 0.872467 0.534397 0.872467 0.900023L0.875006 8.10002C0.875006 8.46283 1.07305 8.7919 1.37774 8.93252C1.68243 9.07315 2.03028 8.9944 2.26387 8.73846L5.51387 5.13846L5.51133 5.13565Z" fill={props.color ?? "currentColor"} />
   </svg>
 );
+export const ArrowDownRightIcon = (props: IconProps) => (
+  <svg
+    width={props.w ?? '6'}
+    height={props.h ?? '9'}
+    className={props.className}
+    viewBox="0 0 256 256"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M200,88V192a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h84.69L58.34,69.66A8,8,0,0,1,69.66,58.34L184,172.69V88a8,8,0,0,1,16,0Z" fill={props.color ?? "currentColor"} />
+  </svg>
+);
 export const ArrowDownCircleIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1518,6 +1530,7 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <ChevronUpDownIcon {...props}/>,   title: 'ChevronUpDownIcon'                       },
   { component: (props?: IconProps) => <ChevronsRightIcon {...props}/>,   title: 'ChevronsRightIcon'                       },
   { component: (props?: IconProps) => <ArrowRightIcon {...props}/>,      title: 'ArrowRightIcon'                          },
+  { component: (props?: IconProps) => <ArrowDownRightIcon {...props}/>,  title: 'ArrowDownRightIcon'                          },
   { component: (props?: IconProps) => <ArrowDownCircleIcon {...props}/>, title: 'ArrowDownCircleIcon'                     },
   { component: (props?: IconProps) => <CloseIcon {...props}/>,           title: 'CloseIcon'                               },
   { component: (props?: IconProps) => <TrashIcon {...props}/>,           title: 'TrashIcon'                               },
