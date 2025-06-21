@@ -60,8 +60,8 @@ export const ArrowRightIcon = (props: IconProps) => (
 );
 export const ArrowDownRightIcon = (props: IconProps) => (
   <svg
-    width={props.w ?? '6'}
-    height={props.h ?? '9'}
+    width={props.w ?? '24'}
+    height={props.h ?? '24'}
     className={props.className}
     viewBox="0 0 256 256"
     fill="none"
