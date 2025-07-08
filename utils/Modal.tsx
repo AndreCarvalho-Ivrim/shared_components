@@ -9,7 +9,7 @@ interface ModalType{
   zIndex?: 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50'
 }
 export interface ModalOptionsType{
-  title: string,
+  title?: string,
   titleProps?: {
     className?: string,
     style?: React.CSSProperties
@@ -99,13 +99,15 @@ export const Modal = ({
             } ${options.classNames?.content ?? ''}`}>
               <div className={`rounded-lg bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 ${options.classNames?.dialog ?? ''}`}>
                 <div className="sm:flex sm:items-start">
-                  { options.type && options.type == 'danger' ? <ModalIconDanger/> : <></>}
+                  {options.type && options.type == 'danger' ? <ModalIconDanger/> : <></>}
                   <div className={`mt-3 text-center sm:mt-0 ${ !!options.type ? 'sm:ml-4':'' } sm:text-left flex-1`}>
-                    <Dialog.Title
-                      as="h3"
-                      className={options.titleProps?.className ? options.titleProps.className : "text-lg font-medium leading-6 text-gray-900"}
-                      style={options.titleProps?.style}
-                    >{ options.title }</Dialog.Title>
+                    {options.title && (
+                      <Dialog.Title
+                        as="h3"
+                        className={options.titleProps?.className ? options.titleProps.className : "text-lg font-medium leading-6 text-gray-900"}
+                        style={options.titleProps?.style}
+                      >{ options.title }</Dialog.Title>
+                    )}
                     <div className="mt-2 -z-50">
                       {children}
                     </div>
