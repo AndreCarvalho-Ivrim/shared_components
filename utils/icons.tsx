@@ -1523,6 +1523,28 @@ export const StarIcon = (props: IconProps & { isFilled?: boolean}) => (
     )}
   </svg>
 )
+export const ClockIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 256 256"
+  >
+    <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"></path>
+  </svg>
+)
+export const ListBulletIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+    className={props.className}
+    viewBox="0 0 256 256"
+  >
+    <path d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"></path>
+  </svg>
+)
 //#endregion COMPONENTS
 //#region LIST AVAILABLE ICONS
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
@@ -1638,7 +1660,9 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <SaveAltIcon {...props}/>,          title: 'SaveAltIcon'                             },
   { component: (props?: IconProps) => <CogIcon {...props}/>,              title: 'CogIcon'                                 },
   { component: (props?: IconProps) => <StarIcon {...props}/>,             title: 'StarIcon'                                },
-  { component: (props?: IconProps) => <SendIcon {...props}/>,             title: 'SendIcon'                                }
+  { component: (props?: IconProps) => <SendIcon {...props}/>,             title: 'SendIcon'                                },
+  { component: (props?: IconProps) => <ClockIcon {...props}/>,            title: 'ClockIcon'                               },
+  { component: (props?: IconProps) => <ListBulletIcon {...props}/>,            title: 'ListBulletIcon'                               },
   
 ];
 //#endregion LIST AVAILABLE ICONS
