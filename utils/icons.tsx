@@ -1661,8 +1661,8 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <CogIcon {...props}/>,              title: 'CogIcon'                                 },
   { component: (props?: IconProps) => <StarIcon {...props}/>,             title: 'StarIcon'                                },
   { component: (props?: IconProps) => <SendIcon {...props}/>,             title: 'SendIcon'                                },
-  // { component: (props?: IconProps) => <ClockIcon {...props}/>,            title: 'ClockIcon'                               },
-  // { component: (props?: IconProps) => <ListBulletIcon {...props}/>,       title: 'ListBulletIcon'                          },
+  { component: (props?: IconProps) => <ClockIcon {...props}/>,            title: 'ClockIcon'                               },
+  { component: (props?: IconProps) => <ListBulletIcon {...props}/>,       title: 'ListBulletIcon'                          },
   
 ];
 //#endregion LIST AVAILABLE ICONS
