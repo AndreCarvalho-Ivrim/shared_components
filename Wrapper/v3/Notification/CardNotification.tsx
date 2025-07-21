@@ -4,12 +4,10 @@ import { useNotifications } from "./Hook"
 import { NotificationIconOrDefaultByType } from "./NotificationIconOrDefaultByType";
 
 export const CardNotification = () => {
-  const { handleGoToAllNotificactions, handleMarkAsViewed, notifications, onDetails, unvieweds } = useNotifications(); 
-
-  const perPage = 10;
+  const { handleGoToAllNotificactions, handleMarkAsViewed, notifications, onDetails, unvieweds } = useNotifications();
 
   return (
-    <div className="h-full bg-gray-50/20 backdrop:blur-lg rounded-xl overflow-hidden flex flex-col">
+    <div className="h-full bg-gray-50/20 backdrop:blur-lg rounded-xl overflow-hidden flex flex-col flex-1">
       <strong className="bg-gray-50/40 block w-full text-xs text-center uppercase font-semibold py-1 px-2">Notificações</strong>
 
       <div className="flex flex-col gap-1 flex-1">

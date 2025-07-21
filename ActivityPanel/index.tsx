@@ -88,7 +88,7 @@ export const ActivityPanel = () => {
   }
   
   return (
-    <div className="h-full bg-gray-50/20 backdrop:blur-lg rounded-xl overflow-hidden flex flex-col">
+    <div className="h-full bg-gray-50/20 backdrop:blur-lg rounded-xl overflow-hidden flex flex-col flex-1">
       <strong className="bg-gray-50/40 block w-full text-xs text-center uppercase font-semibold py-1 px-2">Painel de Atividades</strong>
   
       <div className="overflow-x-auto min-h-[15rem] flex-1">
