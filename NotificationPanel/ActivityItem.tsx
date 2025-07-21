@@ -34,18 +34,20 @@ export const ActivityItem = ({ activity }:ActivityItemProps) => {
   }, [activity]);
 
   async function handleFn(){
+    if(!activity.fn) return;
+
     if(!isLoading) setIsLoading(true);
     const isSuccessfully = await (async () : Promise<boolean> => {
-      if(activity.fn.type !== 'request') return false;
+      if(activity.fn!.type !== 'request') return false;
   
       console.log(`[requesting-${activity.id}]`)
 
-      if(activity.fn.url.slice(0, 10) !== '@isac_back'){
+      if(activity.fn!.url.slice(0, 10) !== '@isac_back'){
         toast.error('Não é possível parametrizar atividades que fazem consultas externas');
         return false;
       }
         
-      const url = handleRegexUrl(activity.fn.url as any)
+      const url = handleRegexUrl(activity.fn!.url as any)
       try{
         const { data } = await axios.get(url);
   
@@ -69,7 +71,7 @@ export const ActivityItem = ({ activity }:ActivityItemProps) => {
           return value;
         }
 
-        for(const effect of activity.fn.effects){
+        for(const effect of activity.fn!.effects){
           if(effect.only !== 'always' && (
             (effect.only === 'fail' && data.result) ||
             (effect.only === 'success' && !data.result)
