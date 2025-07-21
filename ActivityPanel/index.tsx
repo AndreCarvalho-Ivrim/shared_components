@@ -88,37 +88,25 @@ export const ActivityPanel = () => {
   }
   
   return (
-    <div className={`h-full flex flex-col justify-between p-1 lg:max-w-sm`}>
-      <div>
-        <div className="overflow-x-auto rounded-lg border border-gray-300 bg-gradient-glass backdrop-blur-[25px] min-h-[15rem]">
+    <div className="h-full bg-gray-50/20 backdrop:blur-lg rounded-xl overflow-hidden flex flex-col">
+      <strong className="bg-gray-50/40 block w-full text-xs text-center uppercase font-semibold py-1 px-2">Painel de Atividades</strong>
+  
+      <div className="overflow-x-auto min-h-[15rem] flex-1">
+        {activities.length === 0 ? (
+          <div className="px-3 py-10 text-center text-sm text-gray-200 h-full min-h-[8rem] flex items-center justify-center">
+            Não há atividades<br/>
+            programadas no momento
+          </div>
+        ) : (
           <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs  text-primary-800 uppercase bg-primary-500/5">
-              <tr>
-                <th className="px-3 py-2 font-bold">Painel de Atividades</th>
-                <th></th>
-              </tr>
-            </thead>
             <tbody className="">
               {activities.slice(pageIndex * perPage, (pageIndex + 1) * perPage).map(activity => {
                 if (activity.mode === 'workflow-activity') return <WorkflowActivityItem activity={activity} key={activity.id}/>
                 else return <ActivityItem activity={activity} key={activity.id}/>
               })}
-              {activities.length === 0 && (
-                <tr>
-                  <td
-                    colSpan={2}
-                    className="px-3 py-10 text-center text-sm text-gray-500 bg-gray-300/50 opacity-70"
-                  >
-                    <div className="min-h-[8rem] flex items-center justify-center">
-                      Não há atividades<br/>
-                      programadas no momento
-                    </div>
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
-        </div>
+        )}
       </div>
       {isLoading && <Loading className="absolute inset-0 z-50 bg-gray-50/75"/>}
     </div>

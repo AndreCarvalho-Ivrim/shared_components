@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Client, User } from "../../../shared-types";
-import { SearchIcon, CloseIcon } from "../../utils/icons";
+import { SearchIcon, CloseIcon, ChevronDownIcon } from "../../utils/icons";
 import { Modal } from "../../utils/Modal";
-import colapse from "../../assets/colapse.svg"
 import logo from '../../assets/default-client.jpg';
 
 interface ClientProps extends Client { active?: boolean, type?: undefined }
@@ -100,7 +99,7 @@ export const ModalEnterprise = ({ client, clients, handleChangeClient, modalIsOp
             </>
           ) : '..'}
         </div>
-        <img src={colapse}/>
+        <ChevronDownIcon/>
       </button>
       <Modal
         isOpen={modalIsOpen}

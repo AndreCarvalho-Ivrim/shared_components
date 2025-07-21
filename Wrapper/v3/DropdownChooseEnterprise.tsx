@@ -3,12 +3,12 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { Client } from "../../../types";
 
 import logo from '../../assets/default-client.jpg';
-import colapse from "../../assets/colapse.svg"
 import { Dropdown } from "../../utils/Dropdown";
 import { useNotify } from "../../../contexts/NotifyContext";
 import { useNavigate } from "react-router-dom";
 import { hubRoutes } from "../../../shared-types/utils/routes";
 import { ModalEnterprise } from "./ModalEnterprise";
+import { ChevronDownIcon } from "../../utils/icons";
 
 interface ClientProps extends Client {
   active?: boolean
@@ -100,7 +100,7 @@ export const DropdownChooseEnterprise = () => {
               </>
             ) : '..'}
           </div>
-          <img src={colapse}/>
+          <ChevronDownIcon/>
         </div>
       }
     >
