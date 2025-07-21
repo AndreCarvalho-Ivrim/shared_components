@@ -36,7 +36,7 @@ export const ActivityItem = ({ activity }:ActivityItemProps) => {
   async function handleFn(){
     if(!isLoading) setIsLoading(true);
     const isSuccessfully = await (async () : Promise<boolean> => {
-      if(activity.fn.type !== 'request') return false;
+      if(!activity.fn || activity.fn.type !== 'request') return false;
   
       console.log(`[requesting-${activity.id}]`)
 

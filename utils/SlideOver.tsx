@@ -97,6 +97,11 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                       {title && (
                         <div className="px-4 sm:px-6">
                           <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
+                          {subtitle && (
+                            <span className='flex items-center gap-1 text-xs text-gray-500 -mt-0.5'>
+                              {subtitle}
+                            </span>
+                          )}
                         </div>
                       )}
                     </>
@@ -105,6 +110,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                     { children }
                   </div>
                 </div>
+                <div className='hidden max-sm:flex-wrap sm:overflow-x-auto'/>
               </Dialog.Panel>
             </Transition.Child>
           </div>
