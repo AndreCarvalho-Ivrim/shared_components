@@ -1,0 +1,41 @@
+import { ReactNode } from "react"
+import bkg from "../../../assets/abstract_blue_gray.png";
+import logoIcon from "../../assets/ISAC_PB.png";
+import { DropdownChooseEnterprise } from "../v3/DropdownChooseEnterprise";
+import { MenuSidebar } from "../../../components/Menu/MenuSidebar";
+import { ButtonHelp } from "../v3/ButtonHelp";
+
+interface WrapperProps{
+  activeItem?: string[],
+  children: ReactNode
+}
+export const Wrapper = ({ children, activeItem }:WrapperProps) => {
+  return (
+    <div
+      className="w-screen h-screen overflow-auto flex flex-col"
+      style={{ 
+        backgroundImage: `url(${bkg})`,
+        backgroundSize: 'cover',
+      }}
+    >
+      <header className="flex items-center justify-between p-8">
+        <img
+          className="w-40"
+          src={logoIcon}
+          alt="ISAC 3.0"
+        />
+
+        <div className="flex items-center gap-4 text-white">
+          <DropdownChooseEnterprise />
+        </div>
+      </header>
+      <div className="flex-1 flex flex-col sm:flex-row p-8 pt-0">
+        <MenuSidebar activeItem={activeItem}/>
+        {children}
+        <div className="absolute bottom-8 right-4 flex flex-col justify-between z-10">
+          <ButtonHelp/>
+        </div>
+      </div>
+    </div>
+  )
+}
