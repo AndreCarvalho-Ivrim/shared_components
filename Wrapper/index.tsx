@@ -165,7 +165,7 @@ export const getAsideItems = ({
 
   let defaultAsideItems: AsideItems[] = [];
 
-  if (module_name === "Configurações" || isAdmin) {
+  if (module_name === "Configurações") {
     defaultAsideItems = [
       {
         id: "aside-item-perfil",
@@ -179,13 +179,13 @@ export const getAsideItems = ({
         href: handleRegexUrl('@hub:gallery.home', user?.token),
         icon: <MyDocsIcon w={22} h={22} />,
       },
-      {
-        id: "aside-item-closing-folder",
-        name: "Fechamentos Finan.",
-        href: handleRegexUrl('@hub:closing_folder.home', user?.token),
-        icon: <MyFinanceIcon w={22} h={22} />,
-        disabled: !user?.permitions_slug || !user.permitions_slug.some((permission) => permission === PossiblePermissions.FINANCIAL_CLOSINGS) ,
-      },
+      // {
+      //   id: "aside-item-closing-folder",
+      //   name: "Fechamentos Finan.",
+      //   href: handleRegexUrl('@hub:closing_folder.home', user?.token),
+      //   icon: <MyFinanceIcon w={22} h={22} />,
+      //   disabled: !user?.permitions_slug || !user.permitions_slug.some((permission) => permission === PossiblePermissions.FINANCIAL_CLOSINGS) ,
+      // },
       {
         id: 'aside-item-notification',
         name: 'Notificações',
@@ -216,7 +216,7 @@ export const getAsideItems = ({
         icon: <SupportIcon w={22} h={22} />
       },
     ];
-
+  } else if(module_name === "Admin Panel"){
     if (user && user.permitions_slug) {
       if (user.permitions_slug.includes(PossiblePermissions.ADMIN)) defaultAsideItems.push(...[
         {
@@ -291,149 +291,148 @@ export const getAsideItems = ({
         ]
       })
     }
-  } else
-    if (module_name) {
-      if(module_name === 'System Architect') defaultAsideItems = [
-        {
-          id: 'aside-item-isac',
-          name: 'ISAC',
-          icon: <FlowIcon w={22} h={22}/>,
-          disabled: !user?.permitions_slug?.includes(
-            PossiblePermissions.ISAC
+  } else if (module_name) {
+    if(module_name === 'System Architect') defaultAsideItems = [
+      {
+        id: 'aside-item-isac',
+        name: 'ISAC',
+        icon: <FlowIcon w={22} h={22}/>,
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.ISAC
+        ),
+        items: [...(user?.permitions_slug?.includes(
+          PossiblePermissions.ISAC
+        ) ? [
+          {
+            id: 'aside-subitem-workflows',
+            name: 'Workflows',
+            href: handleRegexUrl('@isac:workflow.home', user?.token),
+          }, 
+        ] : []), ...(publishedFlows ? publishedFlows.map((flow) => ({
+          id: flow._id,
+          href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
+          icon: (
+            <IconByTheme theme={flow.theme}>
+              <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0, 2)}</span>
+            </IconByTheme>
           ),
-          items: [...(user?.permitions_slug?.includes(
-            PossiblePermissions.ISAC
-          ) ? [
+          name: flow.title,
+        })) : [])]
+      }, {
+        id: 'aside-templates',
+        name: 'Modelos',
+        icon: <EnvelopeIcon w={22} h={22}/>,
+        href: handleRegexUrl('@isac:template', user?.token),
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.ISAC
+        ),
+      },{
+        id: 'aside-chatbot',
+        name: 'Chatbot',
+        icon: <ChatIcon w={22} h={22}/>,
+        href: handleRegexUrl('@isac:chatbot.home', user?.token),
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.ISAC
+        ),
+      }
+    ];
+    else if (['Co-Pilot Dashboard', 'Report'].includes(module_name)) defaultAsideItems = [
+      {    // VISIO
+        id: 'vision',
+        href: '#',
+        name: 'Vision',
+        icon: <CompassIcon w={22} h={22} />,
+        disabled: true
+      }, { // REPORT
+        id: 'report',
+        href: handleRegexUrl('@isac:report.home', user?.token),
+        name: 'Report',
+        icon: <TableIcon w={22} h={22} />,
+        disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
+      }, { // DASHBOARD
+        id: 'aside-item-dashboard',
+        name: 'Dashboard',
+        icon: <PieChartIcon w={22} h={22} />,
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.DASH
+        ),
+        items: user?.permitions_slug?.includes(
+          PossiblePermissions.DASH
+        ) ? [
+          {
+            id: 'aside-subitem-dashboard-all',
+            name: 'Todas',
+            href: handleRegexUrl('@hub:dashboard.home', user.token),
+          },
+          ...(canManagement ? [
             {
-              id: 'aside-subitem-workflows',
-              name: 'Workflows',
-              href: handleRegexUrl('@isac:workflow.home', user?.token),
-            }, 
-          ] : []), ...(publishedFlows ? publishedFlows.map((flow) => ({
-            id: flow._id,
-            href: handleRegexUrl(`@isac:workflow.exec(${flow._id})` as any, user?.token),
-            icon: (
-              <IconByTheme theme={flow.theme}>
-                <span className="uppercase text-white font-semibold text-xl">{(flow.title ?? '').slice(0, 2)}</span>
-              </IconByTheme>
-            ),
-            name: flow.title,
-          })) : [])]
-        }, {
-          id: 'aside-templates',
-          name: 'Modelos',
-          icon: <EnvelopeIcon w={22} h={22}/>,
-          href: handleRegexUrl('@isac:template', user?.token),
-          disabled: !user?.permitions_slug?.includes(
-            PossiblePermissions.ISAC
-          ),
-        },{
-          id: 'aside-chatbot',
-          name: 'Chatbot',
-          icon: <ChatIcon w={22} h={22}/>,
-          href: handleRegexUrl('@isac:chatbot.home', user?.token),
-          disabled: !user?.permitions_slug?.includes(
-            PossiblePermissions.ISAC
-          ),
-        }
-      ];
-      else if (['Co-Pilot Dashboard', 'Report'].includes(module_name)) defaultAsideItems = [
-        {    // VISIO
-          id: 'vision',
-          href: '#',
-          name: 'Vision',
-          icon: <CompassIcon w={22} h={22} />,
-          disabled: true
-        }, { // REPORT
-          id: 'report',
-          href: handleRegexUrl('@isac:report.home', user?.token),
-          name: 'Report',
-          icon: <TableIcon w={22} h={22} />,
-          disabled: !user?.permitions_slug?.includes(PossiblePermissions.REPORT)
-        }, { // DASHBOARD
-          id: 'aside-item-dashboard',
-          name: 'Dashboard',
-          icon: <PieChartIcon w={22} h={22} />,
-          disabled: !user?.permitions_slug?.includes(
-            PossiblePermissions.DASH
-          ),
-          items: user?.permitions_slug?.includes(
-            PossiblePermissions.DASH
-          ) ? [
-            {
-              id: 'aside-subitem-dashboard-all',
-              name: 'Todas',
-              href: handleRegexUrl('@hub:dashboard.home', user.token),
-            },
-            ...(canManagement ? [
-              {
-                id: 'aside-subitem-dashboard-manage',
-                name: 'Gerenciar',
-                href: handleRegexUrl('@hub:admin_panel.dashboards', user.token)
-              }
-            ] : []),
-            ...(dashboards ? dashboards.map((dash) => ({
-              id: `aside-subitem-dashboard-${dash.id}`,
-              name: dash.title,
-              href: dash.link.includes('@isac:workflow.exec') ? handleRegexUrl(dash.link as any, user.token) : handleRegexUrl(
-                `@hub:dashboard.show(${dash.slug})` as any, user.token
-              )
-            })) : [])
-          ] : undefined,
-        },
-      ]
-      else if (module_name === "Ivrim Flows") defaultAsideItems = [
-        {
-          id: "aside-item-compras-e-contas-a-pagar",
-          name: "Contas a Pagar",
-          items: [
-            {
-              id: "aside-subitem-compras-e-contas-a-pagar",
-              name: "Contas a Pagar",
-              href: handleRegexUrl('@hub:old_cap.home', user?.token),
-              disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR),
-            },
-            {
-              id: "aside-subitem-alertas",
-              name: "Alertas",
-              href: handleRegexUrl('@hub:old_cap.alert', user?.token),
-            },
-            {
-              id: "aside-subitem-modelos-de-documentos",
-              name: "Modelos de Documentos",
-              href: handleRegexUrl('@hub:old_cap.models', user?.token),
-            },
-          ],
-        },
-      ];
-      else if (module_name === "Ivrim Conciliation") defaultAsideItems = [
-        {
-          id: "aside-item-contas-a-receber-gerenciamento",
-          icon: <UploadIcon w={22} h={22} />,
-          name: "Gerenciamento",
-          href: handleRegexUrl('@hub:reconciliation.manage', user?.token),
-          disabled: !user?.permitions_slug?.includes(
-            PossiblePermissions.FINANCEIRO
-          ),
-        }, {
-          id: "aside-item-contas-a-receber-conciliacao",
-          icon: <FileIcon w={22} h={22} />,
-          name: "Em Conciliação",
-          href: handleRegexUrl('@hub:reconciliation.home', user?.token),
-          disabled: !user?.permitions_slug?.includes(
-            PossiblePermissions.FINANCEIRO
-          ),
-        }, {
-          id: "aside-item-contas-a-receber-conciliados",
-          icon: <SquareCheckedIcon w={22} h={22} />,
-          name: "Conciliados",
-          href: handleRegexUrl('@hub:reconciliation.history', user?.token),
-          disabled: !user?.permitions_slug?.includes(
-            PossiblePermissions.FINANCEIRO
-          ),
-        }
-      ];
-    }
+              id: 'aside-subitem-dashboard-manage',
+              name: 'Gerenciar',
+              href: handleRegexUrl('@hub:admin_panel.dashboards', user.token)
+            }
+          ] : []),
+          ...(dashboards ? dashboards.map((dash) => ({
+            id: `aside-subitem-dashboard-${dash.id}`,
+            name: dash.title,
+            href: dash.link.includes('@isac:workflow.exec') ? handleRegexUrl(dash.link as any, user.token) : handleRegexUrl(
+              `@hub:dashboard.show(${dash.slug})` as any, user.token
+            )
+          })) : [])
+        ] : undefined,
+      },
+    ]
+    else if (module_name === "Ivrim Flows") defaultAsideItems = [
+      {
+        id: "aside-item-compras-e-contas-a-pagar",
+        name: "Contas a Pagar",
+        items: [
+          {
+            id: "aside-subitem-compras-e-contas-a-pagar",
+            name: "Contas a Pagar",
+            href: handleRegexUrl('@hub:old_cap.home', user?.token),
+            disabled: !user?.permitions_slug?.includes(PossiblePermissions.CONTAS_A_PAGAR),
+          },
+          {
+            id: "aside-subitem-alertas",
+            name: "Alertas",
+            href: handleRegexUrl('@hub:old_cap.alert', user?.token),
+          },
+          {
+            id: "aside-subitem-modelos-de-documentos",
+            name: "Modelos de Documentos",
+            href: handleRegexUrl('@hub:old_cap.models', user?.token),
+          },
+        ],
+      },
+    ];
+    else if (module_name === "Ivrim Conciliation") defaultAsideItems = [
+      {
+        id: "aside-item-contas-a-receber-gerenciamento",
+        icon: <UploadIcon w={22} h={22} />,
+        name: "Gerenciamento",
+        href: handleRegexUrl('@hub:reconciliation.manage', user?.token),
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.FINANCEIRO
+        ),
+      }, {
+        id: "aside-item-contas-a-receber-conciliacao",
+        icon: <FileIcon w={22} h={22} />,
+        name: "Em Conciliação",
+        href: handleRegexUrl('@hub:reconciliation.home', user?.token),
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.FINANCEIRO
+        ),
+      }, {
+        id: "aside-item-contas-a-receber-conciliados",
+        icon: <SquareCheckedIcon w={22} h={22} />,
+        name: "Conciliados",
+        href: handleRegexUrl('@hub:reconciliation.history', user?.token),
+        disabled: !user?.permitions_slug?.includes(
+          PossiblePermissions.FINANCEIRO
+        ),
+      }
+    ];
+  }
 
   return defaultAsideItems;
 };
