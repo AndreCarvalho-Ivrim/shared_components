@@ -13,7 +13,7 @@ export const getUrls = (environment: 'front' | 'back' ) => {
     }catch(e){ }
     try{
       // @ts-ignore
-      const PORTAL = import.meta.env.VITE_PORTAL_URL;
+      const PORTAL = ''; // import.meta.env.VITE_PORTAL_URL; -- PORTAL ESTÁ SENDO DESCONTINUADO
       urls.portal = PORTAL!;
     }catch(e){ }
     
