@@ -99,7 +99,6 @@ export const ModalEnterprise = ({ client, clients, handleChangeClient, modalIsOp
             </>
           ) : '..'}
         </div>
-        <ChevronDownIcon/>
       </button>
       <Modal
         isOpen={modalIsOpen}

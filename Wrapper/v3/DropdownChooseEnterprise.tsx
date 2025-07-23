@@ -100,7 +100,6 @@ export const DropdownChooseEnterprise = () => {
               </>
             ) : '..'}
           </div>
-          <ChevronDownIcon/>
         </div>
       }
     >
