@@ -40,7 +40,7 @@ export const Wrapper = ({ children, activeItem, breadcrumbs }:WrapperProps) => {
           </div>
         )}
 
-        <div className="flex items-center gap-4 text-white -mr-4">
+        <div className="flex items-center gap-4 text-white">
           <DropdownChooseEnterprise />
         </div>
       </header>
@@ -52,9 +52,9 @@ export const Wrapper = ({ children, activeItem, breadcrumbs }:WrapperProps) => {
             ]}/>
           </div>
         )}
-      <div className="flex-1 flex flex-col sm:flex-row p-8 pr-1 pt-0 h-full min-h-0">
+      <div className="flex-1 flex flex-col sm:flex-row p-8 pr-1 max-sm:pl-1 pt-0 h-full min-h-0">
         <MenuSidebar activeItem={activeItem}/>
-        <div className="flex-1 h-full overflow-auto pr-7 pb-8">
+        <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8">
           {children}
         </div>
         <div className="absolute bottom-8 right-4 flex flex-col justify-between z-10">
