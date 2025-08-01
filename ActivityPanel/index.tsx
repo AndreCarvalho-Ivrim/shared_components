@@ -91,7 +91,7 @@ export const ActivityPanel = () => {
     <div className="h-full bg-gray-50/20 backdrop:blur-lg rounded-xl overflow-hidden flex flex-col flex-1">
       <strong className="bg-gray-50/40 block w-full text-xs text-center uppercase font-semibold py-1 px-2">Painel de Atividades</strong>
   
-      <div className="overflow-x-auto min-h-[15rem] flex-1">
+      <div className="overflow-x-auto flex-1">
         {activities.length === 0 ? (
           <div className="px-3 py-10 text-center text-sm text-gray-200 h-full min-h-[8rem] flex items-center justify-center">
             Não há atividades<br/>

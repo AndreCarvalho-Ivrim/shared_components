@@ -10,25 +10,28 @@ export const CardNotification = () => {
     <div className="h-full bg-gray-50/20 backdrop:blur-lg rounded-xl overflow-hidden flex flex-col flex-1">
       <strong className="bg-gray-50/40 block w-full text-xs text-center uppercase font-semibold py-1 px-2">Notificações</strong>
 
-      <div className="flex flex-col gap-1 flex-1">
+      <div className="flex flex-col gap-1 flex-1 overflow-auto">
         {notifications ? (
           <>
             {notifications.length > 0 ? notifications.map((notification) => (
               <div
                 className={`
-                  ${shortclass.dropdownItemTranslucent}
-                  !flex flex-col overflow-hidden
-                  !text-primary-900
+                  py-2 px-3
+                  text-sm font-semibold text-start
+                  enabled:hover:bg-gray-100 enabled:hover:shadow enabled:cursor-pointer
+                  disabled:opacity-70
+                  flex flex-col overflow-hidden
+                  text-primary-900
                   relative
                   hover:bg-gray-900/5
                 `}
                 key={notification.id}
               >
-                <div className="flex items-center gap-2 max-w-full">
+                <div className="flex items-center gap-1 max-w-full text-gray-100">
                   <NotificationIconOrDefaultByType notification={notification} props={{ w: 18, h: 18 }}/>
-                  <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{notification.title}</strong>
+                  <strong className="text-sm max-w-[calc(100%-2rem)] truncate font-semibold">{notification.title}</strong>
                 </div>
-                <span className="text-gray-400 text-xs font-normal">
+                <span className="text-gray-200 text-xs font-normal">
                   {notification.description.slice(0, 80) + (notification.description.length > 80 ? '...':'')}
                 </span>
 
@@ -40,7 +43,7 @@ export const CardNotification = () => {
                   />
                   <button
                     type="button"
-                    className="bg-gray-50/50 text-gray-700 border-none outline-none ring-0 px-3"
+                    className="bg-gray-50/25 text-gray-700 border-none outline-none ring-0 px-3"
                     onClick={() => handleMarkAsViewed(notification.id)}
                   >
                     <EnvelopeOpenIcon w={20} h={20}/>
