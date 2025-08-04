@@ -9,11 +9,12 @@ import Folder from "../../shared-components/assets/folder-user.svg";
 import FolderFinance from "../../shared-components/assets/finance-folder.svg";
 import Mail from "../../shared-components/assets/mail.svg";
 import profileCircle from "../assets/icon _profile circled_.svg";
-import settings from "../assets/icon _settings_.svg";
 import isac from "../assets/IconsGeo_Prancheta 2.svg"
 import vision from "../assets/IconsGeo_Prancheta 3.svg"
-import report from "../assets/IconsGeo_Prancheta 1.svg"
-import dashboard from "../assets/IconsGeo_Prancheta 4.svg"
+import report from "../assets/icon_article.png"
+import dashboard from "../assets/icon_bar_chart.png"
+import settings from "../assets/settings.png"
+import { ConteinerFlows} from "./MenuConteiner";
 
 import { AvailableWorkflowThemeType, PossiblePermissions, WorkflowType } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
@@ -22,12 +23,14 @@ import { useNavigate } from "react-router-dom";
 import { DropdownChooseEnterprise } from "../Wrapper/v3/DropdownChooseEnterprise";
 import { Fragment, useEffect, useState } from "react";
 import { getPublishedFlows } from "../services/workflow";
-import { CloseIcon, FilterIcon, LockIcon, PinIcon, RefreshIcon } from "../utils/icons";
+import { CloseIcon, LockIcon, PinIcon, RefreshIcon, UserIcon, FilterIcon } from "../utils/icons";
 import { getDomain, handleRegexUrl } from "../../shared-types/utils/routes";
 import { BellNotification } from "../Wrapper/v3/Notification/BellNotification";
 import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
-import { IconByTheme } from "../Wrapper";
+import { IconByTheme, Wrapper } from "../Wrapper";
 import { ActivityPanel } from "../ActivityPanel";
+import { NotificationPanel } from "../NotificationPanel";
+import { flow } from "lodash";
 import { Tooltip } from "flowbite-react";
 
 const clientsWithAccessToCAP = { };
@@ -74,7 +77,233 @@ export const redirectToApp = (
   if (url.substring(0, 4) === "http") window.location.href = url;
   else navigate(url);
 };
+
+
+
+export const Menu = () =>{
+  
+  const { toast } = useNotify();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const [inFixation, setInFixation] = useState(false);
+  const [isFixeds, setIsFixeds] = useState<string[]>([]);
+  const [workflows, setWorkflows] = useState<WorkflowType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => { loadWorkflows () }, [user, user?.token]);
+  useEffect(() => {
+    if(isLoading || workflows.length === 0 || isFixeds.length === 0) return;
+
+    setWorkflows(isFixeds.length > 0 ? workflows.sort((a,b) => {
+      const aIndex = isFixeds.indexOf(a._id.toString());
+      const bIndex = isFixeds.indexOf(b._id.toString());
+  
+      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+      else if (aIndex !== -1) return -1;
+      else if (bIndex !== -1) return 1;
+      else return 0;
+    }) : workflows)
+  },[isFixeds])
+
+  
+  function handleToggleFixed(flow_id: string){
+    setIsFixeds((prevState) => {
+      const newState = prevState.includes(flow_id) ? prevState.filter(
+        (state) => state !== flow_id
+      ):[...prevState, flow_id]
+
+      if(user?.current_client) localStorage.setItem(
+        `isac@fixed:${user.current_client}`, newState.join(',')
+      );
+
+      return newState;
+    })
+  }
+  function getStorageFixeds(){
+    if(!user?.current_client) return [];
+
+    const storaged = localStorage.getItem(`isac@fixed:${user.current_client}`);
+    const fixeds = typeof storaged === 'string' ? storaged.split(',').filter(
+      (st) => !!st
+    ): [];
+
+    setIsFixeds(fixeds);
+    return fixeds;
+  }
+  async function loadWorkflows(){
+    if (!user || isLoading) return;
+
+    setIsLoading(true);
+    await (async () => {
+      const res = await getPublishedFlows(user.token);
+      if (!res.result) {
+        toast.error(res.response);
+        return;
+      }
+  
+      if (!res.data) return;
+  
+      const fixeds = getStorageFixeds();
+  
+      const availableFlows = res.data.filter(wf => !wf.hidden);
+      setWorkflows(fixeds.length > 0 ? availableFlows.sort((a,b) => {
+        const aIndex = fixeds.indexOf(a._id.toString());
+        const bIndex = fixeds.indexOf(b._id.toString());
+    
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+        else if (aIndex !== -1) return -1;
+        else if (bIndex !== -1) return 1;
+        else return 0;
+      }) : availableFlows)
+    })();
+    setIsLoading(false);
+  }
+
+  return (
+    <Wrapper
+      asideActive={['Home']}
+      module_name="ISAC 3.0"
+      omit={['breadcrumbs']}
+      breadcrumbs={[{name: "ISAC 3.0", href:'#',subtitle:"Ivrim System Architect"}]}
+      
+    >
+      <div className="flex flex-col">
+        <div className="
+          flex-col md:flex-row flex-wrap flex justify-start
+          lg:justify-evenly pb-5
+          w-full sm:max-w-[616px] lg:max-w-[95%] xl:max-w-[1580px] 
+          h-full 
+          mx-auto gap-15
+          overflow-x
+        ">
+          
+          
+          <div className="flex flex-col flex-1 lg:flex-none  sm:max-w-[22rem]  h-full">
+
+            
+            <ConteinerFlows
+              theme="Financeiro"
+              title="IFI - Ivrim Financial Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflow => ['Cobrança', "Financeiro"].includes(workflow.theme))}
+            />
+            <ConteinerFlows
+              theme="Supply"
+              title="ISI - Ivrim Supply Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflow => workflow.theme === 'Supply')}   
+            />
+            <ConteinerFlows
+              theme="Field Management"
+              title="IFM - Ivrim Field Management"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflow => workflow.theme === 'Field Management' && workflow.template !== 'IFM Agendamento')}
+            />
+          </div>
+
+          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[5rem] h-full">            
+            <ConteinerFlows
+              theme="Administrativo"
+              title="IAS - Ivrim ADM. Solutios"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflow => workflow.theme == 'Gestão')}
+            />
+            <ConteinerFlows
+              theme="Comercial"
+              title="ICI - Ivrim Commercial Inteligence"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflow => workflow.theme === 'Comercial')}
+            />
+            <ConteinerFlows
+              theme="Administrativo"
+              title="IM - Ivrim Messaging"
+              handleToggleFixed={handleToggleFixed}
+              inFixation={inFixation}
+              isFixeds={isFixeds}
+              workflows={workflows.filter(workflow => workflow.template === 'IFM Agendamento')}          
+            />
+          </div>
+
+          <div className="flex flex-col flex-1 lg:flex-none lg:min-w-[22rem]">
+            <ActivityPanel/>
+            <NotificationPanel/>
+          </div>
+        </div>
+
+        <footer className="mt-auto d-flex items-center justify-center text-center py-4  ">
+          <p className="text-gray-600 text-sm">Ivrim {new Date().getUTCFullYear()} © Todos os direitos reservados</p>
+        </footer>
+      </div>
+    </Wrapper>
+  );
+};
+
+export const SideMenu = () =>{
+  const { user } = useAuth();
+  const { toast } = useNotify();
+  const navigate = useNavigate();
+ 
+
+  return(
+
+      <div className=" rounded-lg border border-gray-300 bg-[#4B92FF] backdrop-blur-[10px] h-full ">
+      
+        <button
+          className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@hub:profile.home', user?.token) }, toast, navigate)}
+        >
+          <img src={profileCircle} alt="Icone de usuário" width={50} height={50} className="pt-2 object-center" />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Usuário</span>
+        </button>
+
+        <button 
+          className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@hub:dashboard.home', user?.token) }, toast, navigate)}
+        >
+          <img src= {dashboard} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
+        </button>
+
+        <button 
+          className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@isac:report.home', user?.token) }, toast, navigate)}
+        >
+          
+          <img src= {report} alt="Icone do Report" width={50} height={50} className="pt-2 object-center"  />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Report</span>
+        </button>   
+
+        <button 
+          className=" m-5 h-50 rounded-md flex flex-col  absolute bottom-0"
+          onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
+        >
+          
+          <img src= {settings} alt="Icone de Settings" width={50} height={50} className="pt-2 object-bottom"  />
+          <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Settings</span>
+        </button> 
+
+        </div>
+
+
+  );
+};
+
+
 export const MenuSlider = () => {
+
+
+
   const { toast } = useNotify();
   const { user, client } = useAuth();
   const navigate = useNavigate();
@@ -259,21 +488,21 @@ export const MenuSlider = () => {
   )
 
   return (
-    <div className="w-screen h-screen bg-background overflow-auto flex flex-col">
+    <div className="w-screen h-screen bg-background overflow-auto flex flex-col"> 
       <div className={style.header}>
-        <div className={style.header__logo}>
-          <img src={logo} alt="Ivrim Consulting"/>
+        <div className={style.header__logo}> 
+          <img src={logo} alt="Ivrim Consulting"/> 
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4"> 
           <BellNotification />
           <DropdownChooseEnterprise />
-        </div>
+        </div> 
       </div>
 
       <div className="
         flex-row flex-wrap flex justify-start
         lg:justify-evenly px-6
-        w-full sm:max-w-[616px] lg:max-w-[95%] xl:max-w-[1580px] 
+        w-full sm:max-w-[900px] lg:max-w-[95%] xl:max-w-[1580px] 
         mx-auto gap-2
       ">
         <div>
@@ -555,6 +784,14 @@ export const MenuSlider = () => {
 
           <ActivityPanel/>
         </div>
+
+       
+        
+
+      
+
+        
+
       </div>
 
       <footer className="mt-auto d-flex items-center justify-center text-center py-4">

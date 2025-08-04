@@ -1365,9 +1365,10 @@ export const PinIcon = (props: IconProps) => (
 export const WorldIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     viewBox="0 0 24 24"
-    className={props.className} style={{ fill: props.color ?? 'currentColor' }}
+    style={{ fill: props.color ?? 'currentColor' }}
   >
     <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM4 12c0-.899.156-1.762.431-2.569L6 11l2 2v2l2 2 1 1v1.931C7.061 19.436 4 16.072 4 12zm14.33 4.873C17.677 16.347 16.687 16 16 16v-1a2 2 0 0 0-2-2h-4v-3a2 2 0 0 0 2-2V7h1a2 2 0 0 0 2-2v-.411C17.928 5.778 20 8.65 20 12a7.947 7.947 0 0 1-1.67 4.873z"></path>
   </svg>
@@ -1385,9 +1386,10 @@ export const BullseyeIcon = (props: IconProps) => (
 export const BinocularsIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     viewBox="0 0 24 24"
-    className={props.className} style={{ fill: props.color ?? 'currentColor' }}
+    style={{ fill: props.color ?? 'currentColor' }}
   >
     <path d="M19.447 5.345A3.27 3.27 0 0 0 16.29 3a3.293 3.293 0 0 0-3.277 3h-2.025a3.297 3.297 0 0 0-3.284-3 3.268 3.268 0 0 0-3.151 2.345l-2.511 8.368A1.027 1.027 0 0 0 2 14v1a5.006 5.006 0 0 0 5.001 5 5.003 5.003 0 0 0 4.576-3h.846a5.003 5.003 0 0 0 4.576 3A5.006 5.006 0 0 0 22 14.999V14c0-.098-.015-.194-.042-.287l-2.511-8.368zM7.001 18A3.005 3.005 0 0 1 4 15c0-.076.017-.147.022-.222A2.995 2.995 0 0 1 7 12a3 3 0 0 1 3 3v.009A3.004 3.004 0 0 1 7.001 18zm9.998 0A3.004 3.004 0 0 1 14 15.009V15a3 3 0 0 1 6-.001A3.005 3.005 0 0 1 16.999 18z"></path>
   </svg>
@@ -1395,17 +1397,19 @@ export const BinocularsIcon = (props: IconProps) => (
 export const SortIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
     width={props.w ?? "24"} height={props.h ?? "24"}
     viewBox="0 0 24 24"
-    className={props.className} style={{ fill: props.color ?? 'currentColor' }}
+    style={{ fill: props.color ?? 'currentColor' }}
   ><path d="M7 20h2V8h3L8 4 4 8h3zm13-4h-3V4h-2v12h-3l4 4z"></path></svg>
 )
 export const WhatsappIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
     viewBox="0 0 24 24"
     width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className} style={{ fill: props.color ?? 'currentColor' }}
+    style={{ fill: props.color ?? 'currentColor' }}
   >
     <path fillRule="evenodd" clipRule="evenodd" d="M18.403 5.633A8.919 8.919 0 0 0 12.053 3c-4.948 0-8.976 4.027-8.978 8.977 0 1.582.413 3.126 1.198 4.488L3 21.116l4.759-1.249a8.981 8.981 0 0 0 4.29 1.093h.004c4.947 0 8.975-4.027 8.977-8.977a8.926 8.926 0 0 0-2.627-6.35m-6.35 13.812h-.003a7.446 7.446 0 0 1-3.798-1.041l-.272-.162-2.824.741.753-2.753-.177-.282a7.448 7.448 0 0 1-1.141-3.971c.002-4.114 3.349-7.461 7.465-7.461a7.413 7.413 0 0 1 5.275 2.188 7.42 7.42 0 0 1 2.183 5.279c-.002 4.114-3.349 7.462-7.461 7.462m4.093-5.589c-.225-.113-1.327-.655-1.533-.73-.205-.075-.354-.112-.504.112s-.58.729-.711.879-.262.168-.486.056-.947-.349-1.804-1.113c-.667-.595-1.117-1.329-1.248-1.554s-.014-.346.099-.458c.101-.1.224-.262.336-.393.112-.131.149-.224.224-.374s.038-.281-.019-.393c-.056-.113-.505-1.217-.692-1.666-.181-.435-.366-.377-.504-.383a9.65 9.65 0 0 0-.429-.008.826.826 0 0 0-.599.28c-.206.225-.785.767-.785 1.871s.804 2.171.916 2.321c.112.15 1.582 2.415 3.832 3.387.536.231.954.369 1.279.473.537.171 1.026.146 1.413.089.431-.064 1.327-.542 1.514-1.066.187-.524.187-.973.131-1.067-.056-.094-.207-.151-.43-.263"></path>
   </svg>
@@ -1413,9 +1417,10 @@ export const WhatsappIcon = (props: IconProps) => (
 export const PhoneOffIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
     viewBox="0 0 24 24"
     width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className} style={{ fill: props.color ?? 'currentColor' }}
+    style={{ fill: props.color ?? 'currentColor' }}
   >
     <path d="M10.09 12.5a8.92 8.92 0 0 1-1-2.2l1.59-1.59a1 1 0 0 0 0-1.42l-4-4a1 1 0 0 0-1.41 0L2.59 6A2 2 0 0 0 2 7.44 15.44 15.44 0 0 0 5.62 17L2.3 20.29l1.41 1.42 18-18-1.41-1.42zM7 15.55a13.36 13.36 0 0 1-3-8.13l2-2L8.59 8 7.3 9.29a1 1 0 0 0-.27.92 11 11 0 0 0 1.62 3.73zm9.71-2.26a1 1 0 0 0-1.41 0l-1.6 1.6-.34-.12-1.56 1.55a12.06 12.06 0 0 0 2 .66 1 1 0 0 0 .91-.27l1.3-1.3L18.59 18l-2 2A13.61 13.61 0 0 1 10 18.1l-1.43 1.45a15.63 15.63 0 0 0 8 2.45 2 2 0 0 0 1.43-.58l2.71-2.71a1 1 0 0 0 0-1.42z"></path>
   </svg>
@@ -1423,13 +1428,51 @@ export const PhoneOffIcon = (props: IconProps) => (
 export const WarningIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg" 
+    className={props.className}
     viewBox="0 0 24 24" 
     width={props.w ?? "24"} height={props.h ?? "24"}
-    className={props.className} style={{ fill: props.color ?? 'currentColor' }}
+    style={{ fill: props.color ?? 'currentColor' }}
   >
     <path d="M11.001 10h2v5h-2zM11 16h2v2h-2z"></path><path d="M13.768 4.2C13.42 3.545 12.742 3.138 12 3.138s-1.42.407-1.768 1.063L2.894 18.064a1.986 1.986 0 0 0 .054 1.968A1.984 1.984 0 0 0 4.661 21h14.678c.708 0 1.349-.362 1.714-.968a1.989 1.989 0 0 0 .054-1.968L13.768 4.2zM4.661 19 12 5.137 19.344 19H4.661z"></path>
   </svg>
 )
+export const CastEducationIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    viewBox="0 -960 960 960" 
+    fill={props.color ?? 'currentColor'}
+  >
+    <path d="m576-480 144-83-144-82-144 82 144 83Zm0 96 103-59v-58l-103 58-103-58v58l103 59Zm-96-96Zm312 288H552q0-18-1.5-36t-4.5-36h246v-432H168v54q-18-3-36-4.5T96-648v-48q0-29.7 21.15-50.85Q138.3-768 168-768h624q29.7 0 50.85 21.16Q864-725.68 864-695.96v432.24Q864-234 842.85-213T792-192Zm-696 0v-96q40 0 68 28t28 68H96Zm168 0q0-70-49.14-119T96-360v-72q100 0 170 69.86 70 69.85 70 170.14h-72Zm144 0q0-64.81-24.5-121.4-24.5-56.6-67-99.1-42.5-42.5-99.1-67Q160.81-504 96-504v-72q80 0 149.68 30.05 69.69 30.05 121.95 82.32 52.27 52.26 82.32 121.95Q480-272 480-192h-72Z"/>
+  </svg>
+)
+export const EducationIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    viewBox="0 -960 960 960" 
+    fill={props.color ?? 'currentColor'}
+  >
+      <path d="M480-120 200-272v-240L40-600l440-240 440 240v320h-80v-276l-80 44v240L480-120Zm0-332 274-148-274-148-274 148 274 148Zm0 241 200-108v-151L480-360 280-470v151l200 108Zm0-241Zm0 90Zm0 0Z"/>
+  </svg>
+
+)
+export const HelpIcon = (props: IconProps) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    className={props.className}
+    width="24" height="24"
+    viewBox="0 0 24 24" 
+    style={{ fill: props.color ?? 'currentColor' }}
+    >
+      <path d="M12 6a3.939 3.939 0 0 0-3.934 3.934h2C10.066 8.867 10.934 8 12 8s1.934.867 1.934 1.934c0 .598-.481 1.032-1.216 1.626a9.208 9.208 0 0 0-.691.599c-.998.997-1.027 2.056-1.027 2.174V15h2l-.001-.633c.001-.016.033-.386.441-.793.15-.15.339-.3.535-.458.779-.631 1.958-1.584 1.958-3.182A3.937 3.937 0 0 0 12 6zm-1 10h2v2h-2z">
+      </path>
+      <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z">
+      </path>
+  </svg>
+);
 export const CalendarCheckIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1546,6 +1589,7 @@ export const ListBulletIcon = (props: IconProps) => (
   </svg>
 )
 //#endregion COMPONENTS
+
 //#region LIST AVAILABLE ICONS
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
   { component: (props?: IconProps) => <ChevronDownIcon {...props}/>,     title: 'ChevronDownIcon'                         },
@@ -1663,9 +1707,12 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <SendIcon {...props}/>,             title: 'SendIcon'                                },
   { component: (props?: IconProps) => <ClockIcon {...props}/>,            title: 'ClockIcon'                               },
   { component: (props?: IconProps) => <ListBulletIcon {...props}/>,       title: 'ListBulletIcon'                          },
-  
+  { component: (props?: IconProps) => <CastEducationIcon {...props}/>, title: 'CastEducationIcon' },
+  { component: (props?: IconProps) => <EducationIcon {...props}/>, title: 'EducationIcon' },
+  { component: (props?: IconProps) => <EducationIcon {...props}/>, title: 'HelpIcon' }
 ];
 //#endregion LIST AVAILABLE ICONS
+
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
   const findedIcon = listAvailableIcons.find(icon => icon.title === title);
   if (findedIcon) return findedIcon.component(props);

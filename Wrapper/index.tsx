@@ -26,6 +26,11 @@ import {
   CartIconNew,
   SupplyIconNew,
   EnvelopeIcon,
+  HomeIcon,
+  DetalistIcon,
+  CastEducationIcon,
+  EducationIcon,
+  HelpIcon,
   ChatIcon,
   SupportIcon,
 } from "../utils/icons";
@@ -47,6 +52,7 @@ import { handleRegexUrl } from "../../shared-types/utils/routes";
 import { getDashboards } from "../services/dashboard";
 import { ivrimID } from "../services/conn/api";
 
+export type OmitWrapperType = 'button-help' | 'header' | 'aside' | 'header-title' | 'breadcrumbs';
 export interface WrapperProps {
   v?: 3;
   children?: ReactNode;
@@ -56,7 +62,7 @@ export interface WrapperProps {
   asideItems?: AsideItems[];
   footerItems?: FooterAsideProps["footerItems"];
   breadcrumbs?: HeaderBreadcrumbs[];
-  omit?: ("button-help" | "header" | "aside")[];
+  omit?: OmitWrapperType[];
 }
 export function Wrapper({
   module_name,
@@ -76,7 +82,7 @@ export function Wrapper({
   useEffect(() => {
     if (!user) return;
     if (module_name && [
-      "Co-Pilot Dashboard", "System Architect", "Report"
+      "Co-Pilot Dashboard", "System Architect", "Report", "ISAC 3.0"
     ].includes(module_name)) {
 
       loadPublishedFlows();
@@ -105,7 +111,7 @@ export function Wrapper({
   if (v === 3)
     return (
       <WrapperV3
-        breadcrumbs={[...[{ name: "Home", href: "/" }], ...(breadcrumbs ?? [])]}
+        breadcrumbs={[{ name: "Home", href: "/" }, ...(breadcrumbs ?? [])]}
         {...{
           asideItems: [
             ...getAsideItems({
@@ -164,6 +170,113 @@ export const getAsideItems = ({
   );
 
   let defaultAsideItems: AsideItems[] = [];
+
+if (module_name ==="ISAC 3.0"){
+
+defaultAsideItems = [
+        {
+          id: 'user',
+          name: 'Home',
+          href: "/",
+          icon: (
+            <HomeIcon w={22} h={22}/>
+          )
+        },  { // DASHBOARD
+          id: 'aside-item-dashboard',
+          name: 'Dashboard',
+          icon: <PieChartIcon w={22} h={22} />,
+          disabled: !user?.permitions_slug?.includes(
+            PossiblePermissions.DASH
+          ),
+          items: user?.permitions_slug?.includes(
+            PossiblePermissions.DASH
+          ) ? [
+            {
+              id: 'aside-subitem-dashboard-all',
+              name: 'Todas',
+              href: handleRegexUrl('@hub:dashboard.home', user.token),
+            },
+            ...(canManagement ? [
+              {
+                id: 'aside-subitem-dashboard-manage',
+                name: 'Gerenciar',
+                href: handleRegexUrl('@hub:admin_panel.dashboards', user.token)
+              }
+            ] : []),
+            ...(dashboards ? dashboards.map((dash) => ({
+              id: `aside-subitem-dashboard-${dash.id}`,
+              name: dash.title,
+              href: dash.link.includes('@isac:workflow.exec') ? handleRegexUrl(dash.link as any, user.token) : handleRegexUrl(
+                `@hub:dashboard.show(${dash.slug})` as any, user.token
+              )
+            })) : [])
+          ] : undefined,
+        },
+        
+         {
+          id: 'report',
+          name: 'Report',
+          href: handleRegexUrl('@isac:report.home', user?.token),
+          icon: (
+            <DetalistIcon  w={22} h={22} />
+          ),
+          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
+
+        }, {
+          id: 'folder',
+          name: 'Meus Docs.',
+          href: handleRegexUrl('@hub:gallery.home', user?.token),
+          icon: (
+           <MyDocsIcon  w={22} h={22} />
+          ),
+          disabled: !(user?.permitions_slug && user.permitions_slug.includes(PossiblePermissions.GESTAO))
+
+        },{
+          id: 'training center',
+          name: 'Treinamentos',
+          href: handleRegexUrl('@hub:training.home', user?.token),
+          icon: (
+           <EducationIcon  w={22} h={22} />
+          )
+        },{
+          id: 'Tech support',
+          name: 'Suporte',
+          href: handleRegexUrl('@hub:gallery.home', user?.token),
+          icon: (
+           <HelpIcon  w={22} h={22} />
+          ),
+        }
+
+        // <button 
+        //   className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+        //   onClick={() => redirectToApp({ url: handleRegexUrl('@hub:dashboard.home', user?.token) }, toast, navigate)}
+        // >
+        //   <img src= {dashbord} alt="Icone de Dashbord" width={50} height={50} className="pt-2 object-center"  />
+        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Dashbord</span>
+        // </button>
+
+        // <button 
+        //   className=" m-5 h-20 rounded-md flex flex-col justify-center items-center"
+        //   onClick={() => redirectToApp({ url: handleRegexUrl('@isac:report.home', user?.token) }, toast, navigate)}
+        // >
+          
+        //   <img src= {report} alt="Icone do Report" width={50} height={50} className="pt-2 object-center"  />
+        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Report</span>
+        // </button>   
+
+        // <button 
+        //   className=" m-5 h-50 rounded-md flex flex-col  absolute bottom-0"
+        //   onClick={() => redirectToApp({ url: handleRegexUrl('@hub:admin_panel.client', user?.token) }, toast, navigate)}
+        // >
+          
+        //   <img src= {settings} alt="Icone de Settings" width={50} height={50} className="pt-2 object-bottom"  />
+        //   <span className="text-xs text-white pb-1 pt-2 w-full truncate hover:whitespace-normal font-semibold">Settings</span>
+        // </button> 
+      ];
+
+}else
+
+
 
   if (module_name === "Configurações" || isAdmin) {
     defaultAsideItems = [
