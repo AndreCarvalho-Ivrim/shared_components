@@ -9,7 +9,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { FileList } from "./FileList";
 import { User, WorkflowConfigFilterRefType, WorkflowConfigFilterType } from "../../../shared-types";
 import { Modal } from "../../utils/Modal";
-import { ChevronDownIcon } from "../../utils/icons";
+import { ChevronDownIcon, SupportAltIcon } from "../../utils/icons";
 import moment from "moment";
 import { AvailableRegexUrls, getDomain, getSupportKeys, handleRegexUrl } from "../../../shared-types/utils/routes";
 import { CreatePublicPostDataBody, requestPublicGet, requestPublicPost } from "../../services/publicRoutes";
@@ -180,11 +180,13 @@ export const ButtonHelp = () => {
         type="button"
         className={`
           bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-white hover:bg-gradient-to-br
-          w-12 h-12 flex items-center justify-center rounded-full
+          w-11 h-11 flex items-center justify-center rounded-xl
           self-end font-semibold text-xl
         `}
         onClick={() => setIsOpen(true)}
-      >?</button>
+      >
+        <SupportAltIcon/>
+      </button>
 
       <Modal
         zIndex="z-50"
