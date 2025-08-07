@@ -98,7 +98,7 @@ export const Modal = ({
               options.size ? options.size : 'sm:w-full sm:max-w-lg'
             } ${options.classNames?.content ?? ''}`}>
               <div className={`rounded-lg bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 ${options.classNames?.dialog ?? ''}`}>
-                <div className="sm:flex sm:items-start">
+                <div className={options.type && options.type == 'danger' ? "sm:flex sm:items-start" : ""}>
                   {options.type && options.type == 'danger' ? <ModalIconDanger/> : <></>}
                   <div className={`mt-3 text-center sm:mt-0 ${ !!options.type ? 'sm:ml-4':'' } sm:text-left flex-1`}>
                     {options.title && (
