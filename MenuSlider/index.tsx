@@ -174,7 +174,10 @@ export const MenuSlider = () => {
        * https://url_dedicada.com.br (isac)
        */
       let url = isHub ? client.dedicated_server : client.dedicated_server.replace('://hub.','://');
-      if(window.location.origin !== url && !sessionStorage.getItem('isac@ignore-redirect-dedicated-server')){
+      if(window.location.origin !== url && (
+        !sessionStorage.getItem('isac@ignore-redirect-dedicated-server') &&
+        !localStorage.getItem('isac@ignore-redirect-dedicated-server')
+      )){
         dedicatedUrl = url;
       }
     }
