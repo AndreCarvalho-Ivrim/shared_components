@@ -21,7 +21,6 @@ import {
   TableIcon,
   PieChartIcon,
   CompassIcon,
-  MyFinanceIcon,
   GameIconNew,
   CartIconNew,
   SupplyIconNew,
@@ -225,15 +224,13 @@ export const getAsideItems = ({
           href: handleRegexUrl('@hub:admin_panel.client', user.token),
           disabled: !canAccessAdminPanel,
           icon: <CompanyIcon w="22" h="22" />,
-        },
-        {
+        }, {
           id: "aside-item-admin-users",
           name: "Admin Usuários",
           href: handleRegexUrl('@hub:admin_panel.users', user.token),
           disabled: !canAccessAdminPanel,
           icon: <UsersIcon w="22" h="22" />,
-        },
-        {
+        }, {
           id: "aside-item-admin-datas",
           name: "Admin Dados",
           icon: <ProjectIcon w="22" h="22" />,
@@ -276,16 +273,24 @@ export const getAsideItems = ({
           {
             id: 'aside-subitem-admin-hub-wf',
             name: 'Workflows',
+            icon: <FlowIcon w={22} h={22}/>,
             href: handleRegexUrl('@isac:admin_hub.workflows', user.token)
           }, ...(user.current_client === ivrimID ? [
             {
               id: "aside-subitem-admin-hub-companies",
               name: "Empresas",
+              icon: <CompanyIcon w="22" h="22" />,
               href: handleRegexUrl('@hub:admin_panel.companies', user.token),
             }, {
               id: "aside-subitem-admin-hub-users",
               name: "Usuários por Empresas",
+              icon: <UsersIcon w="22" h="22" />,
               href: handleRegexUrl('@hub:admin_panel.users_by_client', user.token)
+            }, {
+              id: "aside-subitem-admin-hub-docs",
+              name: "Documentos",
+              icon: <MyDocsIcon w={22} h={22} />,
+              href: handleRegexUrl('@hub:admin_panel.docs.home', user.token),
             }
           ]:[])
         ]

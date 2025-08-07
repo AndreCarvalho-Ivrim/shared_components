@@ -4,16 +4,17 @@ import logoIcon from "../../assets/ISAC_PB.png";
 import { DropdownChooseEnterprise } from "../v3/DropdownChooseEnterprise";
 import { MenuSidebar } from "../../../components/Menu/MenuSidebar";
 import { ButtonHelp } from "../v3/ButtonHelp";
-import { Header } from "../v3/Header";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { HeaderBreadcrumbs } from "../v3/Wrapper";
+import { AsideItems } from "../v3/Aside";
 
 interface WrapperProps{
+  asideSubItems?: AsideItems[],
   activeItem?: string[],
   breadcrumbs?: HeaderBreadcrumbs[]
   children: ReactNode
 }
-export const Wrapper = ({ children, activeItem, breadcrumbs }:WrapperProps) => {
+export const Wrapper = ({ children, activeItem, asideSubItems,breadcrumbs }:WrapperProps) => {
   return (
     <div
       className="w-screen h-screen flex flex-col"
@@ -53,7 +54,7 @@ export const Wrapper = ({ children, activeItem, breadcrumbs }:WrapperProps) => {
           </div>
         )}
       <div className="flex-1 flex flex-col sm:flex-row p-8 pr-1 max-sm:pl-1 pt-0 h-full min-h-0">
-        <MenuSidebar activeItem={activeItem}/>
+        <MenuSidebar activeItem={activeItem} asideSubItems={asideSubItems}/>
         <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8">
           {children}
         </div>
