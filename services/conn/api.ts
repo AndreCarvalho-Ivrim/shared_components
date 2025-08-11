@@ -6,29 +6,11 @@ import { handleRegexUrl } from "../../../shared-types/utils/routes";
 export const getUrls = (environment: 'front' | 'back' ) => {
   if(environment === 'front'){
     let urls = { portal: '', wf: '' }
-    try{
-      // @ts-ignore
-      const WORKFLOW_MODULE = process.env.REACT_APP_WORKFLOW_MODULAR;
-      urls.wf = WORKFLOW_MODULE!;
-    }catch(e){ }
-    try{
-      // @ts-ignore
-      const PORTAL = ''; // import.meta.env.VITE_PORTAL_URL; -- PORTAL ESTÁ SENDO DESCONTINUADO
-      urls.portal = PORTAL!;
-    }catch(e){ }
-    
     return urls
   }
   if(environment === 'back'){
     let urls = { portal: '', wf: '' }
-    try{
-      // @ts-ignore
-      const PORTAL = process.env.REACT_APP_BASE_URL;
-      // @ts-ignore
-      const WF = process.env.REACT_APP_API_WF_URL;
-      urls.wf = WF!;
-      urls.portal = PORTAL!;
-    }catch(e){ }
+    
     try{
       // @ts-ignore
       const WF = import.meta.env.VITE_BASE_URL;
