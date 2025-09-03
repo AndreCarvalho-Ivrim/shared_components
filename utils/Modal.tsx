@@ -40,7 +40,8 @@ export interface ModalOptionsType{
     footer?: string
   },
   bg?: { panel?: string, dialog?: string },
-  disable_overflow_hidden?: boolean
+  disable_overflow_hidden?: boolean,
+  onClose?: () => void
 }
 
 const ModalIconDanger = () => (
@@ -71,7 +72,10 @@ export const Modal = ({
   zIndex = 'z-10'
 }: ModalType) => (
   <Transition.Root  show={isOpen} as={Fragment}>
-    <Dialog  as="div" className={`relative ${zIndex}`} initialFocus={undefined} onClose={setIsOpen}>
+    <Dialog  as="div" className={`relative ${zIndex}`} initialFocus={undefined} onClose={() => {
+      setIsOpen(false);
+      if(options.onClose) options.onClose();
+    }}>
       <Transition.Child
         as={Fragment}
         enter="ease-out duration-300"
