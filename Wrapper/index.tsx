@@ -177,6 +177,7 @@ export const getAsideItems = ({
         name: "Meus Docs.",
         href: handleRegexUrl('@hub:gallery.home', user?.token),
         icon: <MyDocsIcon w={22} h={22} />,
+        disabled:!user?.permitions_slug?.includes(PossiblePermissions.PADRAO)
       },
       // {
       //   id: "aside-item-closing-folder",
