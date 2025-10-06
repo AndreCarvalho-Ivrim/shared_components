@@ -67,7 +67,10 @@ export function handleRedirectToDedicatedServer(data: User, token: string){
      */
     let url = isHub ? client.dedicated_server : client.dedicated_server.replace('://hub.','://');
     if(window.location.origin !== url){
-      if(!sessionStorage.getItem('isac@ignore-redirect-dedicated-server')) redirect(url, token);
+      if(
+        !sessionStorage.getItem('isac@ignore-redirect-dedicated-server') &&
+        !localStorage.getItem('isac@ignore-redirect-dedicated-server')
+      ) redirect(url, token);
     }
   }
   else{
