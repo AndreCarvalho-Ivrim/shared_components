@@ -343,13 +343,7 @@ export const getAsideItems = ({
       }
     ];
     else if (['Co-Pilot Dashboard', 'Report'].includes(module_name)) defaultAsideItems = [
-      {    // VISIO
-        id: 'vision',
-        href: '#',
-        name: 'Vision',
-        icon: <CompassIcon w={22} h={22} />,
-        disabled: true
-      }, { // REPORT
+      { // REPORT
         id: 'report',
         href: handleRegexUrl('@isac:report.home', user?.token),
         name: 'Report',
