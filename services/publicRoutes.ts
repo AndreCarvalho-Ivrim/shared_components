@@ -64,3 +64,22 @@ export const requestCacher = async ({ key, payload, callback }:{
   if(res.result) requestCache[key].push({ payload, response: res });
   return res;
 }
+
+export const requestPublicGetSteps = async ({ flow_id, params, variation }:{
+  flow_id: string,
+  variation: string,
+  params: Record<string, any>
+}) : Promise<ResultAndResponse & { data?: any[]}> => {
+  try{
+    const { data } = await wf.get(`/steps/datas/${flow_id}/${variation}?${
+      Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&')
+    }`)
+
+    return data;
+  }catch(e){
+    return handleErrorResultAndResponse(e, {
+      result: false,
+      response: 'Houve um erro ao tentar processar essa solicitação'
+    })
+  }
+}
