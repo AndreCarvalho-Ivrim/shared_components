@@ -17,7 +17,7 @@ interface WrapperProps{
 export const Wrapper = ({ children, activeItem, asideSubItems,breadcrumbs }:WrapperProps) => {
   return (
     <div
-      className="w-screen h-screen flex flex-col"
+      className="w-screen h-screen flex flex-col bg-gray-500/80"
       style={{ 
         backgroundImage: `url(${bkg})`,
         backgroundSize: 'cover',
