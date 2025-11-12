@@ -6,10 +6,11 @@ interface AvatarProps{
   name?: string,
   email?: string,
   className?: string,
+  version?: 1 | 2,
   style?: React.CSSProperties
   size?: 'sm' | 'md' | 'lg'
 }
-export const Avatar = ({ picture, name, email, className, style, size = 'md' }:AvatarProps) => (
+export const Avatar = ({ picture, name, email, className, version, style, size = 'md' }:AvatarProps) => (
   <div className={className} style={style}>
     {picture ? (
       <img
@@ -28,7 +29,7 @@ export const Avatar = ({ picture, name, email, className, style, size = 'md' }:A
       />
     ):(
       <div className={classNames({
-        'rounded-full bg-gray-300/50': true,
+        [`rounded-full ${version === 2 ?'bg-gray-400/40':'bg-gray-300/50'}`]: true,
         'w-6 h-6': size === 'sm',
         'w-7 h-7': size === 'md',
         'w-14 h-14': size === 'lg'

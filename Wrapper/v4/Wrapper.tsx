@@ -10,11 +10,12 @@ import { AsideItems } from "../v3/Aside";
 
 interface WrapperProps{
   asideSubItems?: AsideItems[],
+  asideItems?: AsideItems[],
   activeItem?: string[],
   breadcrumbs?: HeaderBreadcrumbs[]
   children: ReactNode
 }
-export const Wrapper = ({ children, activeItem, asideSubItems,breadcrumbs }:WrapperProps) => {
+export const Wrapper = ({ children, activeItem, asideItems, asideSubItems,breadcrumbs }:WrapperProps) => {
   return (
     <div
       className="w-screen h-screen flex flex-col bg-gray-500/80"
@@ -54,7 +55,11 @@ export const Wrapper = ({ children, activeItem, asideSubItems,breadcrumbs }:Wrap
           </div>
         )}
       <div className="flex-1 flex flex-col sm:flex-row p-8 pr-1 max-sm:pl-1 pt-0 h-full min-h-0">
-        <MenuSidebar activeItem={activeItem} asideSubItems={asideSubItems}/>
+        <MenuSidebar
+          activeItem={activeItem}
+          asideItems={asideItems}
+          asideSubItems={asideSubItems}
+        />
         <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8">
           {children}
         </div>
