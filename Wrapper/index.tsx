@@ -20,13 +20,14 @@ import {
   FlowIcon,
   TableIcon,
   PieChartIcon,
-  CompassIcon,
   GameIconNew,
   CartIconNew,
   SupplyIconNew,
   EnvelopeIcon,
   ChatIcon,
   SupportIcon,
+  WhatsappIcon,
+  WidgetIcon,
 } from "../utils/icons";
 
 import managedServiceIcon from '../assets/managed_service.png';
@@ -240,12 +241,14 @@ export const getAsideItems = ({
             {
               id: "aside-subitem-projetos",
               name: "Projetos",
+              icon: <ProjectIcon w="22" h="22" />,
               href: handleRegexUrl('@hub:admin_panel.projects', user.token),
               disabled: !canAccessAdminPanel,
             },
             {
               id: "aside-subitem-dashboards",
               name: "Dashboards",
+              icon: <WidgetIcon w="22" h="22" />,
               href: handleRegexUrl('@hub:admin_panel.dashboards', user.token),
               disabled: !canManagement,
             },
@@ -254,12 +257,13 @@ export const getAsideItems = ({
         {
           id: "aside-item-admin-integracoes",
           name: "Admin Integrações",
-          icon: <ConnectionIcon w="18" h="18" />,
+          icon: <ConnectionIcon w="22" h="22" />,
           disabled: !canAccessAdminPanel,
           items: [
             {
               id: "aside-subitem-whatsapp",
               name: "Whatsapp",
+              icon:<WhatsappIcon w="22" h="22" />,
               href: handleRegexUrl('@hub:admin_panel.integrations.whatsapp', user.token),
               disabled: !canAccessWhatsapp,
             }
