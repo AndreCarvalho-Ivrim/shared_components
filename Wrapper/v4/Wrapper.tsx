@@ -60,7 +60,7 @@ export const Wrapper = ({ children, activeItem, asideItems, asideSubItems,breadc
           asideItems={asideItems}
           asideSubItems={asideSubItems}
         />
-        <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8">
+        <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8" id="wrapper-overflow-container">
           {children}
         </div>
         <div className="absolute bottom-8 right-4 flex flex-col justify-between z-10">
