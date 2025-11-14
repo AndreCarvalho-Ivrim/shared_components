@@ -4,8 +4,7 @@ import { useAuth } from '../../../../contexts/AuthContext';
 import { getUrls } from '../../../services/conn/api';
 import { redirectToApp } from '../../../MenuSlider';
 import { AsideItems } from '.';
-import { Fragment, ReactNode } from 'react';
-import { AsideLiItem } from './AsideLiItem';
+import { ReactNode } from 'react';
 
 export interface FooterAsideProps{
   footerItems?: (
@@ -55,7 +54,7 @@ export const FooterAside = ({ footerItems }: FooterAsideProps) => {
       <button
         type="button"
         onClick={() => redirectToApp(
-          { url: `${getUrls('front')?.portal}perfil` },
+          { url: `/${getUrls('front')?.portal}perfil` },
           toast,
           navigate
         )}
