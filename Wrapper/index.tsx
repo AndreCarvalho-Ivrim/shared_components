@@ -220,7 +220,7 @@ export const getAsideItems = ({
     if (user && user.permitions_slug) {
       if (user.permitions_slug.includes(PossiblePermissions.ADMIN)) defaultAsideItems.push(...[
         {
-          id: "aside-item-admin-users",
+          id: "aside-item-admin-client",
           name: "Admin Empresa",
           href: handleRegexUrl('@hub:admin_panel.client', user.token),
           disabled: !canAccessAdminPanel,
