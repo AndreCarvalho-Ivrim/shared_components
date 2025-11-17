@@ -13,9 +13,13 @@ interface WrapperProps{
   asideItems?: AsideItems[],
   activeItem?: string[],
   breadcrumbs?: HeaderBreadcrumbs[]
-  children: ReactNode
+  children: ReactNode,
+  footerItems?: (
+    { type: 'aside-item', content: AsideItems } |
+    { type: 'raw', content: ReactNode }
+  )[]
 }
-export const Wrapper = ({ children, activeItem, asideItems, asideSubItems,breadcrumbs }:WrapperProps) => {
+export const Wrapper = ({ children, activeItem, asideItems, asideSubItems, breadcrumbs, footerItems }:WrapperProps) => {
   return (
     <div
       className="w-screen h-screen flex flex-col bg-gray-500/80"
@@ -59,6 +63,7 @@ export const Wrapper = ({ children, activeItem, asideItems, asideSubItems,breadc
           activeItem={activeItem}
           asideItems={asideItems}
           asideSubItems={asideSubItems}
+          footerItems={footerItems}
         />
         <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8" id="wrapper-overflow-container">
           {children}
