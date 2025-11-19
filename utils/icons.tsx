@@ -1694,7 +1694,16 @@ export const PowerOffIcon = (props: IconProps) => (
     className={props.className}
     viewBox="0 -960 960 960"
   ><path d="M380-120v-120L240-380v-220q0-24 11-45t32-32l77 77h-40v186l140 140v74h40v-74l37-37L56-792l56-56 736 736-56 56-198-198-14 14v120H380Zm306-268-46-46v-166H474L320-754v-86h80v160h160v-160h80v200l-40-40h40q33 0 56.5 23.5T720-600v178l-34 34ZM558-516Zm-130 97Z"/></svg>
-)
+);
+export const UserAltIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -960 960 960"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    fill={props.color ?? 'currentColor'}
+  ><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
+);
 //#endregion COMPONENTS
 //#region LIST AVAILABLE ICONS
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
@@ -1825,6 +1834,7 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <DeliveryTruckSpeedIcon {...props}/>,  title: 'DeliveryTruckSpeedIcon'                  }, 
   { component: (props?: IconProps) => <MaintenanceIcon {...props}/>,         title: 'MaintenanceIcon'                         }, 
   { component: (props?: IconProps) => <PowerOffIcon {...props}/>,            title: 'PowerOffIcon'                            }, 
+  { component: (props?: IconProps) => <UserAltIcon {...props}/>,             title: 'UserAltIcon'                             },
 ];
 //#endregion LIST AVAILABLE ICONS
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
