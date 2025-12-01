@@ -17,9 +17,9 @@ export const Avatar = ({ picture, name, email, className, version, style, size =
         alt={name ?? email ?? "Avatar"}
         className={classNames({
           'rounded-full object-cover': true,
-          'w-6 h-6': size === 'sm',
-          'w-7 h-7': size === 'md',
-          'w-14 h-14': size === 'lg'
+          'min-w-[1.5rem] w-6 h-6': size === 'sm',
+          'min-w-[1.75rem] w-7 h-7': size === 'md',
+          'min-w-[3.5rem] w-14 h-14': size === 'lg'
         })}
         src={picture}
         onError={(e) => {
