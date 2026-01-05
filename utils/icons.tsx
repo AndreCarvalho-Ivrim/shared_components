@@ -471,7 +471,7 @@ export const FlowColorful = (props: IconProps) => (
     />
   </svg>
 );
-export const CheckedCircleIcon = (props: IconProps) => (
+export const CheckedCircleIcon = (props: (IconProps & { secondColor?: string })) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
@@ -480,8 +480,8 @@ export const CheckedCircleIcon = (props: IconProps) => (
     height={props.h ?? '20'}
     className={props.className ?? ''}
   >
-    <circle cx="10" cy="10" r="10" fill={props.color ?? "#40FF2F"} />
-    <path d="M6.45833 10L8.81667 12.3583L13.5417 7.64167" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="10" cy="10" r="10" fill={props.color ?? "currentColor"} />
+    <path d="M6.45833 10L8.81667 12.3583L13.5417 7.64167" stroke={props.secondColor ?? "white"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 export const EditIcon = (props: IconProps) => (
