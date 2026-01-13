@@ -1,13 +1,10 @@
 import { useState } from "react"
 import { ActivityPanelType } from "../../shared-types/activity_panel.type"
-import { Avatar } from "../utils/Avatar"
-import { getIconByName, DetalistIcon, ArrowRightIcon } from "../utils/icons"
+import { ArrowRightIcon } from "../utils/icons"
 import { handleRegexUrl } from "../../shared-types/utils/routes"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
-import { IconByTheme } from "../Wrapper"
 import { AvailableWorkflowThemeType } from "../../shared-types"
-import { getButtonColorClass } from "../MenuSlider"
 
 interface ActivePanelType extends ActivityPanelType {
   theme?: AvailableWorkflowThemeType
@@ -19,9 +16,9 @@ interface ActivityItemProps{
 export const WorkflowActivityItem = ({ activity }:ActivityItemProps) => {
   const navigate = useNavigate();
   
-  const { user, changeClient } = useAuth();
+  const { user } = useAuth();
 
-  const [dynamicBadge, setDynamicBadge] = useState(activity.badge);
+  const dynamicBadge = activity.badge;
 
   async function handleRedirectTo(){
     if(!user || !activity.redirect_to) return;
@@ -34,11 +31,11 @@ export const WorkflowActivityItem = ({ activity }:ActivityItemProps) => {
   }
 
   return (
-    <tr className="hover:bg-gray-200/80 border-b last:border-none" onClick={handleRedirectTo}>
-      <td className="px-3 py-4 cursor-pointer">
+    <tr className="hover:bg-gray-200/20 border-b last:border-none" onClick={handleRedirectTo}>
+      <td className="px-3 py-3 cursor-pointer">
         <div className="flex items-center gap-2 max-w-full">
-          {activity.theme ? (
-            <div className={`p-1 rounded-lg ${getButtonColorClass(activity.theme)} text-white flex items-center justify-center`}>
+          {/* {activity.theme ? (
+            <div className={`p-1 rounded-lg bg-primary-500 text-white flex items-center justify-center`}>
               <IconByTheme theme={activity.theme} props={{ w: 22, h: 22, color: 'white' }} self_adjustment={false}>
                 <span className="uppercase text-gray-700 font-semibold text-lg block mr-1.5 -mt-1">{(activity.title ?? '').slice(0, 2)}</span>
               </IconByTheme>
@@ -47,10 +44,10 @@ export const WorkflowActivityItem = ({ activity }:ActivityItemProps) => {
             <Avatar picture={activity.avatar}/>
           ) : activity.icon ? getIconByName(activity.icon, { w: 18, h: 18 }) : (
             <DetalistIcon {...{ w: 18, h: 18 }}/>
-          )}
+          )} */}
           <div className="flex flex-col flex-1">
             <div className="flex gap-1">
-              <strong className="text-sm max-w-[calc(100%-2rem)] truncate">{activity.title}</strong>
+              <strong className="text-sm text-gray-50 max-w-[calc(100%-2rem)] truncate">{activity.title}</strong>
               {(dynamicBadge && dynamicBadge.value > 0) && (
                 <span style={{ background: `var(--${dynamicBadge.type})` }} className={`
                   ${dynamicBadge.type === 'light' ? 'text-gray-700':'text-white'} text-[10px] rounded-full
@@ -60,13 +57,13 @@ export const WorkflowActivityItem = ({ activity }:ActivityItemProps) => {
                 </span>
               )}
             </div>
-            <span className="text-gray-500 text-xs font-normal">
+            <span className="text-gray-100 text-xs font-normal">
               {activity.description.slice(0, 80) + (activity.description.length > 80 ? '...':'')}
             </span>
           </div>
         </div>
       </td>
-      <td className="px-3 py-4 cursor-pointer text-end w-[2rem] text-gray-500">
+      <td className="px-3 py-4 cursor-pointer text-end w-[2rem] text-gray-50">
         <ArrowRightIcon/>
       </td>
     </tr>
