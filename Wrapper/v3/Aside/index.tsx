@@ -8,6 +8,8 @@ import { AsideLiItem } from './AsideLiItem';
 export interface AsideItems {
   id: string,
   href?: string,
+  /** Configuração disponível quando o href é válido */
+  target?: '_blank' | '_self',
   onClick?: () => void,
   icon?: ReactNode,
   name: string,
