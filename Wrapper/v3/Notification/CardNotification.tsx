@@ -20,7 +20,7 @@ export const CardNotification = () => {
                   text-sm font-semibold text-start
                   enabled:hover:bg-gray-100 enabled:hover:shadow enabled:cursor-pointer
                   disabled:opacity-70
-                  flex flex-col overflow-hidden
+                  flex flex-col
                   text-primary-900
                   relative
                   hover:bg-gray-900/5
