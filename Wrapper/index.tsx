@@ -57,6 +57,7 @@ export interface WrapperProps {
   footerItems?: FooterAsideProps["footerItems"];
   breadcrumbs?: HeaderBreadcrumbs[];
   omit?: ("button-help" | "header" | "aside")[];
+  scrollYContainerRef?: React.RefObject<HTMLDivElement>
 }
 export function Wrapper({
   module_name,
@@ -68,6 +69,7 @@ export function Wrapper({
   isAdmin = false,
   omit = [],
   v = 3,
+  scrollYContainerRef
 }: WrapperProps) {
   const { user } = useAuth();
   const [publishedFlows, setPublishedFlows] = useState<WorkflowType[]>([]);
@@ -131,6 +133,7 @@ export function Wrapper({
           children,
           omit,
         }}
+        scrollYContainerRef={scrollYContainerRef}
       />
     );
 

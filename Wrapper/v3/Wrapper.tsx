@@ -19,9 +19,10 @@ interface WrapperProps{
   children: ReactNode,
   module_name?: string,
   omit: ('button-help' | 'header' | 'aside')[],
-  goBack?: string
+  goBack?: string,
+  scrollYContainerRef?: React.RefObject<HTMLDivElement>
 }
-export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, footerItems, asideActive, module_name, omit, goBack }: WrapperProps) => (
+export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, footerItems, asideActive, module_name, omit, goBack, scrollYContainerRef }: WrapperProps) => (
   <div className="w-screen h-screen bg-background sm:p-4 !pr-0">
     <div className={`
       grid max-w-[1496px] min-[1700px]:max-w-[85%] mx-auto h-full 
@@ -42,7 +43,7 @@ export const Wrapper = ({ breadcrumbs, children, asideItems, dynamicAsideItems, 
           goBack={goBack}
         />
       )}
-      <div className="pr-8 py-8 pl-8 sm:pl-12 max-h-screen -my-4 overflow-y-auto" id="wrapper-content">
+      <div className="pr-8 py-8 pl-8 sm:pl-12 max-h-screen -my-4 overflow-y-auto" id="wrapper-content" ref={scrollYContainerRef}>
         {!omit.includes('header') && (
           <Header breadcrumbs={breadcrumbs}/>
         )}
