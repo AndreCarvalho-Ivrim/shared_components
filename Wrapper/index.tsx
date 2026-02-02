@@ -28,6 +28,7 @@ import {
   SupportIcon,
   WhatsappIcon,
   WidgetIcon,
+  DatabaseIcon,
 } from "../utils/icons";
 
 import managedServiceIcon from '../assets/managed_service.png';
@@ -466,6 +467,7 @@ export const IconByTheme = ({ theme, props = {}, children, self_adjustment = tru
       height: props.h ?? '24px',
       width: props.w ?? '26px',
     }}/>
+    case "Matriz": return <DatabaseIcon {...{ ...props, w: props.w ?? 22, h: props.h ?? 22 }} className={self_adjustment ? "-mt-1": undefined}/>;
     default: return <>{children}</>;
   }
 };
