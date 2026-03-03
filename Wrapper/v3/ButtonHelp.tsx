@@ -30,7 +30,7 @@ export const hardcodeSupport = {
 }
 
 export type CallStatusType = 'open' | 'in_progress' | 'finished'
-export type TypeOfCallType = 'Dúvida' | 'Melhoria' | 'Problema'
+export type TypeOfCallType = 'Dúvida' | 'Problema'
 export const translateCallStatus : Record<CallStatusType, string> = {
   open: 'Em Aberto',
   in_progress: 'Em Andamento',
@@ -275,7 +275,7 @@ const CreateCallFormContent = ({
   toast: any
 }) => {
   const options: OptionType[] = [
-    { value: 'Dúvida', label: 'Dúvida' }, { value: 'Melhoria', label: 'Melhoria' }, { value: 'Problema', label: 'Problema' }
+    { value: 'Dúvida', label: 'Dúvida' }, { value: 'Problema', label: 'Problema' }
   ];
   function handleUpload(selectedFiles: File[]) {
   
@@ -479,7 +479,6 @@ const ListCallsContent = ({ onAccess }:{ onAccess: (_id: string) => void }) => {
                     {translateCallStatus[called.status]}
                   </span>
                   <span className={`font-semibold block text-[10px] leading-none uppercase py-0.5 px-2 rounded-lg text-gray-100 ${
-                    called.type_of_call === 'Melhoria' ? 'text-gray-100 bg-green-600' : 
                     called.type_of_call === 'Dúvida' ? 'text-gray-100 bg-primary-600' :
                     called.type_of_call === 'Problema' ? 'bg-red-500' : 'bg-gray-100'
                   }`}>
