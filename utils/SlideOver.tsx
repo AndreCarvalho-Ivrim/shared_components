@@ -19,10 +19,11 @@ interface SlideOverProps{
     wrapper?: string,
     container?: string
   }
+  zIndex?: 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50'
 }
-export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer, classNames }: SlideOverProps) => (
+export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer, classNames, zIndex }: SlideOverProps) => (
   <Transition.Root show={isOpen} as={Fragment}>
-    <Dialog as="div" className="relative z-10" onClose={onClose}>
+    <Dialog as="div" className={`relative ${zIndex ?? 'z-10'}`} onClose={onClose}>
       <Transition.Child
         as={Fragment}
         enter="ease-in-out duration-500"
