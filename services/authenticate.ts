@@ -85,6 +85,41 @@ export function handleRedirectToDedicatedServer(data: User, token: string){
     if(original_url && typeof original_url === 'string') redirect(original_url, token);
   }
 }
+export function handleRedirectToDedicatedServerByFlowId(flow_id: string) : Boolean {
+  const flowIdsOnDedicatedServer = {
+    'https://isac3.ivrim.com.br': [
+      '67d8994f3cf6a9f96c8641af',
+      '6808c74e6adbfe33faac098f',
+      '685938a4d5883257c4f803be',
+      '68764d08884d5153173b03ae',
+      '68e54969a50fd9c84f9dd5e9',
+      '690df7baaf484e01b2e93825',
+      '6931eacbcd4c1174504402cf',
+      '693724c91f67d6dffd041669',
+      '6960fa11cf30eb668e1e371c',
+      '697222a0a1978fe2d7aba517',
+      '69722c3aa1978fe2d7aba57e'
+    ]
+  }
+
+  if(!flow_id) return false;
+
+  const url = Object.entries(flowIdsOnDedicatedServer).find(
+    ([_, flowIds]) => flowIds.includes(flow_id)
+  )?.[0] as string | undefined;
+
+  if(url && window.location.origin !== url){
+    if(
+      !sessionStorage.getItem('isac@ignore-redirect-dedicated-server') &&
+      !localStorage.getItem('isac@ignore-redirect-dedicated-server')
+    ){
+      window.location.href = `${url}/${window.location.hash}`;
+      return true;
+    }
+  }
+
+  return false;
+}
 export async function logout() : Promise<ResultAndResponse>{
   sessionStorage.removeItem(storageKeys.token);
   localStorage.removeItem(storageKeys.token);
