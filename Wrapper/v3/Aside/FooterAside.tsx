@@ -28,7 +28,7 @@ export const FooterAside = ({ footerItems }: FooterAsideProps) => {
       <button
         type="button"
         onClick={() => redirectToApp(
-          { url: `${getUrls('front')?.portal}perfil` },
+          { url: `/perfil` },
           toast,
           navigate
         )}
@@ -54,7 +54,7 @@ export const FooterAside = ({ footerItems }: FooterAsideProps) => {
       <button
         type="button"
         onClick={() => redirectToApp(
-          { url: `/${getUrls('front')?.portal}perfil` },
+          { url: `/perfil` },
           toast,
           navigate
         )}
