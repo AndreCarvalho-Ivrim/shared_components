@@ -55,7 +55,17 @@ export function handleRedirectToDedicatedServer(data: User, token: string){
   const client = data.clients.find((client) => client.id === data.current_client)
   if(!client) return;
 
-  const redirect = (url: string, token: string) => window.location.href = `${url}#/?token=${token}`
+  const redirect = (url: string, token: string) => {
+    let hash = window.location.hash;
+    if(!hash) hash = `#/?token=${token}`;
+    else if(hash.includes('?')){
+      if((hash.length - 1) === hash.indexOf('?')) hash += `token=${token}`;
+      else hash += `&token=${token}`;
+    }
+    else hash += `?token=${token}`;
+
+    window.location.href = `${url}${hash}`; // window.location.href = `${url}#/?token=${token}`
+  }
   if(client.dedicated_server){
     const isHub = getDomain('hub') === '';
     /**
