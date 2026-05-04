@@ -5,6 +5,7 @@ import { getUrls } from '../../../services/conn/api';
 import { redirectToApp } from '../../../MenuSlider';
 import { AsideItems } from '.';
 import { ReactNode } from 'react';
+import { handleHubUrl } from '../../../../services/utils';
 
 export interface FooterAsideProps{
   footerItems?: (
@@ -45,7 +46,7 @@ export const FooterAside = ({ footerItems }: FooterAsideProps) => {
         {user?.picture ? (
           <img
             className="object-cover w-full h-full rounded-full"
-            src={user.picture}
+            src={handleHubUrl(user.picture)}
           />
         ):(
           user ? user.name.substr(0,2) :'..'

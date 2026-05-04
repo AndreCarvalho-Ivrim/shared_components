@@ -3,6 +3,7 @@ import { Client, User } from "../../../shared-types";
 import { SearchIcon, CloseIcon, ChevronDownIcon } from "../../utils/icons";
 import { Modal } from "../../utils/Modal";
 import logo from '../../assets/default-client.jpg';
+import { handleHubUrl } from "../../../services/utils";
 
 interface ClientProps extends Client { active?: boolean, type?: undefined }
 interface EconomicGroup{
@@ -89,7 +90,7 @@ export const ModalEnterprise = ({ client, clients, handleChangeClient, modalIsOp
               {client.picture ? (
                 <img
                   className="object-cover min-w-[100%] w-full h-full rounded-md"
-                  src={client.picture}
+                  src={handleHubUrl(client.picture)}
                   onError={(e) => {
                     let img = e.target as HTMLImageElement;
                     if(img.src !== logo) img.src = logo;
@@ -118,7 +119,7 @@ export const ModalEnterprise = ({ client, clients, handleChangeClient, modalIsOp
           {user && (
             <div className="flex justify-between gap-2 mb-5">
               <div className="flex items-center gap-4">
-                <img className="h-14 w-14 rounded-full shadow object-cover bg-gray-100" src={user.picture} alt="avatar"/>
+                <img className="h-14 w-14 rounded-full shadow object-cover bg-gray-100" src={handleHubUrl(user.picture)} alt="avatar"/>
                 <div>
                   <div className="flex items-center justify-between gap-4 mb-1">
                     <div>
@@ -295,7 +296,7 @@ const ImageClient = ({ client, className }:{ client: ClientProps, className?: st
   <img
     alt={client.nome_fantasia}
     className={className ?? "rounded-full object-cover h-16 w-16 mx-auto border bg-white"}
-    src={client.picture ?? logo}
+    src={handleHubUrl(client.picture ?? logo)}
     onError={(e) => {
       let img = e.target as HTMLImageElement;
       if(img.src !== logo) img.src = logo;

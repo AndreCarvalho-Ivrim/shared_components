@@ -7,6 +7,7 @@ import { ButtonHelp } from "../v3/ButtonHelp";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { HeaderBreadcrumbs } from "../v3/Wrapper";
 import { AsideItems } from "../v3/Aside";
+import { handleHubUrl } from "../../../services/utils";
 
 interface WrapperProps{
   asideSubItems?: AsideItems[],
@@ -32,7 +33,7 @@ export const Wrapper = ({ children, activeItem, asideItems, asideSubItems, bread
         <div className="flex items-center justify-center lg:w-56">
           <img
             className="w-40"
-            src={logoIcon}
+            src={handleHubUrl(logoIcon)}
             alt="ISAC 3.0"
           />
         </div>

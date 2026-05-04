@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { hubRoutes } from "../../../shared-types/utils/routes";
 import { ModalEnterprise } from "./ModalEnterprise";
 import { ChevronDownIcon } from "../../utils/icons";
+import { handleHubUrl } from "../../../services/utils";
 
 interface ClientProps extends Client {
   active?: boolean
@@ -90,7 +91,7 @@ export const DropdownChooseEnterprise = () => {
                 {client.picture ? (
                   <img
                     className="object-cover min-w-[100%] w-full h-full rounded-md"
-                    src={client.picture}
+                    src={handleHubUrl(client.picture)}
                     onError={(e) => {
                       let img = e.target as HTMLImageElement;
                       if(img.src !== logo) img.src = logo;
@@ -120,7 +121,7 @@ export const DropdownChooseEnterprise = () => {
               <img
                 alt={c.nome_fantasia}
                 className="rounded-full object-cover w-6 h-6"
-                src={c.picture ?? logo}
+                src={handleHubUrl(c.picture ?? logo)}
                 onError={(e) => {
                   let img = e.target as HTMLImageElement;
                   if(img.src !== logo) img.src = logo;

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../../../assets/icons/logo.svg';
 import { ArrowBackCircleIcon } from '../../../utils/icons';
 import { getUrls } from '../../../services/conn/api';
+import { handleHubUrl } from '../../../../services/utils';
 
 interface HeaderAsideProps{
   isCollapsed?: boolean,
@@ -33,7 +34,7 @@ export const HeaderAside = ({ isCollapsed, dotColor, module_name, goBack } : Hea
             <ArrowBackCircleIcon/>
             <span className="text-[10px] font-semibold uppercase ">Voltar</span>
           </>
-        ):( <img className="bg-white rounded-full w-12 h-12" src={logo}/> )}
+        ):( <img className="bg-white rounded-full w-12 h-12" src={handleHubUrl(logo)}/> )}
       </button>
       <div className={`
         flex sm:hidden md:flex flex-col
@@ -55,7 +56,7 @@ export const HeaderAside = ({ isCollapsed, dotColor, module_name, goBack } : Hea
         <div className="overflow-clip w-[50%]">
           <div className="bg-background p-1 w-[62px] h-[62px] rounded-full"/>
         </div>
-        <img className="bg-white rounded-full w-[54px] h-[54px] absolute ml-1" src={logo}/>
+        <img className="bg-white rounded-full w-[54px] h-[54px] absolute ml-1" src={handleHubUrl(logo)}/>
       </button>
       <HeaderDots dotColor={dotColor}/>
     </header>

@@ -29,6 +29,7 @@ import { ButtonHelp } from "../Wrapper/v3/ButtonHelp";
 import { IconByTheme } from "../Wrapper";
 import { ActivityPanel } from "../ActivityPanel";
 import { Tooltip } from "flowbite-react";
+import { handleHubUrl } from "../../services/utils";
 
 const clientsWithAccessToCAP = { };
 
@@ -202,7 +203,7 @@ export const MenuSlider = () => {
       <div className="page_error__content">
         <>
           <img
-            src={logo}
+            src={handleHubUrl(logo)}
             alt="Ivrim Consulting"
             className="max-w-[90%] w-72 mx-auto mb-2"
           />
@@ -234,7 +235,7 @@ export const MenuSlider = () => {
       <div className="page_error__content">
         <>
           <img
-            src={logo}
+            src={handleHubUrl(logo)}
             alt="Ivrim Consulting"
             className="max-w-[90%] w-72 mx-auto mb-2"
           />
@@ -265,7 +266,7 @@ export const MenuSlider = () => {
     <div className="w-screen h-screen bg-background overflow-auto flex flex-col">
       <div className={style.header}>
         <div className={style.header__logo}>
-          <img src={logo} alt="Ivrim Consulting"/>
+          <img src={handleHubUrl(logo)} alt="Ivrim Consulting"/>
         </div>
         <div className="flex items-center gap-4">
           <BellNotification />
