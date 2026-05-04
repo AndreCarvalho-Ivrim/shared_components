@@ -97,7 +97,7 @@ export function handleRedirectToDedicatedServer(data: User, token: string){
 }
 export function handleRedirectToDedicatedServerByFlowId(flow_id: string) : Boolean {
   const flowIdsOnDedicatedServer = {
-    'https://isac3.ivrim.com.br': [
+    'https://arion-ivrim.codewriters.space': [
       '67d8994f3cf6a9f96c8641af',
       '6808c74e6adbfe33faac098f',
       '685938a4d5883257c4f803be',
