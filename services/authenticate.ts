@@ -109,6 +109,13 @@ export function handleRedirectToDedicatedServerByFlowId(flow_id: string) : Boole
       '6960fa11cf30eb668e1e371c',
       '697222a0a1978fe2d7aba517',
       '69722c3aa1978fe2d7aba57e'
+    ],
+    'https://muffato.ivrim.com.br': [
+      '69b3f0c67a9f597f7cddfaa3',
+      '69b3f10c7a9f597f7cddfabc',
+      '6903683d8bcc1ba093933479',
+      '6903692a8bcc1ba09393348a',
+      '68ee9aba0a225845f9f1d355',
     ]
   }
 
