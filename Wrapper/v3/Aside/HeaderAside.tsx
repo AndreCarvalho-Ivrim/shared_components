@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../../../../assets/icons/logo.svg';
 import { ArrowBackCircleIcon } from '../../../utils/icons';
-import { getUrls } from '../../../services/conn/api';
 import { handleHubUrl } from '../../../../services/utils';
 
 interface HeaderAsideProps{
@@ -12,7 +11,6 @@ interface HeaderAsideProps{
 }
 export const HeaderAside = ({ isCollapsed, dotColor, module_name, goBack } : HeaderAsideProps) => {
   const navigate = useNavigate();
-  const urls = getUrls('front')!;
 
   return (
     <header className={`relative`} style={{
