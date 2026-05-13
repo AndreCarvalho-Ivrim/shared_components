@@ -565,9 +565,11 @@ export const MenuSlider = () => {
         <p className="text-gray-600 text-sm">Ivrim {new Date().getUTCFullYear()} © Todos os direitos reservados</p>
       </footer>
 
-      <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
-        <ButtonHelp />
-      </div>
+      {user && user.permitions_slug && user.permitions_slug.includes('abrir-chamado' as any) && (
+        <div className="absolute bottom-8 right-4 flex flex-col justify-between z-50">
+          <ButtonHelp />
+        </div>
+      )}
     </div>
   );
 };
