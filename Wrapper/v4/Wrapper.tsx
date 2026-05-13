@@ -8,7 +8,7 @@ import { Breadcrumbs } from "./Breadcrumbs";
 import { HeaderBreadcrumbs } from "../v3/Wrapper";
 import { AsideItems } from "../v3/Aside";
 import { handleHubUrl } from "../../../services/utils";
-
+export type WrapperOmitType = 'button-help' | 'header' | 'aside';
 interface WrapperProps{
   asideSubItems?: AsideItems[],
   asideItems?: AsideItems[],
@@ -18,9 +18,10 @@ interface WrapperProps{
   footerItems?: (
     { type: 'aside-item', content: AsideItems } |
     { type: 'raw', content: ReactNode }
-  )[]
+  )[],
+  omit: WrapperOmitType[],
 }
-export const Wrapper = ({ children, activeItem, asideItems, asideSubItems, breadcrumbs, footerItems }:WrapperProps) => {
+export const Wrapper = ({ children, activeItem, asideItems, asideSubItems, breadcrumbs, footerItems, omit }:WrapperProps) => {
   return (
     <div
       className="w-screen h-screen flex flex-col bg-gray-500/80"
@@ -69,9 +70,11 @@ export const Wrapper = ({ children, activeItem, asideItems, asideSubItems, bread
         <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8" id="wrapper-overflow-container">
           {children}
         </div>
-        <div className="absolute bottom-8 right-4 flex flex-col justify-between z-10">
-          <ButtonHelp/>
-        </div>
+        {!omit.includes('button-help') && (
+          <div className="absolute bottom-8 right-4 flex flex-col justify-between z-10">
+            <ButtonHelp/>
+          </div>
+        )}
       </div>
     </div>
   )
