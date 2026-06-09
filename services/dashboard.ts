@@ -75,3 +75,29 @@ export const getDashboardBySlug = async (token: string, slug: string) : Promise<
     });
   }
 }
+export const getDashboardByLink = async (token: string, link: string) : Promise<DashboardResponse> => {
+  try{
+    const { data } = await portal.get<DashboardsResponse>(
+      `/dashboard/?onlyActive=true&link=${encodeURIComponent(link)}`,
+      headerBearer(token)
+    );
+
+    if(!data || !data.result) throw new Error(data.response);
+    
+    const dashboard = data.data?.[0];
+    if(!dashboard) return { result: false, response: 'Dashboard não encontrado' };
+    
+    return {
+      result: true,
+      response: 'Dashboard localizada com sucesso',
+      data: dashboard
+    }
+  }catch(e){
+    console.error(e);
+
+    return handleErrorResultAndResponse(e, {
+      result: false,
+      response: 'Não foi possível carregar as Dashboards'
+    });
+  }
+}
