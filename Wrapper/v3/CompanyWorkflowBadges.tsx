@@ -7,6 +7,7 @@ import { handleHubUrl } from "../../../services/utils";
 import { isacRoutes } from "../../../shared-types/utils/routes";
 import { Client } from "../../../types";
 import logo from '../../assets/default-client.jpg';
+import axios from "axios";
 
 const MAX_VISIBLE = 4;
 
@@ -97,23 +98,73 @@ export const CompanyWorkflowBadges = () => {
   async function loadCounts() {
     if (!user?.clients?.length) return;
     setLoadingCounts(true);
+
+    const mainServerClients = user.clients.filter(
+      c => !c.dedicated_server || c.dedicated_server.includes('isac.ivrim.com.br')
+    );
+
+    const dedicatedServerClients = new Map<string, typeof user.clients>();
+    user.clients
+      .filter(c => c.dedicated_server && !c.dedicated_server.includes('isac.ivrim.com.br'))
+      .forEach(c => {
+        const backend_url = c.dedicated_server!.replace('ivrim.com.br', 'ivrim.tech');
+        if (!dedicatedServerClients.has(backend_url)) dedicatedServerClients.set(backend_url, []);
+        dedicatedServerClients.get(backend_url)!.push(c);
+      });
+
     try {
-      const client_ids = user.clients.map(c => c.id);
-      const res = await requestFnException('isac-project-management-nav-badges', { client_ids }, user.token);
-      if (res.result && Array.isArray(res.data)) {
-        const countMap: Record<string, number> = {};
-        const flowIdMap: Record<string, string> = {};
-        const ids: string[] = [];
-        for (const item of res.data as { client_id: string; flow_id: string; count: number }[]) {
-          countMap[item.client_id] = (countMap[item.client_id] ?? 0) + item.count;
-          if (!flowIdMap[item.client_id]) flowIdMap[item.client_id] = item.flow_id;
-          if (!ids.includes(item.client_id)) ids.push(item.client_id);
+      const allData: { client_id: string; flow_id: string; count: number }[] = [];
+
+      if (mainServerClients.length > 0) {
+        const mainRes = await requestFnException(
+          'isac-project-management-nav-badges',
+          { client_ids: mainServerClients.map(c => c.id) },
+          user.token
+        );
+        if (mainRes.result && Array.isArray(mainRes.data)) {
+          allData.push(...mainRes.data);
         }
-        setCounts(countMap);
-        setFlowIds(flowIdMap);
-        setOrderedIds(ids);
       }
+
+      const dedicatedPromises = Array.from(dedicatedServerClients.entries()).map(
+        async ([backend_url, clients]) => {
+          try {
+            const { data: response } = await axios.post(
+              `${backend_url}/fn-exceptions/isac-project-management-nav-badges`,
+              { client_ids: clients.map(c => c.id) },
+              { headers: { Authorization: `Bearer ${user.token}` } }
+            );
+            if (response.result && Array.isArray(response.data)) {
+              return response.data;
+            }
+          } catch (err) {
+            console.error(`Falha ao buscar badges do servidor ${backend_url}`, err);
+          }
+          return [];
+        }
+      );
+
+      const dedicatedResults = await Promise.all(dedicatedPromises);
+      dedicatedResults.forEach(arr => allData.push(...arr));
+
+
+      const countMap: Record<string, number> = {};
+      const flowIdMap: Record<string, string> = {};
+      const idsSet = new Set<string>();
+
+      allData.sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
+
+      for (const item of allData) {
+        countMap[item.client_id] = (countMap[item.client_id] ?? 0) + item.count;
+        if (!flowIdMap[item.client_id]) flowIdMap[item.client_id] = item.flow_id;
+        idsSet.add(item.client_id);
+      }
+
+      setCounts(countMap);
+      setFlowIds(flowIdMap);
+      setOrderedIds(Array.from(idsSet));
     } catch {
+      console.error('Falha ao buscar badges');
     } finally {
       setLoadingCounts(false);
     }
