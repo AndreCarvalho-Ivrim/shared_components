@@ -16,9 +16,10 @@ export interface FileListType{
 
 interface FileListProps{
   files: FileListType[],
-  onDelete: (id: string) => void
+  onDelete: (id: string) => void,
+  disabled?: boolean;
 }
-export const FileList = ({ files, onDelete }: FileListProps) => (
+export const FileList = ({ files, onDelete, disabled = false }: FileListProps) => (
   <ul className="mt-1 px-2">
     {files.map(uploadedFile => (
       <li className="flex justify-between items-center text-gray-500 mt-4" key={uploadedFile.id}>
@@ -34,14 +35,19 @@ export const FileList = ({ files, onDelete }: FileListProps) => (
               {!!uploadedFile.url && (
                 <button
                   type="button"
-                  className="
-                    text-red-500/80 ml-1.5 cursor-pointer
+                  disabled={disabled}
+                  className={`
+                    text-red-500/80 ml-1.5
                     w-4 h-4 flex items-center justify-center
                     rounded-lg border leading-none
                     shadow-sm hover:bg-gray-200
                     text-gray-500 font-semibold
                     focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2
-                  "
+                    ${disabled 
+                      ? 'opacity-50 cursor-not-allowed hover:bg-transparent' 
+                      : 'cursor-pointer hover:bg-gray-200'
+                    }
+                  `}
                   onClick={() => onDelete(uploadedFile.id)}
                 ><TrashIcon w="16" h="16"/></button>
               )}
