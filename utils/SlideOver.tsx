@@ -73,7 +73,10 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl" ref={refContainer}>
+                <div className={`flex h-full flex-col overflow-y-scroll bg-white ${
+                  !!header || !!title ? 'py-6':''
+                  
+                  } shadow-xl`} ref={refContainer}>
                   {header ? (
                     <>
                       {header.mode === 'overwrite' ? header.content : (
