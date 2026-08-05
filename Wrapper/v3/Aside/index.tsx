@@ -3,6 +3,7 @@ import { Fragment, ReactNode } from 'react';
 import { HeaderAside } from './HeaderAside';
 import { FooterAside, FooterAsideProps } from './FooterAside';
 import { AsideLiItem } from './AsideLiItem';
+import { ViewModeBadge } from '../../../../shared-types';
 
 
 export interface AsideItems {
@@ -14,7 +15,8 @@ export interface AsideItems {
   icon?: ReactNode,
   name: string,
   disabled?: boolean,
-  items?: Omit<AsideItems, 'items'>[]
+  items?: Omit<AsideItems, 'items'>[],
+  badge?: ViewModeBadge
 }
 interface AsideProps {
   active?: string | string[],
