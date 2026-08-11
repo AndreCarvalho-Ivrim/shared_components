@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Textarea, Spinner } from "flowbite-react";
+import { Textarea, Spinner, TextInput } from "flowbite-react";
 import { useNotify } from "../../../contexts/NotifyContext";
 import Dropzone from "react-dropzone";
 import { uniqueId } from "lodash";
@@ -15,6 +15,7 @@ import { AvailableRegexUrls, getDomain, getSupportKeys, handleRegexUrl } from ".
 import { CreatePublicPostDataBody, requestPublicGet, requestPublicPost } from "../../services/publicRoutes";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useExecuteFlow } from "../../../contexts/ExecuteFlowContext";
 
 const supportKeys = getSupportKeys();
 export const hardcodeSupport = {
@@ -103,6 +104,7 @@ export const ButtonHelp = () => {
 
   const { toast } = useNotify();
   const { user, client } = useAuth();
+  const { page } = useExecuteFlow();
   const navigate = useNavigate();
 
   async function handleSubmit() {
@@ -121,6 +123,30 @@ export const ButtonHelp = () => {
       return;
     }
 
+    let usernameEl = document.getElementById("modal-help-user") as HTMLSelectElement;
+    let username = usernameEl?.value;
+    if (page === 'public' && !username) {
+      toast.error("É obrigatório informar o nome");
+      return;
+    }
+
+    let emailEl = document.getElementById("modal-help-email") as HTMLSelectElement;
+    let email = emailEl?.value;
+    if (page === 'public' && !email) {
+      toast.error("É obrigatório informar o email");
+      return;
+    }
+
+    let phoneEl = document.getElementById("modal-help-phone") as HTMLSelectElement;
+    let phone = phoneEl?.value;
+
+    let companyEl = document.getElementById("modal-help-company-name") as HTMLSelectElement;
+    let company = companyEl?.value;
+    if (page === 'public' && !company) {
+      toast.error("É obrigatório informar o nome da empresa");
+      return;
+    }
+
     let body: CreatePublicPostDataBody = {
       data: {
         type_of_call,
@@ -128,12 +154,13 @@ export const ButtonHelp = () => {
         created_call_url: window.location.href,
         user: {
           id: user?.id,
-          name: user?.name,
-          email: user?.email
+          name: page === 'public' ? username : user?.name,
+          email: page === 'public' ? email : user?.email,
+          phone: page === 'public' && phone ? phone : null
         },
         client: {
           id: client?.id,
-          name: client?.nome_fantasia
+          name: page === 'public' ? company : client?.nome_fantasia
         },
         attachments: files.map((f) => ({
           url: f.url,
@@ -274,6 +301,8 @@ const CreateCallFormContent = ({
   user: User | undefined,
   toast: any
 }) => {
+  const { page } = useExecuteFlow();
+
   const options: OptionType[] = [
     { value: 'Dúvida', label: 'Dúvida' }, { value: 'Problema', label: 'Problema' }
   ];
@@ -376,6 +405,53 @@ const CreateCallFormContent = ({
           </option>
         ))}
       </select>
+
+      {page === 'public' && (
+        <div>
+          <label htmlFor="modal-help-user" className="text-sm font-medium text-gray-700 block mb-1">
+            Nome
+          </label>
+          <TextInput
+            id="modal-help-user"
+            placeholder="Digite o seu nome"
+            className="mb-4 text-sm"
+            required={true}
+          />
+
+          <label htmlFor="modal-help-email" className="text-sm font-medium text-gray-700 block mb-1">
+            E-mail
+          </label>
+          <TextInput
+            id="modal-help-email"
+            type="email"
+            placeholder="Digite o seu e-mail"
+            className="mb-4 text-sm"
+            required={true}
+          />
+
+          <label htmlFor="modal-help-phone" className="text-sm font-medium text-gray-700 block mb-1">
+            Telefone (opcional)
+          </label>
+          <TextInput
+            id="modal-help-phone"
+            type="phone"
+            placeholder="Digite o seu telefone"
+            className="mb-4 text-sm"
+            required={false}
+          />
+
+          <label htmlFor="modal-help-company-name" className="text-sm font-medium text-gray-700 block mb-1">
+            Nome da Empresa
+          </label>
+          <TextInput
+            id="modal-help-company-name"
+            type="phone"
+            placeholder="Digite o nome da empresa"
+            className="mb-4 text-sm"
+            required={true}
+          />
+        </div>
+      )}
 
       <label htmlFor="modal-help-textarea" className="text-sm font-medium text-gray-700 block mb-1">
         Descrição do problema
