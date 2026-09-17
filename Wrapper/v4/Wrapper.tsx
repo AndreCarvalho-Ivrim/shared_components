@@ -61,12 +61,14 @@ export const Wrapper = ({ children, activeItem, asideItems, asideSubItems, bread
           </div>
         )}
       <div className="flex-1 flex flex-col sm:flex-row p-8 pr-1 max-sm:pl-1 pt-0 h-full min-h-0">
-        <MenuSidebar
-          activeItem={activeItem}
-          asideItems={asideItems}
-          asideSubItems={asideSubItems}
-          footerItems={footerItems}
-        />
+        {!omit.includes('aside') && (
+          <MenuSidebar
+            activeItem={activeItem}
+            asideItems={asideItems}
+            asideSubItems={asideSubItems}
+            footerItems={footerItems}
+          />
+        )}
         <div className="flex-1 h-full overflow-auto pr-7 max-sm:px-4 pb-8" id="wrapper-overflow-container">
           {children}
         </div>
