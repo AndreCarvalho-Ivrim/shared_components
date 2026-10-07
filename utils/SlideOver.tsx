@@ -19,9 +19,10 @@ interface SlideOverProps{
     wrapper?: string,
     container?: string
   }
-  zIndex?: 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50'
+  zIndex?: 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50',
+  stickyTop?: boolean
 }
-export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer, classNames, zIndex }: SlideOverProps) => (
+export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, full, refContainer, classNames, zIndex, stickyTop }: SlideOverProps) => (
   <Transition.Root show={isOpen} as={Fragment}>
     <Dialog as="div" className={`relative ${zIndex ?? 'z-10'}`} onClose={onClose}>
       <Transition.Child
@@ -80,10 +81,11 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                   {header ? (
                     <>
                       {header.mode === 'overwrite' ? header.content : (
-                        <>
+                        <div className={`${stickyTop ? 'sticky top-0 bg-white z-10':''}`}>
+                          {stickyTop && <div className="bg-white w-full h-10 mt-[-2.5rem]"/>}
                           {header.mode === 'prepend' && header.content}
                           {title && (
-                            <div className="px-4 sm:px-6">
+                            <div className={`px-4 sm:px-6`}>
                               <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
                               {subtitle && (
                                 <span className='flex items-center gap-1 text-xs text-gray-500 -mt-0.5'>
@@ -93,13 +95,14 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                             </div>
                           )}
                           {header.mode === 'append' && header.content}
-                        </>
+                        </div>
                       )}
                     </>
                   ):(
-                    <>
+                    <div className={`${stickyTop ? 'sticky top-0 bg-white z-10':''}`}>
+                      {stickyTop && <div className="bg-white w-full h-10 mt-[-2.5rem]"/>}
                       {title && (
-                        <div className="px-4 sm:px-6">
+                        <div className={`px-4 sm:px-6`}>
                           <Dialog.Title className="text-lg font-semibold text-gray-800">{ title }</Dialog.Title>
                           {subtitle && (
                             <span className='flex items-center gap-1 text-xs text-gray-500 -mt-0.5'>
@@ -108,7 +111,7 @@ export const SlideOver = ({ title, subtitle, children, header, isOpen, onClose, 
                           )}
                         </div>
                       )}
-                    </>
+                    </div>
                   )}
                   <div className={classNames?.container ?? "relative mt-4 flex-1 px-4 sm:px-6"}>
                     { children }
