@@ -1748,6 +1748,17 @@ export const AdsClickIcon = (props: IconProps) => (
     <path d="M468-240q-96-5-162-74t-66-166q0-100 70-170t170-70q97 0 166 66t74 162l-84-25q-13-54-56-88.5T480-640q-66 0-113 47t-47 113q0 57 34.5 100t88.5 56l25 84Zm48 158q-9 2-18 2h-18q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480v18q0 9-2 18l-78-24v-12q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93h12l24 78Zm305 22L650-231 600-80 480-480l400 120-151 50 171 171-79 79Z"/>
   </svg>
 );
+export const DrawIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 -960 960 960"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    fill={props.color ?? 'currentColor'}
+  >
+    <path d="M160-120v-170l527-526q12-12 27-18t30-6q16 0 30.5 6t25.5 18l56 56q12 11 18 25.5t6 30.5q0 15-6 30t-18 27L330-120H160Zm80-80h56l393-392-28-29-29-28-392 393v56Zm560-503-57-57 57 57Zm-139 82-29-28 57 57-28-29ZM560-120q74 0 137-37t63-103q0-36-19-62t-51-45l-59 59q23 10 36 22t13 26q0 23-36.5 41.5T560-200q-17 0-28.5 11.5T520-160q0 17 11.5 28.5T560-120ZM183-426l60-60q-20-8-31.5-16.5T200-520q0-12 18-24t76-37q88-38 117-69t29-70q0-55-44-87.5T280-840q-45 0-80.5 16T145-785q-11 13-9 29t15 26q13 11 29 9t27-13q14-14 31-20t42-6q41 0 60.5 12t19.5 28q0 14-17.5 25.5T262-654q-80 35-111 63.5T120-520q0 32 17 54.5t46 39.5Z"/>
+  </svg>
+)
 //#endregion COMPONENTS
 //#region LIST AVAILABLE ICONS
 export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, title: AvailableIcons }[] = [
@@ -1882,7 +1893,9 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <DatabaseIcon {...props}/>,            title: 'DatabaseIcon'                            },
   { component: (props?: IconProps) => <PersonAddIcon {...props}/>,           title: 'PersonAddIcon'                           },
   { component: (props?: IconProps) => <PersonSearchIcon {...props}/>,        title: 'PersonSearchIcon'                        },
-  { component: (props?: IconProps) => <AdsClickIcon {...props}/>,            title: 'AdsClickIcon'                            }
+  { component: (props?: IconProps) => <AdsClickIcon {...props}/>,            title: 'AdsClickIcon'                            },
+  { component: (props?: IconProps) => <DrawIcon {...props}/>,                title: 'DrawIcon'                                }
+  
 ];
 //#endregion LIST AVAILABLE ICONS
 export const getIconByName = (title: AvailableIcons, props?: IconProps): ReactNode => {
