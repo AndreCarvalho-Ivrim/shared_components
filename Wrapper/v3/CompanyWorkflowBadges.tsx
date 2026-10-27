@@ -99,18 +99,22 @@ export const CompanyWorkflowBadges = () => {
     if (!user?.clients?.length) return;
     setLoadingCounts(true);
 
-    const mainServerClients = user.clients.filter(
+    const isDedicatedServer = !!import.meta.env.VITE_RELATIVE_URL;
+
+    const mainServerClients = isDedicatedServer ? [] : user.clients.filter(
       c => !c.dedicated_server || c.dedicated_server.includes('isac.ivrim.com.br')
     );
 
     const dedicatedServerClients = new Map<string, typeof user.clients>();
-    user.clients
-      .filter(c => c.dedicated_server && !c.dedicated_server.includes('isac.ivrim.com.br'))
-      .forEach(c => {
-        const backend_url = c.dedicated_server!.replace('ivrim.com.br', 'ivrim.tech');
-        if (!dedicatedServerClients.has(backend_url)) dedicatedServerClients.set(backend_url, []);
-        dedicatedServerClients.get(backend_url)!.push(c);
-      });
+    user.clients.filter(c => isDedicatedServer || (
+      c.dedicated_server &&
+      !c.dedicated_server.includes('isac.ivrim.com.br')
+    )).forEach(c => {
+      const dedicated_server = c.dedicated_server || 'https://isac.ivrim.com.br';
+      const backend_url = dedicated_server.replace('ivrim.com.br', 'ivrim.tech');
+      if (!dedicatedServerClients.has(backend_url)) dedicatedServerClients.set(backend_url, []);
+      dedicatedServerClients.get(backend_url)!.push(c);
+    });
 
     try {
       const allData: { client_id: string; flow_id: string; count: number }[] = [];
@@ -146,7 +150,6 @@ export const CompanyWorkflowBadges = () => {
 
       const dedicatedResults = await Promise.all(dedicatedPromises);
       dedicatedResults.forEach(arr => allData.push(...arr));
-
 
       const countMap: Record<string, number> = {};
       const flowIdMap: Record<string, string> = {};
