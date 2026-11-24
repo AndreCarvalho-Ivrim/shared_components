@@ -1336,6 +1336,15 @@ export const CollapseIcon = (props: IconProps) => (
     style={{ fill: props.color ?? 'currentColor' }}
   ><path d="M2 15h7v7h2v-9H2v2zM15 2h-2v9h9V9h-7V2z"></path></svg>
 );
+export const ExpandIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={props.className}
+    width={props.w ?? "24"} height={props.h ?? "24"}
+    style={{ fill: props.color ?? 'currentColor' }}
+  ><path d="M5 12H3v9h9v-2H5zm7-7h7v7h2V3h-9z"></path></svg>
+);
 export const FilterIcon = (props: IconProps & { isFilled?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1855,6 +1864,7 @@ export const listAvailableIcons: { component: (props?: IconProps) => ReactNode, 
   { component: (props?: IconProps) => <UnlikeIcon {...props} isFilled/>,     title: 'UnlikeIcon (isFilled)' as AvailableIcons },
   { component: (props?: IconProps) => <MobileIcon {...props}/>,              title: 'MobileIcon'                              },
   { component: (props?: IconProps) => <CollapseIcon {...props}/>,            title: 'CollapseIcon'                            },
+  { component: (props?: IconProps) => <ExpandIcon {...props}/>,              title: 'ExpandIcon'                              },
   { component: (props?: IconProps) => <FilterIcon {...props}/>,              title: 'FilterIcon'                              },
   { component: (props?: IconProps) => <FilterIcon {...props} isFilled/>,     title: 'FilterIcon (isFilled)' as AvailableIcons },
   { component: (props?: IconProps) => <WorldIcon {...props}/>,               title: 'WorldIcon'                               },
