@@ -16,6 +16,7 @@ interface ClientProps extends Client {
 }
 export const DropdownChooseEnterprise = () => {
   const { toast } = useNotify();
+  const { needCallChooseEnterprise, onCallChooseEnterprise } = useAuth();
 
   const navigate = useNavigate();
   
@@ -23,6 +24,7 @@ export const DropdownChooseEnterprise = () => {
   const [client, setClient] = useState<ClientProps>();
   const [clients, setClients] = useState<ClientProps[]>([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [keepUrl, setKeepUrl] = useState(false);
 
   useEffect(() => {
     if (!user || !user.clients) return;
@@ -44,6 +46,16 @@ export const DropdownChooseEnterprise = () => {
       })
     ]);
   }, [user]);
+  useEffect(() => {
+    if(needCallChooseEnterprise){
+      setModalIsOpen(true);
+      setKeepUrl(true)
+      onCallChooseEnterprise(false);
+    }
+  },[needCallChooseEnterprise]);
+  useEffect(() => {
+    if(!modalIsOpen && keepUrl) setKeepUrl(false);
+  },[modalIsOpen]);
 
   async function handleChangeClient(client_id: string, client_name: string) {
     if (!user) return;
@@ -56,7 +68,9 @@ export const DropdownChooseEnterprise = () => {
 
     const pathname = window.location.hash ? window.location.hash.slice(1) : '/'
 
-    if(!globalRoutes.includes(pathname)) navigate('/')
+    if(!keepUrl){
+      if(!globalRoutes.includes(pathname)) navigate('/')
+    }
 
     toast.promise(changeClient(client_id, client_name, user.token), {
       'pending': 'Alterando empresa',
