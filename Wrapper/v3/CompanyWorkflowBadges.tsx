@@ -134,7 +134,9 @@ export const CompanyWorkflowBadges = () => {
         async ([backend_url, clients]) => {
           try {
             const { data: response } = await axios.post(
-              `${backend_url}/fn-exceptions/isac-project-management-nav-badges`,
+              `${
+                backend_url !== 'https://muffato.ivrim.tech' ? backend_url : 'https://muffato-isac.codewriters.space'
+              }/fn-exceptions/isac-project-management-nav-badges`,
               { client_ids: clients.map(c => c.id) },
               { headers: { Authorization: `Bearer ${user.token}` } }
             );
